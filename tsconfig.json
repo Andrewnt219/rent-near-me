@@ -24,7 +24,8 @@
     "paths": {
       "@public/*": ["public/*"],
       "@utils/*": ["src/utils/*"],
-      "@components/*": ["src/components/*"],
+      "@modules/*": ["src/modules/*"],
+      "@ui/*": ["src/ui/*"],
       "@contexts/*": ["src/contexts/*"],
       "@libs/*": ["src/libs/*"],
       "@services/*": ["src/server/services/*"],
