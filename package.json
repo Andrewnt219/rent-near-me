@@ -10,7 +10,8 @@
     "build:analyze": "cross-env ANALYZE=\"true\"  next build",
     "rebuild": "rimraf ./node_modules ./.next | yarn",
     "rebuild:next": "rimraf ./.next | yarn dev",
-    "test": "jest"
+    "test": "jest",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^11.0.0",
@@ -34,10 +35,12 @@
     "babel-plugin-styled-components": "^1.12.0",
     "babel-plugin-twin": "^1.0.2",
     "cross-env": "^7.0.3",
+    "cypress": "^7.5.0",
     "dotenv": "^10.0.0",
     "eslint": "7.28.0",
     "eslint-config-next": "11.0.0",
     "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-jsx-a11y": "^6.4.1",
