@@ -29,9 +29,18 @@
       "@contexts/*": ["src/contexts/*"],
       "@libs/*": ["src/libs/*"],
       "@services/*": ["src/server/services/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@pages/*": ["src/pages/*"],
+      "@mock/*": ["__tests__/mock/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "twind.d.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "twind.d.ts",
+    "setupTests.js",
+    "__tests__/testing-library.test.tsx"
+  ],
   "exclude": ["node_modules"]
 }

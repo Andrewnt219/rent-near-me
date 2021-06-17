@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    'jest/globals': true,
   },
   extends: [
     'plugin:@typescript-eslint/recommended',
@@ -15,7 +16,7 @@ module.exports = {
     'next/core-web-vitals',
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['react', '@typescript-eslint', 'import', 'jsx-a11y'],
+  plugins: ['jest', 'react', '@typescript-eslint', 'import', 'jsx-a11y'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -27,6 +28,11 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-unused-vars': 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
   },
   settings: {
     react: {
