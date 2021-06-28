@@ -1,4 +1,5 @@
-import { supabase } from '@libs/supabase/supabase-utils';
+import AuthService from '@services/AuthService';
+import UserService from '@services/UserService';
 import { Session } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
 
@@ -15,17 +16,9 @@ export default function Account({ session }: { session: Session }) {
   async function getProfile() {
     try {
       setLoading(true);
-      const user = supabase.auth.user();
+      const user = await AuthService.getCurrentUser();
 
-      const { data, error, status } = await supabase
-        .from('profiles')
-        .select(`username, website, avatar_url`)
-        .eq('id', user?.id)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
+      const { data } = await UserService.getProfile(user?.id);
 
       if (data) {
         setUsername(data.username);
@@ -50,7 +43,7 @@ export default function Account({ session }: { session: Session }) {
   }) {
     try {
       setLoading(true);
-      const user = supabase.auth.user();
+      const user = await AuthService.getCurrentUser();
 
       const updates = {
         id: user?.id,
@@ -60,13 +53,7 @@ export default function Account({ session }: { session: Session }) {
         updated_at: new Date(),
       };
 
-      const { error } = await supabase.from('profiles').upsert(updates, {
-        returning: 'minimal', // Don't return the value after inserting
-      });
-
-      if (error) {
-        throw error;
-      }
+      await UserService.upsertProfile(user?.id, updates);
     } catch (error) {
       alert(error.message);
     } finally {
@@ -77,46 +64,42 @@ export default function Account({ session }: { session: Session }) {
   return (
     <div className="form-widget">
       <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user?.email} disabled />
+        <label htmlFor="email" className="mr-2">
+          Email:
+        </label>
+        <span>{session.user?.email}</span>
       </div>
       <div>
-        <label htmlFor="username">Name</label>
+        <label htmlFor="username" className="mr-2">
+          Name:
+        </label>
         <input
           id="username"
           type="text"
-          value={username || ''}
+          value={username ?? ''}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="website">Website</label>
+      <div className="mb-4">
+        <label htmlFor="website" className="mr-2">
+          Website:
+        </label>
         <input
           id="website"
           type="website"
-          value={website || ''}
+          value={website ?? ''}
           onChange={(e) => setWebsite(e.target.value)}
         />
       </div>
 
-      <div>
-        <button
-          className="button block primary"
-          onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled={loading}
-        >
-          {loading ? 'Loading ...' : 'Update'}
-        </button>
-      </div>
-
-      <div>
-        <button
-          className="button block"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
-        </button>
-      </div>
+      <button
+        onClick={() => updateProfile({ username, website, avatar_url })}
+        disabled={loading}
+      >
+        {loading ? 'Loading' : 'Update'}
+      </button>
+      <br />
+      <button onClick={() => AuthService.signOut()}>Sign Out</button>
     </div>
   );
 }
