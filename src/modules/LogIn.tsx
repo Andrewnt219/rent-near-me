@@ -1,11 +1,12 @@
 import AuthService from '@services/AuthService';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useState } from 'react';
-
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { t } = useTranslation();
 
   const handleEmailSignIn = async () => {
     try {
@@ -59,13 +60,13 @@ export default function Login() {
         onClick={async (e) => await AuthService.signInWithGoogle()}
         className="block"
       >
-        Sign in with Google
+        {t('common:login.google')}
       </button>
       <button
         onClick={async (e) => await AuthService.signInWithFacebook()}
         className="block"
       >
-        Sign in with Facebook
+        {t('common:login.facebook')}
       </button>
     </div>
   );
