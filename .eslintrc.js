@@ -42,6 +42,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-unused-vars': 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
+    'jsx-a11y/anchor-is-valid': 'off',
   },
   settings: {
     react: {
@@ -63,6 +64,13 @@ module.exports = {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
       excludedFiles: '**/cypress/**/?(*.)+(spec|test).[jt]s?(x)',
       extends: ['plugin:testing-library/react', 'plugin:jest/recommended'],
+      rules: {
+        'jest/no-disabled-tests': 'warn',
+        'jest/no-focused-tests': 'error',
+        'jest/no-identical-title': 'error',
+        'jest/prefer-to-have-length': 'warn',
+        'jest/valid-expect': 'error',
+      },
     },
   ],
 };

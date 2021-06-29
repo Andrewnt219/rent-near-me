@@ -1,6 +1,6 @@
-import { supabase } from '@libs/supabase/supabase-utils';
+import { supabase } from '@libs/supabase';
 import Account from '@modules/Account';
-import Auth from '@modules/Auth';
+import Login from '@modules/LogIn';
 import { Session } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
 
@@ -16,9 +16,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container" style={{ padding: '50px 0 100px 0' }}>
+    <div className="container">
       {!session ? (
-        <Auth />
+        <Login />
       ) : (
         <Account key={session.user?.id} session={session} />
       )}
