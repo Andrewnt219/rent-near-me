@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins');
 const bundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const nextTranslate = require('next-translate');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -14,4 +15,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([bundleAnalyzer], nextConfig);
+module.exports = withPlugins([bundleAnalyzer], nextTranslate(nextConfig));
