@@ -1,5 +1,6 @@
 import AuthService from '@services/AuthService';
 import Form from '@ui/Form';
+import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -20,11 +21,11 @@ export default function Login() {
     );
   });
 
-  console.log({ errors: formState.errors });
+  console.log(formState.errors);
 
   return (
     <div>
-      <Form className="mb-4" onSubmit={onSubmit}>
+      <Form noValidate className="mb-4" onSubmit={onSubmit}>
         <p>
           Sign in with email and password (
           <Link href="/register">
@@ -32,41 +33,28 @@ export default function Login() {
           </Link>
           )
         </p>
-        <Form.Group>
-          <Form.Label>
-            Email
-            <Form.TextField
-              type="email"
-              placeholder="Email"
-              tw="mr-4"
-              {...register('email', {
-                required: t('common:errors.form.required'),
-              })}
-            />
-          </Form.Label>
 
-          <Form.ErrorMessage>
-            {formState.errors.email?.message}
-          </Form.ErrorMessage>
-        </Form.Group>
+        <TextField
+          label="Email"
+          type="email"
+          id="login-email"
+          inputDescription="Enter your registered email"
+          errorMessage={formState.errors.email?.message}
+          {...register('email', {
+            required: t('common:errors.form.required'),
+          })}
+        />
 
-        <Form.Group>
-          <Form.Label>
-            Password
-            <Form.TextField
-              type="password"
-              placeholder="Password"
-              tw="mr-4"
-              {...register('email', {
-                required: t('common:errors.form.required'),
-              })}
-            />
-          </Form.Label>
-
-          <Form.ErrorMessage>
-            {formState.errors.email?.message}
-          </Form.ErrorMessage>
-        </Form.Group>
+        <TextField
+          label="Password"
+          type="password"
+          id="login-password"
+          inputDescription="Enter your registered password"
+          errorMessage={formState.errors.password?.message}
+          {...register('password', {
+            required: t('common:errors.form.required'),
+          })}
+        />
 
         <button disabled={formState.isSubmitting}>
           <span>{formState.isSubmitting ? 'Loading' : 'Sign in'}</span>

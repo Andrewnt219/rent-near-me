@@ -11,9 +11,6 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'eslint:recommended',
-    'plugin:import/typescript',
-    'plugin:import/errors',
-    'plugin:import/warnings',
     'plugin:jsx-a11y/recommended',
     'next',
     'next/core-web-vitals',
@@ -22,7 +19,6 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
-    'import',
     'jsx-a11y',
 
     'jest',
@@ -47,9 +43,6 @@ module.exports = {
   settings: {
     react: {
       version: 'detect',
-    },
-    'import/resolver': {
-      typescript: {},
     },
   },
   overrides: [
