@@ -1,33 +1,30 @@
 import AuthService from '@services/AuthService';
+import Form from '@ui/Form';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+type FormData = {
+  email: string;
+  password: string;
+};
+
 export default function Login() {
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const { t } = useTranslation();
 
-  const handleEmailSignIn = async () => {
-    try {
-      setLoading(true);
-      await AuthService.signInWithEmail(email, password);
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { register, handleSubmit, formState } = useForm<FormData>();
+
+  const onSubmit = handleSubmit(async (data) => {
+    await AuthService.signInWithEmail(data.email, data.password).catch(
+      (error) => alert(error.error_description || error.message)
+    );
+  });
+
+  console.log({ errors: formState.errors });
 
   return (
     <div>
-      <form
-        className="mb-4"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await handleEmailSignIn();
-        }}
-      >
+      <Form className="mb-4" onSubmit={onSubmit}>
         <p>
           Sign in with email and password (
           <Link href="/register">
@@ -35,26 +32,46 @@ export default function Login() {
           </Link>
           )
         </p>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          className="mr-4"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          className="mr-4"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button disabled={loading}>
-          <span>{loading ? 'Loading' : 'Sign in'}</span>
+        <Form.Group>
+          <Form.Label>
+            Email
+            <Form.TextField
+              type="email"
+              placeholder="Email"
+              tw="mr-4"
+              {...register('email', {
+                required: t('common:errors.form.required'),
+              })}
+            />
+          </Form.Label>
+
+          <Form.ErrorMessage>
+            {formState.errors.email?.message}
+          </Form.ErrorMessage>
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>
+            Password
+            <Form.TextField
+              type="password"
+              placeholder="Password"
+              tw="mr-4"
+              {...register('email', {
+                required: t('common:errors.form.required'),
+              })}
+            />
+          </Form.Label>
+
+          <Form.ErrorMessage>
+            {formState.errors.email?.message}
+          </Form.ErrorMessage>
+        </Form.Group>
+
+        <button disabled={formState.isSubmitting}>
+          <span>{formState.isSubmitting ? 'Loading' : 'Sign in'}</span>
         </button>
-      </form>
+      </Form>
       <button
         type="button"
         onClick={async (e) => await AuthService.signInWithGoogle()}
