@@ -1,5 +1,5 @@
 import { FormHTMLAttributes } from 'react';
-import tw, { styled } from 'twin.macro';
+import tw, { css, styled } from 'twin.macro';
 
 type Props = FormHTMLAttributes<HTMLFormElement>;
 
@@ -10,7 +10,8 @@ const Form = ({ children, ...formProps }: Props) => {
 Form.Group = styled.div`
   ${tw`relative mb-md`}
 `;
-Form.Input = styled.input`
+
+export const inputCss = css`
   ${tw`w-full border rounded px-sm py-md`}
   ${tw`focus:outline-none hover:bg-light`}
 
@@ -18,23 +19,32 @@ Form.Input = styled.input`
     ${tw`border-danger`}
   }
 `;
+Form.Input = styled.input`
+  ${inputCss}
+`;
+
+export const labelActiveCss = css`
+  ${tw`translate-y-1 text-xs`}
+`;
 Form.Label = styled.label`
   /* Translate y equals to input pt */
-  ${tw`!mt-0 absolute top-0 left-sm transform translate-y-md`}
+  ${tw`absolute top-0 left-sm transform translate-y-md`}
   ${tw`text-muted`}
   ${tw`transition-all`} 
 
-  ${Form.Input}:focus ~ &, ${Form.Input}:not(:placeholder-shown) ~ & {
-    ${tw`translate-y-1 text-xs`}
+  input:focus ~ &, input:not(:placeholder-shown) ~ & {
+    ${labelActiveCss}
   }
 
-  ${Form.Input}[aria-invalid='true'] ~ & {
+  input[aria-invalid='true'] ~ & {
     ${tw`text-danger`}
   }
 `;
+
 Form.ErrorMessage = styled.p`
   ${tw`text-danger`}
 `;
+
 Form.Description = styled.p`
   ${tw`text-muted`}
 `;

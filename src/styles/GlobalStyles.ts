@@ -13,6 +13,9 @@ const GlobalStyles = createGlobalStyle`
   #__next {
     ${tw``}
   }
+  
+
+  
 `;
 
 export default GlobalStyles;

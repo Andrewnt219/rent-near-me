@@ -1,3 +1,4 @@
+import DatePicker from '@libs/react-datepicker/DatePicker';
 import AuthService from '@services/AuthService';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
@@ -8,6 +9,7 @@ import { useForm } from 'react-hook-form';
 type FormData = {
   email: string;
   password: string;
+  date: Date;
 };
 
 export default function Login() {
@@ -55,7 +57,9 @@ export default function Login() {
             required: t('common:errors.form.required'),
           })}
         />
+        <DatePicker />
 
+        <p>{formState.errors.date?.message}</p>
         <button disabled={formState.isSubmitting}>
           <span>{formState.isSubmitting ? 'Loading' : 'Sign in'}</span>
         </button>
