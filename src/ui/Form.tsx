@@ -12,8 +12,9 @@ Form.Group = styled.div`
 `;
 
 export const inputCss = css`
-  ${tw`w-full border rounded px-sm py-md`}
+  ${tw`w-full border rounded px-sm pt-lg pb-sm`}
   ${tw`focus:outline-none hover:bg-light`}
+  ${tw`transition-colors`}
 
   &[aria-invalid='true'] {
     ${tw`border-danger`}

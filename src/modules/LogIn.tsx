@@ -2,9 +2,10 @@ import DatePicker from '@libs/react-day-picker/DatePicker';
 import AuthService from '@services/AuthService';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
+import { isNullOrUndefined } from '@utils/validate-utils';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 type FormData = {
   email: string;
@@ -15,9 +16,10 @@ type FormData = {
 export default function Login() {
   const { t } = useTranslation();
 
-  const { register, handleSubmit, formState } = useForm<FormData>();
+  const { control, register, handleSubmit, formState } = useForm<FormData>();
 
   const onSubmit = handleSubmit(async (data) => {
+    debugger;
     await AuthService.signInWithEmail(data.email, data.password).catch(
       (error) => alert(error.error_description || error.message)
     );
@@ -56,19 +58,32 @@ export default function Login() {
           })}
         />
 
-        <DatePicker
-          errorMessage={formState.errors.date?.message}
-          inputDescription="Enter your birthday"
-          {...register('date', {
-            required: t('common:errors.form.required'),
-          })}
+        <Controller
+          control={control}
+          name="date"
+          rules={{ required: t('common:errors.form.required') }}
+          render={({
+            field: { onChange, onBlur, value, ref },
+            fieldState: { error },
+          }) => (
+            <DatePicker
+              inputProps={{
+                ref: ref,
+              }}
+              errorMessage={error?.message}
+              value={value}
+              onDayChange={onChange}
+              onBlur={onBlur}
+              isInputActive={!isNullOrUndefined(value)}
+            />
+          )}
         />
 
-        <p>{formState.errors.date?.message}</p>
         <button disabled={formState.isSubmitting}>
           <span>{formState.isSubmitting ? 'Loading' : 'Sign in'}</span>
         </button>
       </Form>
+
       <button
         type="button"
         onClick={async (e) => await AuthService.signInWithGoogle()}
@@ -76,6 +91,7 @@ export default function Login() {
       >
         {t('common:login.google')}
       </button>
+
       <button
         onClick={async (e) => await AuthService.signInWithFacebook()}
         className="block"

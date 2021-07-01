@@ -1,18 +1,29 @@
 import Form, { inputCss, labelActiveCss, labelInvalidCss } from '@ui/Form';
 import { isNullOrUndefined } from '@utils/validate-utils';
-import React, { forwardRef, ReactNode, useState } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import { DayPickerInputProps } from 'react-day-picker/types/Props';
 import { styled } from 'twin.macro';
 import { formatDate, parseDate } from './react-day-picker-utils';
 
-type Props = Partial<Omit<DayPickerInput, 'onDayChange' | 'placeholder'>> & {
+type Props = Partial<Omit<DayPickerInputProps, 'placeholder'>> & {
   errorMessage?: ReactNode;
   inputDescription?: ReactNode;
+  isInputActive: boolean;
 };
-type Ref = DayPickerInput;
+type Ref = HTMLInputElement;
 const DatePicker = forwardRef<Ref, Props>(
-  ({ errorMessage, inputDescription, ...pickerProps }, ref) => {
-    const [startDate, setStartDate] = useState<Date | null>(null);
+  (
+    {
+      errorMessage,
+      inputDescription,
+      isInputActive,
+      inputProps,
+      dayPickerProps,
+      ...pickerProps
+    },
+    ref
+  ) => {
     const isInvalid = !isNullOrUndefined(errorMessage);
 
     return (
@@ -20,20 +31,17 @@ const DatePicker = forwardRef<Ref, Props>(
         <DayPickerInput
           {...pickerProps}
           inputProps={{
+            ...inputProps,
             'aria-invalid': isInvalid,
           }}
-          ref={ref}
+          dayPickerProps={dayPickerProps}
           placeholder=" "
-          onDayChange={setStartDate}
           formatDate={formatDate}
           parseDate={parseDate}
           format="MM-dd-yyyy"
         />
 
-        <StyledLabel
-          isInvalid={isInvalid}
-          isActive={!isNullOrUndefined(startDate)}
-        >
+        <StyledLabel isInvalid={isInvalid} isActive={isInputActive}>
           Date Picker
         </StyledLabel>
 
