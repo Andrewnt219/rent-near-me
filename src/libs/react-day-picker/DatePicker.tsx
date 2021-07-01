@@ -1,5 +1,5 @@
 import Form, { inputCss, labelActiveCss, labelInvalidCss } from '@ui/Form';
-import { isNullOrUndefined } from '@utils/validate-utils';
+import { isEmptyString } from '@utils/validate-utils';
 import React, { ReactNode } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DayPickerInputProps } from 'react-day-picker/types/Props';
@@ -22,7 +22,7 @@ function DatePicker<FormValues>({
   const { field, fieldState } = useController(controller);
 
   const { value } = field;
-
+  console.log(value);
   return (
     <StyledWrapper>
       <DayPickerInput
@@ -45,7 +45,7 @@ function DatePicker<FormValues>({
 
       <StyledLabel
         isInvalid={fieldState.invalid}
-        isActive={!isNullOrUndefined(value)}
+        isActive={!isEmptyString(value)}
       >
         Date Picker
       </StyledLabel>
