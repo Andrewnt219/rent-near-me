@@ -25,7 +25,9 @@ function TextField<FormValues extends Record<string, string>>(
       <Form.Input
         aria-invalid={!isNullOrUndefined(errorMessage)}
         {...inputProps}
-        {...field}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
+        name={field.name}
         placeholder=" "
       />
 
