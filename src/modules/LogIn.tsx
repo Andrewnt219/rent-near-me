@@ -2,15 +2,14 @@ import DatePicker from '@libs/react-day-picker/DatePicker';
 import AuthService from '@services/AuthService';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
-import { isNullOrUndefined } from '@utils/validate-utils';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 type FormData = {
   email: string;
   password: string;
-  date: Date;
+  dob: Date;
 };
 
 export default function Login() {
@@ -58,25 +57,10 @@ export default function Login() {
           })}
         />
 
-        <Controller
+        <DatePicker
           control={control}
-          name="date"
+          name="dob"
           rules={{ required: t('common:errors.form.required') }}
-          render={({
-            field: { onChange, onBlur, value, ref },
-            fieldState: { error },
-          }) => (
-            <DatePicker
-              inputProps={{
-                ref: ref,
-              }}
-              errorMessage={error?.message}
-              value={value}
-              onDayChange={onChange}
-              onBlur={onBlur}
-              isInputActive={!isNullOrUndefined(value)}
-            />
-          )}
         />
 
         <button disabled={formState.isSubmitting}>
