@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from '@utils/validate-utils';
 import { InputHTMLAttributes, ReactNode } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
 import Form from './Form';
@@ -16,29 +17,27 @@ function TextField<FormValues extends Record<string, string>>(
 ) {
   const { label, inputDescription, controller, ...inputProps } = props;
   const { field, fieldState } = useController(controller);
-  const { value } = field;
+
+  const errorMessage = fieldState.error?.message;
 
   return (
     <Form.Group>
       <Form.Input
-        aria-invalid={!!fieldState.error?.message}
+        aria-invalid={!isNullOrUndefined(errorMessage)}
         {...inputProps}
         {...field}
-        value={value}
         placeholder=" "
       />
 
       <Form.Label htmlFor={inputProps.id}>{label}</Form.Label>
 
-      <div tw="mt-1 text-sm">
-        <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
+      <Form.TextWrapper>
+        <Form.ErrorMessage>{errorMessage}</Form.ErrorMessage>
 
         <Form.Description>{inputDescription}</Form.Description>
-      </div>
+      </Form.TextWrapper>
     </Form.Group>
   );
 }
-
-TextField.displayName = 'TextField';
 
 export default TextField;
