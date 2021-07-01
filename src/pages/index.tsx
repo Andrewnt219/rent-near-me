@@ -1,6 +1,6 @@
 import { supabase } from '@libs/supabase';
 import Account from '@modules/Account';
-import Login from '@modules/LogIn';
+import LoginForm from '@modules/user/LoginForm/LoginForm';
 import { Session } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
 
@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div className="container">
       {!session ? (
-        <Login />
+        <LoginForm />
       ) : (
         <Account key={session.user?.id} session={session} />
       )}

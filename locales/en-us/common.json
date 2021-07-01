@@ -1,4 +1,10 @@
 {
+  "errors": {
+    "form": {
+      "required": "This field is required",
+      "invalid-date": "Suggested format is MM-dd-yyyy (e.g. 12-31-2000)"
+    }
+  },
   "login": {
     "facebook": "Sign in with Facebook",
     "google": "Sign in with Google"

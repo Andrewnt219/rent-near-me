@@ -34,13 +34,6 @@
       "@mock/*": ["__tests__/mock/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "twind.d.ts",
-    "setupTests.js",
-    "__tests__/testing-library.test.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "twind.d.ts"],
   "exclude": ["node_modules"]
 }
