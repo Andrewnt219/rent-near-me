@@ -22,8 +22,6 @@ function DatePicker<FormValues>({
   const { field, fieldState } = useController(controller);
 
   const { value } = field;
-  const errorMessage = fieldState.error?.message;
-  const isInvalid = !isNullOrUndefined(errorMessage);
 
   return (
     <StyledWrapper>
@@ -32,25 +30,28 @@ function DatePicker<FormValues>({
         inputProps={{
           ...inputProps,
           ref: field.ref,
-          'aria-invalid': isInvalid,
+          'aria-invalid': fieldState.invalid,
           name: field.name,
           onChange: field.onChange,
           onBlur: field.onBlur,
         }}
         // onDayChange won't work with user keyboard's input
-        dayPickerProps={{ onDayClick: field.onChange }}
+        dayPickerProps={{ ...dayPickerProps, onDayClick: field.onChange }}
         placeholder=" "
         formatDate={formatDate}
         parseDate={parseDate}
         format="MM-dd-yyyy"
       />
 
-      <StyledLabel isInvalid={isInvalid} isActive={!isNullOrUndefined(value)}>
+      <StyledLabel
+        isInvalid={fieldState.invalid}
+        isActive={!isNullOrUndefined(value)}
+      >
         Date Picker
       </StyledLabel>
 
       <Form.TextWrapper>
-        <Form.ErrorMessage>{errorMessage}</Form.ErrorMessage>
+        <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
         <Form.Description>{inputDescription}</Form.Description>
       </Form.TextWrapper>
     </StyledWrapper>

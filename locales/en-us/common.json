@@ -2,7 +2,7 @@
   "errors": {
     "form": {
       "required": "This field is required",
-      "invalid-date": "Suggested format is MM-dd-yyyy (e.g. 31-12-2000)"
+      "invalid-date": "Suggested format is MM-dd-yyyy (e.g. 12-31-2000)"
     }
   },
   "login": {
