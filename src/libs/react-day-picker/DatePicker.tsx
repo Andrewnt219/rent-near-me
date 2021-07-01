@@ -58,12 +58,6 @@ function DatePicker<FormValues>({
   );
 }
 
-const StyledWrapper = styled(Form.Group)`
-  input {
-    ${inputCss}
-  }
-`;
-
 type StyledLabelProps = {
   isActive: boolean;
   isInvalid: boolean;
@@ -75,5 +69,14 @@ const StyledLabel = styled(Form.Label)<StyledLabelProps>`
   }
 `;
 
-DatePicker.displayName = 'DatePicker';
+const StyledWrapper = styled(Form.Group)`
+  input {
+    ${inputCss}
+  }
+
+  &:focus-within ${StyledLabel} {
+    ${labelActiveCss}
+  }
+`;
+
 export default DatePicker;
