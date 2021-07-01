@@ -3,7 +3,12 @@ import { isValidDate } from '@utils/validate-utils';
 import useTranslation from 'next-translate/useTranslation';
 import { UseControllerProps, useForm } from 'react-hook-form';
 
-export type LoginFormData = { email: string; password: string; dob: string };
+export type LoginFormData = {
+  email: string;
+  password: string;
+  dob: string;
+  keepLogIn: boolean;
+};
 type Controllers = Record<
   keyof LoginFormData,
   UseControllerProps<LoginFormData>
@@ -39,6 +44,11 @@ export const useLoginForm = () => {
     password: {
       control,
       name: 'password',
+      rules: { required: t('common:errors.form.required') },
+    },
+    keepLogIn: {
+      control,
+      name: 'keepLogIn',
       rules: { required: t('common:errors.form.required') },
     },
   };

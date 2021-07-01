@@ -2,6 +2,7 @@ import DatePicker from '@libs/react-day-picker/DatePicker';
 import AuthService from '@services/AuthService';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
+import Checkbox from '@ui/Checkbox';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useLoginForm } from './useLoginForm';
@@ -37,7 +38,10 @@ export default function LoginForm() {
         />
 
         <DatePicker controller={controllers.dob} />
-
+        <Checkbox
+          controller={controllers.keepLogIn}
+          label="Keep me signed in"
+        />
         <button disabled={form.formState.isSubmitting}>
           <span>{form.formState.isSubmitting ? 'Loading' : 'Sign in'}</span>
         </button>
