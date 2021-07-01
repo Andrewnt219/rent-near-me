@@ -1,5 +1,5 @@
 import Form, { inputCss, labelActiveCss, labelInvalidCss } from '@ui/Form';
-import { isNullOrUndefined, isValidDate } from '@utils/validate-utils';
+import { isNullOrUndefined } from '@utils/validate-utils';
 import React, { ReactNode } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DayPickerInputProps } from 'react-day-picker/types/Props';
@@ -20,8 +20,10 @@ function DatePicker<FormValues>({
   ...pickerProps
 }: Props<FormValues>) {
   const { field, fieldState } = useController(controller);
-  const isInvalid = !isNullOrUndefined(fieldState.error?.message);
+
   const { value } = field;
+  const errorMessage = fieldState.error?.message;
+  const isInvalid = !isNullOrUndefined(errorMessage);
 
   return (
     <StyledWrapper>
@@ -31,11 +33,12 @@ function DatePicker<FormValues>({
           ...inputProps,
           ref: field.ref,
           'aria-invalid': isInvalid,
+          name: field.name,
+          onChange: field.onChange,
+          onBlur: field.onBlur,
         }}
-        dayPickerProps={dayPickerProps}
-        onDayChange={field.onChange}
-        onBlur={field.onBlur}
-        value={isValidDate(value) ? value : undefined}
+        // onDayChange won't work with user keyboard's input
+        dayPickerProps={{ onDayClick: field.onChange }}
         placeholder=" "
         formatDate={formatDate}
         parseDate={parseDate}
@@ -47,7 +50,7 @@ function DatePicker<FormValues>({
       </StyledLabel>
 
       <Form.TextWrapper>
-        <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
+        <Form.ErrorMessage>{errorMessage}</Form.ErrorMessage>
         <Form.Description>{inputDescription}</Form.Description>
       </Form.TextWrapper>
     </StyledWrapper>

@@ -1,4 +1,5 @@
 import AuthService from '@services/AuthService';
+import { isValidDate } from '@utils/validate-utils';
 import useTranslation from 'next-translate/useTranslation';
 import { UseControllerProps, useForm } from 'react-hook-form';
 
@@ -13,6 +14,8 @@ export const useLoginForm = () => {
   const { control } = form;
 
   const onSubmit = form.handleSubmit(async (data) => {
+    const parsedDate = new Date(data.dob);
+
     await AuthService.signInWithEmail(data.email, data.password).catch(
       (error) => alert(error.error_description || error.message)
     );
@@ -22,7 +25,11 @@ export const useLoginForm = () => {
     dob: {
       control,
       name: 'dob',
-      rules: {},
+      rules: {
+        required: t('common:errors.form.required'),
+        validate: (value) =>
+          isValidDate(value) || t('common:errors.form.invalid-date'),
+      },
     },
     email: {
       control,
