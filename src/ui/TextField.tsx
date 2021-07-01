@@ -1,37 +1,43 @@
-import { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
+import { useController, UseControllerProps } from 'react-hook-form';
 import Form from './Form';
 
-type Ref = HTMLInputElement;
-type Props = InputHTMLAttributes<HTMLInputElement> & {
-  label: ReactNode;
-  errorMessage?: ReactNode;
-  inputDescription?: ReactNode;
-  children?: never;
-  id: string;
-};
+type Props<FormValues extends Record<string, string>> =
+  InputHTMLAttributes<HTMLInputElement> & {
+    label: ReactNode;
+    inputDescription?: ReactNode;
+    children?: never;
+    id: string;
+    controller: UseControllerProps<FormValues>;
+  };
 
-const TextField = forwardRef<Ref, Props>((props, ref) => {
-  const { label, inputDescription, errorMessage, ...inputProps } = props;
+function TextField<FormValues extends Record<string, string>>(
+  props: Props<FormValues>
+) {
+  const { label, inputDescription, controller, ...inputProps } = props;
+  const { field, fieldState } = useController(controller);
+  const { value } = field;
 
   return (
     <Form.Group>
       <Form.Input
-        aria-invalid={!!errorMessage}
+        aria-invalid={!!fieldState.error?.message}
         {...inputProps}
-        ref={ref}
+        {...field}
+        value={value}
         placeholder=" "
       />
 
       <Form.Label htmlFor={inputProps.id}>{label}</Form.Label>
 
       <div tw="mt-1 text-sm">
-        <Form.ErrorMessage>{errorMessage}</Form.ErrorMessage>
+        <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
 
         <Form.Description>{inputDescription}</Form.Description>
       </div>
     </Form.Group>
   );
-});
+}
 
 TextField.displayName = 'TextField';
 
