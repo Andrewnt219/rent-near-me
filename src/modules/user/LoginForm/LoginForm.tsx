@@ -4,25 +4,10 @@ import Form from '@ui/Form';
 import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-
-type FormData = {
-  email: string;
-  password: string;
-  dob: Date;
-};
-
-export default function Login() {
+import { useLoginForm } from './useLoginForm';
+export default function LoginForm() {
+  const { controllers, form, onSubmit } = useLoginForm();
   const { t } = useTranslation();
-
-  const { control, register, handleSubmit, formState } = useForm<FormData>();
-
-  const onSubmit = handleSubmit(async (data) => {
-    debugger;
-    await AuthService.signInWithEmail(data.email, data.password).catch(
-      (error) => alert(error.error_description || error.message)
-    );
-  });
 
   return (
     <div>
@@ -40,10 +25,7 @@ export default function Login() {
           type="email"
           id="login-email"
           inputDescription="Enter your registered email"
-          errorMessage={formState.errors.email?.message}
-          {...register('email', {
-            required: t('common:errors.form.required'),
-          })}
+          controller={controllers.email}
         />
 
         <TextField
@@ -51,20 +33,13 @@ export default function Login() {
           type="password"
           id="login-password"
           inputDescription="Enter your registered password"
-          errorMessage={formState.errors.password?.message}
-          {...register('password', {
-            required: t('common:errors.form.required'),
-          })}
+          controller={controllers.password}
         />
 
-        <DatePicker
-          control={control}
-          name="dob"
-          rules={{ required: t('common:errors.form.required') }}
-        />
+        <DatePicker controller={controllers.dob} />
 
-        <button disabled={formState.isSubmitting}>
-          <span>{formState.isSubmitting ? 'Loading' : 'Sign in'}</span>
+        <button disabled={form.formState.isSubmitting}>
+          <span>{form.formState.isSubmitting ? 'Loading' : 'Sign in'}</span>
         </button>
       </Form>
 

@@ -7,24 +7,19 @@ import { useController, UseControllerProps } from 'react-hook-form';
 import { styled } from 'twin.macro';
 import { formatDate, parseDate } from './react-day-picker-utils';
 
-type Props<FormValues> = UseControllerProps<FormValues> &
-  Partial<Omit<DayPickerInputProps, 'placeholder'>> & {
-    inputDescription?: ReactNode;
-  };
+type Props<FormValues> = Partial<Omit<DayPickerInputProps, 'placeholder'>> & {
+  inputDescription?: ReactNode;
+  controller: UseControllerProps<FormValues>;
+};
 
 function DatePicker<FormValues>({
   inputDescription,
   inputProps,
   dayPickerProps,
-  ...props
+  controller,
+  ...pickerProps
 }: Props<FormValues>) {
-  const { name, control, rules, defaultValue, ...pickerProps } = props;
-  const { field, fieldState } = useController({
-    name,
-    control,
-    rules,
-    defaultValue,
-  });
+  const { field, fieldState } = useController(controller);
   const isInvalid = !isNullOrUndefined(fieldState.error?.message);
   const { value } = field;
 
