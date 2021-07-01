@@ -1,3 +1,5 @@
+import { reactDatePickerCss } from '@libs/react-day-picker/react-day-picker-overide';
+import 'react-day-picker/lib/style.css';
 import { createGlobalStyle } from 'styled-components';
 import tw from 'twin.macro';
 
@@ -11,9 +13,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #__next {
-    ${tw``}
+    ${tw`max-w-7xl mx-auto`}
   }
   
+  ${reactDatePickerCss}
 
   
 `;

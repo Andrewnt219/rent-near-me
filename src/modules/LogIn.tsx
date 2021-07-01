@@ -1,4 +1,4 @@
-import DatePicker from '@libs/react-datepicker/DatePicker';
+import DatePicker from '@libs/react-day-picker/DatePicker';
 import AuthService from '@services/AuthService';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
@@ -22,8 +22,6 @@ export default function Login() {
       (error) => alert(error.error_description || error.message)
     );
   });
-
-  console.log(formState.errors);
 
   return (
     <div>
@@ -57,7 +55,14 @@ export default function Login() {
             required: t('common:errors.form.required'),
           })}
         />
-        <DatePicker />
+
+        <DatePicker
+          errorMessage={formState.errors.date?.message}
+          inputDescription="Enter your birthday"
+          {...register('date', {
+            required: t('common:errors.form.required'),
+          })}
+        />
 
         <p>{formState.errors.date?.message}</p>
         <button disabled={formState.isSubmitting}>

@@ -26,8 +26,12 @@ Form.Input = styled.input`
 export const labelActiveCss = css`
   ${tw`translate-y-1 text-xs`}
 `;
+export const labelInvalidCss = css`
+  ${tw`text-danger`}
+`;
 Form.Label = styled.label`
   /* Translate y equals to input pt */
+  /* left equals to input pl */
   ${tw`absolute top-0 left-sm transform translate-y-md`}
   ${tw`text-muted`}
   ${tw`transition-all`} 
@@ -37,8 +41,12 @@ Form.Label = styled.label`
   }
 
   input[aria-invalid='true'] ~ & {
-    ${tw`text-danger`}
+    ${labelInvalidCss}
   }
+`;
+
+Form.TextWrapper = styled.div`
+  ${tw`mt-1 text-sm`}
 `;
 
 Form.ErrorMessage = styled.p`
