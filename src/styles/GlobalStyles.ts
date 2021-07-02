@@ -4,7 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 import tw from 'twin.macro';
 
 const GlobalStyles = createGlobalStyle`
-  html,body {
+  html,body, #__next {
    ${tw`w-full h-full text-dark`} 
   }
 
@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #__next {
-    ${tw`max-w-7xl mx-auto`}
+    ${tw`max-w-7xl mx-auto relative`}
   }
   
   ${reactDatePickerCss}
