@@ -46,6 +46,37 @@ Form.Label = styled.label`
   }
 `;
 
+Form.CheckboxGroup = styled.label`
+  ${tw`relative inline-flex items-center gap-md cursor-pointer`}
+  user-select: none;
+`;
+
+Form.Checkbox = styled.span`
+  ${tw`grid place-content-center`}
+  ${tw`w-7 h-7`}
+  ${tw`border border-gray-400 bg-transparent`}
+
+  border-radius: 5px;
+
+  label:hover > & {
+    ${tw`border-dark`}
+  }
+
+  input[aria-checked='true'] ~ & {
+    ${tw`border-dark bg-dark`}
+  }
+`;
+
+Form.CheckboxTick = styled.svg`
+  ${tw`w-5 h-5 invisible`}
+  stroke: white;
+  stroke-width: 4;
+
+  input[aria-checked='true'] ~ span > & {
+    ${tw`visible`}
+  }
+`;
+
 Form.TextWrapper = styled.div`
   ${tw`mt-1 text-sm`}
 `;

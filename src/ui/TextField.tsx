@@ -29,7 +29,6 @@ function TextField<FormValues>(props: Props<FormValues>) {
 
       <Form.TextWrapper>
         <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
-
         <Form.Description>{inputDescription}</Form.Description>
       </Form.TextWrapper>
     </Form.Group>
