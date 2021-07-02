@@ -1,21 +1,30 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+  FieldValues,
+  useController,
+  UseControllerProps,
+} from 'react-hook-form';
 import Form from './Form';
 
-type Props<FormValues> = InputHTMLAttributes<HTMLInputElement> & {
-  label: ReactNode;
-  inputDescription?: ReactNode;
-  children?: never;
-  controller: UseControllerProps<FormValues>;
-};
+type Props<FormValues extends FieldValues> =
+  InputHTMLAttributes<HTMLInputElement> & {
+    label: ReactNode;
+    inputDescription?: ReactNode;
+    children?: never;
+    controller: UseControllerProps<FormValues>;
+  };
 
-export default function Checkbox<FormValues>({
+export default function Checkbox<FormValues extends FieldValues>({
   label,
   inputDescription,
   controller,
   ...inputProps
 }: Props<FormValues>) {
-  const { field, fieldState } = useController(controller);
+  const {
+    field: { value, ...field },
+    fieldState,
+  } = useController(controller);
+
   return (
     <Form.Group>
       <Form.CheckboxGroup>
@@ -23,12 +32,11 @@ export default function Checkbox<FormValues>({
           type="checkbox"
           tw="hidden"
           aria-hidden
+          checked={value === true}
+          aria-checked={value === true}
           aria-invalid={fieldState.invalid}
-          aria-checked={field.value === true}
           {...inputProps}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
-          name={field.name}
+          {...field}
         />
         <Form.Checkbox>
           <Form.CheckboxTick

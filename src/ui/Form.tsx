@@ -62,7 +62,7 @@ Form.Checkbox = styled.span`
     ${tw`border-dark`}
   }
 
-  input[aria-checked='true'] ~ & {
+  input:checked ~ & {
     ${tw`border-dark bg-dark`}
   }
 `;
@@ -72,7 +72,7 @@ Form.CheckboxTick = styled.svg`
   stroke: white;
   stroke-width: 4;
 
-  input[aria-checked='true'] ~ span > & {
+  input:checked ~ span > & {
     ${tw`visible`}
   }
 `;

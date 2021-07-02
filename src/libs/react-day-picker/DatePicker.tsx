@@ -3,16 +3,22 @@ import { isEmptyString } from '@utils/validate-utils';
 import React, { ReactNode } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DayPickerInputProps } from 'react-day-picker/types/Props';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+  FieldValues,
+  useController,
+  UseControllerProps,
+} from 'react-hook-form';
 import { styled } from 'twin.macro';
 import { formatDate, parseDate } from './react-day-picker-utils';
 
-type Props<FormValues> = Partial<Omit<DayPickerInputProps, 'placeholder'>> & {
+type Props<FormValues extends FieldValues> = Partial<
+  Omit<DayPickerInputProps, 'placeholder'>
+> & {
   inputDescription?: ReactNode;
   controller: UseControllerProps<FormValues>;
 };
 
-function DatePicker<FormValues>({
+function DatePicker<FormValues extends FieldValues>({
   inputDescription,
   inputProps,
   dayPickerProps,
@@ -26,6 +32,7 @@ function DatePicker<FormValues>({
   return (
     <StyledWrapper>
       <DayPickerInput
+        format="MM-dd-yyyy"
         {...pickerProps}
         inputProps={{
           ...inputProps,
@@ -40,7 +47,6 @@ function DatePicker<FormValues>({
         placeholder=" "
         formatDate={formatDate}
         parseDate={parseDate}
-        format="MM-dd-yyyy"
       />
 
       <StyledLabel
