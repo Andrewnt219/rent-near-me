@@ -39,6 +39,7 @@ export default function LoginForm() {
 
         <DatePicker controller={controllers.dob} />
         <Checkbox
+          id="login-keepLogIn"
           controller={controllers.keepLogIn}
           label="Keep me signed in"
         />

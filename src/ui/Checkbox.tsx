@@ -12,9 +12,11 @@ type Props<FormValues extends FieldValues> =
     inputDescription?: ReactNode;
     children?: never;
     controller: UseControllerProps<FormValues>;
+    id: string;
   };
 
 export default function Checkbox<FormValues extends FieldValues>({
+  id,
   label,
   inputDescription,
   controller,
@@ -29,16 +31,20 @@ export default function Checkbox<FormValues extends FieldValues>({
     <Form.Group>
       <Form.CheckboxGroup>
         <input
+          id={id}
           type="checkbox"
           tw="hidden"
           aria-hidden
           checked={value === true}
-          aria-checked={value === true}
-          aria-invalid={fieldState.invalid}
           {...inputProps}
           {...field}
         />
-        <Form.Checkbox>
+        <Form.Checkbox
+          role="checkbox"
+          aria-describedby={id + 'error'}
+          aria-checked={value === true}
+          aria-invalid={fieldState.invalid}
+        >
           <Form.CheckboxTick
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
@@ -49,11 +55,14 @@ export default function Checkbox<FormValues extends FieldValues>({
             <path fill="none" d="m4 16.5 8 8 16-16"></path>
           </Form.CheckboxTick>
         </Form.Checkbox>
-        <span>{label}</span>
+
+        <label htmlFor={id}>{label}</label>
       </Form.CheckboxGroup>
 
       <Form.TextWrapper>
-        <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
+        <Form.ErrorMessage id={id + 'error'}>
+          {fieldState.error?.message}
+        </Form.ErrorMessage>
         <Form.Description>{inputDescription}</Form.Description>
       </Form.TextWrapper>
     </Form.Group>
