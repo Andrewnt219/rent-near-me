@@ -1,27 +1,34 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+  FieldValues,
+  useController,
+  UseControllerProps,
+} from 'react-hook-form';
 import Form from './Form';
 
-type Props<FormValues> = InputHTMLAttributes<HTMLInputElement> & {
-  label: ReactNode;
-  inputDescription?: ReactNode;
-  children?: never;
-  id: string;
-  controller: UseControllerProps<FormValues>;
-};
+type Props<FormValues extends FieldValues> =
+  InputHTMLAttributes<HTMLInputElement> & {
+    label: ReactNode;
+    inputDescription?: ReactNode;
+    children?: never;
+    id: string;
+    controller: UseControllerProps<FormValues>;
+  };
 
-function TextField<FormValues>(props: Props<FormValues>) {
+function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
   const { label, inputDescription, controller, ...inputProps } = props;
-  const { field, fieldState } = useController(controller);
+  const {
+    field: { value, ...field },
+    fieldState,
+  } = useController(controller);
 
   return (
     <Form.Group>
       <Form.Input
         aria-invalid={fieldState.invalid}
         {...inputProps}
-        onChange={field.onChange}
-        onBlur={field.onBlur}
-        name={field.name}
+        {...field}
+        value={value.toString()}
         placeholder=" "
       />
 

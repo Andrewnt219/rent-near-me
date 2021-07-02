@@ -13,12 +13,23 @@ type Controllers = Record<
   keyof LoginFormData,
   UseControllerProps<LoginFormData>
 >;
+
+// Important so that input value will not change from controlled to uncontrolled
+// (because of undefined)
+const defaultValues: LoginFormData = {
+  dob: '',
+  email: '',
+  keepLogIn: false,
+  password: '',
+};
 export const useLoginForm = () => {
   const { t } = useTranslation();
-  const form = useForm<LoginFormData>();
+
+  const form = useForm<LoginFormData>({ defaultValues });
   const { control } = form;
 
   const onSubmit = form.handleSubmit(async (data) => {
+    console.log({ data });
     const parsedDate = new Date(data.dob);
 
     await AuthService.signInWithEmail(data.email, data.password).catch(

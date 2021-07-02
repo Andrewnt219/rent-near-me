@@ -1,36 +1,50 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+  FieldValues,
+  useController,
+  UseControllerProps,
+} from 'react-hook-form';
 import Form from './Form';
 
-type Props<FormValues> = InputHTMLAttributes<HTMLInputElement> & {
-  label: ReactNode;
-  inputDescription?: ReactNode;
-  children?: never;
-  controller: UseControllerProps<FormValues>;
-};
+type Props<FormValues extends FieldValues> =
+  InputHTMLAttributes<HTMLInputElement> & {
+    label: ReactNode;
+    inputDescription?: ReactNode;
+    children?: never;
+    controller: UseControllerProps<FormValues>;
+    id: string;
+  };
 
-export default function Checkbox<FormValues>({
+export default function Checkbox<FormValues extends FieldValues>({
+  id,
   label,
   inputDescription,
   controller,
   ...inputProps
 }: Props<FormValues>) {
-  const { field, fieldState } = useController(controller);
+  const {
+    field: { value, ...field },
+    fieldState,
+  } = useController(controller);
+
   return (
     <Form.Group>
       <Form.CheckboxGroup>
         <input
+          id={id}
           type="checkbox"
           tw="hidden"
           aria-hidden
-          aria-invalid={fieldState.invalid}
-          aria-checked={field.value === true}
+          checked={value === true}
           {...inputProps}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
-          name={field.name}
+          {...field}
         />
-        <Form.Checkbox>
+        <Form.Checkbox
+          role="checkbox"
+          aria-describedby={id + 'error'}
+          aria-checked={value === true}
+          aria-invalid={fieldState.invalid}
+        >
           <Form.CheckboxTick
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
@@ -41,11 +55,14 @@ export default function Checkbox<FormValues>({
             <path fill="none" d="m4 16.5 8 8 16-16"></path>
           </Form.CheckboxTick>
         </Form.Checkbox>
-        <span>{label}</span>
+
+        <label htmlFor={id}>{label}</label>
       </Form.CheckboxGroup>
 
       <Form.TextWrapper>
-        <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
+        <Form.ErrorMessage id={id + 'error'}>
+          {fieldState.error?.message}
+        </Form.ErrorMessage>
         <Form.Description>{inputDescription}</Form.Description>
       </Form.TextWrapper>
     </Form.Group>
