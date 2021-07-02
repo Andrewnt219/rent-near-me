@@ -1,12 +1,12 @@
 import AuthService from '@services/AuthService';
 import { isValidDate } from '@utils/validate-utils';
 import useTranslation from 'next-translate/useTranslation';
+import { useState } from 'react';
 import { UseControllerProps, useForm } from 'react-hook-form';
 
 export type LoginFormData = {
   email: string;
   password: string;
-  dob: string;
   keepLogIn: boolean;
 };
 type Controllers = Record<
@@ -17,7 +17,6 @@ type Controllers = Record<
 // Important so that input value will not change from controlled to uncontrolled
 // (because of undefined)
 const defaultValues: LoginFormData = {
-  dob: '',
   email: '',
   keepLogIn: false,
   password: '',
@@ -28,25 +27,15 @@ export const useLoginForm = () => {
   const form = useForm<LoginFormData>({ defaultValues });
   const { control } = form;
 
-  const onSubmit = form.handleSubmit(async (data) => {
-    console.log({ data });
-    const parsedDate = new Date(data.dob);
+  const [submitError, setSubmitError] = useState('');
 
-    await AuthService.signInWithEmail(data.email, data.password).catch(
-      (error) => alert(error.error_description || error.message)
+  const onSubmit = form.handleSubmit(async (data) => {
+    await AuthService.signInWithEmail(data.email, data.password).catch((err) =>
+      setSubmitError(err.error_description || err.message)
     );
   });
 
   const controllers: Controllers = {
-    dob: {
-      control,
-      name: 'dob',
-      rules: {
-        required: t('common:errors.form.required'),
-        validate: (value) =>
-          isValidDate(value) || t('common:errors.form.invalid-date'),
-      },
-    },
     email: {
       control,
       name: 'email',
@@ -60,9 +49,8 @@ export const useLoginForm = () => {
     keepLogIn: {
       control,
       name: 'keepLogIn',
-      rules: { required: t('common:errors.form.required') },
     },
   };
 
-  return { onSubmit, form, controllers };
+  return { onSubmit, form, controllers, submitError };
 };

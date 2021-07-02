@@ -82,7 +82,7 @@ Form.TextWrapper = styled.div`
 `;
 
 Form.ErrorMessage = styled.p`
-  ${tw`text-danger`}
+  ${tw`text-danger text-xs`}
 `;
 
 Form.Description = styled.p`
