@@ -29,7 +29,7 @@ const AppBar = ({ className }: Props) => {
 };
 
 const StyledHeader = styled.nav`
-  ${tw`w-full absolute bottom-0 left-0 py-md border-gray-200 border-t`}
+  ${tw`w-full absolute bottom-0 left-0 py-md border-gray-light border-t`}
 `;
 
 const StyledMenuList = styled.ul`

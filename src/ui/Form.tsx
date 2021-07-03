@@ -12,7 +12,7 @@ Form.Group = styled.div`
 `;
 
 export const inputCss = css`
-  ${tw`w-full border rounded px-sm pt-lg pb-sm`}
+  ${tw`w-full border border-dark rounded px-sm pt-lg pb-sm`}
   ${tw`focus:outline-none hover:bg-light`}
   ${tw`transition-colors`}
 
@@ -54,7 +54,7 @@ Form.CheckboxGroup = styled.label`
 Form.Checkbox = styled.span`
   ${tw`grid place-content-center`}
   ${tw`w-7 h-7`}
-  ${tw`border border-gray-400 bg-transparent`}
+  ${tw`border border-gray bg-transparent`}
 
   border-radius: 5px;
 

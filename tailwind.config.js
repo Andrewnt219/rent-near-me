@@ -10,23 +10,32 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {
-      colors: {
-        primary: '#ff385c',
-        dark: '#222',
-        danger: '#dc2626',
-        light: '#f8f9fa',
+    shadow: {
+      DEFAULT: '0px 6px 16px rgb(0 0 0 / 12%)',
+      sm: '0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%)',
+    },
+    colors: {
+      transparent: 'transparent',
+      current: 'current',
+      primary: '#ff385c',
+      danger: '#dc2626',
+      white: '#fff',
+      black: '#000',
+      light: '#f8f9fa',
+      dark: '#333',
+      gray: {
+        DEFAULT: '#9ca3af',
+        light: '#ddd',
+        dark: '#717171',
       },
-
+    },
+    extend: {
       borderRadius: {
         DEFAULT: '0.5rem',
       },
-      borderColor: {
-        DEFAULT: '#333',
-      },
 
-      textColor: {
-        muted: '#717171',
+      borderColor: {
+        DEFAULT: '#ddd',
       },
 
       fontFamily: {
