@@ -4,7 +4,6 @@ import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import React from 'react';
 import { FaGlobe } from 'react-icons/fa';
-import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
 
 type Props = {
@@ -16,7 +15,7 @@ const HomeNavBar = ({ className }: Props) => {
       <Layout.Container tw="flex items-center justify-between">
         <Logo />
 
-        <LocationSearchBar />
+        <LocationSearchBar tw="min-w-[20rem]" />
 
         <nav aria-label="Main" tw="flex space-x-sm">
           <Button tw="font-semibold">Become a Host</Button>
@@ -32,7 +31,5 @@ const HomeNavBar = ({ className }: Props) => {
     </header>
   );
 };
-
-const StyledWrapper = styled.div``;
 
 export default HomeNavBar;
