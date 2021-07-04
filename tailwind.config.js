@@ -56,5 +56,85 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    centers,
+    grid,
+    sizing,
+    commons,
+    fonts,
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
+
+function commons({ addComponents }) {
+  addComponents({
+    '.content': {
+      content: '""',
+    },
+  });
+}
+
+function fonts({ addComponents, theme }) {
+  addComponents({
+    '.font-inherit': {
+      font: 'inherit',
+    },
+    '.text-smaller': {
+      fontSize: 'smaller',
+    },
+    '.text-larger': {
+      fontSize: 'larger',
+    },
+  });
+}
+
+function centers({ addComponents }) {
+  addComponents({
+    '.position-center': {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    },
+    '.flex-center': {
+      display: 'flex',
+      'justify-content': 'center',
+      'align-items': 'center',
+    },
+  });
+}
+
+function grid({ addComponents }) {
+  addComponents({
+    '.grid-p-sm': {
+      'grid-column': '2/12',
+    },
+    '.grid-p-md': {
+      'grid-column': '4/10',
+    },
+    '.grid-p-lg': {
+      'grid-column': '6/8',
+    },
+  });
+}
+
+function sizing({ addComponents, theme }) {
+  addComponents({
+    '.absolute-cover': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+    },
+    '.img-absolute': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      objectPosition: 'center center',
+    },
+  });
+}

@@ -1,14 +1,16 @@
 import { FaHeart, FaSearch, FaUserAlt } from 'react-icons/fa';
-import tw, { styled } from 'twin.macro';
 import AppBarMenuItem from '../AppBarMenuItem/AppBarMenuItem';
 type Props = {
   className?: string;
 };
 const AppBar = ({ className }: Props) => {
   return (
-    <StyledHeader className={className}>
+    <header
+      className={className}
+      tw="w-full absolute bottom-0 left-0 py-md border-gray-light border-t"
+    >
       <nav>
-        <StyledMenuList>
+        <ul tw="flex space-x-xl justify-center w-full">
           <li>
             <AppBarMenuItem href="/" icon={<FaSearch />} text="Explore" />
           </li>
@@ -22,18 +24,10 @@ const AppBar = ({ className }: Props) => {
           <li>
             <AppBarMenuItem href="/login" icon={<FaUserAlt />} text="Login" />
           </li>
-        </StyledMenuList>
+        </ul>
       </nav>
-    </StyledHeader>
+    </header>
   );
 };
-
-const StyledHeader = styled.nav`
-  ${tw`w-full absolute bottom-0 left-0 py-md border-gray-light border-t`}
-`;
-
-const StyledMenuList = styled.ul`
-  ${tw`flex space-x-xl justify-center w-full`}
-`;
 
 export default AppBar;

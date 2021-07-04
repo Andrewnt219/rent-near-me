@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 
 const GlobalStyles = createGlobalStyle`
   html,body, #__next {
-   ${tw`w-full h-full text-dark`} 
+   ${tw`w-full h-full text-dark bg-black`} 
   }
 
   input,text-area, select, ::placeholder {
@@ -13,7 +13,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #__next {
-    ${tw`max-w-7xl mx-auto relative`}
+    ${tw`max-w-7xl mx-auto relative grid grid-cols-12`}
+  }
+
+  input, textarea, select {
+    ${tw`bg-transparent outline-none`}
   }
   
   ${reactDatePickerCss}

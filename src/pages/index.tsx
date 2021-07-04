@@ -1,14 +1,10 @@
-import AppBar from '@ui/navigation/AppBar/AppBar';
-import Footer from '@ui/navigation/Footer/Footer';
 import React from 'react';
+import DefaultLayout from 'src/layouts/DefaultLayout';
 
 export default function Home() {
   return (
-    <>
-      <AppBar />
-      <main></main>
-
-      <Footer></Footer>
-    </>
+    <DefaultLayout>
+      <h1>Hi</h1>
+    </DefaultLayout>
   );
 }
