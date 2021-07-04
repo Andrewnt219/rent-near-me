@@ -30,6 +30,10 @@ module.exports = {
       },
     },
     extend: {
+      maxWidth: {
+        '8xl': '90rem',
+      },
+
       borderRadius: {
         DEFAULT: '0.5rem',
       },

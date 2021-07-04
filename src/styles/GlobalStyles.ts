@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #__next {
-    ${tw`max-w-7xl mx-auto relative grid grid-cols-12`}
+    ${tw`mx-auto relative`}
   }
 
   input, textarea, select {
