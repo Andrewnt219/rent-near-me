@@ -12,14 +12,14 @@ type Props = {
 };
 const HomeNavBar = ({ className }: Props) => {
   return (
-    <header className={className} tw="bg-white">
-      <Layout.Container tw="flex">
+    <header className={className} tw="bg-white py-xl">
+      <Layout.Container tw="flex items-center justify-between">
         <Logo />
 
         <LocationSearchBar />
 
-        <nav aria-label="Main">
-          <Button>Become a Host</Button>
+        <nav aria-label="Main" tw="flex space-x-sm">
+          <Button tw="font-semibold">Become a Host</Button>
 
           <Button>
             <FaGlobe />
