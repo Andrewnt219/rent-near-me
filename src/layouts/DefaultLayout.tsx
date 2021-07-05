@@ -1,5 +1,4 @@
 import Layout from '@layouts/Layout';
-import AppBar from '@ui/navigation/AppBar/AppBar';
 import Footer from '@ui/navigation/Footer/Footer';
 import HomeNavBar from '@ui/navigation/HomeNavBar/HomeNavBar';
 import { PropsWithChildren } from 'react';
@@ -14,7 +13,7 @@ const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
       className={className}
     >
       <HomeNavBar />
-      <AppBar />
+      {/* <AppBar /> */}
 
       <Layout.Container as="main" tw="flex-1">
         {children}

@@ -19,6 +19,11 @@ const GlobalStyles = createGlobalStyle`
   input, textarea, select {
     ${tw`bg-transparent outline-none`}
   }
+
+  * {
+    ${tw`outline-none! focus-visible:(ring ring-dark)`}
+  }
+
   
   ${reactDatePickerCss}
 

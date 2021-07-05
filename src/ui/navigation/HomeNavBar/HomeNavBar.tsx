@@ -1,5 +1,5 @@
 import Layout from '@layouts/Layout';
-import Button from '@ui/Button/Button';
+import { RoundButton } from '@ui/Button/Button';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import React from 'react';
@@ -18,13 +18,13 @@ const HomeNavBar = ({ className }: Props) => {
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
-        <nav aria-label="Main" tw="flex space-x-md">
-          <Button tw="font-semibold">Become a Host</Button>
+        <nav aria-label="Main" tw="flex space-x-xs">
+          <RoundButton tw="font-semibold">Become a Host</RoundButton>
 
-          <Button>
+          <RoundButton>
             <FaGlobe />
             <span tw="sr-only">Change site&apos; language</span>
-          </Button>
+          </RoundButton>
 
           <UserMenu />
         </nav>
