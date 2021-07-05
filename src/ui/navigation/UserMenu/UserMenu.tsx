@@ -36,8 +36,8 @@ const UserMenu = ({ className }: Props) => {
         >
           <StyledLinkList aria-label="Your preferences" tw="font-semibold">
             <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Messages</StyledLink>
+              <NextLink href="/about" passHref>
+                <StyledLink>About</StyledLink>
               </NextLink>
             </li>
             <li>
@@ -108,4 +108,5 @@ const StyledLinkList = styled.ul`
     ${tw`border-b `}
   }
 `;
+
 export default UserMenu;

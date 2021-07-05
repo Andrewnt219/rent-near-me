@@ -36,7 +36,7 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
     'jsx-a11y/anchor-is-valid': 'off',
   },
