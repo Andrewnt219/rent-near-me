@@ -33,7 +33,7 @@ export default function Checkbox<FormValues extends FieldValues>({
         <input
           id={id}
           type="checkbox"
-          tw="hidden"
+          tw="sr-only"
           aria-hidden
           checked={value === true}
           {...inputProps}
@@ -56,7 +56,7 @@ export default function Checkbox<FormValues extends FieldValues>({
           </Form.CheckboxTick>
         </Form.Checkbox>
 
-        <label htmlFor={id}>{label}</label>
+        <div>{label}</div>
       </Form.CheckboxGroup>
 
       <Form.TextWrapper>

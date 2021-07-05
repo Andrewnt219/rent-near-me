@@ -1,67 +1,116 @@
-import DatePicker from '@libs/react-day-picker/DatePicker';
-import AuthService from '@services/AuthService';
-import Checkbox from '@ui/Checkbox';
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+import { RiErrorWarningFill, RiFacebookCircleFill } from 'react-icons/ri';
+import { FcGoogle } from 'react-icons/fc';
+import tw, { css, styled } from 'twin.macro';
+import useTranslation from 'next-translate/useTranslation';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
-import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
+import Checkbox from '@ui/Checkbox';
+import { ButtonLg } from '@ui/Button';
 import { useLoginForm } from './useLoginForm';
+import AuthService from '@services/AuthService';
+import PasswordField from '@ui/PasswordField';
+
+const signInExternalIconStyle = tw`w-6 h-6`;
+
 export default function LoginForm() {
-  const { controllers, form, onSubmit } = useLoginForm();
+  const { controllers, form, onSubmit, submitError } = useLoginForm();
   const { t } = useTranslation();
 
   return (
-    <div>
-      <Form noValidate className="mb-4" onSubmit={onSubmit}>
-        <p>
-          Sign in with email and password (
-          <Link href="/register">
-            <a>No account?</a>
-          </Link>
-          )
-        </p>
+    <Form noValidate onSubmit={onSubmit}>
+      <TextField
+        label={t('common:login.email')}
+        type="email"
+        id="login-email"
+        autoComplete="username"
+        controller={controllers.email}
+      />
 
-        <TextField
-          label="Email"
-          type="email"
-          id="login-email"
-          inputDescription="Enter your registered email"
-          controller={controllers.email}
-        />
+      <PasswordField
+        label={t('common:login.password')}
+        id="login-password"
+        autoComplete="current-password"
+        controller={controllers.password}
+      />
 
-        <TextField
-          label="Password"
-          type="password"
-          id="login-password"
-          inputDescription="Enter your registered password"
-          controller={controllers.password}
-        />
+      <Checkbox
+        id="login-keepLogIn"
+        controller={controllers.keepLogIn}
+        label={t('common:login.keepSignedIn')}
+      />
 
-        <DatePicker controller={controllers.dob} />
-        <Checkbox
-          id="login-keepLogIn"
-          controller={controllers.keepLogIn}
-          label="Keep me signed in"
-        />
-        <button disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? 'Loading' : 'Sign in'}
-        </button>
-      </Form>
+      {submitError && (
+        <Form.ErrorMessage tw="text-base flex items-center gap-2 mb-2">
+          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          {submitError}
+        </Form.ErrorMessage>
+      )}
 
-      <button
-        type="button"
-        onClick={async (e) => await AuthService.signInWithGoogle()}
-        className="block"
+      <ButtonLg
+        type="submit"
+        tw="block w-full"
+        disabled={form.formState.isSubmitting}
       >
-        {t('common:login.google')}
-      </button>
+        {form.formState.isSubmitting
+          ? t('common:login.loading')
+          : t('common:login.login')}
+      </ButtonLg>
 
-      <button
-        onClick={async (e) => await AuthService.signInWithFacebook()}
-        className="block"
-      >
-        {t('common:login.facebook')}
-      </button>
+      <Or />
+
+      <SignInExternalButton
+        tw="mb-4"
+        icon={<FcGoogle css={signInExternalIconStyle} />}
+        text={t('common:login.google')}
+        onClick={async () => await AuthService.signInWithGoogle()}
+      />
+
+      <SignInExternalButton
+        icon={
+          <RiFacebookCircleFill
+            css={signInExternalIconStyle}
+            tw="text-facebook"
+          />
+        }
+        text={t('common:login.facebook')}
+        onClick={async () => await AuthService.signInWithFacebook()}
+      />
+    </Form>
+  );
+}
+
+const HorizontalLine = styled.hr`
+  ${tw`border-gray-light flex-grow`}
+`;
+function Or() {
+  return (
+    <div tw="flex justify-around items-center gap-6 my-6">
+      <HorizontalLine />
+      <span tw="-mt-1 text-gray-dark text-sm">or</span>
+      <HorizontalLine />
     </div>
+  );
+}
+
+const StyledSignInExternalButton = styled.button`
+  ${tw`grid grid-cols-[3rem auto] place-items-center`}
+  ${tw`border-2 border-gray-light hover:border-dark rounded-lg`}
+  ${tw`w-full py-2.5`}
+`;
+type SignInExternalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  icon: ReactNode;
+  text: ReactNode;
+};
+function SignInExternalButton({
+  text,
+  icon,
+  ...buttonProps
+}: SignInExternalButtonProps) {
+  return (
+    <StyledSignInExternalButton {...buttonProps}>
+      <span>{icon}</span>
+      <span tw="font-semibold">{text}</span>
+    </StyledSignInExternalButton>
   );
 }

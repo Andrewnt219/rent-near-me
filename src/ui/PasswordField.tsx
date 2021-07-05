@@ -1,4 +1,5 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import useTranslation from 'next-translate/useTranslation';
+import { InputHTMLAttributes, ReactNode, useState } from 'react';
 import {
   FieldValues,
   useController,
@@ -12,20 +13,30 @@ type Props<FormValues extends FieldValues> =
     inputDescription?: ReactNode;
     children?: never;
     id: string;
+    autoComplete: string;
     controller: UseControllerProps<FormValues>;
   };
 
-function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
+function PasswordField<FormValues extends FieldValues>(
+  props: Props<FormValues>
+) {
   const { label, inputDescription, controller, ...inputProps } = props;
   const {
     field: { value, ...field },
     fieldState,
   } = useController(controller);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword((show) => !show);
+
+  const { t } = useTranslation();
+
   return (
     <Form.Group>
       <Form.Input
         aria-invalid={fieldState.invalid}
+        tw="!pr-14"
+        type={showPassword ? 'text' : 'password'}
         {...inputProps}
         {...field}
         value={value.toString()}
@@ -33,6 +44,11 @@ function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
       />
 
       <Form.Label htmlFor={inputProps.id}>{label}</Form.Label>
+      <Form.ShowPasswordButton type="button" onClick={toggleShowPassword}>
+        {showPassword
+          ? t('common:fields.password.hide')
+          : t('common:fields.password.show')}
+      </Form.ShowPasswordButton>
 
       <Form.TextWrapper>
         {fieldState.invalid && (
@@ -46,4 +62,4 @@ function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
   );
 }
 
-export default TextField;
+export default PasswordField;

@@ -2,11 +2,44 @@
   "errors": {
     "form": {
       "required": "This field is required",
-      "invalid-date": "Suggested format is MM-dd-yyyy (e.g. 12-31-2000)"
+      "invalid-email": "Please enter a valid email address",
+      "weak-password": "Weak password",
+      "unselected-dropdown": "Please select an option",
+      "invalid-date": "Suggested format is dd-MMM-yyyy"
+    }
+  },
+  "fields": {
+    "password": {
+      "show": "Show",
+      "hide": "Hide"
     }
   },
   "login": {
-    "facebook": "Sign in with Facebook",
-    "google": "Sign in with Google"
+    "email": "Email",
+    "password": "Password",
+    "keepSignedIn": "Keep me signed in",
+    "loading": "Loading",
+    "login": "Log in",
+    "google": "Continue with Google",
+    "facebook": "Continue with Facebook"
+  },
+  "register": {
+    "firstName": {
+      "label": "First name",
+      "description": "Make sure it maatches the name on your government ID"
+    },
+    "lastName": "Last name",
+    "gender": "Gender",
+    "dob": {
+      "label": "Date of birth",
+      "description": "To sign up, you need to be at least 18. Your birthday won’t be shared with anyone else."
+    },
+    "email": {
+      "label": "Email",
+      "description": "We'll only communicate to you regarding your account via this email"
+    },
+    "password": "Password",
+    "loading": "Loading",
+    "register": "Create new account"
   }
 }

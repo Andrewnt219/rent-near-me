@@ -1,22 +1,22 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { SelectHTMLAttributes, ReactNode } from 'react';
 import {
   FieldValues,
   useController,
   UseControllerProps,
 } from 'react-hook-form';
+import { GoChevronDown } from 'react-icons/go';
 import Form from './Form';
 
 type Props<FormValues extends FieldValues> =
-  InputHTMLAttributes<HTMLInputElement> & {
+  SelectHTMLAttributes<HTMLSelectElement> & {
     label: ReactNode;
     inputDescription?: ReactNode;
-    children?: never;
     id: string;
     controller: UseControllerProps<FormValues>;
   };
 
-function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
-  const { label, inputDescription, controller, ...inputProps } = props;
+function Select<FormValues extends FieldValues>(props: Props<FormValues>) {
+  const { label, inputDescription, controller, ...selectProps } = props;
   const {
     field: { value, ...field },
     fieldState,
@@ -24,15 +24,18 @@ function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
 
   return (
     <Form.Group>
-      <Form.Input
+      <Form.Select
         aria-invalid={fieldState.invalid}
-        {...inputProps}
+        {...selectProps}
         {...field}
         value={value.toString()}
-        placeholder=" "
-      />
+        data-selected={value.toString() !== ''}
+      >
+        {props.children}
+      </Form.Select>
 
-      <Form.Label htmlFor={inputProps.id}>{label}</Form.Label>
+      <Form.Label htmlFor={selectProps.id}>{label}</Form.Label>
+      <GoChevronDown tw="absolute top-lg right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid && (
@@ -46,4 +49,4 @@ function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
   );
 }
 
-export default TextField;
+export default Select;
