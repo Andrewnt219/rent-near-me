@@ -8,8 +8,7 @@ import Select from '@ui/SelectField';
 import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
-import { GoCheck } from 'react-icons/go';
-import { TiTimes } from 'react-icons/ti';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 import tw, { styled } from 'twin.macro';
 import useRegisterForm from './useRegisterForm';
 
@@ -129,8 +128,8 @@ const PasswordCriteria: FC<PasswordCriteriaProps> = ({
 }) => {
   return (
     <StyledPassworCriteria isQualified={isQualified}>
-      {isQualified ? <GoCheck /> : <TiTimes />}
-      <span>{children}</span>
+      {isQualified ? <FaCheck /> : <FaTimes />}
+      {children}
     </StyledPassworCriteria>
   );
 };
