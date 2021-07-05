@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import React, { FC } from 'react';
+import { useState } from 'react';
 import DefaultLayout from 'src/layouts/DefaultLayout';
 
 export default function Home() {
