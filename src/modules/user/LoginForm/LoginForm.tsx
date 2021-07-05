@@ -20,6 +20,8 @@ export default function LoginForm() {
 
   return (
     <Form noValidate onSubmit={onSubmit}>
+      <h4 tw="text-xl mb-4 font-semibold">Welcome back to RentNearMe!</h4>
+
       <TextField
         label={t('common:login.email')}
         type="email"

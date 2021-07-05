@@ -26,6 +26,11 @@ module.exports = {
       xs: '0.75rem',
     },
     colors: {
+      opaque: {
+        DEFAULT: 'rgba(0,0,0,0.5)',
+        // light: 'rgba(0,0,0,0.25)',
+        // dark: 'rgba(0,0,0,0.75)',
+      },
       transparent: 'transparent',
       current: 'current',
       primary: {
