@@ -32,7 +32,7 @@ const UserMenu = ({ className }: Props) => {
       {isOpen && (
         <ul
           aria-label="Menu links"
-          tw="absolute top-[125%] right-0 bg-white min-w-[200px] shadow rounded"
+          tw="absolute top-[125%] right-0 bg-white min-w-[200px] shadow rounded z-40"
         >
           <StyledLinkList aria-label="Your preferences" tw="font-semibold">
             <li>
