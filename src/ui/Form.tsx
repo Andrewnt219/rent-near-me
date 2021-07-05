@@ -34,7 +34,7 @@ Form.Label = styled.label`
   /* Translate y equals to input pt */
   /* left equals to input pl */
   ${tw`absolute top-0 left-sm transform translate-y-md`}
-  ${tw`text-muted`}
+  ${tw`text-gray-dark`}
   ${tw`transition-all`} 
 
   input:focus ~ &, input:not(:placeholder-shown) ~ & {
@@ -86,7 +86,7 @@ Form.ErrorMessage = styled.p`
 `;
 
 Form.Description = styled.p`
-  ${tw`text-muted`}
+  ${tw`text-gray-dark`}
 `;
 
 export default Form;
