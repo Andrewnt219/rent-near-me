@@ -48,7 +48,7 @@ Layout.Container = styled.div`
   padding-left: var(--page-px, 1.5rem);
   padding-right: var(--page-px, 1.5rem);
 
-  ${tw`mx-auto`}
+  ${tw`mx-auto w-full`}
 `;
 
 export default Layout;
