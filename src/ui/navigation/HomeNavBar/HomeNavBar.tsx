@@ -4,6 +4,7 @@ import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import React from 'react';
 import { FaGlobe } from 'react-icons/fa';
+import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
 
 type Props = {
@@ -11,13 +12,13 @@ type Props = {
 };
 const HomeNavBar = ({ className }: Props) => {
   return (
-    <header className={className} tw="bg-white py-xl">
+    <StyledHeader className={className} tw="bg-white py-xl">
       <Layout.Container tw="flex items-center justify-between">
         <Logo />
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
-        <nav aria-label="Main" tw="flex space-x-sm">
+        <nav aria-label="Main" tw="flex space-x-md">
           <Button tw="font-semibold">Become a Host</Button>
 
           <Button>
@@ -28,8 +29,11 @@ const HomeNavBar = ({ className }: Props) => {
           <UserMenu />
         </nav>
       </Layout.Container>
-    </header>
+    </StyledHeader>
   );
 };
 
+const StyledHeader = styled.header`
+  box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
+`;
 export default HomeNavBar;

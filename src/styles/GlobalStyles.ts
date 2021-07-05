@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 
 const GlobalStyles = createGlobalStyle`
   html,body, #__next {
-   ${tw`w-full h-full text-dark bg-black`} 
+   ${tw`w-full h-full text-dark`} 
   }
 
   input,text-area, select, ::placeholder {
