@@ -1,4 +1,3 @@
-import Button from '@ui/Button/Button';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 import tw from 'twin.macro';
@@ -14,10 +13,10 @@ const SearchBar = ({ className }: Props) => {
         tw="placeholder:( font-semibold text-dark)"
       />
 
-      <Button>
+      <button>
         <FaSearch />
         <span tw="sr-only">Search</span>
-      </Button>
+      </button>
     </StyledWrapper>
   );
 };
