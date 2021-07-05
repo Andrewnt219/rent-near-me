@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
     ${tw`bg-transparent outline-none`}
   }
 
-  * {
+  button, a {
     ${tw`outline-none! focus-visible:(ring ring-dark)`}
   }
 
