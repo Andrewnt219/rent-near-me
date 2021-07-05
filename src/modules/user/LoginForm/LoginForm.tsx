@@ -1,15 +1,16 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { RiErrorWarningFill, RiFacebookCircleFill } from 'react-icons/ri';
-import { FcGoogle } from 'react-icons/fc';
-import tw, { css, styled } from 'twin.macro';
-import useTranslation from 'next-translate/useTranslation';
-import Form from '@ui/Form';
-import TextField from '@ui/TextField';
-import Checkbox from '@ui/Checkbox';
-import { ButtonPrimary, ButtonSimple } from '@ui/Button/Button';
-import { useLoginForm } from './useLoginForm';
 import AuthService from '@services/AuthService';
+import { ButtonPrimary, ButtonSimple } from '@ui/Button/Button';
+import Checkbox from '@ui/Checkbox';
+import Form from '@ui/Form';
+import HrText from '@ui/HrText/HrText';
 import PasswordField from '@ui/PasswordField';
+import TextField from '@ui/TextField';
+import useTranslation from 'next-translate/useTranslation';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { RiErrorWarningFill, RiFacebookCircleFill } from 'react-icons/ri';
+import tw, { styled } from 'twin.macro';
+import { useLoginForm } from './useLoginForm';
 
 const signInExternalIconStyle = tw`w-6 h-6`;
 
@@ -58,7 +59,7 @@ export default function LoginForm() {
           : t('common:login.login')}
       </ButtonPrimary>
 
-      <Or />
+      <HrText>or</HrText>
 
       <SignInExternalButton
         tw="mb-4"
@@ -78,19 +79,6 @@ export default function LoginForm() {
         onClick={async () => await AuthService.signInWithFacebook()}
       />
     </Form>
-  );
-}
-
-const HorizontalLine = styled.hr`
-  ${tw`border-gray-light flex-grow`}
-`;
-function Or() {
-  return (
-    <div tw="flex justify-around items-center gap-6 my-6">
-      <HorizontalLine />
-      <span tw="-mt-1 text-gray-dark text-sm">or</span>
-      <HorizontalLine />
-    </div>
   );
 }
 
