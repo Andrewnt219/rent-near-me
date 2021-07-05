@@ -7,38 +7,41 @@ const Form = ({ children, ...formProps }: Props) => {
   return <form {...formProps}>{children}</form>;
 };
 
-Form.Group = styled.div`
-  ${tw`relative mb-md`}
-`;
-
-Form.Row = styled.div`
-  ${tw`flex gap-md`}
-
-  & > * {
-    ${tw`flex-1`}
-  }
-`;
-
+/* -------------------------------------------------------------------------- */
+/*                                    INPUT                                   */
+/* -------------------------------------------------------------------------- */
 export const inputCss = css`
-  ${tw`border focus-within:(border-2 border-black) border-dark`}
-  ${tw`w-full rounded px-sm pt-lg pb-sm`}
-  ${tw`focus:outline-none hover:bg-light`}
+  ${tw`border w-full rounded px-sm pt-lg pb-sm`}
   ${tw`transition-colors`}
 
   &[aria-invalid='true'] {
     ${tw`border-danger bg-red-light`}
   }
+
+  &:hover {
+    ${tw`bg-gray-light`}
+  }
+
+  &:focus-visible {
+    ${tw`ring-2 ring-black`}
+  }
 `;
+
 Form.Input = styled.input`
   ${inputCss}
 `;
 
+/* -------------------------------------------------------------------------- */
+/*                                    LABEL                                   */
+/* -------------------------------------------------------------------------- */
 export const labelActiveCss = css`
   ${tw`translate-y-1 text-xs`}
 `;
+
 export const labelInvalidCss = css`
   ${tw`text-danger`}
 `;
+
 Form.Label = styled.label`
   /* Translate y equals to input pt */
   /* left equals to input pl */
@@ -60,64 +63,52 @@ Form.Label = styled.label`
   }
 `;
 
+/* -------------------------------------------------------------------------- */
+/*                                   SELECT                                   */
+/* -------------------------------------------------------------------------- */
 Form.Select = styled.select`
   ${inputCss}
   appearance: none;
 `;
 
 Form.ShowPasswordButton = styled.button`
-  top: 1.15rem;
-  ${tw`absolute right-md`}
+  ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
   ${tw`font-semibold underline text-xs`}
-  ${tw`rounded-sm`}
-
-  &:focus {
-    ${tw`outline-none`}
-    ${tw`ring-2 ring-black ring-offset-2`}
-  }
-
-  &:focus:not(:focus-visible) {
-    ${tw`ring-0 ring-offset-0`}
-  }
+  ${tw`ring-offset-2`}
 `;
 
-Form.CheckboxGroup = styled.label`
+/* -------------------------------------------------------------------------- */
+/*                                  CHECKBOX                                  */
+/* -------------------------------------------------------------------------- */
+
+Form.CheckboxLabel = styled.label`
   ${tw`relative inline-flex items-center gap-md cursor-pointer`}
   user-select: none;
 `;
 
-Form.Checkbox = styled.span`
+Form.CheckboxTick = styled.span`
   ${tw`grid place-content-center`}
-  ${tw`w-7 h-7`}
-  ${tw`border border-gray bg-transparent`}
-
-  border-radius: 5px;
+  ${tw`border bg-transparent rounded-md w-7 h-7`}
+  ${tw`text-transparent`}  
 
   label:hover > & {
-    ${tw`border-dark`}
+    ${tw`text-gray-light`}
   }
 
   input:checked ~ & {
-    ${tw`border-dark bg-dark`}
+    ${tw` bg-dark text-white`}
   }
 
-  input:focus ~ & {
-    ${tw`ring-2 ring-black ring-offset-2`}
-  }
-
-  input:focus:not(:focus-visible) ~ & {
-    ${tw`ring-0 ring-offset-0`}
+  input:focus-visible ~ & {
+    ${tw`ring-2 ring-black`}
   }
 `;
 
-Form.CheckboxTick = styled.svg`
-  ${tw`w-5 h-5 invisible pointer-events-none`}
-  stroke: white;
-  stroke-width: 4;
-
-  input:checked ~ span > & {
-    ${tw`visible`}
-  }
+/* -------------------------------------------------------------------------- */
+/*                                    MISC                                    */
+/* -------------------------------------------------------------------------- */
+Form.Group = styled.div`
+  ${tw`relative mb-md`}
 `;
 
 Form.TextWrapper = styled.div`

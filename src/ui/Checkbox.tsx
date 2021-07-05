@@ -4,6 +4,7 @@ import {
   useController,
   UseControllerProps,
 } from 'react-hook-form';
+import { FaCheck } from 'react-icons/fa';
 import Form from './Form';
 
 type Props<FormValues extends FieldValues> =
@@ -29,7 +30,7 @@ export default function Checkbox<FormValues extends FieldValues>({
 
   return (
     <Form.Group>
-      <Form.CheckboxGroup>
+      <Form.CheckboxLabel>
         <input
           id={id}
           type="checkbox"
@@ -39,25 +40,17 @@ export default function Checkbox<FormValues extends FieldValues>({
           {...inputProps}
           {...field}
         />
-        <Form.Checkbox
+        <Form.CheckboxTick
           role="checkbox"
           aria-describedby={id + 'error'}
           aria-checked={value === true}
           aria-invalid={fieldState.invalid}
         >
-          <Form.CheckboxTick
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            role="presentation"
-            focusable="false"
-          >
-            <path fill="none" d="m4 16.5 8 8 16-16"></path>
-          </Form.CheckboxTick>
-        </Form.Checkbox>
+          <FaCheck />
+        </Form.CheckboxTick>
 
-        <div>{label}</div>
-      </Form.CheckboxGroup>
+        {label}
+      </Form.CheckboxLabel>
 
       <Form.TextWrapper>
         <Form.ErrorMessage id={id + 'error'}>

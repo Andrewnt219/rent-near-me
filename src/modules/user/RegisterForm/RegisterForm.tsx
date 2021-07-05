@@ -1,24 +1,26 @@
-import { FC } from 'react';
-import { TiTimes } from 'react-icons/ti';
-import { GoCheck } from 'react-icons/go';
+import DatePicker from '@libs/react-day-picker/DatePicker';
+import RegisterModel from '@models/RegisterForm';
+import { ButtonPrimary } from '@ui/Button/Button';
+import Form from '@ui/Form';
+import PasswordField from '@ui/PasswordField';
+import Row from '@ui/Row/Row';
+import Select from '@ui/SelectField';
+import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
+import { FC } from 'react';
+import { GoCheck } from 'react-icons/go';
+import { TiTimes } from 'react-icons/ti';
 import tw, { styled } from 'twin.macro';
 import useRegisterForm from './useRegisterForm';
-import Form from '@ui/Form';
-import TextField from '@ui/TextField';
-import DatePicker from '@libs/react-day-picker/DatePicker';
-import { ButtonPrimary } from '@ui/Button/Button';
-import RegisterModel from '@models/RegisterForm';
-import PasswordField from '@ui/PasswordField';
-import Select from '@ui/SelectField';
 
 export default function RegisterForm() {
   const { controllers, form, onSubmit, submitError, passwordError } =
     useRegisterForm();
   const { t } = useTranslation();
+
   return (
     <Form noValidate onSubmit={onSubmit}>
-      <Form.Row>
+      <Row>
         <TextField
           label={t('common:register.firstName.label')}
           type="text"
@@ -33,9 +35,9 @@ export default function RegisterForm() {
           id="register-lastName"
           controller={controllers.lastName}
         />
-      </Form.Row>
+      </Row>
 
-      <Form.Row>
+      <Row>
         <DatePicker
           label={t('common:register.dob.label')}
           controller={controllers.dob}
@@ -54,7 +56,7 @@ export default function RegisterForm() {
             </option>
           ))}
         </Select>
-      </Form.Row>
+      </Row>
 
       <TextField
         label={t('common:register.email.label')}
