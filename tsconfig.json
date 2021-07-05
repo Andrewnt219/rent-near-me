@@ -26,6 +26,7 @@
       "@utils/*": ["src/utils/*"],
       "@modules/*": ["src/modules/*"],
       "@ui/*": ["src/ui/*"],
+      "@layouts/*": ["src/layouts/*"],
       "@contexts/*": ["src/contexts/*"],
       "@libs/*": ["src/libs/*"],
       "@services/*": ["src/services/*"],

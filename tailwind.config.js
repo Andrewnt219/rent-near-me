@@ -10,23 +10,36 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    shadow: {
+      DEFAULT: '0px 6px 16px rgb(0 0 0 / 12%)',
+      sm: '0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%)',
+    },
+    colors: {
+      transparent: 'transparent',
+      current: 'current',
+      primary: '#ff385c',
+      danger: '#dc2626',
+      white: '#fff',
+      black: '#000',
+      light: '#f8f9fa',
+      dark: '#333',
+      gray: {
+        DEFAULT: '#9ca3af',
+        light: '#ddd',
+        dark: '#717171',
+      },
+    },
     extend: {
-      colors: {
-        primary: '#ff385c',
-        dark: '#222',
-        danger: '#dc2626',
-        light: '#f8f9fa',
+      maxWidth: {
+        '8xl': '90rem',
       },
 
       borderRadius: {
         DEFAULT: '0.5rem',
       },
-      borderColor: {
-        DEFAULT: '#333',
-      },
 
-      textColor: {
-        muted: '#717171',
+      borderColor: {
+        DEFAULT: '#ddd',
       },
 
       fontFamily: {
@@ -47,5 +60,85 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    centers,
+    grid,
+    sizing,
+    commons,
+    fonts,
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
+
+function commons({ addComponents }) {
+  addComponents({
+    '.content': {
+      content: '""',
+    },
+  });
+}
+
+function fonts({ addComponents, theme }) {
+  addComponents({
+    '.font-inherit': {
+      font: 'inherit',
+    },
+    '.text-smaller': {
+      fontSize: 'smaller',
+    },
+    '.text-larger': {
+      fontSize: 'larger',
+    },
+  });
+}
+
+function centers({ addComponents }) {
+  addComponents({
+    '.position-center': {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    },
+    '.flex-center': {
+      display: 'flex',
+      'justify-content': 'center',
+      'align-items': 'center',
+    },
+  });
+}
+
+function grid({ addComponents }) {
+  addComponents({
+    '.grid-p-sm': {
+      'grid-column': '2/12',
+    },
+    '.grid-p-md': {
+      'grid-column': '4/10',
+    },
+    '.grid-p-lg': {
+      'grid-column': '6/8',
+    },
+  });
+}
+
+function sizing({ addComponents, theme }) {
+  addComponents({
+    '.absolute-cover': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+    },
+    '.img-absolute': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      objectPosition: 'center center',
+    },
+  });
+}
