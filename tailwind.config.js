@@ -32,6 +32,7 @@ module.exports = {
         light: '#ddd',
         dark: '#717171',
       },
+      facebook: '#1877f2',
     },
     extend: {
       maxWidth: {

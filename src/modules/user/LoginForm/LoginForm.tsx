@@ -1,16 +1,17 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+import { RiErrorWarningFill, RiFacebookCircleFill } from 'react-icons/ri';
+import { FcGoogle } from 'react-icons/fc';
 import tw, { css, styled } from 'twin.macro';
 import useTranslation from 'next-translate/useTranslation';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
 import Checkbox from '@ui/Checkbox';
 import { ButtonLg } from '@ui/Button';
-import GoogleIcon from '@assets/ic-google.svg';
-import FacebookIcon from '@assets/ic-facebook.svg';
-import ErrorIcon from '@assets/ic-error.svg';
 import { useLoginForm } from './useLoginForm';
 import AuthService from '@services/AuthService';
 import PasswordField from '@ui/PasswordField';
+
+const signInExternalIconStyle = tw`w-6 h-6`;
 
 export default function LoginForm() {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
@@ -41,7 +42,7 @@ export default function LoginForm() {
 
       {submitError && (
         <Form.ErrorMessage tw="text-base flex items-center gap-2 mb-2">
-          <ErrorIcon tw="w-5 h-5 fill-current" />
+          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
       )}
@@ -60,13 +61,18 @@ export default function LoginForm() {
 
       <SignInExternalButton
         tw="mb-4"
-        icon={<GoogleIcon tw="w-6 h-6" />}
+        icon={<FcGoogle css={signInExternalIconStyle} />}
         text={t('common:login.google')}
         onClick={async () => await AuthService.signInWithGoogle()}
       />
 
       <SignInExternalButton
-        icon={<FacebookIcon tw="w-6 h-6" />}
+        icon={
+          <RiFacebookCircleFill
+            css={signInExternalIconStyle}
+            tw="text-facebook"
+          />
+        }
         text={t('common:login.facebook')}
         onClick={async () => await AuthService.signInWithFacebook()}
       />
@@ -87,6 +93,11 @@ function Or() {
   );
 }
 
+const StyledSignInExternalButton = styled.button`
+  ${tw`grid grid-cols-[3rem auto] place-items-center`}
+  ${tw`border-2 border-gray-light hover:border-dark rounded-lg`}
+  ${tw`w-full py-2.5`}
+`;
 type SignInExternalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: ReactNode;
   text: ReactNode;
@@ -97,12 +108,9 @@ function SignInExternalButton({
   ...buttonProps
 }: SignInExternalButtonProps) {
   return (
-    <button
-      {...buttonProps}
-      tw="grid grid-cols-[3rem auto] place-items-center w-full py-2.5 border-2 border-gray-light hover:border-dark rounded-lg"
-    >
+    <StyledSignInExternalButton {...buttonProps}>
       <span>{icon}</span>
       <span tw="font-semibold">{text}</span>
-    </button>
+    </StyledSignInExternalButton>
   );
 }

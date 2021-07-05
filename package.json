@@ -1,5 +1,5 @@
 {
-  "name": "house",
+  "name": "rent-near-me",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,7 +19,7 @@
     "@supabase/supabase-js": "^1.15.1",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "date-fns": "^2.22.1",
-    "next": "^11.0.2-canary.4",
+    "next": "^11.0.0",
     "next-compose-plugins": "^2.2.1",
     "next-translate": "^1.0.7",
     "react": "17.0.2",
@@ -31,7 +31,6 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@svgr/webpack": "^5.5.0",
     "@testing-library/cypress": "^7.0.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

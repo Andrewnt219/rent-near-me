@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { TiTimes } from 'react-icons/ti';
+import { GoCheck } from 'react-icons/go';
 import useTranslation from 'next-translate/useTranslation';
 import tw, { styled } from 'twin.macro';
 import useRegisterForm from './useRegisterForm';
@@ -9,8 +11,6 @@ import { ButtonLg } from '@ui/Button';
 import RegisterModel from '@models/RegisterForm';
 import PasswordField from '@ui/PasswordField';
 import Select from '@ui/SelectField';
-import PwdCheckIcon from '@assets/ic-pwd-check.svg';
-import PwdTimesIcon from '@assets/ic-pwd-times.svg';
 
 export default function RegisterForm() {
   const { controllers, form, onSubmit, submitError, passwordError } =
@@ -73,16 +73,18 @@ export default function RegisterForm() {
       />
 
       <div tw="mb-md">
-        <PasswordCriteria qualified={passwordError.reachesMinimumLength}>
+        <PasswordCriteria isQualified={passwordError.reachesMinimumLength}>
           At least 8 characters
         </PasswordCriteria>
-        <PasswordCriteria qualified={passwordError.containsUpperLowerChars}>
+        <PasswordCriteria isQualified={passwordError.containsUpperLowerChars}>
           Contains a lowercase letter and an uppercase letter
         </PasswordCriteria>
-        <PasswordCriteria qualified={passwordError.notContainsPersonalInfo}>
+        <PasswordCriteria isQualified={passwordError.notContainsPersonalInfo}>
           Can&apos;t contain your name or email address
         </PasswordCriteria>
-        <PasswordCriteria qualified={passwordError.containsSpecialCharOrNumber}>
+        <PasswordCriteria
+          isQualified={passwordError.containsSpecialCharOrNumber}
+        >
           Contains a number or symbol
         </PasswordCriteria>
       </div>
@@ -100,7 +102,10 @@ export default function RegisterForm() {
   );
 }
 
-const StyledPassworCriteria = styled.p`
+type PasswordCriteriaProps = {
+  isQualified: boolean;
+};
+const StyledPassworCriteria = styled.p<PasswordCriteriaProps>`
   ${tw`text-xs font-semibold`}
   ${tw`flex items-center gap-sm mb-0`};
   ${tw`text-danger`}
@@ -109,24 +114,19 @@ const StyledPassworCriteria = styled.p`
     ${tw`mb-1`}
   }
 
-  &.qualified {
-    ${tw`text-success`};
+  ${(props) => props.isQualified && tw`text-success`}
+
+  svg {
+    ${tw`fill-current w-4 h-4`}
   }
 `;
-type PasswordCriteriaProps = {
-  qualified: boolean;
-};
 const PasswordCriteria: FC<PasswordCriteriaProps> = ({
-  qualified,
+  isQualified,
   children,
 }) => {
   return (
-    <StyledPassworCriteria className={qualified ? 'qualified' : ''}>
-      {qualified ? (
-        <PwdCheckIcon tw="w-3 h-3" />
-      ) : (
-        <PwdTimesIcon tw="w-2 h-2" />
-      )}
+    <StyledPassworCriteria isQualified={isQualified}>
+      {isQualified ? <GoCheck /> : <TiTimes />}
       <span>{children}</span>
     </StyledPassworCriteria>
   );
