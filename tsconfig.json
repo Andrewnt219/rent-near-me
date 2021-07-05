@@ -26,6 +26,7 @@
       "@public/*": ["public/*"],
       "@utils/*": ["src/utils/*"],
       "@modules/*": ["src/modules/*"],
+      "@models/*": ["src/models/*"],
       "@ui/*": ["src/ui/*"],
       "@layouts/*": ["src/layouts/*"],
       "@contexts/*": ["src/contexts/*"],

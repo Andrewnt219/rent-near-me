@@ -11,13 +11,22 @@ Form.Group = styled.div`
   ${tw`relative mb-md`}
 `;
 
+Form.Row = styled.div`
+  ${tw`flex gap-md`}
+
+  & > * {
+    ${tw`flex-1`}
+  }
+`;
+
 export const inputCss = css`
-  ${tw`w-full border border-dark rounded px-sm pt-lg pb-sm`}
+  ${tw`border focus-within:(border-2 border-black) border-dark`}
+  ${tw`w-full rounded px-sm pt-lg pb-sm`}
   ${tw`focus:outline-none hover:bg-light`}
   ${tw`transition-colors`}
 
   &[aria-invalid='true'] {
-    ${tw`border-danger`}
+    ${tw`border-danger bg-red-light`}
   }
 `;
 Form.Input = styled.input`
@@ -41,8 +50,34 @@ Form.Label = styled.label`
     ${labelActiveCss}
   }
 
-  input[aria-invalid='true'] ~ & {
+  select[data-selected='true'] ~ & {
+    ${labelActiveCss}
+  }
+
+  input[aria-invalid='true'] ~ &,
+  select[aria-invalid='true'] ~ & {
     ${labelInvalidCss}
+  }
+`;
+
+Form.Select = styled.select`
+  ${inputCss}
+  appearance: none;
+`;
+
+Form.ShowPasswordButton = styled.button`
+  top: 1.15rem;
+  ${tw`absolute right-md`}
+  ${tw`font-semibold underline text-xs`}
+  ${tw`rounded-sm`}
+
+  &:focus {
+    ${tw`outline-none`}
+    ${tw`ring-2 ring-black ring-offset-2`}
+  }
+
+  &:focus:not(:focus-visible) {
+    ${tw`ring-0 ring-offset-0`}
   }
 `;
 
@@ -65,10 +100,18 @@ Form.Checkbox = styled.span`
   input:checked ~ & {
     ${tw`border-dark bg-dark`}
   }
+
+  input:focus ~ & {
+    ${tw`ring-2 ring-black ring-offset-2`}
+  }
+
+  input:focus:not(:focus-visible) ~ & {
+    ${tw`ring-0 ring-offset-0`}
+  }
 `;
 
 Form.CheckboxTick = styled.svg`
-  ${tw`w-5 h-5 invisible`}
+  ${tw`w-5 h-5 invisible pointer-events-none`}
   stroke: white;
   stroke-width: 4;
 
@@ -78,11 +121,11 @@ Form.CheckboxTick = styled.svg`
 `;
 
 Form.TextWrapper = styled.div`
-  ${tw`mt-1 text-sm`}
+  ${tw`mt-1 text-xs`}
 `;
 
 Form.ErrorMessage = styled.p`
-  ${tw`text-danger text-xs`}
+  ${tw`text-danger`}
 `;
 
 Form.Description = styled.p`

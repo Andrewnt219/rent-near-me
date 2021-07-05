@@ -14,11 +14,13 @@ import { formatDate, parseDate } from './react-day-picker-utils';
 type Props<FormValues extends FieldValues> = Partial<
   Omit<DayPickerInputProps, 'placeholder'>
 > & {
+  label: ReactNode;
   inputDescription?: ReactNode;
   controller: UseControllerProps<FormValues>;
 };
 
 function DatePicker<FormValues extends FieldValues>({
+  label,
   inputDescription,
   inputProps,
   dayPickerProps,
@@ -26,13 +28,12 @@ function DatePicker<FormValues extends FieldValues>({
   ...pickerProps
 }: Props<FormValues>) {
   const { field, fieldState } = useController(controller);
-
   const { value } = field;
-  console.log(value);
+
   return (
     <StyledWrapper>
       <DayPickerInput
-        format="MM-dd-yyyy"
+        format="dd-MMM-yyyy"
         {...pickerProps}
         inputProps={{
           ...inputProps,
@@ -53,12 +54,16 @@ function DatePicker<FormValues extends FieldValues>({
         isInvalid={fieldState.invalid}
         isActive={!isEmptyString(value)}
       >
-        Date Picker
+        {label}
       </StyledLabel>
 
       <Form.TextWrapper>
-        <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
-        <Form.Description>{inputDescription}</Form.Description>
+        {fieldState.invalid && (
+          <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
+        )}
+        {!fieldState.invalid && (
+          <Form.Description>{inputDescription}</Form.Description>
+        )}
       </Form.TextWrapper>
     </StyledWrapper>
   );

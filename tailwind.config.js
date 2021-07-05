@@ -19,10 +19,14 @@ module.exports = {
       current: 'current',
       primary: '#ff385c',
       danger: '#dc2626',
+      success: '#008A05',
       white: '#fff',
       black: '#000',
       light: '#f8f9fa',
       dark: '#333',
+      red: {
+        light: '#fff8f6',
+      },
       gray: {
         DEFAULT: '#9ca3af',
         light: '#ddd',

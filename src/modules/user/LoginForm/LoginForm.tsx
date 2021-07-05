@@ -10,83 +10,84 @@ import FacebookIcon from '@assets/ic-facebook.svg';
 import ErrorIcon from '@assets/ic-error.svg';
 import { useLoginForm } from './useLoginForm';
 import AuthService from '@services/AuthService';
+import PasswordField from '@ui/PasswordField';
 
 export default function LoginForm() {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
   const { t } = useTranslation();
 
   return (
-    <div>
-      <Form noValidate onSubmit={onSubmit}>
-        <TextField
-          label={t('common:login.email')}
-          type="email"
-          id="login-email"
-          controller={controllers.email}
-        />
+    <Form noValidate onSubmit={onSubmit}>
+      <TextField
+        label={t('common:login.email')}
+        type="email"
+        id="login-email"
+        autoComplete="username"
+        controller={controllers.email}
+      />
 
-        <TextField
-          label={t('common:login.password')}
-          type="password"
-          id="login-password"
-          controller={controllers.password}
-        />
+      <PasswordField
+        label={t('common:login.password')}
+        id="login-password"
+        autoComplete="current-password"
+        controller={controllers.password}
+      />
 
-        <Checkbox
-          id="login-keepLogIn"
-          controller={controllers.keepLogIn}
-          label={t('common:login.keepSignedIn')}
-        />
+      <Checkbox
+        id="login-keepLogIn"
+        controller={controllers.keepLogIn}
+        label={t('common:login.keepSignedIn')}
+      />
 
-        {submitError && (
-          <Form.ErrorMessage tw="text-base flex items-center gap-2 mb-2">
-            <ErrorIcon tw="w-5 h-5 fill-current" />
-            {submitError}
-          </Form.ErrorMessage>
-        )}
+      {submitError && (
+        <Form.ErrorMessage tw="text-base flex items-center gap-2 mb-2">
+          <ErrorIcon tw="w-5 h-5 fill-current" />
+          {submitError}
+        </Form.ErrorMessage>
+      )}
 
-        <ButtonLg tw="block w-full" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting
-            ? t('common:login.loading')
-            : t('common:login.login')}
-        </ButtonLg>
+      <ButtonLg
+        type="submit"
+        tw="block w-full"
+        disabled={form.formState.isSubmitting}
+      >
+        {form.formState.isSubmitting
+          ? t('common:login.loading')
+          : t('common:login.login')}
+      </ButtonLg>
 
-        <Or />
+      <Or />
 
-        <SignInExternalButton
-          tw="mb-4"
-          icon={<GoogleIcon tw="w-6 h-6" />}
-          text={t('common:login.google')}
-          onClick={async () => await AuthService.signInWithGoogle()}
-        />
+      <SignInExternalButton
+        tw="mb-4"
+        icon={<GoogleIcon tw="w-6 h-6" />}
+        text={t('common:login.google')}
+        onClick={async () => await AuthService.signInWithGoogle()}
+      />
 
-        <SignInExternalButton
-          icon={<FacebookIcon tw="w-6 h-6" />}
-          text={t('common:login.facebook')}
-          onClick={async () => await AuthService.signInWithFacebook()}
-        />
-      </Form>
-    </div>
+      <SignInExternalButton
+        icon={<FacebookIcon tw="w-6 h-6" />}
+        text={t('common:login.facebook')}
+        onClick={async () => await AuthService.signInWithFacebook()}
+      />
+    </Form>
   );
 }
 
 const HorizontalLine = styled.hr`
-  ${tw`border-gray-300 flex-grow`}
+  ${tw`border-gray-light flex-grow`}
 `;
 function Or() {
   return (
-    <div tw="flex justify-around items-center gap-6 mt-6 mb-4">
+    <div tw="flex justify-around items-center gap-6 my-6">
       <HorizontalLine />
-      <span tw="-mt-1 text-muted text-sm">or</span>
+      <span tw="-mt-1 text-gray-dark text-sm">or</span>
       <HorizontalLine />
     </div>
   );
 }
 
-type SignInExternalButtonProps = DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
-> & {
+type SignInExternalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: ReactNode;
   text: ReactNode;
 };
@@ -98,8 +99,7 @@ function SignInExternalButton({
   return (
     <button
       {...buttonProps}
-      tw="grid place-items-center w-full py-2.5 border-2 border-gray-400 hover:border-dark rounded-lg"
-      style={{ gridTemplateColumns: '3rem auto' }}
+      tw="grid grid-cols-[3rem auto] place-items-center w-full py-2.5 border-2 border-gray-light hover:border-dark rounded-lg"
     >
       <span>{icon}</span>
       <span tw="font-semibold">{text}</span>
