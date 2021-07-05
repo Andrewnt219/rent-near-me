@@ -1,5 +1,5 @@
 import LoginForm from '@modules/user/LoginForm/LoginForm';
-import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { AppProps } from 'next/app';
 import React, { FC } from 'react';
 import DefaultLayout from 'src/layouts/DefaultLayout';
 
