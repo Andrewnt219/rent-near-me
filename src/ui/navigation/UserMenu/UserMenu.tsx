@@ -56,43 +56,43 @@ const StyledLine = styled.div`
 const links: Record<'preference' | 'dashboard' | 'others', RouteProps[]> = {
   preference: [
     {
-      text: 'About',
+      textTranslateKey: 'about',
       href: '/about',
     },
     {
-      text: 'Register',
+      textTranslateKey: 'register',
       href: '/register',
     },
     {
-      text: 'Login',
+      textTranslateKey: 'login',
       href: '/login',
     },
   ],
   dashboard: [
     {
-      text: 'About',
+      textTranslateKey: 'about',
       href: '/about',
     },
     {
-      text: 'Register',
+      textTranslateKey: 'register',
       href: '/register',
     },
     {
-      text: 'Login',
+      textTranslateKey: 'login',
       href: '/login',
     },
   ],
   others: [
     {
-      text: 'About',
+      textTranslateKey: 'about',
       href: '/about',
     },
     {
-      text: 'Register',
+      textTranslateKey: 'register',
       href: '/register',
     },
     {
-      text: 'Login',
+      textTranslateKey: 'login',
       href: '/login',
     },
   ],
@@ -115,7 +115,11 @@ function Menu() {
       <UserMenuLinksGroup label="Your dashboard" routes={links.dashboard} />
 
       <UserMenuLinksGroup label="Other settings" routes={links.others}>
-        <UserMenuLink href="/" tw="text-danger font-semibold" text="Logout" />
+        <UserMenuLink
+          href="/"
+          tw="text-danger font-semibold"
+          textTranslateKey="logout"
+        />
       </UserMenuLinksGroup>
     </ul>
   );

@@ -41,5 +41,13 @@
     "password": "Password",
     "loading": "Loading",
     "register": "Create new account"
+  },
+  "routes": {
+    "home": "Home",
+    "about": "About",
+    "login": "Log in",
+    "register": "Register",
+    "wishlist": "Wishlist",
+    "logout": "Log out"
   }
 }

@@ -1,14 +1,24 @@
 import { RouteProps } from '@common-types';
+import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import tw, { styled } from 'twin.macro';
 
 type Props = RouteProps & {
   className?: string;
 };
-const UserMenuLink = ({ className, text, exact, ...routeProps }: Props) => {
+const UserMenuLink = ({
+  className,
+  textTranslateKey,
+  exact,
+  ...routeProps
+}: Props) => {
+  const { t } = useTranslation();
+
   return (
     <NextLink {...routeProps} passHref>
-      <StyledLink className={className}>{text}</StyledLink>
+      <StyledLink className={className}>
+        {t(`common:routes.${textTranslateKey}`)}
+      </StyledLink>
     </NextLink>
   );
 };
