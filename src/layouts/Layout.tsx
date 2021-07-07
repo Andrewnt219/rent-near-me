@@ -15,6 +15,7 @@ const pageSize = (size: Size) => {
       return css`
         --page-max-width: 110rem;
         --page-px: 1.5rem;
+        --app-bar-height: 4.8125rem;
 
         @media screen and (min-width: ${theme('screens.md')}) {
           --page-px: 2.5rem;
@@ -29,6 +30,7 @@ const pageSize = (size: Size) => {
       return css`
         --page-max-width: 100%;
         --page-px: 1.5rem;
+        --app-bar-height: 4.8125rem;
       `;
 
     default:
@@ -44,11 +46,7 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
 `;
 
 Layout.Container = styled.div`
-  max-width: var(--page-max-width, 90rem);
-  padding-left: var(--page-px, 1.5rem);
-  padding-right: var(--page-px, 1.5rem);
-
-  ${tw`mx-auto w-full`}
+  ${tw`mx-auto w-full max-w-var-page px-var-page-px`}
 `;
 
 export default Layout;

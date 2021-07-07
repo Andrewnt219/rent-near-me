@@ -37,6 +37,7 @@ module.exports = {
     extend: {
       maxWidth: {
         '8xl': '90rem',
+        'var-page': 'var(--page-max-width, 90rem)',
       },
 
       borderRadius: {
@@ -59,6 +60,8 @@ module.exports = {
         xl: '1.5rem',
         '2xl': '2rem',
         '3xl': '3rem',
+        'var-app-bar': 'var(--app-bar-height, 4.8125rem)',
+        'var-page-px': 'var(--page-px, 1.5rem)',
       },
     },
   },
