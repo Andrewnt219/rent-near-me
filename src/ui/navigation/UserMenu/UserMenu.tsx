@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import tw, { styled } from 'twin.macro';
-import UserMenuLink from './components/UserMenuLink/UserMenuLink';
-import UserMenuLinksGroup from './components/UserMenuLinksGroup/UserMenuLinksGroup';
+import UserMenuLink from '../UserMenuLink/UserMenuLink';
+import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
 
 type Props = {
   className?: string;
