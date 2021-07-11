@@ -26,7 +26,7 @@
   "register": {
     "firstName": {
       "label": "First name",
-      "description": "Make sure it maatches the name on your government ID"
+      "description": "Make sure it matches the name on your ID"
     },
     "lastName": "Last name",
     "gender": "Gender",

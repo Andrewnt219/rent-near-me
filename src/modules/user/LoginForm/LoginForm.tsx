@@ -1,5 +1,5 @@
 import AuthService from '@services/AuthService';
-import { ButtonPrimary, ButtonSimple } from '@ui/Button/Button';
+import { ButtonPrimary, ButtonSimple, ButtonLink } from '@ui/Button/Button';
 import Checkbox from '@ui/Checkbox';
 import Form from '@ui/Form';
 import HrText from '@ui/HrText/HrText';
@@ -53,7 +53,7 @@ export default function LoginForm() {
       <ButtonPrimary
         size="xl"
         type="submit"
-        tw="block w-full"
+        tw="block w-full mb-4"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
@@ -61,7 +61,12 @@ export default function LoginForm() {
           : t('common:login.login')}
       </ButtonPrimary>
 
-      <HrText>or</HrText>
+      <ButtonLink type="button" tw="block mb-0.5">
+        Don&apos;t have an account?
+      </ButtonLink>
+      <ButtonLink type="button">Forget password?</ButtonLink>
+
+      <HrText tw="my-6">or</HrText>
 
       <SignInExternalButton
         tw="mb-4"
