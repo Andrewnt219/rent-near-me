@@ -117,5 +117,9 @@ const ModalBodyContent = styled.div`
   max-height: calc(100vh - 10rem);
   ${tw`overflow-auto p-xs`}
 `;
+const ModalBodyContent = styled.div`
+  max-height: calc(100vh - 10rem);
+  ${tw`overflow-auto p-1`}
+`;
 
 export default Modal;
