@@ -1,19 +1,17 @@
 import { RouteProps } from '@common-types';
-import { useState } from 'react';
+import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import { useClickOutside } from 'src/hooks/useClickOutside';
 import tw, { styled } from 'twin.macro';
 import UserMenuLink from '../UserMenuLink/UserMenuLink';
 import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
+import { useUserMenuDropDown } from './useUserMenuDropdown';
 
 type Props = {
   className?: string;
 };
 const UserMenu = ({ className }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const buttonRef = useClickOutside<HTMLButtonElement>(() => setIsOpen(false));
-
-  const handleMenuClick = () => setIsOpen((prev) => !prev);
+  const { isOpen, buttonRef, closeDropdown, openDropdown, toggleDropDown } =
+    useUserMenuDropDown();
 
   return (
     <button
@@ -24,7 +22,7 @@ const UserMenu = ({ className }: Props) => {
       aria-controls="user-menu-menu"
       aria-expanded={isOpen}
       aria-pressed={isOpen}
-      onClick={handleMenuClick}
+      onClick={toggleDropDown}
       tw="flex border text-left relative rounded-full pl-md pr-sm py-sm transition-shadow hover:shadow"
     >
       <span tw="sr-only">Menu</span>
@@ -33,7 +31,7 @@ const UserMenu = ({ className }: Props) => {
 
       <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
 
-      {isOpen && <Menu />}
+      {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
     </button>
   );
 };
@@ -98,9 +96,11 @@ const links: Record<'preference' | 'dashboard' | 'others', RouteProps[]> = {
   ],
 };
 
-function Menu() {
+type MenuProps = HTMLAttributes<HTMLUListElement>;
+function Menu(props: MenuProps) {
   return (
     <ul
+      {...props}
       id="user-menu-menu"
       role="menu"
       aria-label="Menu links"
