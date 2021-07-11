@@ -1,3 +1,4 @@
+import { useLayoutModal } from '@layouts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonPrimary, ButtonSimple, ButtonLink } from '@ui/Button/Button';
 import Checkbox from '@ui/Checkbox';
@@ -16,6 +17,7 @@ const signInExternalIconStyle = tw`w-6 h-6`;
 
 export default function LoginForm() {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
+  const { loginModal, registerModal } = useLayoutModal();
   const { t } = useTranslation();
 
   return (
@@ -61,7 +63,14 @@ export default function LoginForm() {
           : t('common:login.login')}
       </ButtonPrimary>
 
-      <ButtonLink type="button" tw="block mb-0.5">
+      <ButtonLink
+        type="button"
+        tw="block mb-0.5"
+        onClick={() => {
+          loginModal.hide();
+          registerModal.show();
+        }}
+      >
         Don&apos;t have an account?
       </ButtonLink>
       <ButtonLink type="button">Forget password?</ButtonLink>

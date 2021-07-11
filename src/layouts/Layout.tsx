@@ -1,11 +1,18 @@
 import { HTMLAttributes, PropsWithChildren } from 'react';
 import tw, { css, styled, theme } from 'twin.macro';
+import { LayoutProvider } from './LayoutModalContext';
 
-type Props = StyledWrapperProps & HTMLAttributes<HTMLDivElement>;
-const Layout = ({ children, size, ...htmlAttrs }: PropsWithChildren<Props>) => (
-  <StyledWrapper {...htmlAttrs} size={size}>
-    {children}
-  </StyledWrapper>
+type LayoutProps = StyledWrapperProps & HTMLAttributes<HTMLDivElement>;
+const Layout = ({
+  children,
+  size,
+  ...htmlAttrs
+}: PropsWithChildren<LayoutProps>) => (
+  <LayoutProvider>
+    <StyledWrapper {...htmlAttrs} size={size}>
+      {children}
+    </StyledWrapper>
+  </LayoutProvider>
 );
 
 type Size = 'sm' | 'lg';

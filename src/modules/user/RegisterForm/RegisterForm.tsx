@@ -1,3 +1,4 @@
+import { useLayoutModal } from '@layouts/LayoutModalContext';
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import RegisterModel from '@models/RegisterForm';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
@@ -15,13 +16,22 @@ import useRegisterForm from './useRegisterForm';
 export default function RegisterForm() {
   const { controllers, form, onSubmit, submitError, passwordError } =
     useRegisterForm();
+  const { loginModal, registerModal } = useLayoutModal();
   const { t } = useTranslation();
 
   return (
     <Form noValidate onSubmit={onSubmit}>
       <div tw="mb-4 flex flex-wrap justify-between items-center">
         <h4 tw="text-xl font-semibold">Welcome to RentNearMe!</h4>
-        <ButtonLink type="button">Already have an account?</ButtonLink>
+        <ButtonLink
+          type="button"
+          onClick={() => {
+            loginModal.hide();
+            registerModal.show();
+          }}
+        >
+          Already have an account?
+        </ButtonLink>
       </div>
 
       <Row>
