@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { RiErrorWarningFill, RiFacebookCircleFill } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
 import tw, { css, styled } from 'twin.macro';
@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
 import Checkbox from '@ui/Checkbox';
-import { ButtonLg } from '@ui/Button';
+import { ButtonPrimary, ButtonSimple } from '@ui/Button/Button';
 import { useLoginForm } from './useLoginForm';
 import AuthService from '@services/AuthService';
 import PasswordField from '@ui/PasswordField';
@@ -47,7 +47,8 @@ export default function LoginForm() {
         </Form.ErrorMessage>
       )}
 
-      <ButtonLg
+      <ButtonPrimary
+        size="xl"
         type="submit"
         tw="block w-full"
         disabled={form.formState.isSubmitting}
@@ -55,7 +56,7 @@ export default function LoginForm() {
         {form.formState.isSubmitting
           ? t('common:login.loading')
           : t('common:login.login')}
-      </ButtonLg>
+      </ButtonPrimary>
 
       <Or />
 
@@ -93,12 +94,12 @@ function Or() {
   );
 }
 
-const StyledSignInExternalButton = styled.button`
+const ExternalAuthButton = styled(ButtonSimple)`
   ${tw`grid grid-cols-[3rem auto] place-items-center`}
-  ${tw`border-2 border-gray-light hover:border-dark rounded-lg`}
-  ${tw`w-full py-2.5`}
+  ${tw`border-2 rounded-lg`}
+  ${tw`w-full`}
 `;
-type SignInExternalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ExternalAuthButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: ReactNode;
   text: ReactNode;
 };
@@ -106,11 +107,11 @@ function SignInExternalButton({
   text,
   icon,
   ...buttonProps
-}: SignInExternalButtonProps) {
+}: ExternalAuthButtonProps) {
   return (
-    <StyledSignInExternalButton {...buttonProps}>
+    <ExternalAuthButton outline {...buttonProps}>
       <span>{icon}</span>
       <span tw="font-semibold">{text}</span>
-    </StyledSignInExternalButton>
+    </ExternalAuthButton>
   );
 }

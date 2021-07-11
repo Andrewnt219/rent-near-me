@@ -1,5 +1,5 @@
 import Layout from '@layouts/Layout';
-import { RoundButton } from '@ui/Button/Button';
+import { ButtonSimple } from '@ui/Button/Button';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import React from 'react';
@@ -18,13 +18,15 @@ const HomeNavBar = ({ className }: Props) => {
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
-        <nav aria-label="Main" tw="flex space-x-xs">
-          <RoundButton tw="font-semibold">Become a Host</RoundButton>
+        <nav aria-label="Main" tw="flex gap-xs">
+          <ButtonSimple rounded tw="font-semibold">
+            Become a Host
+          </ButtonSimple>
 
-          <RoundButton>
+          <ButtonSimple rounded>
             <FaGlobe />
             <span tw="sr-only">Change site&apos; language</span>
-          </RoundButton>
+          </ButtonSimple>
 
           <UserMenu />
         </nav>

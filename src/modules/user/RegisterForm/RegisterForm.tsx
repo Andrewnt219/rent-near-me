@@ -7,7 +7,7 @@ import useRegisterForm from './useRegisterForm';
 import Form from '@ui/Form';
 import TextField from '@ui/TextField';
 import DatePicker from '@libs/react-day-picker/DatePicker';
-import { ButtonLg } from '@ui/Button';
+import { ButtonPrimary } from '@ui/Button/Button';
 import RegisterModel from '@models/RegisterForm';
 import PasswordField from '@ui/PasswordField';
 import Select from '@ui/SelectField';
@@ -89,7 +89,8 @@ export default function RegisterForm() {
         </PasswordCriteria>
       </div>
 
-      <ButtonLg
+      <ButtonPrimary
+        size="xl"
         type="submit"
         tw="block w-full"
         disabled={form.formState.isSubmitting}
@@ -97,7 +98,7 @@ export default function RegisterForm() {
         {form.formState.isSubmitting
           ? t('common:register.loading')
           : t('common:register.register')}
-      </ButtonLg>
+      </ButtonPrimary>
     </Form>
   );
 }
