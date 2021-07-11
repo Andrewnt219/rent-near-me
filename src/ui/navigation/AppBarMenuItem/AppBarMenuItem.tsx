@@ -1,29 +1,30 @@
-import NextLink, { LinkProps } from 'next/link';
-import { PropsWithChildren, ReactNode } from 'react';
+import { RouteProps } from '@common-types';
+import useTranslation from 'next-translate/useTranslation';
+import NextLink from 'next/link';
+import { ReactNode } from 'react';
 import { useRouteMatch } from 'src/hooks/useRouteMatch';
 import tw, { css, styled } from 'twin.macro';
 
-type Props = PropsWithChildren<LinkProps> & {
+type Props = RouteProps & {
   icon: ReactNode;
-  text: ReactNode;
-  children?: never;
   className?: string;
   exact?: boolean;
 };
 const AppBarMenuItem = ({
   className,
   icon,
-  text,
+  textTranslateKey,
   exact,
   ...linkProps
 }: Props) => {
   const isActive = useRouteMatch(linkProps.href.toString(), exact);
+  const { t } = useTranslation();
 
   return (
     <NextLink {...linkProps} passHref>
       <StyledAnchor className={className} isActive={isActive} tw="">
         {icon}
-        {text}
+        {t(`common:routes.${textTranslateKey}`)}
       </StyledAnchor>
     </NextLink>
   );

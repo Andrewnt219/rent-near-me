@@ -1,112 +1,128 @@
-import NextLink from 'next/link';
+import { RouteProps } from '@common-types';
 import { useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
+import { useClickOutside } from 'src/hooks/useClickOutside';
 import tw, { styled } from 'twin.macro';
+import UserMenuLink from '../UserMenuLink/UserMenuLink';
+import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
 
 type Props = {
   className?: string;
 };
 const UserMenu = ({ className }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useClickOutside<HTMLButtonElement>(() => setIsOpen(false));
 
-  const handleMenuButtonClick = () => setIsOpen((prev) => !prev);
+  const handleMenuClick = () => setIsOpen((prev) => !prev);
 
   return (
-    <div
+    <button
+      ref={buttonRef}
       className={className}
-      tw="flex border relative rounded-full pl-md pr-sm py-sm transition-shadow hover:shadow"
+      id="user-menu-button"
+      aria-haspopup
+      aria-controls="user-menu-menu"
+      aria-expanded={isOpen}
+      aria-pressed={isOpen}
+      onClick={handleMenuClick}
+      tw="flex border text-left relative rounded-full pl-md pr-sm py-sm transition-shadow hover:shadow"
     >
-      <button
-        aria-expanded={isOpen}
-        onClick={handleMenuButtonClick}
-        tw="inline-flex flex-col justify-center space-y-0.5 h-full"
-      >
-        <StyledLine />
-        <StyledLine />
-        <StyledLine />
-        <span tw="sr-only">Menu</span>
-      </button>
+      <span tw="sr-only">Menu</span>
+
+      <StyledHamburger />
 
       <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
 
-      {isOpen && (
-        <ul
-          aria-label="Menu links"
-          tw="absolute top-[125%] right-0 bg-white min-w-[200px] shadow rounded z-40"
-        >
-          <StyledLinkList aria-label="Your preferences" tw="font-semibold">
-            <li>
-              <NextLink href="/about" passHref>
-                <StyledLink>About</StyledLink>
-              </NextLink>
-            </li>
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Messages</StyledLink>
-              </NextLink>
-            </li>
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Messages</StyledLink>
-              </NextLink>
-            </li>
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Messages</StyledLink>
-              </NextLink>
-            </li>
-          </StyledLinkList>
-
-          <StyledLinkList aria-label="Your properties">
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Messages</StyledLink>
-              </NextLink>
-            </li>
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Messages</StyledLink>
-              </NextLink>
-            </li>
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Messages</StyledLink>
-              </NextLink>
-            </li>
-          </StyledLinkList>
-
-          <StyledLinkList aria-label="Other settings">
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink>Help</StyledLink>
-              </NextLink>
-            </li>
-            <li>
-              <NextLink href="/" passHref>
-                <StyledLink tw="text-danger font-semibold">Logout</StyledLink>
-              </NextLink>
-            </li>
-          </StyledLinkList>
-        </ul>
-      )}
-    </div>
+      {isOpen && <Menu />}
+    </button>
   );
 };
+/* -------------------------------- Hamburger ------------------------------- */
+function StyledHamburger() {
+  return (
+    <div tw="inline-flex flex-col justify-center space-y-0.5 h-full">
+      <StyledLine />
+      <StyledLine />
+      <StyledLine />
+    </div>
+  );
+}
 
 const StyledLine = styled.div`
   ${tw`h-0.5 w-5 bg-dark`}
 `;
 
-const StyledLink = styled.a`
-  ${tw`px-md py-sm block hover:bg-light`}
-`;
+/* ---------------------------------- Menu ---------------------------------- */
+const links: Record<'preference' | 'dashboard' | 'others', RouteProps[]> = {
+  preference: [
+    {
+      textTranslateKey: 'about',
+      href: '/about',
+    },
+    {
+      textTranslateKey: 'register',
+      href: '/register',
+    },
+    {
+      textTranslateKey: 'login',
+      href: '/login',
+    },
+  ],
+  dashboard: [
+    {
+      textTranslateKey: 'about',
+      href: '/about',
+    },
+    {
+      textTranslateKey: 'register',
+      href: '/register',
+    },
+    {
+      textTranslateKey: 'login',
+      href: '/login',
+    },
+  ],
+  others: [
+    {
+      textTranslateKey: 'about',
+      href: '/about',
+    },
+    {
+      textTranslateKey: 'register',
+      href: '/register',
+    },
+    {
+      textTranslateKey: 'login',
+      href: '/login',
+    },
+  ],
+};
 
-const StyledLinkList = styled.ul`
-  ${tw`py-sm`}
+function Menu() {
+  return (
+    <ul
+      id="user-menu-menu"
+      role="menu"
+      aria-label="Menu links"
+      tw="absolute top-[125%] right-0 bg-white min-w-[12.5rem] shadow rounded z-40"
+    >
+      <UserMenuLinksGroup
+        tw="font-semibold"
+        label="Your preferences"
+        routes={links.preference}
+      />
 
-  :not(:last-of-type) {
-    ${tw`border-b `}
-  }
-`;
+      <UserMenuLinksGroup label="Your dashboard" routes={links.dashboard} />
+
+      <UserMenuLinksGroup label="Other settings" routes={links.others}>
+        <UserMenuLink
+          href="/"
+          tw="text-danger font-semibold"
+          textTranslateKey="logout"
+        />
+      </UserMenuLinksGroup>
+    </ul>
+  );
+}
 
 export default UserMenu;

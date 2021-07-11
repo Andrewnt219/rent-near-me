@@ -15,3 +15,11 @@ export function isValidDate(date: any): date is Date {
 
   return castedDate instanceof Date && !isNaN(castedDate.getTime());
 }
+
+export function isButtonActiveKey(key: string) {
+  return ['Spacebar', 'Enter', ' '].includes(key);
+}
+
+export function isLinkActiveKey(key: string) {
+  return key === 'Enter';
+}

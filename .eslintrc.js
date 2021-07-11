@@ -37,6 +37,8 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-unused-vars': 'off',
+    // Somehow trigger errors for interfaces from dom lib
+    'no-undef': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
     'jsx-a11y/anchor-is-valid': 'off',
   },
