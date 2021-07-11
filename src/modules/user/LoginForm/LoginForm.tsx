@@ -42,7 +42,7 @@ export default function LoginForm() {
       />
 
       {submitError && (
-        <Form.ErrorMessage tw="text-base flex items-center gap-2 mb-2">
+        <Form.ErrorMessage tw="text-body flex items-center gap-2 mb-2">
           <RiErrorWarningFill tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>

@@ -108,7 +108,7 @@ type PasswordCriteriaProps = {
   isQualified: boolean;
 };
 const StyledPassworCriteria = styled.p<PasswordCriteriaProps>`
-  ${tw`text-xs font-semibold`}
+  ${tw`text-sm font-semibold`}
   ${tw`flex items-center gap-sm mb-0`};
   ${tw`text-danger`}
 

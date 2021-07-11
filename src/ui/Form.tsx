@@ -35,7 +35,7 @@ Form.Input = styled.input`
 /*                                    LABEL                                   */
 /* -------------------------------------------------------------------------- */
 export const labelActiveCss = css`
-  ${tw`translate-y-1 text-xs`}
+  ${tw`translate-y-1 text-sm`}
 `;
 
 export const labelInvalidCss = css`
@@ -73,7 +73,7 @@ Form.Select = styled.select`
 
 Form.ShowPasswordButton = styled.button`
   ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
-  ${tw`font-semibold underline text-xs`}
+  ${tw`font-semibold underline text-sm`}
   ${tw`ring-offset-2`}
 `;
 
@@ -112,7 +112,7 @@ Form.Group = styled.div`
 `;
 
 Form.TextWrapper = styled.div`
-  ${tw`mt-1 text-xs`}
+  ${tw`mt-1 text-sm`}
 `;
 
 Form.ErrorMessage = styled.p`
