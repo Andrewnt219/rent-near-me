@@ -24,6 +24,14 @@ const GlobalStyles = createGlobalStyle`
     ${tw`outline-none! focus-visible:(ring ring-dark)`}
   }
 
+  *, *::before, *::after {
+    ${tw`outline-none!`}
+    
+    &:focus-visible {
+      ${tw`ring-2 ring-dark`}
+    }
+  }
+
   
   ${reactDatePickerCss}
 
