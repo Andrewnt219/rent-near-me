@@ -48,17 +48,17 @@ export const LayoutProvider: FC = ({ children }) => {
         size="md"
         show={showLoginModal}
         onClose={() => setShowLoginModal(false)}
-        aria-labelledby="LoginModalTitleId"
-        header={<h3 id="LoginModalTitleId">Log in</h3>}
+        aria-labelledby="LoginModalTitle"
+        header={<h3 id="LoginModalTitle">Log in</h3>}
       >
         <LoginForm />
       </Modal>
       <Modal
-        size="md"
+        size="lg"
         show={showRegisterModel}
         onClose={() => setShowRegisterModel(false)}
-        aria-labelledby="RegisterModalTitleId"
-        header={<h3 id="RegisterModalTitleId">Register an account</h3>}
+        aria-labelledby="RegisterModalTitle"
+        header={<h3 id="RegisterModalTitle">Register an account</h3>}
       >
         <RegisterForm />
       </Modal>

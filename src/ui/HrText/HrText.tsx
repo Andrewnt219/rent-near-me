@@ -8,9 +8,9 @@ type Props = {
 };
 function HrText({ children, className }: PropsWithChildren<Props>) {
   return (
-    <div className={className} tw="flex justify-around items-center gap-6">
+    <div className={className} tw="flex justify-around items-center gap-xl">
       <hr css={hrStyle} />
-      <div tw="-mt-1 text-gray-dark text-sm">{children}</div>
+      <div tw="-mt-xs text-gray-dark text-sm">{children}</div>
       <hr css={hrStyle} />
     </div>
   );

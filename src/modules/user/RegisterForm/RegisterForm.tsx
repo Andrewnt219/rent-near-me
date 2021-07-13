@@ -21,7 +21,7 @@ export default function RegisterForm() {
 
   return (
     <Form noValidate onSubmit={onSubmit}>
-      <div tw="mb-4 flex flex-wrap justify-between items-center">
+      <div tw="mb-md flex flex-wrap justify-between items-center">
         <h4 tw="text-xl font-semibold">Welcome to RentNearMe!</h4>
         <ButtonLink
           type="button"

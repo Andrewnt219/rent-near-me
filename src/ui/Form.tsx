@@ -1,5 +1,6 @@
 import { FormHTMLAttributes } from 'react';
 import tw, { css, styled } from 'twin.macro';
+import { ButtonLinkDark } from './Button/Button';
 
 type Props = FormHTMLAttributes<HTMLFormElement>;
 
@@ -71,10 +72,10 @@ Form.Select = styled.select`
   appearance: none;
 `;
 
-Form.ShowPasswordButton = styled.button`
+Form.ShowPasswordButton = styled(ButtonLinkDark)`
   ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
-  ${tw`font-semibold underline text-xs`}
-  ${tw`ring-offset-2`}
+  ${tw`focus-visible:(ring-offset-2 bg-white)`}
+  ${tw`font-semibold text-xs`}
 `;
 
 /* -------------------------------------------------------------------------- */

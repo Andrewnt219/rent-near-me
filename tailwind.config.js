@@ -52,6 +52,7 @@ module.exports = {
         dark: '#717171',
       },
       facebook: '#1877f2',
+      link: 'rgb(0, 76, 196)',
     },
     extend: {
       maxWidth: {

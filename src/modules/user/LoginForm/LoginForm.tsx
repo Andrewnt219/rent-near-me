@@ -22,7 +22,7 @@ export default function LoginForm() {
 
   return (
     <Form noValidate onSubmit={onSubmit}>
-      <h4 tw="text-xl mb-4 font-semibold">Welcome back to RentNearMe!</h4>
+      <h4 tw="text-xl mb-md font-semibold">Welcome back to RentNearMe!</h4>
 
       <TextField
         label={t('common:login.email')}
@@ -46,7 +46,7 @@ export default function LoginForm() {
       />
 
       {submitError && (
-        <Form.ErrorMessage tw="text-body flex items-center gap-2 mb-2">
+        <Form.ErrorMessage tw="text-body flex items-center gap-sm mb-sm">
           <RiErrorWarningFill tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
@@ -55,7 +55,7 @@ export default function LoginForm() {
       <ButtonPrimary
         size="xl"
         type="submit"
-        tw="block w-full mb-4"
+        tw="block w-full mb-md"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
@@ -65,7 +65,7 @@ export default function LoginForm() {
 
       <ButtonLink
         type="button"
-        tw="block mb-0.5"
+        tw="block mb-[2px]"
         onClick={() => {
           loginModal.hide();
           registerModal.show();
@@ -75,10 +75,10 @@ export default function LoginForm() {
       </ButtonLink>
       <ButtonLink type="button">Forget password?</ButtonLink>
 
-      <HrText tw="my-6">or</HrText>
+      <HrText tw="my-xl">or</HrText>
 
       <SignInExternalButton
-        tw="mb-4"
+        tw="mb-md"
         icon={<FcGoogle css={signInExternalIconStyle} />}
         text={t('common:login.google')}
         onClick={async () => await AuthService.signInWithGoogle()}

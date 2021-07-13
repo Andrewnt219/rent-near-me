@@ -25,7 +25,7 @@ const Modal: FC<ModalProps> = ({
 }) => {
   return (
     <Dialog
-      css={modalDialogCss(show, size)}
+      css={modalDialogCss(size)}
       isOpen={show}
       onDismiss={() => onClose()}
       {...props}
@@ -57,18 +57,18 @@ const closeModalBtnCss = (closeBtnPos: CloseModalButtonPosition) => {
       closeBtnPosCss = tw`hidden`;
       break;
     case 'right':
-      closeBtnPosCss = tw`right-4`;
+      closeBtnPosCss = tw`right-md`;
       break;
     default:
-      closeBtnPosCss = tw`left-4`;
+      closeBtnPosCss = tw`left-md`;
   }
   return css`
     ${closeBtnPosCss}
-    ${tw`p-1.5 absolute top-1/2 transform -translate-y-1/2 mt-0.5`}
+    ${tw`p-xs absolute top-1/2 transform -translate-y-1/2 mt-[2px]`}
   `;
 };
 
-const modalDialogCss = (show: boolean, size: ModalSize) => {
+const modalDialogCss = (size: ModalSize) => {
   let sizeCss;
   switch (size) {
     case 'full':
@@ -77,29 +77,19 @@ const modalDialogCss = (show: boolean, size: ModalSize) => {
       `;
       break;
     case 'xl':
-      sizeCss = css`
-        width: 80rem;
-      `;
+      sizeCss = tw`w-[80rem]`;
       break;
     case 'lg':
-      sizeCss = css`
-        width: 60rem;
-      `;
+      sizeCss = tw`w-[60rem]`;
       break;
     case 'sm':
-      sizeCss = css`
-        width: 20rem;
-      `;
+      sizeCss = tw`w-80`;
       break;
     case 'xs':
-      sizeCss = css`
-        width: 10rem;
-      `;
+      sizeCss = tw`w-40`;
       break;
     default:
-      sizeCss = css`
-        width: 40rem;
-      `;
+      sizeCss = tw`w-[40rem]`;
   }
 
   return css`
@@ -112,7 +102,7 @@ const modalDialogCss = (show: boolean, size: ModalSize) => {
 };
 
 const ModalHeader = styled.div`
-  ${tw`relative px-6 py-4`}
+  ${tw`relative px-xl py-md`}
   ${tw`border-b border-gray-light`}
   ${tw`text-center font-bold`}
 `;
@@ -121,11 +111,11 @@ const ModalHeaderContent = styled.div`
 `;
 
 const ModalBody = styled.div`
-  ${tw`p-6`}
+  ${tw`p-xl`}
 `;
 const ModalBodyContent = styled.div`
   max-height: calc(100vh - 10rem);
-  ${tw`overflow-auto p-1`}
+  ${tw`overflow-auto p-xs`}
 `;
 
 export default Modal;
