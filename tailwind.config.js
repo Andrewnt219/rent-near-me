@@ -23,6 +23,7 @@ module.exports = {
       h3: 'clamp(1rem, 1rem + 0.2vw, 1.25rem)', // 16~20px
       body: '1rem',
       sm: '0.875rem',
+      xs: '0.75rem',
     },
     colors: {
       transparent: 'transparent',
