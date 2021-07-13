@@ -68,7 +68,7 @@ export default function RegisterForm() {
         >
           <option value="" disabled></option>
           {Object.entries(RegisterModel.genders).map(([key, val], idx) => (
-            <option key={key} value="key">
+            <option key={key} value={key}>
               {val}
             </option>
           ))}

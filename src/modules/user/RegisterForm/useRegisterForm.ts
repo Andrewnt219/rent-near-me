@@ -4,6 +4,7 @@ import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { UseControllerProps, useForm } from 'react-hook-form';
+import AuthService from '@services/AuthService';
 
 type Controllers = Record<keyof RegisterForm, UseControllerProps<RegisterForm>>;
 
@@ -45,7 +46,11 @@ export default function useRegisterForm() {
   };
 
   const onSubmit = form.handleSubmit(async (data) => {
-    console.log(data);
+    try {
+      await AuthService.registerWithEmail(data);
+    } catch (e) {
+      setSubmitError(e.message);
+    }
   });
 
   const password = form.watch('password');
