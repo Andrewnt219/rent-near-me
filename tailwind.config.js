@@ -48,7 +48,7 @@ module.exports = {
       },
       gray: {
         DEFAULT: '#9ca3af',
-        light: '#ddd',
+        light: '#f7f7f7',
         dark: '#717171',
       },
       facebook: '#1877f2',

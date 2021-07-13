@@ -1,4 +1,5 @@
 import { RouteProps } from '@common-types';
+import { ringStyle } from '@styles/globals-styles';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import tw, { styled } from 'twin.macro';
@@ -24,7 +25,11 @@ const UserMenuLink = ({
 };
 
 const StyledLink = styled.a`
-  ${tw`px-md py-sm block hover:bg-light`}
+  ${tw`px-md py-sm block hover:bg-gray-light`}
+
+  &:focus-visible {
+    ${ringStyle}
+  }
 `;
 
 export default UserMenuLink;

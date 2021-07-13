@@ -1,4 +1,5 @@
 import { RouteProps } from '@common-types';
+import { ButtonSimple } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import tw, { styled } from 'twin.macro';
@@ -14,7 +15,7 @@ const UserMenu = ({ className }: Props) => {
     useUserMenuDropDown();
 
   return (
-    <button
+    <ButtonSimple
       ref={buttonRef}
       className={className}
       id="user-menu-button"
@@ -32,7 +33,7 @@ const UserMenu = ({ className }: Props) => {
       <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
 
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
-    </button>
+    </ButtonSimple>
   );
 };
 /* -------------------------------- Hamburger ------------------------------- */
