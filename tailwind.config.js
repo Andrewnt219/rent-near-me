@@ -14,6 +14,17 @@ module.exports = {
       DEFAULT: '0px 6px 16px rgb(0 0 0 / 12%)',
       sm: '0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%)',
     },
+    fontSize: {
+      hero: 'clamp(2.5rem, 2.1rem + 2vw, 4.5rem)', // 40~72px
+      h1: 'clamp(1.75rem, 1.5rem + 1.25vw, 3rem)', // 28~48px
+      h2: 'clamp(1.5rem, 1.4rem + 0.5vw, 2rem)', // 24~32px,
+      xl: '1.5rem',
+      lg: '1.125rem',
+      h3: 'clamp(1rem, 1rem + 0.2vw, 1.25rem)', // 16~20px
+      body: '1rem',
+      sm: '0.875rem',
+      xs: '0.75rem',
+    },
     colors: {
       transparent: 'transparent',
       current: 'current',
