@@ -1,6 +1,7 @@
+import { useLayoutModal } from '@layouts/LayoutModalContext';
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import RegisterModel from '@models/RegisterForm';
-import { ButtonPrimary } from '@ui/Button/Button';
+import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import Form from '@ui/Form';
 import PasswordField from '@ui/PasswordField';
 import Row from '@ui/Row/Row';
@@ -8,17 +9,31 @@ import Select from '@ui/SelectField';
 import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { IoCloseOutline, IoCheckmarkOutline } from 'react-icons/io5';
 import tw, { styled } from 'twin.macro';
 import useRegisterForm from './useRegisterForm';
 
 export default function RegisterForm() {
   const { controllers, form, onSubmit, submitError, passwordError } =
     useRegisterForm();
+  const { loginModal, registerModal } = useLayoutModal();
   const { t } = useTranslation();
 
   return (
     <Form noValidate onSubmit={onSubmit}>
+      <div tw="mb-md flex flex-wrap justify-between items-center">
+        <h4 tw="text-xl font-semibold">Welcome to RentNearMe!</h4>
+        <ButtonLink
+          type="button"
+          onClick={() => {
+            loginModal.hide();
+            registerModal.show();
+          }}
+        >
+          Already have an account?
+        </ButtonLink>
+      </div>
+
       <Row>
         <TextField
           label={t('common:register.firstName.label')}
@@ -128,7 +143,7 @@ const PasswordCriteria: FC<PasswordCriteriaProps> = ({
 }) => {
   return (
     <StyledPassworCriteria isQualified={isQualified}>
-      {isQualified ? <FaCheck /> : <FaTimes />}
+      {isQualified ? <IoCheckmarkOutline /> : <IoCloseOutline />}
       {children}
     </StyledPassworCriteria>
   );

@@ -52,3 +52,15 @@ export const ButtonSimple = styled(Button)`
       ? tw`border border-gray-light hover:border-dark`
       : tw`hover:bg-gray-light`}
 `;
+
+export const ButtonLink = styled.button<ButtonProps>`
+  ${tw`focus-visible:(ring ring-dark ring-offset-1)`}
+  ${tw`text-link underline`}
+
+  ${(props) => (props.size ? buttonCss.size[props.size] : buttonCss.size.none)}
+  ${(props) => (props.rounded ? buttonCss.shape.round : tw`rounded-sm`)}
+`;
+
+export const ButtonLinkDark = styled(ButtonLink)`
+  ${tw`text-dark`}
+`;

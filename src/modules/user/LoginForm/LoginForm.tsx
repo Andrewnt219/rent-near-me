@@ -1,5 +1,6 @@
+import { useLayoutModal } from '@layouts/LayoutModalContext';
 import AuthService from '@services/AuthService';
-import { ButtonPrimary, ButtonSimple } from '@ui/Button/Button';
+import { ButtonPrimary, ButtonSimple, ButtonLink } from '@ui/Button/Button';
 import Checkbox from '@ui/Checkbox';
 import Form from '@ui/Form';
 import HrText from '@ui/HrText/HrText';
@@ -16,10 +17,13 @@ const signInExternalIconStyle = tw`w-6 h-6`;
 
 export default function LoginForm() {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
+  const { loginModal, registerModal } = useLayoutModal();
   const { t } = useTranslation();
 
   return (
     <Form noValidate onSubmit={onSubmit}>
+      <h4 tw="text-xl mb-md font-semibold">Welcome back to RentNearMe!</h4>
+
       <TextField
         label={t('common:login.email')}
         type="email"
@@ -42,7 +46,7 @@ export default function LoginForm() {
       />
 
       {submitError && (
-        <Form.ErrorMessage tw="text-body flex items-center gap-2 mb-2">
+        <Form.ErrorMessage tw="text-body flex items-center gap-sm mb-sm">
           <RiErrorWarningFill tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
@@ -51,7 +55,7 @@ export default function LoginForm() {
       <ButtonPrimary
         size="xl"
         type="submit"
-        tw="block w-full"
+        tw="block w-full mb-md"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
@@ -59,10 +63,22 @@ export default function LoginForm() {
           : t('common:login.login')}
       </ButtonPrimary>
 
-      <HrText>or</HrText>
+      <ButtonLink
+        type="button"
+        tw="block mb-[2px]"
+        onClick={() => {
+          loginModal.hide();
+          registerModal.show();
+        }}
+      >
+        Don&apos;t have an account?
+      </ButtonLink>
+      <ButtonLink type="button">Forget password?</ButtonLink>
+
+      <HrText tw="my-xl">or</HrText>
 
       <SignInExternalButton
-        tw="mb-4"
+        tw="mb-md"
         icon={<FcGoogle css={signInExternalIconStyle} />}
         text={t('common:login.google')}
         onClick={async () => await AuthService.signInWithGoogle()}

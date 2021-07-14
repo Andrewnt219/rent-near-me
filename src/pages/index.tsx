@@ -1,14 +1,17 @@
-import LoginForm from '@modules/user/LoginForm/LoginForm';
+import { useLayoutModal } from '@layouts/LayoutModalContext';
 import { AppProps } from 'next/app';
 import React, { FC } from 'react';
 import DefaultLayout from 'src/layouts/DefaultLayout';
 
 export default function Home() {
+  const { loginModal, registerModal } = useLayoutModal();
+
   return (
-    <>
-      <h1 tw="text-h1">Hello world</h1>
-      <LoginForm />
-    </>
+    <div>
+      <button onClick={() => loginModal.show()}>Login</button>
+      <br />
+      <button onClick={() => registerModal.show()}>Register</button>
+    </div>
   );
 }
 
