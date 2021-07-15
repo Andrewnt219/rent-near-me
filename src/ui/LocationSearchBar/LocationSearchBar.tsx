@@ -1,3 +1,4 @@
+import { ButtonSimple } from '@ui/Button/Button';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 import tw from 'twin.macro';
@@ -8,21 +9,28 @@ type Props = {
 const SearchBar = ({ className }: Props) => {
   return (
     <StyledWrapper className={className}>
-      <input
-        placeholder="Start your search"
-        tw="placeholder:( font-semibold text-dark)"
-      />
+      <StyledInput placeholder="Start your search" />
 
-      <button>
+      <StyledButton>
         <FaSearch />
         <span tw="sr-only">Search</span>
-      </button>
+      </StyledButton>
     </StyledWrapper>
   );
 };
 
+const StyledButton = styled(ButtonSimple)`
+  ${tw`rounded-full absolute top-1/2 right-0 transform -translate-y-1/2`}
+`;
+
 const StyledWrapper = styled.div`
-  ${tw`border rounded-full flex justify-between items-center pl-lg pr-md py-sm shadow-sm`}
+  ${tw`relative`}
+`;
+
+const StyledInput = styled.input`
+  ${tw`w-full rounded-full h-full border pl-lg pr-3xl py-sm`}
+  ${tw`focus:(ring-2 ring-dark)  placeholder:( font-semibold text-dark)`}
+
   box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%);
 `;
 

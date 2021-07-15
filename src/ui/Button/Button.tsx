@@ -1,3 +1,4 @@
+import { ringStyle } from '@styles/globals-styles';
 import tw, { css, styled } from 'twin.macro';
 
 type ButtonProps = {
@@ -34,7 +35,10 @@ const buttonCss = {
 };
 
 const Button = styled.button<ButtonProps>`
-  ${tw`focus-visible:(ring-2 ring-dark ring-offset-2)`}
+  &:focus-visible {
+    ${ringStyle}
+  }
+
   ${(props) => (props.size ? buttonCss.size[props.size] : buttonCss.size.md)}
   ${(props) => props.rounded && buttonCss.shape.round}
 `;
@@ -48,9 +52,7 @@ export const ButtonPrimary = styled(Button)`
 
 export const ButtonSimple = styled(Button)`
   ${(props) =>
-    props.outline
-      ? tw`border border-gray-light hover:border-dark`
-      : tw`hover:bg-gray-light`}
+    props.outline ? tw`border hover:border-dark` : tw`hover:bg-gray-light`}
 `;
 
 export const ButtonLink = styled.button<ButtonProps>`

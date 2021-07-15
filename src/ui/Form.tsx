@@ -1,3 +1,4 @@
+import { ringStyle } from '@styles/globals-styles';
 import { FormHTMLAttributes } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { ButtonLinkDark } from './Button/Button';
@@ -24,7 +25,7 @@ export const inputCss = css`
   }
 
   &:focus-visible {
-    ${tw`ring-2 ring-black`}
+    ${ringStyle}
   }
 `;
 
@@ -74,8 +75,12 @@ Form.Select = styled.select`
 
 Form.ShowPasswordButton = styled(ButtonLinkDark)`
   ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
-  ${tw`focus-visible:(ring-offset-2 bg-white)`}
-  ${tw`font-semibold text-xs`}
+  ${tw`font-semibold underline text-xs`}
+  
+  &:focus-visible {
+    ${ringStyle}
+    ${tw`ring-offset-2`}
+  }
 `;
 
 /* -------------------------------------------------------------------------- */
@@ -93,7 +98,7 @@ Form.CheckboxTick = styled.span`
   ${tw`text-transparent`}  
 
   label:hover > & {
-    ${tw`text-gray-light`}
+    ${tw`text-gray`}
   }
 
   input:checked ~ & {
