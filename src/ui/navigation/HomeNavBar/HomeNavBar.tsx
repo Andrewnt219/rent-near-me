@@ -1,4 +1,5 @@
 import Layout from '@layouts/Layout';
+import { useLayoutModal } from '@layouts/LayoutModalContext';
 import { ButtonSimple } from '@ui/Button/Button';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
@@ -11,6 +12,8 @@ type Props = {
   className?: string;
 };
 const HomeNavBar = ({ className }: Props) => {
+  const { registerModal } = useLayoutModal();
+
   return (
     <StyledHeader className={className} tw="bg-white py-xl">
       <Layout.Container tw="flex items-center justify-between">
@@ -19,7 +22,7 @@ const HomeNavBar = ({ className }: Props) => {
         <LocationSearchBar tw="min-w-[20rem]" />
 
         <nav aria-label="Main" tw="flex gap-xs">
-          <ButtonSimple rounded tw="font-semibold">
+          <ButtonSimple onClick={registerModal.show} rounded tw="font-semibold">
             Become a Host
           </ButtonSimple>
 

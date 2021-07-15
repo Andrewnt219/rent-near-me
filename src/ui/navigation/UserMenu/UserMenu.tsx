@@ -1,9 +1,10 @@
 import { RouteProps } from '@common-types';
+import { useLayoutModal } from '@layouts/LayoutModalContext';
 import { ButtonSimple } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import tw, { styled } from 'twin.macro';
-import UserMenuLink from '../UserMenuLink/UserMenuLink';
+import { StyledUserMenuLink } from '../UserMenuLink/UserMenuLink';
 import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
 import { useUserMenuDropDown } from './useUserMenuDropdown';
 
@@ -52,76 +53,46 @@ const StyledLine = styled.div`
 `;
 
 /* ---------------------------------- Menu ---------------------------------- */
-const links: Record<'preference' | 'dashboard' | 'others', RouteProps[]> = {
+const links: Record<'preference', RouteProps[]> = {
   preference: [
     {
-      textTranslateKey: 'about',
-      href: '/about',
+      textTranslateKey: 'home',
+      href: '/',
     },
-    {
-      textTranslateKey: 'register',
-      href: '/register',
-    },
-    {
-      textTranslateKey: 'login',
-      href: '/login',
-    },
-  ],
-  dashboard: [
     {
       textTranslateKey: 'about',
       href: '/about',
     },
     {
-      textTranslateKey: 'register',
-      href: '/register',
-    },
-    {
-      textTranslateKey: 'login',
-      href: '/login',
-    },
-  ],
-  others: [
-    {
-      textTranslateKey: 'about',
-      href: '/about',
-    },
-    {
-      textTranslateKey: 'register',
-      href: '/register',
-    },
-    {
-      textTranslateKey: 'login',
-      href: '/login',
+      textTranslateKey: 'wishlist',
+      href: '/wishlist',
     },
   ],
 };
 
 type MenuProps = HTMLAttributes<HTMLUListElement>;
 function Menu(props: MenuProps) {
+  const { registerModal, loginModal } = useLayoutModal();
+
   return (
     <ul
       {...props}
       id="user-menu-menu"
       role="menu"
       aria-label="Menu links"
-      tw="absolute top-[125%] right-0 bg-white min-w-[12.5rem] shadow rounded z-40"
+      tw="font-normal absolute top-[125%] right-0 bg-white min-w-[12.5rem] shadow rounded z-40"
     >
-      <UserMenuLinksGroup
-        tw="font-semibold"
-        label="Your preferences"
-        routes={links.preference}
-      />
+      <UserMenuLinksGroup tw="font-semibold">
+        <StyledUserMenuLink as="button" onClick={registerModal.show}>
+          Register
+        </StyledUserMenuLink>
 
-      <UserMenuLinksGroup label="Your dashboard" routes={links.dashboard} />
-
-      <UserMenuLinksGroup label="Other settings" routes={links.others}>
-        <UserMenuLink
-          href="/"
-          tw="text-danger font-semibold"
-          textTranslateKey="logout"
-        />
+        <StyledUserMenuLink as="button" onClick={loginModal.show}>
+          Login
+        </StyledUserMenuLink>
       </UserMenuLinksGroup>
+
+      <UserMenuLinksGroup routes={links.preference} />
     </ul>
   );
 }
