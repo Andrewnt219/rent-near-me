@@ -1,8 +1,9 @@
-import { UseControllerProps, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import RegisterForm from '@models/RegisterForm';
+import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
-import RegisterForm from '@models/RegisterForm';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { UseControllerProps, useForm } from 'react-hook-form';
 
 type Controllers = Record<keyof RegisterForm, UseControllerProps<RegisterForm>>;
 
@@ -47,26 +48,15 @@ export default function useRegisterForm() {
     console.log(data);
   });
 
-  const [firstName, lastName, email, password] = form.watch([
-    'firstName',
-    'lastName',
-    'email',
-    'password',
-  ]);
+  const password = form.watch('password');
 
-  const passwordError = {
-    reachesMinimumLength: RegisterForm.reachesMinimumLength(password),
-    containsUpperLowerChars:
-      RegisterForm.containsAnUpperCaseLetter(password) &&
-      RegisterForm.containsALowerCaseLetter(password),
-    containsSpecialCharOrNumber:
-      RegisterForm.containsASpecialCharacter(password) ||
-      RegisterForm.containsANumber(password),
-    notContainsPersonalInfo:
-      !RegisterForm.containsEmail(password, email) &&
-      !RegisterForm.containsName(password, firstName) &&
-      !RegisterForm.containsName(password, lastName),
+  const passwordValidationResults = validatePassword(password);
+
+  return {
+    onSubmit,
+    form,
+    controllers,
+    submitError,
+    passwordValidationResults,
   };
-
-  return { onSubmit, form, controllers, submitError, passwordError };
 }
