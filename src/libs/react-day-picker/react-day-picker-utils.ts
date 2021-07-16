@@ -1,4 +1,4 @@
-import { isValidDate } from '@utils/validate-utils';
+import { isValidDate } from '@utils/validate-js-utils';
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 

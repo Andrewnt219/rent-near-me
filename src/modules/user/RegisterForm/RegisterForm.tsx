@@ -3,19 +3,22 @@ import DatePicker from '@libs/react-day-picker/DatePicker';
 import RegisterModel from '@models/RegisterForm';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import Form from '@ui/Form';
+import PasswordCheckList from '@ui/PasswordCriteria/PasswordCriteria';
 import PasswordField from '@ui/PasswordField';
 import Row from '@ui/Row/Row';
 import Select from '@ui/SelectField';
 import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
-import { FC } from 'react';
-import { IoCheckmarkOutline, IoCloseOutline } from 'react-icons/io5';
-import tw, { styled } from 'twin.macro';
 import useRegisterForm from './useRegisterForm';
 
 export default function RegisterForm() {
-  const { controllers, form, onSubmit, submitError, passwordError } =
-    useRegisterForm();
+  const {
+    controllers,
+    form,
+    onSubmit,
+    submitError,
+    passwordValidationResults,
+  } = useRegisterForm();
   const { loginModal, registerModal } = useLayoutModal();
   const { t } = useTranslation();
 
@@ -88,27 +91,14 @@ export default function RegisterForm() {
         controller={controllers.password}
       />
 
-      <div tw="mb-md">
-        <PasswordCriteria isQualified={passwordError.reachesMinimumLength}>
-          At least 8 characters
-        </PasswordCriteria>
-        <PasswordCriteria isQualified={passwordError.containsUpperLowerChars}>
-          Contains a lowercase letter and an uppercase letter
-        </PasswordCriteria>
-        <PasswordCriteria isQualified={passwordError.notContainsPersonalInfo}>
-          Can&apos;t contain your name or email address
-        </PasswordCriteria>
-        <PasswordCriteria
-          isQualified={passwordError.containsSpecialCharOrNumber}
-        >
-          Contains a number or symbol
-        </PasswordCriteria>
-      </div>
+      <PasswordCheckList
+        passwordValidationResults={passwordValidationResults}
+      />
 
       <ButtonPrimary
         size="xl"
         type="submit"
-        tw="block w-full"
+        tw="block w-full mt-md"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
@@ -118,33 +108,3 @@ export default function RegisterForm() {
     </Form>
   );
 }
-
-type PasswordCriteriaProps = {
-  isQualified: boolean;
-};
-const StyledPassworCriteria = styled.p<PasswordCriteriaProps>`
-  ${tw`text-xs font-semibold`}
-  ${tw`flex items-center gap-sm mb-0`};
-  ${tw`text-danger`}
-
-  &:not(:last-child) {
-    ${tw`mb-1`}
-  }
-
-  ${(props) => props.isQualified && tw`text-success`}
-
-  svg {
-    ${tw`fill-current w-4 h-4`}
-  }
-`;
-const PasswordCriteria: FC<PasswordCriteriaProps> = ({
-  isQualified,
-  children,
-}) => {
-  return (
-    <StyledPassworCriteria isQualified={isQualified}>
-      {isQualified ? <IoCheckmarkOutline /> : <IoCloseOutline />}
-      {children}
-    </StyledPassworCriteria>
-  );
-};
