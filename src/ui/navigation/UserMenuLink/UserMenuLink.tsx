@@ -17,15 +17,16 @@ const UserMenuLink = ({
 
   return (
     <NextLink {...routeProps} passHref>
-      <StyledLink className={className}>
+      <StyledUserMenuLink className={className}>
         {t(`common:routes.${textTranslateKey}`)}
-      </StyledLink>
+      </StyledUserMenuLink>
     </NextLink>
   );
 };
 
-const StyledLink = styled.a`
-  ${tw`px-md py-sm block hover:bg-gray-light`}
+export const StyledUserMenuLink = styled.a`
+  /* Force inherit font on buttons */
+  ${tw`font-inherit w-full text-left px-md py-sm block hover:bg-gray-light`}
 
   &:focus-visible {
     ${ringStyle}

@@ -9,7 +9,7 @@ import Select from '@ui/SelectField';
 import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
-import { IoCloseOutline, IoCheckmarkOutline } from 'react-icons/io5';
+import { IoCheckmarkOutline, IoCloseOutline } from 'react-icons/io5';
 import tw, { styled } from 'twin.macro';
 import useRegisterForm from './useRegisterForm';
 
@@ -26,8 +26,8 @@ export default function RegisterForm() {
         <ButtonLink
           type="button"
           onClick={() => {
-            loginModal.hide();
-            registerModal.show();
+            registerModal.hide();
+            loginModal.show();
           }}
         >
           Already have an account?

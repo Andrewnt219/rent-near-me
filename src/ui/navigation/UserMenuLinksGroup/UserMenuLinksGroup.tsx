@@ -6,8 +6,8 @@ import UserMenuLink from '../UserMenuLink/UserMenuLink';
 
 type Props = {
   className?: string;
-  routes: RouteProps[];
-  label: string;
+  routes?: RouteProps[];
+  label?: string;
 };
 function UserMenuLinksGroup({
   className,
@@ -17,7 +17,7 @@ function UserMenuLinksGroup({
 }: PropsWithChildren<Props>) {
   return (
     <StyledList role="menu" aria-label={label} className={className}>
-      {routes.map((routeProps, index) => (
+      {routes?.map((routeProps, index) => (
         <li key={index} role="none">
           <UserMenuLink {...routeProps} />
         </li>
