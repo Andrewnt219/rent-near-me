@@ -1,14 +1,15 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useLayoutModal } from '@layouts/LayoutModalContext';
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import RegisterModel from '@models/RegisterForm';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
+import { RiErrorWarningFill } from 'react-icons/ri';
 import Form from '@ui/Form';
 import PasswordCheckList from '@ui/PasswordCriteria/PasswordCriteria';
 import PasswordField from '@ui/PasswordField';
 import Row from '@ui/Row/Row';
 import Select from '@ui/SelectField';
 import TextField from '@ui/TextField';
-import useTranslation from 'next-translate/useTranslation';
 import useRegisterForm from './useRegisterForm';
 
 export default function RegisterForm() {
@@ -94,6 +95,13 @@ export default function RegisterForm() {
       <PasswordCheckList
         passwordValidationResults={passwordValidationResults}
       />
+
+      {submitError && (
+        <Form.ErrorMessage tw="text-body flex items-center gap-sm mb-sm">
+          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          {submitError}
+        </Form.ErrorMessage>
+      )}
 
       <ButtonPrimary
         size="xl"
