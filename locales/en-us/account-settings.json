@@ -1,0 +1,6 @@
+{
+  "routes": {
+    "index": "Account",
+    "login-and-security": "Login & Security"
+  }
+}
