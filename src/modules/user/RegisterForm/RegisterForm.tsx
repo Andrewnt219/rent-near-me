@@ -94,6 +94,7 @@ export default function RegisterForm() {
 
       <PasswordCheckList
         passwordValidationResults={passwordValidationResults}
+        tw="mb-sm"
       />
 
       {submitError && (

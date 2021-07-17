@@ -1,3 +1,7 @@
+import axios, { AxiosError } from 'axios';
+import { Translate } from 'next-translate';
+import { isNullOrUndefined } from './validate-js-utils';
+
 type ResultTypes = 'success' | 'error';
 type ErrorWithMessage = Error | { message: string };
 
@@ -34,4 +38,19 @@ export class ResultError implements Result<null> {
     }
     this.error = err;
   }
+}
+
+export function getErrorMessage(
+  error: Error | AxiosError<ResultError>,
+  t: Translate
+) {
+  if (axios.isAxiosError(error)) {
+    if (error.response) return t(error.response.data.error.message);
+    if (error.request) return t('common:errors.api.network-issue');
+  }
+
+  if (error instanceof ResultError) return error.error.message;
+  if (error instanceof Error) return error.message;
+
+  return t('common:errors.api.other');
 }

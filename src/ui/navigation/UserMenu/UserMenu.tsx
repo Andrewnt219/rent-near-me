@@ -12,33 +12,33 @@ type Props = {
   className?: string;
 };
 const UserMenu = ({ className }: Props) => {
-  const { isOpen, buttonRef, closeDropdown, openDropdown, toggleDropDown } =
+  const { isOpen, wrapperRef, closeDropdown, openDropdown, toggleDropDown } =
     useUserMenuDropDown();
 
   return (
-    <ButtonSimple
-      ref={buttonRef}
-      className={className}
-      id="user-menu-button"
-      aria-haspopup
-      aria-controls="user-menu-menu"
-      aria-expanded={isOpen}
-      aria-pressed={isOpen}
-      onClick={toggleDropDown}
-      tw="flex border text-left relative rounded-full pl-md pr-sm py-sm transition-shadow hover:shadow"
-    >
-      <span tw="sr-only">Menu</span>
+    <div tw="relative" ref={wrapperRef}>
+      <ButtonSimple
+        className={className}
+        id="user-menu-button"
+        aria-haspopup
+        aria-controls="user-menu-menu"
+        aria-expanded={isOpen}
+        aria-pressed={isOpen}
+        onClick={toggleDropDown}
+        tw="flex items-center border rounded-full pl-md pr-sm py-sm transition-shadow hover:shadow"
+      >
+        <span tw="sr-only">Menu</span>
 
-      <StyledHamburger />
+        <HamburgerIcon />
 
-      <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
-
+        <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
+      </ButtonSimple>
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
-    </ButtonSimple>
+    </div>
   );
 };
 /* -------------------------------- Hamburger ------------------------------- */
-function StyledHamburger() {
+function HamburgerIcon() {
   return (
     <div tw="inline-flex flex-col justify-center space-y-0.5 h-full">
       <StyledLine />

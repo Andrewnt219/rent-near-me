@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import { SPECIAL_CHARS } from '@utils/validate-js-utils';
 import { PasswordCriteria } from '@utils/validate-password-utils';
 import PasswordCriterion from '@ui/PasswordCriterion/PasswordCriterion';
@@ -8,7 +8,7 @@ type Props = {
   className?: string;
   passwordValidationResults: Record<PasswordCriteria, boolean>;
 };
-const PasswordCheckList: FC<Props> = ({ className, ...props }) => {
+const PasswordCheckList: VFC<Props> = ({ className, ...props }) => {
   return (
     <div className={className} tw="space-y-xs">
       <PasswordCriterion

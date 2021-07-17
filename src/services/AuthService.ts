@@ -1,25 +1,19 @@
 import { supabase } from '@libs/supabase';
 import RegisterForm from '@models/RegisterForm';
-import { Result } from '@utils/api-responses';
+import { ApiPostResult_UserRegister } from '@pages/api/user/register';
+import axios from 'axios';
 
 export default class AuthService {
   static async getCurrentUser() {
     return supabase.auth.user();
   }
 
-  static async registerWithEmail(data: RegisterForm) {
-    const response = await fetch('/api/user/register', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const responseData: Result = await response.json();
-    if (!response.ok) {
-      throw Error(responseData.error?.message);
-    }
-    return responseData;
+  static async registerWithEmail(formData: RegisterForm) {
+    const response = await axios.post<ApiPostResult_UserRegister>(
+      '/api/user/register',
+      formData
+    );
+    return response.data;
   }
 
   static async signInWithEmail(email: string, password: string) {

@@ -1,43 +1,31 @@
+import { NextApiHandler } from 'next';
 import { Result, ResultError } from '@utils/api-responses';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
-export type NextApiHanlder = (
-  req: NextApiRequest,
-  res: NextApiResponse<Result>
-) => void | Promise<void>;
-
+export type ApiHandler = NextApiHandler<Result>;
 export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
-export type HttpMethodHandlers = Partial<Record<HttpMethod, NextApiHanlder>>;
-type HttpMethodHandlerSelector = (
-  handlers: HttpMethodHandlers
-) => NextApiHanlder;
+export type HttpMethodHandlers = Partial<Record<HttpMethod, ApiHandler>>;
+type HttpMethodHandlerSelector = (handlers: HttpMethodHandlers) => ApiHandler;
 
 export const handleHttpMethod: HttpMethodHandlerSelector =
-  (handlers) => (req, res) => {
+  (handlers) => async (req, res) => {
     const httpMethod = req.method?.toLowerCase() ?? '';
     if (!(httpMethod in handlers)) {
-      return res.status(405).json(new ResultError('HTTP Method Not Allowed'));
+      return res
+        .status(405)
+        .json(new ResultError('common:errors.api.http-not-allowed'));
     }
 
     const handle = handlers[httpMethod as HttpMethod];
     if (!handle) {
       return res
         .status(405)
-        .json(new ResultError('HTTP Method Not Supported For This Route'));
+        .json(new ResultError('common:errors.api.http-not-supported'));
     }
 
     try {
-      return handle(req, res);
+      return await Promise.resolve(handle(req, res));
     } catch (err) {
-      return handleError(req, res, err);
+      console.error(err);
+      return res.status(500).json(new ResultError('common:errors.api.other'));
     }
   };
-
-const handleError = (
-  req: NextApiRequest,
-  res: NextApiResponse<ResultError>,
-  err: unknown
-) => {
-  console.error(err);
-  return res.status(500).json(new ResultError('Oops! Something went wrong.'));
-};

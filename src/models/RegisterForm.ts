@@ -11,7 +11,7 @@ export default class RegisterForm {
   email = '';
   password = '';
 
-  constructor(source?: any) {
+  constructor(source?: Record<keyof RegisterForm, any>) {
     if (!isNullOrUndefined(source)) {
       this.firstName = source.firstName;
       this.lastName = source.lastName;
