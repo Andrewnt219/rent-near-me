@@ -56,6 +56,10 @@
     "login": "Log in",
     "register": "Register",
     "wishlist": "Wishlist",
-    "logout": "Log out"
+    "logout": "Log out",
+    "account-settings": {
+      "index": "Account",
+      "login-and-security": "Login & Security"
+    }
   }
 }

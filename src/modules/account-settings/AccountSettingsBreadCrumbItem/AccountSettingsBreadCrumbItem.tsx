@@ -22,7 +22,7 @@ const AccountSettingsBreadCrumbItem: VFC<Props> = ({ className, ...props }) => {
         className={className}
         tw=""
       >
-        {t(textTranslateKey)}
+        {t(`common:routes.${textTranslateKey}`)}
       </StyledLink>
     </NextLink>
   );

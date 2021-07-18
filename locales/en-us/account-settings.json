@@ -1,6 +1,5 @@
 {
-  "routes": {
-    "index": "Account",
-    "login-and-security": "Login & Security"
+  "login-and-security": {
+    "page-title": "Login & Security"
   }
 }

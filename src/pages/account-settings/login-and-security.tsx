@@ -1,8 +1,6 @@
-import DefaultLayout from '@layouts/DefaultLayout';
+import { WithDefaultLayout } from '@layouts/DefaultLayout';
 import AccountSettingsHeader from '@modules/account-settings/AccoutnSettingsHeader/AccoutnSettingsHeader';
 import useTranslation from 'next-translate/useTranslation';
-import { AppProps } from 'next/app';
-import { FC } from 'react';
 
 export default function LoginAndSecurityPage() {
   const { t } = useTranslation();
@@ -10,12 +8,10 @@ export default function LoginAndSecurityPage() {
   return (
     <>
       <AccountSettingsHeader
-        title={t('account-settings:routes.login-and-security')}
+        title={t('account-settings:login-and-security.page-title')}
       />
     </>
   );
 }
 
-LoginAndSecurityPage.WithLayout = ((page: AppProps['Component']) => (
-  <DefaultLayout>{page}</DefaultLayout>
-)) as FC;
+LoginAndSecurityPage.WithLayout = WithDefaultLayout;

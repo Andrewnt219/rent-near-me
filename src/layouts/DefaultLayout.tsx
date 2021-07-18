@@ -1,8 +1,9 @@
-import { FC, useState } from 'react';
+import { WithLayout } from '@common-types';
 import Layout from '@layouts/Layout';
 import AppBar from '@ui/navigation/AppBar/AppBar';
 import Footer from '@ui/navigation/Footer/Footer';
 import HomeNavBar from '@ui/navigation/HomeNavBar/HomeNavBar';
+import { FC } from 'react';
 
 type DefaultLayoutProps = {
   className?: string;
@@ -23,5 +24,9 @@ const DefaultLayout: FC<DefaultLayoutProps> = ({ className, children }) => {
     </Layout>
   );
 };
+
+export const WithDefaultLayout: WithLayout = (page) => (
+  <DefaultLayout>{page}</DefaultLayout>
+);
 
 export default DefaultLayout;
