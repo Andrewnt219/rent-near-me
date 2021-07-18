@@ -6,6 +6,13 @@
       "weak-password": "Weak password",
       "unselected-dropdown": "Please select an option",
       "invalid-date": "Suggested format is dd-MMM-yyyy"
+    },
+    "api": {
+      "http-not-allowed": "HTTP Method Not Allowed",
+      "http-not-supported": "HTTP Method Not Supported For This Route",
+      "network-issue": "Unable to make request. Check your network connection.",
+      "invalid-schema": "Invalid incoming data shape.",
+      "other": "Oops! Something went wrong."
     }
   },
   "fields": {

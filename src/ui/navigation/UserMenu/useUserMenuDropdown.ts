@@ -3,7 +3,7 @@ import { useClickOutside } from 'src/hooks/useClickOutside';
 
 export const useUserMenuDropDown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const buttonRef = useClickOutside<HTMLButtonElement>(() => setIsOpen(false));
+  const wrapperRef = useClickOutside<HTMLDivElement>(() => setIsOpen(false));
 
   const blurTimerId = useRef<NodeJS.Timeout>();
 
@@ -21,5 +21,5 @@ export const useUserMenuDropDown = () => {
 
   const toggleDropDown = useCallback(() => setIsOpen((prev) => !prev), []);
 
-  return { isOpen, buttonRef, closeDropdown, openDropdown, toggleDropDown };
+  return { isOpen, wrapperRef, closeDropdown, openDropdown, toggleDropDown };
 };

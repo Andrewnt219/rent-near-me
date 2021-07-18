@@ -39,6 +39,7 @@ module.exports = {
       },
       danger: '#dc2626',
       success: '#008A05',
+      info: '#007bff',
       white: '#fff',
       black: '#000',
       light: '#f8f9fa',

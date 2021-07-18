@@ -1,6 +1,7 @@
 import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
+import { isNullOrUndefined } from '@utils/validate-js-utils';
 
 export default class RegisterForm {
   firstName = '';
@@ -9,6 +10,17 @@ export default class RegisterForm {
   dob = null;
   email = '';
   password = '';
+
+  constructor(source?: Record<keyof RegisterForm, any>) {
+    if (!isNullOrUndefined(source)) {
+      this.firstName = source.firstName;
+      this.lastName = source.lastName;
+      this.gender = source.gender;
+      this.dob = source.dob;
+      this.email = source.email;
+      this.password = source.password;
+    }
+  }
 
   static genders = {
     male: 'Male',
