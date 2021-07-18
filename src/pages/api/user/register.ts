@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { supabase } from '@libs/supabase';
+import { Await } from '@common-types';
 import RegisterForm from '@models/RegisterForm';
 import { ResultSuccess, ResultError, Result } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
-import { Session } from '@supabase/supabase-js';
+import { auth, db } from '@libs/firebase-admin/firebase-admin';
+import { capitalizeName } from '@utils/string-utils';
 
-type PostResponseData = {
-  session: Session | null;
-};
+type PostResponseData = Await<ReturnType<typeof auth.createUser>>;
 export type ApiPostResult_UserRegister = ResultSuccess<PostResponseData>;
 async function post(
   req: NextApiRequest,
@@ -20,24 +19,21 @@ async function post(
       .status(422)
       .json(new ResultError('common:errors.api.invalid-schema'));
   }
-  const signUpResult = await supabase.auth.signUp({
+  const user = await auth.createUser({
     email: model.email,
     password: model.password,
+    displayName: capitalizeName(`${model.firstName} ${model.lastName}`),
+    emailVerified: false,
+    disabled: false,
   });
-  if (signUpResult.error) throw signUpResult.error;
-  const insertProfileResult = await supabase.from('profiles').insert({
-    id: signUpResult.user?.id,
+  await db.collection('profiles').doc(user.uid).create({
+    id: user.uid,
     firstName: model.firstName,
     lastName: model.lastName,
     gender: model.gender,
     dob: model.dob,
   });
-  if (insertProfileResult.error) throw insertProfileResult.error;
-  return res.json(
-    new ResultSuccess({
-      session: signUpResult.session,
-    })
-  );
+  return res.json(new ResultSuccess(user));
 }
 
 export default handleHttpMethod({ post });

@@ -78,6 +78,7 @@ export default function LoginForm() {
       <HrText tw="my-xl">or</HrText>
 
       <SignInExternalButton
+        type="button"
         tw="mb-md"
         icon={<FcGoogle css={signInExternalIconStyle} />}
         text={t('common:login.google')}
@@ -85,6 +86,7 @@ export default function LoginForm() {
       />
 
       <SignInExternalButton
+        type="button"
         icon={
           <RiFacebookCircleFill
             css={signInExternalIconStyle}

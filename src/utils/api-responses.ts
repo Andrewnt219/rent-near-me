@@ -45,7 +45,7 @@ export function getErrorMessage(
   t: Translate
 ) {
   if (axios.isAxiosError(error)) {
-    if (error.response) return t(error.response.data.error.message);
+    if (error.response) return t(error.response.data.error?.message);
     if (error.request) return t('common:errors.api.network-issue');
   }
 
