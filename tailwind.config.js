@@ -37,6 +37,7 @@ module.exports = {
         DEFAULT: '#ff385c',
         dark: '#bd1e59',
       },
+      secondary: '#008489',
       danger: '#dc2626',
       success: '#008A05',
       info: '#007bff',
