@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren } from 'react';
 import tw, { css, styled, theme } from 'twin.macro';
-import { LayoutProvider } from './LayoutModalContext';
+import { LayoutProvider } from '@contexts/LayoutModalContext';
 
 type LayoutProps = StyledWrapperProps & HTMLAttributes<HTMLDivElement>;
 const Layout = ({

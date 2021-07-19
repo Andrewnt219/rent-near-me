@@ -1,4 +1,4 @@
-import { useLayoutModal } from '@layouts/LayoutModalContext';
+import { useLayoutModal } from '@contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonPrimary, ButtonSimple, ButtonLink } from '@ui/Button/Button';
 import Checkbox from '@ui/Checkbox';

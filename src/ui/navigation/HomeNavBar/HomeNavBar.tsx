@@ -1,5 +1,5 @@
 import Layout from '@layouts/Layout';
-import { useLayoutModal } from '@layouts/LayoutModalContext';
+import { useLayoutModal } from '@contexts/LayoutModalContext';
 import { ButtonSimple } from '@ui/Button/Button';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
@@ -7,11 +7,13 @@ import React from 'react';
 import { FaGlobe } from 'react-icons/fa';
 import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
+import { useAuth } from '@contexts/AuthContext';
 
 type Props = {
   className?: string;
 };
 const HomeNavBar = ({ className }: Props) => {
+  const { isAuthenticated } = useAuth();
   const { registerModal } = useLayoutModal();
 
   return (
@@ -22,9 +24,15 @@ const HomeNavBar = ({ className }: Props) => {
         <LocationSearchBar tw="min-w-[20rem]" />
 
         <nav aria-label="Main" tw="flex gap-xs">
-          <ButtonSimple onClick={registerModal.show} rounded tw="font-semibold">
-            Become a Host
-          </ButtonSimple>
+          {!isAuthenticated && (
+            <ButtonSimple
+              onClick={registerModal.show}
+              rounded
+              tw="font-semibold"
+            >
+              Become a Host
+            </ButtonSimple>
+          )}
 
           <ButtonSimple rounded>
             <FaGlobe />

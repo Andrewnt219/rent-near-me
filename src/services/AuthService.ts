@@ -14,10 +14,6 @@ import { ApiPostResult_UserRegister } from '@pages/api/user/register';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
 
 export default class AuthService {
-  static getCurrentUser() {
-    return auth.currentUser;
-  }
-
   static async registerWithEmail(formData: RegisterForm) {
     const response = await axios.post<ApiPostResult_UserRegister>(
       '/api/user/register',
@@ -31,10 +27,10 @@ export default class AuthService {
     password: string,
     keepLogIn: boolean
   ) {
-    await setPersistence(
-      auth,
-      keepLogIn ? browserLocalPersistence : browserSessionPersistence
-    );
+    const persistence = keepLogIn
+      ? browserLocalPersistence
+      : browserSessionPersistence;
+    await setPersistence(auth, persistence);
     await signInWithEmailAndPassword(auth, email, password);
   }
 

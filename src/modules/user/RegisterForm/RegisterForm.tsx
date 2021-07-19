@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useLayoutModal } from '@layouts/LayoutModalContext';
+import { useLayoutModal } from '@contexts/LayoutModalContext';
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import RegisterModel from '@models/RegisterForm';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
