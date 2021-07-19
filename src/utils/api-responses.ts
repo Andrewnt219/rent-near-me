@@ -9,17 +9,17 @@ export interface Result<Data = unknown> {
   type: ResultTypes;
   data: Data | null;
   error: ErrorWithMessage | null;
-  timestamp: Date;
+  timestamp: string;
 }
 
 export class ResultSuccess<Data = unknown> implements Result<Data> {
   readonly type: ResultTypes = 'success';
   data: Data;
   readonly error = null;
-  readonly timestamp: Date;
+  readonly timestamp: string;
 
   constructor(data: Data) {
-    this.timestamp = new Date();
+    this.timestamp = new Date().toLocaleString();
     this.data = data;
   }
 }
@@ -28,10 +28,10 @@ export class ResultError implements Result<null> {
   readonly type: ResultTypes = 'error';
   readonly data = null;
   error: ErrorWithMessage;
-  readonly timestamp: Date;
+  readonly timestamp: string;
 
   constructor(err: ErrorWithMessage | string) {
-    this.timestamp = new Date();
+    this.timestamp = new Date().toLocaleString();
     if (typeof err === 'string') {
       this.error = { message: err };
       return;
