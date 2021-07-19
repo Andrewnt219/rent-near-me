@@ -1,14 +1,5 @@
+import firebase from 'firebase/app';
 import axios from 'axios';
-import {
-  setPersistence,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  browserLocalPersistence,
-  browserSessionPersistence,
-  signOut,
-} from 'firebase/auth';
 import RegisterForm from '@models/RegisterForm';
 import { ApiPostResult_UserRegister } from '@pages/api/user/register';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
@@ -27,22 +18,21 @@ export default class AuthService {
     password: string,
     keepLogIn: boolean
   ) {
-    const persistence = keepLogIn
-      ? browserLocalPersistence
-      : browserSessionPersistence;
-    await setPersistence(auth, persistence);
-    await signInWithEmailAndPassword(auth, email, password);
+    const persistence =
+      firebase.auth.Auth.Persistence[keepLogIn ? 'LOCAL' : 'SESSION'];
+    await auth.setPersistence(persistence);
+    await auth.signInWithEmailAndPassword(email, password);
   }
 
   static async signInWithGoogle() {
-    await signInWithPopup(auth, new GoogleAuthProvider());
+    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   static async signInWithFacebook() {
-    await signInWithPopup(auth, new FacebookAuthProvider());
+    await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
 
   static async signOut() {
-    await signOut(auth);
+    await auth.signOut();
   }
 }

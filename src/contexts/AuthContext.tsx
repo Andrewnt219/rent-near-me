@@ -1,13 +1,13 @@
+import firebase from 'firebase/app';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
 import { isNullOrUndefined } from '@utils/validate-js-utils';
-import { onAuthStateChanged, User } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
 
 type AuthContextValue = {
   isAuthenticated: boolean;
-  user: User | null;
+  user: firebase.User | null;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -19,10 +19,10 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: FC = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<firebase.User | null>(null);
 
   useEffect(() => {
-    onAuthStateChanged(auth, setUser);
+    auth.onAuthStateChanged(setUser);
   }, []);
 
   return (
