@@ -1,4 +1,4 @@
-import { WithDefaultLayout } from '@layouts/DefaultLayout';
+import DefaultLayout from '@layouts/DefaultLayout';
 import AccountSettingsHeader from '@modules/account-settings/AccoutnSettingsHeader/AccoutnSettingsHeader';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -14,4 +14,4 @@ export default function LoginAndSecurityPage() {
   );
 }
 
-LoginAndSecurityPage.WithLayout = WithDefaultLayout;
+LoginAndSecurityPage.WithLayout = DefaultLayout.Layout;

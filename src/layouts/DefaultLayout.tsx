@@ -3,12 +3,12 @@ import Layout from '@layouts/Layout';
 import AppBar from '@ui/navigation/AppBar/AppBar';
 import Footer from '@ui/navigation/Footer/Footer';
 import HomeNavBar from '@ui/navigation/HomeNavBar/HomeNavBar';
-import { FC } from 'react';
+import { PropsWithChildren } from 'react';
 
-type DefaultLayoutProps = {
+type Props = {
   className?: string;
 };
-const DefaultLayout: FC<DefaultLayoutProps> = ({ className, children }) => {
+const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
   return (
     <Layout
       size="lg"
@@ -25,8 +25,8 @@ const DefaultLayout: FC<DefaultLayoutProps> = ({ className, children }) => {
   );
 };
 
-export const WithDefaultLayout: WithLayout = (page) => (
+DefaultLayout.Layout = ((page) => (
   <DefaultLayout>{page}</DefaultLayout>
-);
+)) as WithLayout;
 
 export default DefaultLayout;

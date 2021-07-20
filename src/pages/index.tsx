@@ -1,7 +1,7 @@
 import React from 'react';
-import { WithDefaultLayout } from 'src/layouts/DefaultLayout';
+import DefaultLayout from 'src/layouts/DefaultLayout';
 export default function Home() {
   return <div></div>;
 }
 
-Home.WithLayout = WithDefaultLayout;
+Home.WithLayout = DefaultLayout.Layout;
