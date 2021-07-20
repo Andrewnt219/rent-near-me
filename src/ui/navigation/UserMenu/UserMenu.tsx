@@ -68,8 +68,8 @@ const links: Record<string, RouteProps[]> = {
       href: '/',
     },
     {
-      textTranslateKey: 'account-settings.login-and-security',
-      href: '/account-settings/login-and-security',
+      textTranslateKey: 'account.security',
+      href: '/account/security',
     },
     {
       textTranslateKey: 'wishlist',

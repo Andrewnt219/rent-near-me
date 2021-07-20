@@ -50,16 +50,15 @@
     "register": "Create new account"
   },
   "routes": {
-    "account": "Account",
+    "account": {
+      "index": "Account",
+      "security": "Login & Security"
+    },
     "home": "Home",
     "about": "About",
     "login": "Log in",
     "register": "Register",
     "wishlist": "Wishlist",
-    "logout": "Log out",
-    "account-settings": {
-      "index": "Account",
-      "login-and-security": "Login & Security"
-    }
+    "logout": "Log out"
   }
 }
