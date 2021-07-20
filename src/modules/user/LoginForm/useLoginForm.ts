@@ -19,9 +19,11 @@ export const useLoginForm = () => {
   const [submitError, setSubmitError] = useState('');
 
   const onSubmit = form.handleSubmit(async (data) => {
-    await AuthService.signInWithEmail(data.email, data.password).catch((err) =>
-      setSubmitError(err.error_description || err.message)
-    );
+    await AuthService.signInWithEmail(
+      data.email,
+      data.password,
+      data.keepLogIn
+    ).catch((err) => setSubmitError(err.error_description || err.message));
   });
 
   const controllers: Controllers = {

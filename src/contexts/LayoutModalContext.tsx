@@ -1,18 +1,12 @@
 import { createContext, useContext, FC, useState } from 'react';
+import { ModalControl } from '@common-types';
 import RegisterForm from '@modules/user/RegisterForm/RegisterForm';
 import LoginForm from '@modules/user/LoginForm/LoginForm';
 import Modal from '@ui/Modal/Modal';
 
-type ModalValue = {
-  isShow: boolean;
-  show: () => void;
-  hide: () => void;
-  toggle: () => void;
-};
-
 type LayoutModalContextValue = {
-  loginModal: ModalValue;
-  registerModal: ModalValue;
+  loginModal: ModalControl;
+  registerModal: ModalControl;
 };
 
 const LayoutModalContext = createContext<LayoutModalContextValue | null>(null);

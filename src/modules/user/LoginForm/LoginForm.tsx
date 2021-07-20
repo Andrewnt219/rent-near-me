@@ -1,4 +1,4 @@
-import { useLayoutModal } from '@layouts/LayoutModalContext';
+import { useLayoutModal } from '@contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonPrimary, ButtonSimple, ButtonLink } from '@ui/Button/Button';
 import Checkbox from '@ui/Checkbox';
@@ -78,6 +78,7 @@ export default function LoginForm() {
       <HrText tw="my-xl">or</HrText>
 
       <SignInExternalButton
+        type="button"
         tw="mb-md"
         icon={<FcGoogle css={signInExternalIconStyle} />}
         text={t('common:login.google')}
@@ -85,6 +86,7 @@ export default function LoginForm() {
       />
 
       <SignInExternalButton
+        type="button"
         icon={
           <RiFacebookCircleFill
             css={signInExternalIconStyle}

@@ -4,4 +4,11 @@ declare module '@common-types' {
     textTranslateKey: string;
     exact?: boolean;
   };
+  type ModalControl = {
+    isShow: boolean;
+    show: () => void;
+    hide: () => void;
+    toggle: () => void;
+  };
+  type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
 }

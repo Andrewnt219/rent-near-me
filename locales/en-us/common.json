@@ -24,7 +24,7 @@
   "login": {
     "email": "Email",
     "password": "Password",
-    "keepSignedIn": "Keep me signed in",
+    "keepSignedIn": "Remember me",
     "loading": "Loading",
     "login": "Log in",
     "google": "Continue with Google",
@@ -50,6 +50,7 @@
     "register": "Create new account"
   },
   "routes": {
+    "account": "Account",
     "home": "Home",
     "about": "About",
     "login": "Log in",

@@ -1,5 +1,7 @@
 import { RouteProps } from '@common-types';
-import { useLayoutModal } from '@layouts/LayoutModalContext';
+import { useAuth } from '@contexts/AuthContext';
+import { useLayoutModal } from '@contexts/LayoutModalContext';
+import AuthService from '@services/AuthService';
 import { ButtonSimple } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
@@ -53,7 +55,13 @@ const StyledLine = styled.div`
 `;
 
 /* ---------------------------------- Menu ---------------------------------- */
-const links: Record<'preference', RouteProps[]> = {
+const links: Record<string, RouteProps[]> = {
+  account: [
+    {
+      textTranslateKey: 'account',
+      href: '/account',
+    },
+  ],
   preference: [
     {
       textTranslateKey: 'home',
@@ -72,6 +80,7 @@ const links: Record<'preference', RouteProps[]> = {
 
 type MenuProps = HTMLAttributes<HTMLUListElement>;
 function Menu(props: MenuProps) {
+  const { isAuthenticated } = useAuth();
   const { registerModal, loginModal } = useLayoutModal();
 
   return (
@@ -82,17 +91,27 @@ function Menu(props: MenuProps) {
       aria-label="Menu links"
       tw="font-normal absolute top-[125%] right-0 bg-white min-w-[12.5rem] shadow rounded z-40"
     >
-      <UserMenuLinksGroup tw="font-semibold">
-        <StyledUserMenuLink as="button" onClick={registerModal.show}>
-          Register
-        </StyledUserMenuLink>
+      {isAuthenticated ? (
+        <UserMenuLinksGroup routes={links['account']} />
+      ) : (
+        <UserMenuLinksGroup tw="font-semibold">
+          <StyledUserMenuLink as="button" onClick={registerModal.show}>
+            Register
+          </StyledUserMenuLink>
 
-        <StyledUserMenuLink as="button" onClick={loginModal.show}>
-          Login
-        </StyledUserMenuLink>
-      </UserMenuLinksGroup>
-
-      <UserMenuLinksGroup routes={links.preference} />
+          <StyledUserMenuLink as="button" onClick={loginModal.show}>
+            Login
+          </StyledUserMenuLink>
+        </UserMenuLinksGroup>
+      )}
+      <UserMenuLinksGroup routes={links['preference']} />
+      {isAuthenticated && (
+        <UserMenuLinksGroup>
+          <StyledUserMenuLink as="button" onClick={() => AuthService.signOut()}>
+            Logout
+          </StyledUserMenuLink>
+        </UserMenuLinksGroup>
+      )}
     </ul>
   );
 }
