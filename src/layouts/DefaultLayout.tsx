@@ -1,4 +1,3 @@
-import { WithLayout } from '@common-types';
 import Layout from '@layouts/Layout';
 import AppBar from '@ui/navigation/AppBar/AppBar';
 import Footer from '@ui/navigation/Footer/Footer';
@@ -24,9 +23,5 @@ const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
     </Layout>
   );
 };
-
-DefaultLayout.Layout = ((page) => (
-  <DefaultLayout>{page}</DefaultLayout>
-)) as WithLayout;
 
 export default DefaultLayout;

@@ -13,5 +13,5 @@ declare module '@common-types' {
   };
   type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
 
-  type WithLayout = (page: ReactNode) => ReactNode;
+  type GetLayout = (page: ReactNode) => ReactNode;
 }

@@ -41,6 +41,7 @@ module.exports = {
     'no-undef': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
     'jsx-a11y/anchor-is-valid': 'off',
+    'react/display-name': 'off',
   },
   settings: {
     react: {

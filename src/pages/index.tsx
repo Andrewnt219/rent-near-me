@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import DefaultLayout from 'src/layouts/DefaultLayout';
 export default function Home() {
   return <div></div>;
 }
 
-Home.WithLayout = DefaultLayout.Layout;
+Home.getLayout = (page: ReactNode) => {
+  return <DefaultLayout>{page}</DefaultLayout>;
+};

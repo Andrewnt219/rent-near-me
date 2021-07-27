@@ -1,5 +1,5 @@
 // import '@libs/react-datepicker/style.css';
-import { WithLayout } from '@common-types';
+import { GetLayout } from '@common-types';
 import { AuthProvider } from '@contexts/AuthContext';
 import '@reach/dialog/styles.css';
 import GlobalStyle from '@styles/GlobalStyles';
@@ -8,16 +8,16 @@ import 'react-day-picker/lib/style.css';
 import { GlobalStyles as TwinStyles } from 'twin.macro';
 
 type Page = AppProps['Component'] & {
-  WithLayout?: WithLayout;
+  getLayout?: GetLayout;
 };
 function MyApp({ Component, pageProps }: AppProps) {
-  const WithLayout = (Component as Page).WithLayout ?? ((page) => page);
+  const getLayout = (Component as Page).getLayout ?? ((page) => page);
 
   return (
     <AuthProvider>
       <TwinStyles />
       <GlobalStyle />
-      {WithLayout(<Component {...pageProps} />)}
+      {getLayout(<Component {...pageProps} />)}
     </AuthProvider>
   );
 }

@@ -1,6 +1,7 @@
 import DefaultLayout from '@layouts/DefaultLayout';
 import AccountPageHeader from '@modules/account/AccountPageHeader/AccountPageHeader';
 import useTranslation from 'next-translate/useTranslation';
+import { ReactNode } from 'react';
 
 export default function SecurityPage() {
   const { t } = useTranslation();
@@ -12,4 +13,6 @@ export default function SecurityPage() {
   );
 }
 
-SecurityPage.WithLayout = DefaultLayout.Layout;
+SecurityPage.getLayout = (page: ReactNode) => {
+  return <DefaultLayout>{page}</DefaultLayout>;
+};
