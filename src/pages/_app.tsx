@@ -1,23 +1,23 @@
 // import '@libs/react-datepicker/style.css';
-import { ReactNode } from 'react';
-import type { AppProps } from 'next/app';
-import { GlobalStyles as TwinStyles } from 'twin.macro';
+import { GetLayout } from '@common-types';
 import { AuthProvider } from '@contexts/AuthContext';
-import GlobalStyle from '@styles/GlobalStyles';
-import 'react-day-picker/lib/style.css';
 import '@reach/dialog/styles.css';
+import GlobalStyle from '@styles/GlobalStyles';
+import type { AppProps } from 'next/app';
+import 'react-day-picker/lib/style.css';
+import { GlobalStyles as TwinStyles } from 'twin.macro';
 
 type Page = AppProps['Component'] & {
-  WithLayout?(page: ReactNode): ReactNode;
+  getLayout?: GetLayout;
 };
 function MyApp({ Component, pageProps }: AppProps) {
-  const WithLayout = (Component as Page).WithLayout ?? ((page: Page) => page);
+  const getLayout = (Component as Page).getLayout ?? ((page) => page);
 
   return (
     <AuthProvider>
       <TwinStyles />
       <GlobalStyle />
-      {WithLayout(<Component {...pageProps} />)}
+      {getLayout(<Component {...pageProps} />)}
     </AuthProvider>
   );
 }

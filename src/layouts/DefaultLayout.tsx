@@ -1,13 +1,13 @@
-import { FC, useState } from 'react';
 import Layout from '@layouts/Layout';
 import AppBar from '@ui/navigation/AppBar/AppBar';
 import Footer from '@ui/navigation/Footer/Footer';
 import HomeNavBar from '@ui/navigation/HomeNavBar/HomeNavBar';
+import { PropsWithChildren } from 'react';
 
-type DefaultLayoutProps = {
+type Props = {
   className?: string;
 };
-const DefaultLayout: FC<DefaultLayoutProps> = ({ className, children }) => {
+const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
   return (
     <Layout
       size="lg"

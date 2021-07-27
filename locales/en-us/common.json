@@ -50,7 +50,10 @@
     "register": "Create new account"
   },
   "routes": {
-    "account": "Account",
+    "account": {
+      "index": "Account",
+      "security": "Login & Security"
+    },
     "home": "Home",
     "about": "About",
     "login": "Log in",

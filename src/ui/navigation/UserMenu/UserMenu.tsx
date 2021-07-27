@@ -68,8 +68,8 @@ const links: Record<string, RouteProps[]> = {
       href: '/',
     },
     {
-      textTranslateKey: 'about',
-      href: '/about',
+      textTranslateKey: 'account.security',
+      href: '/account/security',
     },
     {
       textTranslateKey: 'wishlist',

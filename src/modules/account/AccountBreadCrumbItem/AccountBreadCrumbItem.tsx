@@ -10,7 +10,7 @@ type Props = {
   route: RouteProps;
   isCurrent: boolean;
 };
-const AccountSettingsBreadCrumbItem: VFC<Props> = ({ className, ...props }) => {
+const AccountBreadCrumbItem: VFC<Props> = ({ className, ...props }) => {
   const { exact, textTranslateKey, ...routeProps } = props.route;
   const { t } = useTranslation();
 
@@ -22,7 +22,7 @@ const AccountSettingsBreadCrumbItem: VFC<Props> = ({ className, ...props }) => {
         className={className}
         tw=""
       >
-        {t(textTranslateKey)}
+        {t(`common:routes.${textTranslateKey}`)}
       </StyledLink>
     </NextLink>
   );
@@ -44,4 +44,4 @@ const StyledLink = styled.a<StyledLinkProps>`
   ${(p) => p.isActive && activeStyle}
 `;
 
-export default AccountSettingsBreadCrumbItem;
+export default AccountBreadCrumbItem;

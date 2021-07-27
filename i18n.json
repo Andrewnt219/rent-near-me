@@ -2,7 +2,7 @@
   "locales": ["en-us", "vi"],
   "defaultLocale": "en-us",
   "pages": {
-    "rgx:/account-settings/*": ["account-settings"],
+    "rgx:/account/*": ["account"],
     "*": ["common"]
   }
 }
