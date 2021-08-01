@@ -1,5 +1,6 @@
-import Layout from '@layouts/Layout';
+import { useAuth } from '@contexts/AuthContext';
 import { useLayoutModal } from '@contexts/LayoutModalContext';
+import Layout from '@layouts/Layout';
 import { ButtonSimple } from '@ui/Button/Button';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
@@ -7,7 +8,6 @@ import React from 'react';
 import { FaGlobe } from 'react-icons/fa';
 import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
-import { useAuth } from '@contexts/AuthContext';
 
 type Props = {
   className?: string;

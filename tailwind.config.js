@@ -16,12 +16,13 @@ module.exports = {
     },
     fontSize: {
       hero: 'clamp(2.5rem, 2.1rem + 2vw, 4.5rem)', // 40~72px
-      h1: 'clamp(1.75rem, 1.5rem + 1.25vw, 3rem)', // 28~48px
-      h2: 'clamp(1.5rem, 1.4rem + 0.5vw, 2rem)', // 24~32px,
+      h1: 'clamp(2rem, 1.6666666666666667rem + 1.6666666666666667vw, 3rem)', // 32~48px
+      h2: 'clamp(1.5rem, 1.1666666666666667rem + 1.6666666666666667vw, 2.5rem)', // 24~40px,
       xl: '1.5rem',
+      h3: 'clamp(1.125rem, 0.8333333333333333rem + 1.4583333333333333vw, 2rem)', // 18~32px
       lg: '1.125rem',
-      h3: 'clamp(1rem, 1rem + 0.2vw, 1.25rem)', // 16~20px
-      body: '1rem',
+      body:
+        'clamp(1rem, 0.9583333333333334rem + 0.20833333333333334vw, 1.125rem)', // 16~18px
       sm: '0.875rem',
       xs: '0.75rem',
     },
@@ -82,6 +83,7 @@ module.exports = {
         xl: '1.5rem',
         '2xl': '2rem',
         '3xl': '3rem',
+        '4xl': '5rem',
         'var-app-bar': 'var(--app-bar-height, 4.8125rem)',
         'var-page-px': 'var(--page-px, 1.5rem)',
       },
