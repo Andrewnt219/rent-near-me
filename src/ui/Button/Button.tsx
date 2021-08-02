@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro';
 
-const commonStyle = tw`rounded outline-none! `;
+const commonStyle = tw`rounded outline-none!`;
 
 type Size = 'lg' | 'md' | 'sm';
 function getSizeStyle(size: Size | undefined) {
@@ -45,12 +45,12 @@ export const ButtonPrimary = styled(BaseButton)`
 `;
 /* -------------------------------------------------------------------------- */
 export const ButtonGhost = styled(BaseButton)`
-  &:active,
   &:hover {
     ${tw`bg-light`}
   }
 
-  &:focus-visible {
+  &:focus-visible,
+  &:active {
     ${tw`ring-2 ring-dark`}
   }
 `;
@@ -68,6 +68,8 @@ export const ButtonOutline = styled(BaseButton)`
     ${tw`ring-2 ring-dark`}
   }
 `;
+
+/* -------------------------------------------------------------------------- */
 export const ButtonLink = styled(BaseButton)`
   ${tw`underline text-secondary`}
 
@@ -80,3 +82,5 @@ export const ButtonLink = styled(BaseButton)`
     ${tw`ring-2 ring-dark ring-offset-2`}
   }
 `;
+
+/* -------------------------------------------------------------------------- */

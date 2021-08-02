@@ -1,4 +1,4 @@
-import { ButtonPrimary } from '@ui/Button/Button';
+import { IconButtonPrimary } from '@ui/IconButton/IconButton';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 import tw from 'twin.macro';
@@ -11,17 +11,16 @@ const SearchBar = ({ className }: Props) => {
     <StyledWrapper className={className}>
       <StyledInput placeholder="Start your search" />
 
-      <StyledButton circle>
+      <IconButtonPrimary
+        size="md"
+        tw="absolute top-1/2 right-sm transform -translate-y-1/2"
+      >
         <FaSearch />
         <span tw="sr-only">Search</span>
-      </StyledButton>
+      </IconButtonPrimary>
     </StyledWrapper>
   );
 };
-
-const StyledButton = styled(ButtonPrimary)`
-  ${tw`w-10 h-10 inline-flex items-center justify-center absolute top-1/2 right-sm transform -translate-y-1/2`}
-`;
 
 const StyledWrapper = styled.div`
   ${tw`relative`}
