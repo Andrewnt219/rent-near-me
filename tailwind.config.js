@@ -1,16 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
-const getColorFromCssVariable = (cssVariableName) => ({ opacityVariable }) => {
-  const cssVariable = `var(--${cssVariableName})`;
-
-  if (opacityVariable !== undefined) {
-    return `rgba(${cssVariable}, var(${opacityVariable}, 1))`;
-  }
-
-  return `rgb(${cssVariable})`;
-};
-
 module.exports = {
   mode: 'jit',
   purge: [
@@ -40,8 +30,8 @@ module.exports = {
       transparent: 'transparent',
       current: 'current',
       primary: {
-        DEFAULT: getColorFromCssVariable('primary'),
-        dark: getColorFromCssVariable('primary-dark'),
+        DEFAULT: '#ff385c',
+        dark: '#bd1e59',
       },
       secondary: '#008489',
       danger: '#dc2626',
