@@ -1,6 +1,6 @@
 import { useLayoutModal } from '@contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
-import { ButtonPrimary, ButtonSimple, ButtonLink } from '@ui/Button/Button';
+import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
 import Checkbox from '@ui/Checkbox';
 import Form from '@ui/Form';
 import HrText from '@ui/HrText/HrText';
@@ -8,9 +8,10 @@ import PasswordField from '@ui/PasswordField';
 import TextField from '@ui/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { FaFacebook, FaKey } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { RiErrorWarningFill, RiFacebookCircleFill } from 'react-icons/ri';
-import tw, { styled } from 'twin.macro';
+import { RiErrorWarningFill } from 'react-icons/ri';
+import tw from 'twin.macro';
 import { useLoginForm } from './useLoginForm';
 
 const signInExternalIconStyle = tw`w-6 h-6`;
@@ -31,6 +32,10 @@ export default function LoginForm() {
         autoComplete="username"
         controller={controllers.email}
       />
+
+      <ButtonLink tw="ml-auto block text-sm" type="button">
+        Forget password?
+      </ButtonLink>
 
       <PasswordField
         label={t('common:login.password')}
@@ -53,9 +58,9 @@ export default function LoginForm() {
       )}
 
       <ButtonPrimary
-        size="xl"
+        size="md"
         type="submit"
-        tw="block w-full mb-md"
+        tw="block w-full"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
@@ -63,48 +68,39 @@ export default function LoginForm() {
           : t('common:login.login')}
       </ButtonPrimary>
 
-      <ButtonLink
-        type="button"
-        tw="block mb-[2px]"
-        onClick={() => {
-          loginModal.hide();
-          registerModal.show();
-        }}
-      >
-        Don&apos;t have an account?
-      </ButtonLink>
-      <ButtonLink type="button">Forget password?</ButtonLink>
+      <HrText tw="my-lg">or</HrText>
 
-      <HrText tw="my-xl">or</HrText>
+      <ul aria-label="Sign-in options" tw="space-y-sm">
+        <SignInExternalButton
+          type="button"
+          icon={<FcGoogle css={signInExternalIconStyle} />}
+          text={t('common:login.google')}
+          onClick={() => AuthService.signInWithGoogle()}
+        />
 
-      <SignInExternalButton
-        type="button"
-        tw="mb-md"
-        icon={<FcGoogle css={signInExternalIconStyle} />}
-        text={t('common:login.google')}
-        onClick={async () => await AuthService.signInWithGoogle()}
-      />
+        <SignInExternalButton
+          type="button"
+          icon={
+            <FaFacebook css={signInExternalIconStyle} tw="text-[#1877f2]" />
+          }
+          text={t('common:login.facebook')}
+          onClick={() => AuthService.signInWithFacebook()}
+        />
 
-      <SignInExternalButton
-        type="button"
-        icon={
-          <RiFacebookCircleFill
-            css={signInExternalIconStyle}
-            tw="text-facebook"
-          />
-        }
-        text={t('common:login.facebook')}
-        onClick={async () => await AuthService.signInWithFacebook()}
-      />
+        <SignInExternalButton
+          type="button"
+          icon={<FaKey css={signInExternalIconStyle} />}
+          text={t('common:login.new-account')}
+          onClick={() => {
+            loginModal.hide();
+            registerModal.show();
+          }}
+        />
+      </ul>
     </Form>
   );
 }
 
-const ExternalAuthButton = styled(ButtonSimple)`
-  ${tw`grid grid-cols-[3rem auto] place-items-center`}
-  ${tw`border-2 rounded-lg`}
-  ${tw`w-full`}
-`;
 type ExternalAuthButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: ReactNode;
   text: ReactNode;
@@ -115,9 +111,13 @@ function SignInExternalButton({
   ...buttonProps
 }: ExternalAuthButtonProps) {
   return (
-    <ExternalAuthButton outline {...buttonProps}>
-      <span>{icon}</span>
-      <span tw="font-semibold">{text}</span>
-    </ExternalAuthButton>
+    <ButtonOutline
+      tw="w-full grid grid-cols-[3rem auto] place-items-center"
+      size="md"
+      {...buttonProps}
+    >
+      <span aria-hidden>{icon}</span>
+      <span>{text}</span>
+    </ButtonOutline>
   );
 }

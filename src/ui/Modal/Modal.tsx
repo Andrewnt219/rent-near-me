@@ -1,8 +1,8 @@
-import { FC, ReactNode } from 'react';
-import tw, { css, styled } from 'twin.macro';
-import { IoCloseOutline } from 'react-icons/io5';
 import { Dialog } from '@reach/dialog';
-import { ButtonSimple } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button/Button';
+import { FC, ReactNode } from 'react';
+import { IoCloseOutline } from 'react-icons/io5';
+import tw, { css, styled } from 'twin.macro';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -32,14 +32,14 @@ const Modal: FC<ModalProps> = ({
     >
       {header && (
         <ModalHeader>
-          <ButtonSimple
-            rounded
+          <ButtonGhost
+            circle
             css={closeModalBtnCss(closeButtonPosition)}
             onClick={() => onClose()}
           >
             <IoCloseOutline tw="w-6 h-6" />
             <span tw="sr-only">Close dialog</span>
-          </ButtonSimple>
+          </ButtonGhost>
           <ModalHeaderContent>{header}</ModalHeaderContent>
         </ModalHeader>
       )}
@@ -64,7 +64,7 @@ const closeModalBtnCss = (closeBtnPos: CloseModalButtonPosition) => {
   }
   return css`
     ${closeBtnPosCss}
-    ${tw`p-xs absolute top-1/2 transform -translate-y-1/2 mt-[2px]`}
+    ${tw`p-xs absolute top-1/2 transform -translate-y-1/2 mt-xs`}
   `;
 };
 
@@ -95,7 +95,7 @@ const modalDialogCss = (size: ModalSize) => {
   return css`
     ${sizeCss}
     max-width: calc(100% - 1rem);
-    ${tw`bg-white rounded-xl shadow-xl`}
+    ${tw`bg-white rounded shadow-xl`}
     ${tw`p-0 m-0`}
     ${tw`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
   `;
@@ -103,7 +103,7 @@ const modalDialogCss = (size: ModalSize) => {
 
 const ModalHeader = styled.div`
   ${tw`relative px-xl py-md`}
-  ${tw`border-b border-gray-light`}
+  ${tw`border-b border-light`}
   ${tw`text-center font-bold`}
 `;
 const ModalHeaderContent = styled.div`

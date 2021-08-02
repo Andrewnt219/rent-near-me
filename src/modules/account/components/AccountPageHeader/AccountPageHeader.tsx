@@ -1,15 +1,15 @@
 import { FC, ReactNode } from 'react';
-import AccountBreadCrumb from '../AccountBreadCrumb/AccountBreadCrumb';
+import BreadCrumb from '../BreadCrumb/BreadCrumb';
 type Props = {
   className?: string;
   title: ReactNode;
 };
 const AccountPageHeader: FC<Props> = ({ className, title }) => {
   return (
-    <header className={className} tw="">
-      <AccountBreadCrumb />
+    <div className={className} tw="">
+      <BreadCrumb />
       <h1 tw="text-h2 mt-sm font-bold">{title}</h1>
-    </header>
+    </div>
   );
 };
 

@@ -1,13 +1,14 @@
-import Layout from '@layouts/Layout';
+import { useAuth } from '@contexts/AuthContext';
 import { useLayoutModal } from '@contexts/LayoutModalContext';
-import { ButtonSimple } from '@ui/Button/Button';
+import Layout from '@layouts/Layout';
+import { ButtonGhost } from '@ui/Button/Button';
+import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import React from 'react';
 import { FaGlobe } from 'react-icons/fa';
 import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
-import { useAuth } from '@contexts/AuthContext';
 
 type Props = {
   className?: string;
@@ -23,23 +24,24 @@ const HomeNavBar = ({ className }: Props) => {
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
-        <nav aria-label="Main" tw="flex gap-xs">
+        <nav aria-label="Main" tw="flex items-center">
           {!isAuthenticated && (
-            <ButtonSimple
+            <ButtonGhost
               onClick={registerModal.show}
-              rounded
+              circle
+              size="md"
               tw="font-semibold"
             >
               Become a Host
-            </ButtonSimple>
+            </ButtonGhost>
           )}
 
-          <ButtonSimple rounded>
+          <IconButtonGhost size="md">
             <FaGlobe />
             <span tw="sr-only">Change site&apos; language</span>
-          </ButtonSimple>
+          </IconButtonGhost>
 
-          <UserMenu />
+          <UserMenu tw="ml-sm" />
         </nav>
       </Layout.Container>
     </StyledHeader>

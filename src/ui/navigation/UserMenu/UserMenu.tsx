@@ -2,7 +2,7 @@ import { RouteProps } from '@common-types';
 import { useAuth } from '@contexts/AuthContext';
 import { useLayoutModal } from '@contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
-import { ButtonSimple } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import tw, { styled } from 'twin.macro';
@@ -14,12 +14,17 @@ type Props = {
   className?: string;
 };
 const UserMenu = ({ className }: Props) => {
-  const { isOpen, wrapperRef, closeDropdown, openDropdown, toggleDropDown } =
-    useUserMenuDropDown();
+  const {
+    isOpen,
+    wrapperRef,
+    closeDropdown,
+    openDropdown,
+    toggleDropDown,
+  } = useUserMenuDropDown();
 
   return (
     <div tw="relative" ref={wrapperRef}>
-      <ButtonSimple
+      <ButtonGhost
         className={className}
         id="user-menu-button"
         aria-haspopup
@@ -27,14 +32,15 @@ const UserMenu = ({ className }: Props) => {
         aria-expanded={isOpen}
         aria-pressed={isOpen}
         onClick={toggleDropDown}
-        tw="flex items-center border rounded-full pl-md pr-sm py-sm transition-shadow hover:shadow"
+        circle
+        tw="flex items-center border pl-md pr-sm py-sm transition-shadow hover:shadow"
       >
         <span tw="sr-only">Menu</span>
 
         <HamburgerIcon />
 
         <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
-      </ButtonSimple>
+      </ButtonGhost>
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
     </div>
   );

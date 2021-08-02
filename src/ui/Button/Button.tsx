@@ -1,68 +1,86 @@
-import { ringStyle } from '@styles/globals-styles';
-import tw, { css, styled } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
-type ButtonProps = {
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'none';
-  rounded?: boolean;
-  outline?: boolean;
+const commonStyle = tw`rounded outline-none!`;
+
+type Size = 'lg' | 'md' | 'sm';
+function getSizeStyle(size: Size | undefined) {
+  switch (size) {
+    case 'lg':
+      return tw`px-xl py-md`;
+
+    case 'md':
+      return tw`px-lg py-sm`;
+
+    case 'sm':
+      return tw`px-sm py-xs`;
+
+    default:
+      return tw``;
+  }
+}
+
+type BaseButtonProps = {
+  size?: Size;
+  circle?: boolean;
 };
+const BaseButton = styled.button<BaseButtonProps>`
+  ${commonStyle}
+  ${(p) => getSizeStyle(p.size)}
+  ${(p) => p.circle && tw`rounded-full`}
+`;
 
-// size
-const buttonCss = {
-  shape: {
-    round: tw`rounded-full`,
-  },
-  size: {
-    xl: css`
-      ${tw`px-xl py-2.5 rounded-md`}
-      ${tw`font-bold text-lg`}
-    `,
-    lg: css``,
-    md: css`
-      ${tw`px-md py-2 rounded-md`}
-      ${tw`font-semibold`}
-    `,
-    sm: css`
-      ${tw`p-sm rounded-sm`}
-    `,
-    xs: css`
-      ${tw`p-xs`}
-    `,
-    none: css`
-      ${tw`p-0`}
-    `,
-  },
-};
+/* -------------------------------------------------------------------------- */
 
-const Button = styled.button<ButtonProps>`
-  &:focus-visible {
-    ${ringStyle}
+export const ButtonPrimary = styled(BaseButton)`
+  ${tw`font-semibold  bg-primary text-white`}
+
+  &:hover {
+    ${tw`filter brightness-90`}
   }
 
-  ${(props) => (props.size ? buttonCss.size[props.size] : buttonCss.size.md)}
-  ${(props) => props.rounded && buttonCss.shape.round}
+  &:active,
+  &:focus-visible {
+    ${tw`ring-4 ring-primary ring-opacity-50`}
+  }
+`;
+/* -------------------------------------------------------------------------- */
+export const ButtonGhost = styled(BaseButton)`
+  &:hover {
+    ${tw`bg-light`}
+  }
+
+  &:focus-visible,
+  &:active {
+    ${tw`ring-2 ring-dark`}
+  }
 `;
 
-export const ButtonPrimary = styled(Button)`
-  ${(props) =>
-    props.outline
-      ? tw`border-primary text-primary hover:(bg-primary text-white)`
-      : tw`bg-primary hover:bg-primary-dark text-white`}
+/* -------------------------------------------------------------------------- */
+
+export const ButtonOutline = styled(BaseButton)`
+  ${tw`border`}
+
+  &:hover, &:active {
+    ${tw`bg-light`}
+  }
+
+  &:focus-visible {
+    ${tw`ring-2 ring-dark`}
+  }
 `;
 
-export const ButtonSimple = styled(Button)`
-  ${(props) =>
-    props.outline ? tw`border hover:border-dark` : tw`hover:bg-gray-light`}
+/* -------------------------------------------------------------------------- */
+export const ButtonLink = styled(BaseButton)`
+  ${tw`underline text-secondary`}
+
+  &:hover {
+    ${tw`filter brightness-[0.6]`}
+  }
+
+  &:focus-visible,
+  &:active {
+    ${tw`ring-2 ring-dark ring-offset-2`}
+  }
 `;
 
-export const ButtonLink = styled.button<ButtonProps>`
-  ${tw`focus-visible:(ring ring-dark ring-offset-1)`}
-  ${tw`text-link underline`}
-
-  ${(props) => (props.size ? buttonCss.size[props.size] : buttonCss.size.none)}
-  ${(props) => (props.rounded ? buttonCss.shape.round : tw`rounded-sm`)}
-`;
-
-export const ButtonLinkDark = styled(ButtonLink)`
-  ${tw`text-dark`}
-`;
+/* -------------------------------------------------------------------------- */

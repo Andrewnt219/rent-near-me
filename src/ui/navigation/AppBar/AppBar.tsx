@@ -9,7 +9,7 @@ const AppBar = ({ className }: Props) => {
   return (
     <header
       className={className}
-      tw="h-var-app-bar fixed bottom-0 left-0 right-0 py-md border-gray-light border-t bg-white"
+      tw="h-var-app-bar fixed bottom-0 left-0 right-0 py-md border-light border-t bg-white"
     >
       <nav>
         <MenuList />
