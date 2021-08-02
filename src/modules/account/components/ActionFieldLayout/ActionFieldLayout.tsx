@@ -14,7 +14,7 @@ function ActionFieldLayout({ className, ...props }: PropsWithChildren<Props>) {
         <div>{props.actionButton}</div>
       </header>
 
-      {props.children}
+      <div tw="mt-sm">{props.children}</div>
     </article>
   );
 }
