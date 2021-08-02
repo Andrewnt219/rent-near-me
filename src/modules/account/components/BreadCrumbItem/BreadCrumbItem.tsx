@@ -1,5 +1,4 @@
 import { RouteProps } from '@common-types';
-import { ringStyle } from '@styles/globals-styles';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import { VFC } from 'react';
@@ -38,7 +37,7 @@ const StyledLink = styled.a<StyledLinkProps>`
   ${tw`hover:underline`}
 
   &:focus-visible {
-    ${ringStyle}
+    ${tw`ring-2 ring-dark`}
   }
 
   ${(p) => p.isActive && activeStyle}

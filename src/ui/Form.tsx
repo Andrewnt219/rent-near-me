@@ -1,4 +1,3 @@
-import { ringStyle } from '@styles/globals-styles';
 import { FormHTMLAttributes } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { ButtonLink } from './Button/Button';
@@ -25,7 +24,7 @@ export const inputCss = css`
   }
 
   &:focus-visible {
-    ${ringStyle}
+    ${tw`ring-2 ring-dark`}
   }
 `;
 
