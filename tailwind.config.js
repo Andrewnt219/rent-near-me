@@ -1,16 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
-const getColorFromCssVariable = (cssVariableName) => ({ opacityVariable }) => {
-  const cssVariable = `var(--${cssVariableName})`;
-
-  if (opacityVariable !== undefined) {
-    return `rgba(${cssVariable}, var(${opacityVariable}, 1))`;
-  }
-
-  return `rgb(${cssVariable})`;
-};
-
 module.exports = {
   mode: 'jit',
   purge: [
@@ -40,21 +30,21 @@ module.exports = {
       transparent: 'transparent',
       current: 'current',
       primary: {
-        DEFAULT: getColorFromCssVariable('primary'),
-        dark: getColorFromCssVariable('primary-dark'),
+        DEFAULT: '#ff385c',
+        dark: '#bd1e59',
       },
-      secondary: getColorFromCssVariable('secondary'),
-      danger: getColorFromCssVariable('danger'),
-      success: getColorFromCssVariable('success'),
-      info: getColorFromCssVariable('info'),
+      secondary: '#008489',
+      danger: '#dc2626',
+      success: '#008a05',
+      info: '#007bff',
       white: '#fff',
       black: '#000',
-      light: getColorFromCssVariable('light'),
-      dark: getColorFromCssVariable('dark'),
+      light: '#f7f7f7',
+      dark: '#333333',
       gray: {
-        DEFAULT: getColorFromCssVariable('gray'),
+        DEFAULT: '#9ca3af',
       },
-      bordercolor: getColorFromCssVariable('border-color'),
+      bordercolor: '#dddddd',
     },
     extend: {
       maxWidth: {
