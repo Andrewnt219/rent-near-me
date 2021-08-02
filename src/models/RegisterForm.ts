@@ -1,7 +1,7 @@
+import { isNullOrUndefined } from '@utils/validate-js-utils';
 import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
-import { isNullOrUndefined } from '@utils/validate-js-utils';
 
 export default class RegisterForm {
   firstName = '';
@@ -30,11 +30,12 @@ export default class RegisterForm {
   };
 
   static getValidationSchema(t?: Translate) {
-    const requiredMessage = t ? t('common:errors.form.required') : undefined;
-    const emailMessage = t ? t('common:errors.form.invalid-email') : undefined;
-    const selectMessage = t
-      ? t('common:errors.form.unselected-dropdown')
-      : undefined;
+    const requiredMessage = t?.('common:errors.form.required');
+    const emailMessage = t?.('common:errors.form.invalid-email');
+    const selectMessage = t?.('common:errors.form.unselected-dropdown');
+    const maxLengthMessaage = t?.('common:errors.form.invalid-max-length', {
+      length: 50,
+    });
     const weakPasswordMessage = t
       ? t('common:errors.form.weak-password')
       : 'weak password';
@@ -52,7 +53,7 @@ export default class RegisterForm {
       password: yup
         .string()
         .required(requiredMessage)
-        .max(50)
+        .max(50, maxLengthMessaage)
         .test('is-strong-password', weakPasswordMessage, isValidPassword),
     });
   }

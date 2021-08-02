@@ -1,5 +1,10 @@
 {
   "security": {
-    "page-title": "Login & Security"
+    "page-title": "Login & Security",
+    "edit-password": {
+      "old-password": "Old password",
+      "new-password": "New password",
+      "confirm-new-password": "Confirm new password"
+    }
   }
 }
