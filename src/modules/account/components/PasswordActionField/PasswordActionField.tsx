@@ -1,8 +1,8 @@
-import { ButtonGhost } from '@ui/Button/Button';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
+import ActionFieldButton from '../ActionFieldButton/ActionFieldButton';
 import ActionFieldLayout from '../ActionFieldLayout/ActionFieldLayout';
 import EditPasswordForm from '../EditPasswordForm/EditPasswordForm';
 dayjs.extend(relativeTime);
@@ -20,15 +20,11 @@ function PasswordActionField({ className }: Props) {
     <ActionFieldLayout
       label={t('account:security.edit-password.field-label')}
       actionButton={
-        <ButtonGhost
-          tw="text-secondary font-semibold"
-          size="sm"
-          onClick={() => setIsEditMode((prev) => !prev)}
-        >
+        <ActionFieldButton onClick={() => setIsEditMode((prev) => !prev)}>
           {isEditMode
             ? t('account:security.edit-password.cancel-button')
             : t('account:security.edit-password.action-button')}
-        </ButtonGhost>
+        </ActionFieldButton>
       }
     >
       {isEditMode ? (

@@ -35,6 +35,7 @@ export const useEditPasswordForm = () => {
     },
   };
 
+  // TODO #55 validate old password and update new password
   const onSubmit = form.handleSubmit((data) => {
     console.log(data);
   });

@@ -21,7 +21,10 @@ function Header() {
 
 function Main() {
   return (
-    <div>
+    <div tw="all-child:py-xl divide-y divide-bordercolor">
+      <PasswordActionField />
+      <PasswordActionField />
+      <PasswordActionField />
       <PasswordActionField />
     </div>
   );
