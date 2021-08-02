@@ -8,7 +8,7 @@ const AccountPageHeader: FC<Props> = ({ className, title }) => {
   return (
     <div className={className} tw="">
       <BreadCrumb />
-      <h1 tw="text-h2 mt-sm font-bold">{title}</h1>
+      <h1 tw="text-h2 mt-sm font-semibold">{title}</h1>
     </div>
   );
 };

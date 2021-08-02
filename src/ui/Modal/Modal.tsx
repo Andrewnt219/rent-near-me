@@ -104,7 +104,7 @@ const modalDialogCss = (size: ModalSize) => {
 const ModalHeader = styled.div`
   ${tw`relative px-xl py-md`}
   ${tw`border-b border-light`}
-  ${tw`text-center font-bold`}
+  ${tw`text-center font-semibold`}
 `;
 const ModalHeaderContent = styled.div`
   ${tw`overflow-auto max-h-16`}

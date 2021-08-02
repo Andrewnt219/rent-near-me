@@ -23,9 +23,6 @@ function Main() {
   return (
     <div>
       <PasswordActionField />
-      <PasswordActionField />
-      <PasswordActionField />
-      <PasswordActionField />
     </div>
   );
 }

@@ -43,6 +43,21 @@ export const ButtonPrimary = styled(BaseButton)`
     ${tw`ring-4 ring-primary ring-opacity-50`}
   }
 `;
+
+/* -------------------------------------------------------------------------- */
+export const ButtonSecondary = styled(BaseButton)`
+  ${tw`font-semibold  bg-secondary text-white`}
+
+  &:hover {
+    ${tw`filter brightness-90`}
+  }
+
+  &:active,
+  &:focus-visible {
+    ${tw`ring-4 ring-secondary ring-opacity-50`}
+  }
+`;
+
 /* -------------------------------------------------------------------------- */
 export const ButtonGhost = styled(BaseButton)`
   &:hover {
@@ -74,7 +89,7 @@ export const ButtonLink = styled(BaseButton)`
   ${tw`underline text-secondary`}
 
   &:hover {
-    ${tw`filter brightness-[0.6]`}
+    ${tw`no-underline`}
   }
 
   &:focus-visible,
