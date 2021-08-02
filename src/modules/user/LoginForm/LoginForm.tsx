@@ -33,15 +33,14 @@ export default function LoginForm() {
         controller={controllers.email}
       />
 
-      <ButtonLink tw="ml-auto block text-sm" type="button">
-        Forget password?
-      </ButtonLink>
-
       <PasswordField
         label={t('common:login.password')}
         id="login-password"
         autoComplete="current-password"
         controller={controllers.password}
+        inputDescription={
+          <ButtonLink type="button">Forget password?</ButtonLink>
+        }
       />
 
       <Checkbox
