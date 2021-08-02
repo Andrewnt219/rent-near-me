@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "build:analyze": "cross-env ANALYZE=\"true\"  next build",
-    "rebuild": "rimraf ./node_modules ./.next | yarn",
-    "rebuild:next": "rimraf ./.next | yarn dev",
+    "rebuild": "rimraf ./node_modules ./.next | npm i",
+    "rebuild:next": "rimraf ./.next | npm run dev",
     "test": "jest",
     "cypress:open": "cypress open"
   },

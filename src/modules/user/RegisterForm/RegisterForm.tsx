@@ -1,15 +1,15 @@
-import useTranslation from 'next-translate/useTranslation';
 import { useLayoutModal } from '@contexts/LayoutModalContext';
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import RegisterModel from '@models/RegisterForm';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
-import { RiErrorWarningFill } from 'react-icons/ri';
 import Form from '@ui/Form';
 import PasswordCheckList from '@ui/PasswordCriteria/PasswordCriteria';
 import PasswordField from '@ui/PasswordField';
 import Row from '@ui/Row/Row';
 import Select from '@ui/SelectField';
 import TextField from '@ui/TextField';
+import useTranslation from 'next-translate/useTranslation';
+import { RiErrorWarningFill } from 'react-icons/ri';
 import useRegisterForm from './useRegisterForm';
 
 export default function RegisterForm() {
@@ -105,7 +105,7 @@ export default function RegisterForm() {
       )}
 
       <ButtonPrimary
-        size="xl"
+        size="md"
         type="submit"
         tw="block w-full mt-md"
         disabled={form.formState.isSubmitting}

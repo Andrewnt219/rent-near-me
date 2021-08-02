@@ -26,7 +26,7 @@ const UserMenuLink = ({
 
 export const StyledUserMenuLink = styled.a`
   /* Force inherit font on buttons */
-  ${tw`font-inherit w-full text-left px-md py-sm block hover:bg-gray-light`}
+  ${tw`font-inherit w-full text-left px-md py-sm block hover:bg-light`}
 
   &:focus-visible {
     ${ringStyle}

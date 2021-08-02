@@ -1,7 +1,7 @@
 import { ringStyle } from '@styles/globals-styles';
 import { FormHTMLAttributes } from 'react';
 import tw, { css, styled } from 'twin.macro';
-import { ButtonLinkDark } from './Button/Button';
+import { ButtonLink } from './Button/Button';
 
 type Props = FormHTMLAttributes<HTMLFormElement>;
 
@@ -13,15 +13,15 @@ const Form = ({ children, ...formProps }: Props) => {
 /*                                    INPUT                                   */
 /* -------------------------------------------------------------------------- */
 export const inputCss = css`
-  ${tw`border w-full rounded px-sm pt-lg pb-sm`}
+  ${tw`border border-bordercolor w-full rounded px-sm pt-lg pb-sm`}
   ${tw`transition-colors`}
 
   &[aria-invalid='true'] {
-    ${tw`border-danger bg-red-light`}
+    ${tw`border-danger bg-danger`}
   }
 
   &:hover {
-    ${tw`bg-gray-light`}
+    ${tw`bg-light`}
   }
 
   &:focus-visible {
@@ -48,7 +48,7 @@ Form.Label = styled.label`
   /* Translate y equals to input pt */
   /* left equals to input pl */
   ${tw`absolute top-0 left-sm transform translate-y-md`}
-  ${tw`text-gray-dark`}
+  ${tw`text-dark`}
   ${tw`transition-all`} 
 
   input:focus ~ &, input:not(:placeholder-shown) ~ & {
@@ -73,14 +73,9 @@ Form.Select = styled.select`
   appearance: none;
 `;
 
-Form.ShowPasswordButton = styled(ButtonLinkDark)`
+Form.ShowPasswordButton = styled(ButtonLink)`
   ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
-  ${tw`font-semibold underline text-xs`}
-  
-  &:focus-visible {
-    ${ringStyle}
-    ${tw`ring-offset-2`}
-  }
+  ${tw`underline text-xs`}
 `;
 
 /* -------------------------------------------------------------------------- */
@@ -126,7 +121,7 @@ Form.ErrorMessage = styled.p`
 `;
 
 Form.Description = styled.p`
-  ${tw`text-gray-dark`}
+  ${tw`text-dark`}
 `;
 
 export default Form;

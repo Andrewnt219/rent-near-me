@@ -1,6 +1,16 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
+const getColorFromCssVariable = (cssVariableName) => ({ opacityVariable }) => {
+  const cssVariable = `var(--${cssVariableName})`;
+
+  if (opacityVariable !== undefined) {
+    return `rgba(${cssVariable}, var(${opacityVariable}, 1))`;
+  }
+
+  return `rgb(${cssVariable})`;
+};
+
 module.exports = {
   mode: 'jit',
   purge: [
@@ -27,35 +37,24 @@ module.exports = {
       xs: '0.75rem',
     },
     colors: {
-      opaque: {
-        DEFAULT: 'rgba(0,0,0,0.5)',
-        // light: 'rgba(0,0,0,0.25)',
-        // dark: 'rgba(0,0,0,0.75)',
-      },
       transparent: 'transparent',
       current: 'current',
       primary: {
-        DEFAULT: '#ff385c',
-        dark: '#bd1e59',
+        DEFAULT: getColorFromCssVariable('primary'),
+        dark: getColorFromCssVariable('primary-dark'),
       },
-      secondary: '#008489',
-      danger: '#dc2626',
-      success: '#008A05',
-      info: '#007bff',
+      secondary: getColorFromCssVariable('secondary'),
+      danger: getColorFromCssVariable('danger'),
+      success: getColorFromCssVariable('success'),
+      info: getColorFromCssVariable('info'),
       white: '#fff',
       black: '#000',
-      light: '#f8f9fa',
-      dark: '#333',
-      red: {
-        light: '#fff8f6',
-      },
+      light: getColorFromCssVariable('light'),
+      dark: getColorFromCssVariable('dark'),
       gray: {
-        DEFAULT: '#9ca3af',
-        light: '#f7f7f7',
-        dark: '#717171',
+        DEFAULT: getColorFromCssVariable('gray'),
       },
-      facebook: '#1877f2',
-      link: 'rgb(0, 76, 196)',
+      bordercolor: getColorFromCssVariable('border-color'),
     },
     extend: {
       maxWidth: {
@@ -64,12 +63,12 @@ module.exports = {
       },
 
       borderRadius: {
-        DEFAULT: '0.5rem',
+        DEFAULT: '0.25rem',
       },
 
-      borderColor: {
-        DEFAULT: '#ddd',
-      },
+      borderColor: (theme) => ({
+        DEFAULT: theme('colors.bordercolor'),
+      }),
 
       fontFamily: {
         sans: ['Montserrat', ...fontFamily.sans],

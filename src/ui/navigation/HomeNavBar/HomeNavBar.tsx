@@ -1,7 +1,7 @@
 import { useAuth } from '@contexts/AuthContext';
 import { useLayoutModal } from '@contexts/LayoutModalContext';
 import Layout from '@layouts/Layout';
-import { ButtonSimple } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button/Button';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import React from 'react';
@@ -25,19 +25,20 @@ const HomeNavBar = ({ className }: Props) => {
 
         <nav aria-label="Main" tw="flex gap-xs">
           {!isAuthenticated && (
-            <ButtonSimple
+            <ButtonGhost
               onClick={registerModal.show}
-              rounded
+              circle
+              size="md"
               tw="font-semibold"
             >
               Become a Host
-            </ButtonSimple>
+            </ButtonGhost>
           )}
 
-          <ButtonSimple rounded>
+          <ButtonGhost size="md" circle>
             <FaGlobe />
             <span tw="sr-only">Change site&apos; language</span>
-          </ButtonSimple>
+          </ButtonGhost>
 
           <UserMenu />
         </nav>

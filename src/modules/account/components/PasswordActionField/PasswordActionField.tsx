@@ -1,4 +1,4 @@
-import { ButtonSimple } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button/Button';
 import { useState } from 'react';
 import ActionFieldLayout from '../ActionFieldLayout/ActionFieldLayout';
 
@@ -11,7 +11,11 @@ function PasswordActionField({ className }: Props) {
   return (
     <ActionFieldLayout
       label="Password"
-      actionButton={<ButtonSimple>Update</ButtonSimple>}
+      actionButton={
+        <ButtonGhost size="sm" onClick={() => setIsEditMode((prev) => !prev)}>
+          Update
+        </ButtonGhost>
+      }
     >
       {isEditMode ? <form>Form</form> : 'last updated a month ago'}
     </ActionFieldLayout>
