@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro';
 
-const commonStyle = tw`rounded outline-none! `;
+const commonStyle = tw`rounded outline-none!`;
 
 type Size = 'lg' | 'md' | 'sm';
 function getSizeStyle(size: Size | undefined) {
@@ -83,6 +83,8 @@ export const ButtonOutline = styled(BaseButton)`
     ${tw`ring-2 ring-dark`}
   }
 `;
+
+/* -------------------------------------------------------------------------- */
 export const ButtonLink = styled(BaseButton)`
   ${tw`underline text-secondary`}
 
