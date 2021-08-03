@@ -1,5 +1,5 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
-import RegisterFormModel from '@modules/user/RegisterForm/RegisterFormModel';
+import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { ApiPostResult_UserRegister } from '@pages/api/user/register';
 import axios from 'axios';
 import firebase from 'firebase/app';
