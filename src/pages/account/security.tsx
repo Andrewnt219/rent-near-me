@@ -2,6 +2,7 @@ import DefaultLayout from '@layouts/DefaultLayout';
 import AccountInfoCard from '@modules/account/components/AccountInfoCard/AccountInfoCard';
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import AccountPageLayout from '@modules/account/components/AccountPageLayout/AccountPageLayout';
+import ActionFieldGroup from '@modules/account/components/ActionFieldGroup/ActionFieldGroup';
 import PasswordActionField from '@modules/account/components/PasswordActionField/PasswordActionField';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactNode } from 'react';
@@ -21,12 +22,12 @@ function Header() {
 
 function Main() {
   return (
-    <div>
+    <ActionFieldGroup>
       <PasswordActionField />
       <PasswordActionField />
       <PasswordActionField />
       <PasswordActionField />
-    </div>
+    </ActionFieldGroup>
   );
 }
 

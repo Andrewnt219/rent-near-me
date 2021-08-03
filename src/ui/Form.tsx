@@ -15,8 +15,8 @@ export const inputCss = css`
   ${tw`border border-bordercolor w-full rounded px-sm pt-lg pb-sm`}
   ${tw`transition-colors`}
 
-  &[aria-invalid='true'] {
-    ${tw`border-danger bg-danger`}
+  &[aria-invalid='true']:not(:focus) {
+    ${tw`border-danger bg-danger bg-opacity-10`}
   }
 
   &:hover {

@@ -12,7 +12,7 @@ const BreadCrumb: VFC<Props> = ({ className }) => {
 
   return (
     <nav aria-label="breadcrumb" className={className} tw="">
-      <ol tw="flex font-semibold">
+      <ol tw="flex">
         {routes.map((route, index) => (
           <li tw="inline-flex items-center" key={index}>
             <BreadCrumbItem

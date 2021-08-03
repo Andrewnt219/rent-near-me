@@ -1,7 +1,6 @@
-import { VFC } from 'react';
-import { SPECIAL_CHARS } from '@utils/validate-js-utils';
-import { PasswordCriteria } from '@utils/validate-password-utils';
 import PasswordCriterion from '@ui/PasswordCriterion/PasswordCriterion';
+import { PasswordCriteria } from '@utils/validate-password-utils';
+import { VFC } from 'react';
 import { BsQuestionCircleFill } from 'react-icons/bs';
 
 type Props = {

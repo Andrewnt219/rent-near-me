@@ -3,7 +3,7 @@ import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
 
-export default class RegisterForm {
+export default class RegisterFormModel {
   firstName = '';
   lastName = '';
   gender = '';
@@ -11,7 +11,7 @@ export default class RegisterForm {
   email = '';
   password = '';
 
-  constructor(source?: Record<keyof RegisterForm, any>) {
+  constructor(source?: Record<keyof RegisterFormModel, any>) {
     if (!isNullOrUndefined(source)) {
       this.firstName = source.firstName;
       this.lastName = source.lastName;
@@ -47,7 +47,7 @@ export default class RegisterForm {
         .string()
         .required(requiredMessage)
         .trim()
-        .oneOf(Object.keys(RegisterForm.genders), selectMessage),
+        .oneOf(Object.keys(RegisterFormModel.genders), selectMessage),
       dob: yup.date().nullable().required(requiredMessage).max(new Date()),
       email: yup.string().required(requiredMessage).trim().email(emailMessage),
       password: yup

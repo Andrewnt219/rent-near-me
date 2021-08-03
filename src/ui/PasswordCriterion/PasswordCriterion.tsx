@@ -11,14 +11,24 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
   children,
 }) => {
   return (
-    <StyledPassworCriteria isQualified={isQualified}>
-      {isQualified ? <IoCheckmarkOutline /> : <IoCloseOutline />}
+    <StyledPassworCriterion isQualified={isQualified}>
+      {isQualified ? (
+        <>
+          <IoCheckmarkOutline />
+          <span tw="sr-only">qualified</span>
+        </>
+      ) : (
+        <>
+          <IoCloseOutline />
+          <span tw="sr-only">not qualified</span>
+        </>
+      )}
       {children}
-    </StyledPassworCriteria>
+    </StyledPassworCriterion>
   );
 };
 
-const StyledPassworCriteria = styled.p<PasswordCriteriaProps>`
+const StyledPassworCriterion = styled.p<PasswordCriteriaProps>`
   ${tw`text-xs font-semibold`}
   ${tw`flex items-center gap-sm`};
   ${tw`text-danger`}

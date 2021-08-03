@@ -1,18 +1,21 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import LoginForm from '@models/LoginForm';
-import AuthService from '@services/AuthService';
+import LoginFormModel from '@modules/user/LoginForm/LoginFormModel';
+import AuthService from '@modules/user/services/AuthService';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { UseControllerProps, useForm } from 'react-hook-form';
 
-type Controllers = Record<keyof LoginForm, UseControllerProps<LoginForm>>;
+type Controllers = Record<
+  keyof LoginFormModel,
+  UseControllerProps<LoginFormModel>
+>;
 
 export const useLoginForm = () => {
   const { t } = useTranslation();
 
-  const form = useForm<LoginForm>({
-    defaultValues: new LoginForm(),
-    resolver: yupResolver(LoginForm.getValidationSchema(t)),
+  const form = useForm<LoginFormModel>({
+    defaultValues: new LoginFormModel(),
+    resolver: yupResolver(LoginFormModel.getValidationSchema(t)),
   });
   const { control } = form;
 

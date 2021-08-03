@@ -1,19 +1,22 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import RegisterForm from '@models/RegisterForm';
+import RegisterFormModel from '@modules/user/RegisterForm/RegisterFormModel';
+import AuthService from '@modules/user/services/AuthService';
+import { getErrorMessage } from '@utils/api-responses';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { UseControllerProps, useForm } from 'react-hook-form';
-import AuthService from '@services/AuthService';
-import { getErrorMessage } from '@utils/api-responses';
 
-type Controllers = Record<keyof RegisterForm, UseControllerProps<RegisterForm>>;
+type Controllers = Record<
+  keyof RegisterFormModel,
+  UseControllerProps<RegisterFormModel>
+>;
 
 export default function useRegisterForm() {
   const { t } = useTranslation();
-  const form = useForm<RegisterForm>({
-    defaultValues: new RegisterForm(),
-    resolver: yupResolver(RegisterForm.getValidationSchema(t)),
+  const form = useForm<RegisterFormModel>({
+    defaultValues: new RegisterFormModel(),
+    resolver: yupResolver(RegisterFormModel.getValidationSchema(t)),
   });
   const { control } = form;
 
