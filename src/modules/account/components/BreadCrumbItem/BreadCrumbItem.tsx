@@ -16,7 +16,7 @@ const BreadCrumbItem: VFC<Props> = ({ className, ...props }) => {
   return (
     <NextLink {...routeProps} passHref>
       <StyledLink
-        aria-current={props.isCurrent ? 'step' : undefined}
+        aria-current={props.isCurrent ? 'page' : undefined}
         isActive={props.isCurrent}
         className={className}
         tw=""
