@@ -1,7 +1,7 @@
 import { RouteProps } from '@common-types';
 import { useAuth } from '@contexts/AuthContext';
 import { useLayoutModal } from '@contexts/LayoutModalContext';
-import AuthService from '@services/AuthService';
+import AuthService from '@modules/user/services/AuthService';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';

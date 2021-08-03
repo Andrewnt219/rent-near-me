@@ -1,11 +1,11 @@
-import firebase from 'firebase/app';
-import axios from 'axios';
-import RegisterForm from '@models/RegisterForm';
-import { ApiPostResult_UserRegister } from '@pages/api/user/register';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
+import RegisterFormModel from '@modules/user/RegisterForm/RegisterFormModel';
+import { ApiPostResult_UserRegister } from '@pages/api/user/register';
+import axios from 'axios';
+import firebase from 'firebase/app';
 
 export default class AuthService {
-  static async registerWithEmail(formData: RegisterForm) {
+  static async registerWithEmail(formData: RegisterFormModel) {
     const response = await axios.post<ApiPostResult_UserRegister>(
       '/api/user/register',
       formData

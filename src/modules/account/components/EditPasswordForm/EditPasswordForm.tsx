@@ -1,6 +1,6 @@
 import { ButtonLink, ButtonSecondary } from '@ui/Button/Button';
 import Form from '@ui/Form';
-import PasswordCheckList from '@ui/PasswordCriteria/PasswordCriteria';
+import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import PasswordField from '@ui/PasswordField';
 import useTranslation from 'next-translate/useTranslation';
 import { useEditPasswordForm } from './useEditPasswordForm';

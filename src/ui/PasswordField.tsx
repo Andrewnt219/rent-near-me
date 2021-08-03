@@ -36,6 +36,7 @@ function PasswordField<FormValues extends FieldValues>(
     <Form.Group>
       <div tw="relative">
         <Form.Input
+          aria-describedby={`error-${props.id}`}
           aria-invalid={fieldState.invalid}
           tw="!pr-14"
           type={showPassword ? 'text' : 'password'}
@@ -46,6 +47,7 @@ function PasswordField<FormValues extends FieldValues>(
         />
 
         <Form.Label htmlFor={inputProps.id}>{label}</Form.Label>
+
         <Form.ShowPasswordButton type="button" onClick={toggleShowPassword}>
           {showPassword
             ? t('common:fields.password.hide')
@@ -55,7 +57,9 @@ function PasswordField<FormValues extends FieldValues>(
 
       <Form.TextWrapper>
         {fieldState.invalid && (
-          <Form.ErrorMessage>{fieldState.error?.message}</Form.ErrorMessage>
+          <Form.ErrorMessage id={`error-${props.id}`}>
+            {fieldState.error?.message}
+          </Form.ErrorMessage>
         )}
 
         <Form.Description>{inputDescription}</Form.Description>
