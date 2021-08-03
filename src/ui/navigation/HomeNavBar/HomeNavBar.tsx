@@ -1,6 +1,6 @@
-import { useAuth } from '@contexts/AuthContext';
-import { useLayoutModal } from '@contexts/LayoutModalContext';
 import Layout from '@layouts/Layout';
+import { useAuth } from '@modules/user-auth/AuthContext';
+import { useLayoutModal } from '@modules/user-auth/LayoutModalContext';
 import { ButtonGhost } from '@ui/Button/Button';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';

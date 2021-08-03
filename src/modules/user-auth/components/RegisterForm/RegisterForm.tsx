@@ -1,6 +1,6 @@
-import { useLayoutModal } from '@contexts/LayoutModalContext';
 import DatePicker from '@libs/react-day-picker/DatePicker';
-import RegisterModel from '@modules/user/RegisterForm/RegisterFormModel';
+import RegisterModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
+import { useLayoutModal } from '@modules/user-auth/LayoutModalContext';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import Form from '@ui/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';

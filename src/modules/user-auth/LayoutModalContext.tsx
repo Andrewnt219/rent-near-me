@@ -1,8 +1,8 @@
-import { createContext, useContext, FC, useState } from 'react';
 import { ModalControl } from '@common-types';
-import RegisterForm from '@modules/user/RegisterForm/RegisterForm';
-import LoginForm from '@modules/user/LoginForm/LoginForm';
+import LoginForm from '@modules/user-auth/components/LoginForm/LoginForm';
+import RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterForm';
 import Modal from '@ui/Modal/Modal';
+import { createContext, FC, useContext, useState } from 'react';
 
 type LayoutModalContextValue = {
   loginModal: ModalControl;

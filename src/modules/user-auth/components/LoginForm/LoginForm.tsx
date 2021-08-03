@@ -1,5 +1,5 @@
-import { useLayoutModal } from '@contexts/LayoutModalContext';
-import AuthService from '@modules/user/services/AuthService';
+import { useLayoutModal } from '@modules/user-auth/LayoutModalContext';
+import AuthService from '@modules/user-auth/services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
 import Checkbox from '@ui/Checkbox';
 import Form from '@ui/Form';

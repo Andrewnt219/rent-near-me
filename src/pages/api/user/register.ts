@@ -1,6 +1,6 @@
 import { Await } from '@common-types';
 import { auth, db } from '@libs/firebase-admin/firebase-admin';
-import RegisterFormModel from '@modules/user/RegisterForm/RegisterFormModel';
+import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { Result, ResultError, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { capitalizeName } from '@utils/string-utils';

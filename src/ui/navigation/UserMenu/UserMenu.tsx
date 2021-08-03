@@ -1,7 +1,7 @@
 import { RouteProps } from '@common-types';
-import { useAuth } from '@contexts/AuthContext';
-import { useLayoutModal } from '@contexts/LayoutModalContext';
-import AuthService from '@modules/user/services/AuthService';
+import { useAuth } from '@modules/user-auth/AuthContext';
+import { useLayoutModal } from '@modules/user-auth/LayoutModalContext';
+import AuthService from '@modules/user-auth/services/AuthService';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
@@ -14,13 +14,8 @@ type Props = {
   className?: string;
 };
 const UserMenu = ({ className }: Props) => {
-  const {
-    isOpen,
-    wrapperRef,
-    closeDropdown,
-    openDropdown,
-    toggleDropDown,
-  } = useUserMenuDropDown();
+  const { isOpen, wrapperRef, closeDropdown, openDropdown, toggleDropDown } =
+    useUserMenuDropDown();
 
   return (
     <div tw="relative" ref={wrapperRef}>
