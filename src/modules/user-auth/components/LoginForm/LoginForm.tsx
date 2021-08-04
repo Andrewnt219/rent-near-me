@@ -53,7 +53,7 @@ export default function LoginForm() {
         <Form.ErrorMessage
           role="alert"
           aria-relevant="text"
-          tw="text-body flex items-center gap-sm mb-sm"
+          tw="flex items-center gap-sm mb-sm"
         >
           <RiErrorWarningFill tw="w-5 h-5 fill-current" />
           {submitError}

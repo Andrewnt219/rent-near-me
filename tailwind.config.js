@@ -21,8 +21,7 @@ module.exports = {
       xl: '1.5rem',
       h3: 'clamp(1.125rem, 0.8333333333333333rem + 1.4583333333333333vw, 2rem)', // 18~32px
       lg: '1.125rem',
-      body:
-        'clamp(1rem, 0.9583333333333334rem + 0.20833333333333334vw, 1.125rem)', // 16~18px
+      body: '1rem',
       sm: '0.875rem',
       xs: '0.75rem',
     },

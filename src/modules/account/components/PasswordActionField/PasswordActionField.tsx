@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
+import ActionFieldLayout from '../../layouts/ActionFieldLayout/ActionFieldLayout';
 import ActionFieldButton from '../ActionFieldButton/ActionFieldButton';
-import ActionFieldLayout from '../ActionFieldLayout/ActionFieldLayout';
 import EditPasswordForm from '../EditPasswordForm/EditPasswordForm';
 dayjs.extend(relativeTime);
 
