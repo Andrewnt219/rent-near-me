@@ -42,6 +42,7 @@ function DatePicker<FormValues extends FieldValues>({
           name: field.name,
           onChange: field.onChange,
           onBlur: field.onBlur,
+          autoComplete: 'off',
         }}
         // onDayChange won't work with user keyboard's input
         dayPickerProps={{ ...dayPickerProps, onDayClick: field.onChange }}

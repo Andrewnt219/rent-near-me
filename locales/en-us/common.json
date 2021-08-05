@@ -56,7 +56,8 @@
   "routes": {
     "account": {
       "index": "Account",
-      "security": "Login & Security"
+      "security": "Login & Security",
+      "payments": "Payments & payouts"
     },
     "home": "Home",
     "about": "About",
