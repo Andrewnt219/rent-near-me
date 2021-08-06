@@ -27,7 +27,7 @@ module.exports = {
     },
     colors: {
       transparent: 'transparent',
-      current: 'current',
+      current: 'currentColor',
       primary: {
         DEFAULT: '#ff385c',
         dark: '#bd1e59',

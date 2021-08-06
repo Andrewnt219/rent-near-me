@@ -38,3 +38,7 @@ export function containsALowerCaseLetter(string: string) {
 export function containsANumber(string: string) {
   return /[0-9]/.test(string);
 }
+
+export function isLastIndex(array: unknown[], currentIndex: number) {
+  return currentIndex === array.length - 1;
+}
