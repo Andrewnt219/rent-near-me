@@ -1,4 +1,3 @@
-import { LayoutProvider } from '@modules/user-auth/LayoutModalContext';
 import { HTMLAttributes, PropsWithChildren } from 'react';
 import tw, { css, styled, theme } from 'twin.macro';
 
@@ -8,17 +7,15 @@ const Layout = ({
   size,
   ...htmlAttrs
 }: PropsWithChildren<LayoutProps>) => (
-  <LayoutProvider>
-    <StyledWrapper {...htmlAttrs} size={size}>
-      {children}
-    </StyledWrapper>
-  </LayoutProvider>
+  <StyledWrapper {...htmlAttrs} size={size}>
+    {children}
+  </StyledWrapper>
 );
 
 type Size = 'sm' | 'lg';
 const pageSize = (size: Size) => {
   switch (size) {
-    case 'lg':
+    case 'sm':
       return css`
         --page-max-width: 110rem;
         --page-px: 1.5rem;
@@ -33,7 +30,7 @@ const pageSize = (size: Size) => {
         }
       `;
 
-    case 'sm':
+    case 'lg':
       return css`
         --page-max-width: 100%;
         --page-px: 1.5rem;

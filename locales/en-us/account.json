@@ -1,4 +1,26 @@
 {
+  "index": {
+    "page-title": "Account",
+    "go-to-profile": "Go to profile",
+    "menu-items": {
+      "personal-info": {
+        "title": "Personal info",
+        "description": "Provide personal details and how we can reach you"
+      },
+      "security": {
+        "title": "Login & security",
+        "description": "Update your password and secure your account"
+      },
+      "payments": {
+        "title": "Payments & payouts",
+        "description": "Review payments, payouts, coupons, gift cards, and taxes"
+      }
+    },
+    "deactivate": {
+      "title": "Need to deactivate your acount?",
+      "button": "Take care of that now"
+    }
+  },
   "security": {
     "page-title": "Login & Security",
     "edit-password": {

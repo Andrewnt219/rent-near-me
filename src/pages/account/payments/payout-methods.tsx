@@ -1,5 +1,4 @@
-import DefaultLayout from '@layouts/DefaultLayout';
-import PaymentSettingLayout from '@modules/account/layouts/PaymentSettingLayout/PaymentSettingLayout';
+import PaymentSettingPageLayout from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
 import { ReactNode } from 'react';
 
 type Props = {
@@ -14,9 +13,5 @@ export default function PayoutMethodsPage({ className, ...props }: Props) {
 }
 
 PayoutMethodsPage.getLayout = (page: ReactNode) => {
-  return (
-    <DefaultLayout>
-      <PaymentSettingLayout>{page}</PaymentSettingLayout>
-    </DefaultLayout>
-  );
+  return <PaymentSettingPageLayout>{page}</PaymentSettingPageLayout>;
 };
