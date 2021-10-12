@@ -2,23 +2,27 @@ import { ButtonLink, ButtonSecondary } from '@ui/Button/Button';
 import Form from '@ui/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import PasswordField from '@ui/PasswordField';
+import HiddenField from '@ui/HiddenField';
 import useTranslation from 'next-translate/useTranslation';
-import { useEditPasswordForm } from './useEditPasswordForm';
+import { useChangePasswordForm } from './useChangePasswordForm';
 
 type Props = {
   className?: string;
 };
-function EditPasswordForm({ className, ...props }: Props) {
+function ChangePasswordForm({ className, ...props }: Props) {
   const { t } = useTranslation();
-  const {
-    form,
-    controllers,
-    onSubmit,
-    passwordValidationResults,
-  } = useEditPasswordForm();
+  const { form, controllers, onSubmit, passwordValidationResults } =
+    useChangePasswordForm();
 
   return (
-    <Form className={className} tw="" onSubmit={onSubmit}>
+    <Form className={className} tw="" noValidate onSubmit={onSubmit}>
+      <HiddenField controller={controllers.uid} />
+      <HiddenField
+        controller={controllers.email}
+        hiddenVisually
+        autoComplete="username"
+      />
+
       <PasswordField
         controller={controllers.oldPassword}
         id="edit-password-old-password"
@@ -49,9 +53,15 @@ function EditPasswordForm({ className, ...props }: Props) {
         autoComplete="new-password"
       />
 
-      <ButtonSecondary size="lg">Update Password</ButtonSecondary>
+      <ButtonSecondary
+        type="submit"
+        size="lg"
+        disabled={form.formState.isSubmitting}
+      >
+        Update Password
+      </ButtonSecondary>
     </Form>
   );
 }
 
-export default EditPasswordForm;
+export default ChangePasswordForm;

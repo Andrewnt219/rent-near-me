@@ -1,16 +1,11 @@
 import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
 import SettingsPageLayout from '@modules/account/layouts/SettingsPageLayout/SettingsPageLayout';
+import { useAuth } from '@modules/user-auth/AuthContext';
 import { ButtonLink } from '@ui/Button/Button';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import React, { ReactNode } from 'react';
-
-// TODO #55 fetch user info from session
-const user = {
-  name: 'Andrew Nguyen',
-  email: 'phongnguyentuan20@gmail.com',
-};
 
 export default function AccountIndexPage() {
   const { t } = useTranslation();
@@ -37,6 +32,7 @@ export default function AccountIndexPage() {
 
 function Header() {
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   return (
     <header>
@@ -47,12 +43,11 @@ function Header() {
         tw="flex flex-col md:(flex-row gap-xs)"
       >
         <div title="Username" tw="font-semibold">
-          {user.name}
+          {user?.displayName}
         </div>
 
         <div title="Email" tw="break-words">
-          {' '}
-          {user.email}
+          {user?.email}
         </div>
 
         <NextLink href="/account/profile-info" passHref>

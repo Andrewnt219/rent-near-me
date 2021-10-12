@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import ActionFieldLayout from '../../layouts/ActionFieldLayout/ActionFieldLayout';
 import ActionFieldButton from '../ActionFieldButton/ActionFieldButton';
-import EditPasswordForm from '../EditPasswordForm/EditPasswordForm';
+import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm';
 dayjs.extend(relativeTime);
 
 // TODO #55 get last updated password time
@@ -28,7 +28,7 @@ function PasswordActionField({ className }: Props) {
       }
     >
       {isEditMode ? (
-        <EditPasswordForm />
+        <ChangePasswordForm />
       ) : (
         t('account:security.edit-password.description', {
           time: dayjs(MOCK_LAST_UPDATED_DATE).fromNow(),

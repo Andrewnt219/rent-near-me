@@ -1,4 +1,4 @@
-import { Await } from '@common-types';
+import type { Await } from '@common-types';
 import { auth, db } from '@libs/firebase-admin/firebase-admin';
 import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { Result, ResultError, ResultSuccess } from '@utils/api-responses';
