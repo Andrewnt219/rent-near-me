@@ -1,5 +1,6 @@
 import { NextApiHandler } from 'next';
 import { Result, ResultError } from '@utils/api-responses';
+import handleError from './error-handler';
 
 export type ApiHandler = NextApiHandler<Result>;
 export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
@@ -25,7 +26,6 @@ export const handleHttpMethod: HttpMethodHandlerSelector =
     try {
       return await Promise.resolve(handle(req, res));
     } catch (err) {
-      console.error(err);
-      return res.status(500).json(new ResultError('common:errors.api.other'));
+      return await Promise.resolve(handleError(req, res, err));
     }
   };

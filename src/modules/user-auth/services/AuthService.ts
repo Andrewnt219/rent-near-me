@@ -49,7 +49,20 @@ export default class AuthService {
       : user?.providerData[0]?.providerId ?? null;
   }
 
-  static async reauthenticate(email: string, password: string) {
+  static async changePassword(formData: ChangePasswordFormModel) {
+    const { oldPassword, newPassword, confirmNewPassword, email } = formData;
+    if (newPassword !== confirmNewPassword)
+      throw Error('New Password and Confirm New Password do not match');
+    await AuthService.reauthenticate(email, oldPassword);
+    await auth.currentUser?.updatePassword(newPassword);
+    // await is intentionally omitted since we don't need the response
+    axios.post<ApiPostResult_User_ChangePassword>(
+      '/api/user/changePassword',
+      formData
+    );
+  }
+
+  private static async reauthenticate(email: string, password: string) {
     const user = auth.currentUser;
     const providerId = AuthService.getAuthProviderId();
     switch (providerId) {
@@ -72,18 +85,5 @@ export default class AuthService {
         break;
       }
     }
-  }
-
-  static async changePassword(formData: ChangePasswordFormModel) {
-    const { oldPassword, newPassword, confirmNewPassword, email } = formData;
-    if (newPassword !== confirmNewPassword)
-      throw Error('New Password and Confirm New Password do not match');
-    await AuthService.reauthenticate(email, oldPassword);
-    await auth.currentUser?.updatePassword(newPassword);
-    // await is intentionally omitted since we don't need the response
-    axios.post<ApiPostResult_User_ChangePassword>(
-      '/api/user/changePassword',
-      formData
-    );
   }
 }

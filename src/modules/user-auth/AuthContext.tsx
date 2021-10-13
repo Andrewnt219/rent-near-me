@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
 import AuthService from './services/AuthService';
+import axios from 'axios';
 
 type AuthContextValue = {
   isAuthenticated: boolean;
@@ -24,7 +25,11 @@ export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState<firebase.User | null>(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged(setUser);
+    auth.onAuthStateChanged(async (newUser) => {
+      setUser(newUser);
+      const useridToken = await newUser?.getIdToken();
+      axios.defaults.headers.common['Authorization'] = `Bearer ${useridToken}`;
+    });
   }, []);
 
   return (

@@ -3,6 +3,7 @@ import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
 
+type RegisterSchema = Record<keyof RegisterFormModel, yup.AnySchema>;
 export default class RegisterFormModel {
   firstName = '';
   lastName = '';
@@ -40,7 +41,7 @@ export default class RegisterFormModel {
       ? t('common:errors.form.weak-password')
       : 'weak password';
 
-    return yup.object().shape({
+    return yup.object().shape<RegisterSchema>({
       firstName: yup.string().required(requiredMessage).trim(),
       lastName: yup.string().required(requiredMessage).trim(),
       gender: yup

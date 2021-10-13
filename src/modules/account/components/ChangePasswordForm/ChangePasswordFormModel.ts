@@ -13,6 +13,7 @@ export default class ChangePasswordFormModel {
   oldPassword = '';
   newPassword = '';
   confirmNewPassword = '';
+
   constructor(source?: Record<keyof ChangePasswordFormModel, any>) {
     if (!isNullOrUndefined(source)) {
       this.uid = source.uid;
