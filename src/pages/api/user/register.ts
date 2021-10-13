@@ -7,7 +7,7 @@ import { capitalizeName } from '@utils/string-utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type PostResponseData = Await<ReturnType<typeof auth.createUser>>;
-export type ApiPostResult_UserRegister = ResultSuccess<PostResponseData>;
+export type ApiPostResult_User_Register = ResultSuccess<PostResponseData>;
 async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>

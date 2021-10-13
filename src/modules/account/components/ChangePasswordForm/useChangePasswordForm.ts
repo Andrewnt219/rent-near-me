@@ -1,18 +1,20 @@
 import { Controllers } from '@common-types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '@modules/user-auth/AuthContext';
+import AuthService from '@modules/user-auth/services/AuthService';
+import { getErrorMessage } from '@utils/api-responses';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import ChangePasswordModel from './ChangePasswordModel';
+import ChangePasswordFormModel from './ChangePasswordFormModel';
 
 export const useChangePasswordForm = () => {
   const { t } = useTranslation();
 
-  const form = useForm<ChangePasswordModel>({
-    defaultValues: new ChangePasswordModel(),
-    resolver: yupResolver(ChangePasswordModel.getValidationSchema(t)),
+  const form = useForm<ChangePasswordFormModel>({
+    defaultValues: new ChangePasswordFormModel(),
+    resolver: yupResolver(ChangePasswordFormModel.getValidationSchema(t)),
   });
 
   const { user } = useAuth();
@@ -23,7 +25,7 @@ export const useChangePasswordForm = () => {
   const passwordValidationResults = validatePassword(password);
 
   const { control } = form;
-  const controllers: Controllers<ChangePasswordModel> = {
+  const controllers: Controllers<ChangePasswordFormModel> = {
     uid: {
       name: 'uid',
       control,
@@ -47,9 +49,10 @@ export const useChangePasswordForm = () => {
   };
 
   const [submitError, setSubmitError] = useState('');
-  // TODO #55 validate old password and update new password
   const onSubmit = form.handleSubmit((data) => {
-    console.log(data);
+    AuthService.changePassword(data).catch((e) =>
+      setSubmitError(getErrorMessage(e, t))
+    );
   });
 
   return {

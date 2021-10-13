@@ -3,14 +3,17 @@ import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
 
-type ChangePasswordSchema = Record<keyof ChangePasswordModel, yup.AnySchema>;
-export default class ChangePasswordModel {
+type ChangePasswordSchema = Record<
+  keyof ChangePasswordFormModel,
+  yup.AnySchema
+>;
+export default class ChangePasswordFormModel {
   uid = '';
   email = '';
   oldPassword = '';
   newPassword = '';
   confirmNewPassword = '';
-  constructor(source?: Record<keyof ChangePasswordModel, any>) {
+  constructor(source?: Record<keyof ChangePasswordFormModel, any>) {
     if (!isNullOrUndefined(source)) {
       this.uid = source.uid;
       this.email = source.email;
@@ -35,8 +38,8 @@ export default class ChangePasswordModel {
 
     return yup.object().shape<ChangePasswordSchema>({
       uid: yup.string().required(),
-      email: yup.string().required(),
-      oldPassword: yup.string().required(requiredMessage),
+      email: yup.string().nullable(),
+      oldPassword: yup.string().nullable(),
       newPassword: yup
         .string()
         .required(requiredMessage)
