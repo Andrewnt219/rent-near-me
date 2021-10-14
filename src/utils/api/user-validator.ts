@@ -21,8 +21,7 @@ export const validateUser = async (authHeader: string | undefined) => {
   if (!authHeader) throw new UserAuthenticationError();
   // Remove the 'Bearer' preffix from Authorization header
   const idToken = authHeader.substr(6).trim();
-  const decodedToken = await auth.verifyIdToken(idToken).catch(() => {
-    console.log(idToken);
+  const decodedToken = await auth.verifyIdToken(idToken, true).catch(() => {
     throw new UserAuthenticationError();
   });
   return decodedToken;
@@ -30,7 +29,7 @@ export const validateUser = async (authHeader: string | undefined) => {
 
 export const validateUserWithId = async (
   authHeader: string | undefined,
-  matchingUid?: string
+  matchingUid: string
 ) => {
   const decodedToken = await validateUser(authHeader);
   if (matchingUid && decodedToken.uid !== matchingUid)

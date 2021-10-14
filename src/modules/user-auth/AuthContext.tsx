@@ -27,8 +27,7 @@ export const AuthProvider: FC = ({ children }) => {
   useEffect(() => {
     auth.onAuthStateChanged(async (newUser) => {
       setUser(newUser);
-      const useridToken = await newUser?.getIdToken();
-      axios.defaults.headers.common['Authorization'] = `Bearer ${useridToken}`;
+      await AuthService.updateRequestAuthorizationHeader(newUser);
     });
   }, []);
 

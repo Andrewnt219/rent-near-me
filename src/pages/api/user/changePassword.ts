@@ -1,5 +1,5 @@
 import type { Await } from '@common-types';
-import { db } from '@libs/firebase-admin/firebase-admin';
+import { auth, db } from '@libs/firebase-admin/firebase-admin';
 import ChangePasswordFormModel from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
@@ -17,6 +17,8 @@ async function post(
   const model = new ChangePasswordFormModel(req.body);
   await validateModelWithSchema(model, ChangePasswordFormModel);
   await validateUserWithId(req.headers.authorization, model.uid);
+
+  await auth.updateUser(model.uid, { password: model.newPassword });
 
   const userProfileDoc = db.collection('profiles').doc(model.uid);
   const firestoreTimestamp = admin.firestore.FieldValue.serverTimestamp();
