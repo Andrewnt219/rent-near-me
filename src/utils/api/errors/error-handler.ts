@@ -1,15 +1,12 @@
 import { Type } from '@common-types';
-import { Result, ResultError } from '@utils/api-responses';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  ForbiddenHttpMethodError,
-  UnsupportedHttpMethodError,
-} from './http-method-handler';
-import { ModelSchemaValidationError } from './model-schema-validator';
-import {
-  UserAuthenticationError,
-  UserAuthorizationError,
-} from './user-validator';
+import { Result, ResultError } from '@utils/api-responses';
+
+import { HttpMethodForbiddenError } from './HttpMethodForbiddenError';
+import { HttpMethodUnsupportedError } from './HttpMethodUnsupportedError';
+import { ModelSchemaValidationError } from './ModelSchemaValidationError';
+import { UserAuthenticationError } from './UserAuthenticationError';
+import { UserAuthorizationError } from './UserAuthorizationError';
 
 export type ApiErrorHandler = (
   req: NextApiRequest,
@@ -40,12 +37,12 @@ const ERR_HANDLING_RULES: ErrorHandlingInfo[] = [
     translateKey: 'common:errors.api.invalid-schema',
   },
   {
-    errorType: ForbiddenHttpMethodError,
+    errorType: HttpMethodForbiddenError,
     statusCode: 405,
     translateKey: 'common:errors.api.http-not-allowed',
   },
   {
-    errorType: UnsupportedHttpMethodError,
+    errorType: HttpMethodUnsupportedError,
     statusCode: 405,
     translateKey: 'common:errors.api.http-not-supported',
   },

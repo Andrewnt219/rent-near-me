@@ -1,40 +1,24 @@
 import { NextApiHandler } from 'next';
-import { Result, ResultError } from '@utils/api-responses';
-import handleError from './error-handler';
+import { Result } from '@utils/api-responses';
+import handleError from './errors/error-handler';
+import { HttpMethodForbiddenError } from './errors/HttpMethodForbiddenError';
+import { HttpMethodUnsupportedError } from './errors/HttpMethodUnsupportedError';
 
 export type ApiHandler = NextApiHandler<Result>;
 export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
 export type HttpMethodHandlers = Partial<Record<HttpMethod, ApiHandler>>;
 type HttpMethodHandlerSelector = (handlers: HttpMethodHandlers) => ApiHandler;
 
-export class ForbiddenHttpMethodError extends Error {
-  httpMethod: string;
-
-  constructor(httpMethod: string, message?: string) {
-    super(message);
-    this.httpMethod = httpMethod;
-  }
-}
-
-export class UnsupportedHttpMethodError extends Error {
-  httpMethod: HttpMethod;
-
-  constructor(httpMethod: HttpMethod, message?: string) {
-    super(message);
-    this.httpMethod = httpMethod;
-  }
-}
-
 export const handleHttpMethod: HttpMethodHandlerSelector =
   (handlers) => async (req, res) => {
     try {
       const httpMethod = req.method?.toLowerCase() ?? '';
       if (!(httpMethod in handlers))
-        throw new ForbiddenHttpMethodError(httpMethod);
+        throw new HttpMethodForbiddenError(httpMethod);
 
       const method = httpMethod as HttpMethod;
       const handle = handlers[method];
-      if (!handle) throw new UnsupportedHttpMethodError(method);
+      if (!handle) throw new HttpMethodUnsupportedError(method);
 
       return await Promise.resolve(handle(req, res));
     } catch (err) {

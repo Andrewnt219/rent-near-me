@@ -1,21 +1,6 @@
 import { auth } from '@libs/firebase-admin/firebase-admin';
-
-export class UserAuthenticationError extends Error {
-  constructor(message?: string) {
-    super(message);
-  }
-}
-
-export class UserAuthorizationError extends Error {
-  uid?: string;
-  email?: string;
-
-  constructor(uid?: string, email?: string) {
-    super('Unauthorized user');
-    this.uid = uid;
-    this.email = email;
-  }
-}
+import { UserAuthenticationError } from './errors/UserAuthenticationError';
+import { UserAuthorizationError } from './errors/UserAuthorizationError';
 
 // Remove the 'Bearer' preffix from Authorization header
 const getIdTokenFromAuthHeader = (header: string) => header.substr(6).trim();
