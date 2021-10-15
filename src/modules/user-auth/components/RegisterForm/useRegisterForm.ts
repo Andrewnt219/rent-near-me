@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
-import AuthService from '@modules/user-auth/services/AuthService';
+import AuthService from '@services/AuthService';
 import { getErrorMessage } from '@utils/api-responses';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';

@@ -7,23 +7,35 @@ export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
 export type HttpMethodHandlers = Partial<Record<HttpMethod, ApiHandler>>;
 type HttpMethodHandlerSelector = (handlers: HttpMethodHandlers) => ApiHandler;
 
+export class ForbiddenHttpMethodError extends Error {
+  httpMethod: string;
+
+  constructor(httpMethod: string, message?: string) {
+    super(message);
+    this.httpMethod = httpMethod;
+  }
+}
+
+export class UnsupportedHttpMethodError extends Error {
+  httpMethod: HttpMethod;
+
+  constructor(httpMethod: HttpMethod, message?: string) {
+    super(message);
+    this.httpMethod = httpMethod;
+  }
+}
+
 export const handleHttpMethod: HttpMethodHandlerSelector =
   (handlers) => async (req, res) => {
-    const httpMethod = req.method?.toLowerCase() ?? '';
-    if (!(httpMethod in handlers)) {
-      return res
-        .status(405)
-        .json(new ResultError('common:errors.api.http-not-allowed'));
-    }
-
-    const handle = handlers[httpMethod as HttpMethod];
-    if (!handle) {
-      return res
-        .status(405)
-        .json(new ResultError('common:errors.api.http-not-supported'));
-    }
-
     try {
+      const httpMethod = req.method?.toLowerCase() ?? '';
+      if (!(httpMethod in handlers))
+        throw new ForbiddenHttpMethodError(httpMethod);
+
+      const method = httpMethod as HttpMethod;
+      const handle = handlers[method];
+      if (!handle) throw new UnsupportedHttpMethodError(method);
+
       return await Promise.resolve(handle(req, res));
     } catch (err) {
       return await Promise.resolve(handleError(req, res, err));

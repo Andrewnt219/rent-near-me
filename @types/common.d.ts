@@ -29,4 +29,8 @@ declare module '@common-types' {
   >
     ? P
     : never;
+
+  type Type<T> = {
+    new (...args: any[]): T;
+  };
 }

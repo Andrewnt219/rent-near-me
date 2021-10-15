@@ -5,7 +5,7 @@ import PasswordField from '@ui/PasswordField';
 import HiddenField from '@ui/HiddenField';
 import useTranslation from 'next-translate/useTranslation';
 import { useChangePasswordForm } from './useChangePasswordForm';
-import { useAuth } from '@modules/user-auth/AuthContext';
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 
 type Props = {
   className?: string;

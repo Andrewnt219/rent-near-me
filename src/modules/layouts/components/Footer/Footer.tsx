@@ -1,4 +1,4 @@
-import Layout from '@layouts/Layout';
+import Layout from '@modules/layouts/Layout';
 
 type Props = {
   className?: string;

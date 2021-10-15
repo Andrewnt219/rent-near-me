@@ -17,10 +17,12 @@ export class UserAuthorizationError extends Error {
   }
 }
 
+// Remove the 'Bearer' preffix from Authorization header
+const getIdTokenFromAuthHeader = (header: string) => header.substr(6).trim();
+
 export const validateUser = async (authHeader: string | undefined) => {
   if (!authHeader) throw new UserAuthenticationError();
-  // Remove the 'Bearer' preffix from Authorization header
-  const idToken = authHeader.substr(6).trim();
+  const idToken = getIdTokenFromAuthHeader(authHeader);
   const decodedToken = await auth.verifyIdToken(idToken, true).catch(() => {
     throw new UserAuthenticationError();
   });

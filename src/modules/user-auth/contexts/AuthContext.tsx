@@ -4,7 +4,7 @@ import { isNullOrUndefined } from '@utils/validate-js-utils';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
-import AuthService from './services/AuthService';
+import AuthService from '@services/AuthService';
 import axios from 'axios';
 
 type AuthContextValue = {
