@@ -96,11 +96,11 @@ function Menu(props: MenuProps) {
         <UserMenuLinksGroup routes={links['account']} />
       ) : (
         <UserMenuLinksGroup tw="font-semibold">
-          <StyledUserMenuLink as="button" onClick={registerModal.show}>
+          <StyledUserMenuLink as="button" onClick={registerModal?.show}>
             Register
           </StyledUserMenuLink>
 
-          <StyledUserMenuLink as="button" onClick={loginModal.show}>
+          <StyledUserMenuLink as="button" onClick={loginModal?.show}>
             Login
           </StyledUserMenuLink>
         </UserMenuLinksGroup>

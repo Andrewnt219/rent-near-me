@@ -27,7 +27,7 @@ const HomeNavBar = ({ className }: Props) => {
         <nav aria-label="Main" tw="flex items-center">
           {!isAuthenticated && (
             <ButtonGhost
-              onClick={registerModal.show}
+              onClick={registerModal?.show}
               circle
               size="md"
               tw="font-semibold"

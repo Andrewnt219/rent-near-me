@@ -8,6 +8,7 @@ declare module '@common-types' {
     exact?: boolean;
   };
   type ModalControl = {
+    name: string;
     isShow: boolean;
     show: () => void;
     hide: () => void;

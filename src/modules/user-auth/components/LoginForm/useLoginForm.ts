@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import LoginFormModel from '@modules/user-auth/components/LoginForm/LoginFormModel';
 import AuthService from '@services/AuthService';
 import useTranslation from 'next-translate/useTranslation';
@@ -20,7 +21,6 @@ export const useLoginForm = () => {
   const { control } = form;
 
   const [submitError, setSubmitError] = useState('');
-
   const onSubmit = form.handleSubmit(async (data) => {
     await AuthService.signInWithEmail(
       data.email,

@@ -1,6 +1,6 @@
 import { NextApiHandler } from 'next';
 import { Result } from '@utils/api-responses';
-import handleError from './errors/error-handler';
+import handleError from './error-handler';
 import { HttpMethodForbiddenError } from './errors/HttpMethodForbiddenError';
 import { HttpMethodUnsupportedError } from './errors/HttpMethodUnsupportedError';
 

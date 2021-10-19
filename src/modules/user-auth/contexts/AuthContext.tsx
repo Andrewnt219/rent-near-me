@@ -5,11 +5,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
 import AuthService from '@services/AuthService';
-import axios from 'axios';
 
 type AuthContextValue = {
   isAuthenticated: boolean;
-  providerId: string | null;
+  effectiveProvider: string | null;
   user: firebase.User | null;
 };
 
@@ -35,8 +34,8 @@ export const AuthProvider: FC = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        get providerId() {
-          return AuthService.getAuthProviderId(this.user);
+        get effectiveProvider() {
+          return AuthService.getEffectiveAuthProvider(this.user);
         },
         get isAuthenticated() {
           return !isNullOrUndefined(this.user);

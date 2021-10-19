@@ -8,15 +8,15 @@ type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 type ModalProps = {
-  show: boolean;
-  onClose: () => void;
+  show?: boolean;
+  onClose?: () => void;
   size?: ModalSize;
   header?: ReactNode;
   closeButtonPosition?: CloseModalButtonPosition;
 };
 const Modal: FC<ModalProps> = ({
-  show,
-  onClose,
+  show = false,
+  onClose = () => undefined,
   size = 'md',
   closeButtonPosition = 'left',
   header,
@@ -27,7 +27,7 @@ const Modal: FC<ModalProps> = ({
     <Dialog
       css={modalDialogCss(size)}
       isOpen={show}
-      onDismiss={() => onClose()}
+      onDismiss={onClose}
       {...props}
     >
       {header && (
@@ -35,7 +35,7 @@ const Modal: FC<ModalProps> = ({
           <ButtonGhost
             circle
             css={closeModalBtnCss(closeButtonPosition)}
-            onClick={() => onClose()}
+            onClick={onClose}
           >
             <IoCloseOutline tw="w-6 h-6" />
             <span tw="sr-only">Close dialog</span>

@@ -14,7 +14,7 @@ function ChangePasswordForm({ className, ...props }: Props) {
   const { t } = useTranslation();
   const { form, controllers, onSubmit, passwordValidationResults } =
     useChangePasswordForm();
-  const { providerId } = useAuth();
+  const { effectiveProvider } = useAuth();
 
   return (
     <Form className={className} tw="" noValidate onSubmit={onSubmit}>
@@ -24,7 +24,7 @@ function ChangePasswordForm({ className, ...props }: Props) {
         hiddenVisually
       />
 
-      {providerId === 'password' && (
+      {effectiveProvider === 'password' && (
         <PasswordField
           controller={controllers.oldPassword}
           id="edit-password-old-password"
