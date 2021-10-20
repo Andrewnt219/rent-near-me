@@ -1,4 +1,4 @@
-import { HttpMethod } from '../http-method-handler';
+import { HttpMethod } from '@utils/api/http-method-handler';
 
 export class HttpMethodUnsupportedError extends Error {
   httpMethod: HttpMethod;

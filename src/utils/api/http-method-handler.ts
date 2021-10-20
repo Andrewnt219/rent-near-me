@@ -1,8 +1,8 @@
 import { NextApiHandler } from 'next';
 import { Result } from '@utils/api-responses';
 import handleError from './error-handler';
-import { HttpMethodForbiddenError } from './errors/HttpMethodForbiddenError';
-import { HttpMethodUnsupportedError } from './errors/HttpMethodUnsupportedError';
+import { HttpMethodForbiddenError } from '@models/api/errors/HttpMethodForbiddenError';
+import { HttpMethodUnsupportedError } from '@models/api/errors/HttpMethodUnsupportedError';
 
 export type ApiHandler = NextApiHandler<Result>;
 export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';

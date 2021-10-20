@@ -8,7 +8,7 @@ export default class RegisterFormModel {
   firstName = '';
   lastName = '';
   gender = '';
-  dob = null;
+  dob = '';
   email = '';
   password = '';
 

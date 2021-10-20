@@ -34,4 +34,6 @@ declare module '@common-types' {
   type Type<T> = {
     new (...args: any[]): T;
   };
+
+  type FirestoreTimestamp = Date | FirebaseFirestore.FieldValue;
 }

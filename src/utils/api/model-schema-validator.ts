@@ -1,5 +1,5 @@
 import { SchemaOf } from 'yup';
-import { ModelSchemaValidationError } from './errors/ModelSchemaValidationError';
+import { ModelSchemaValidationError } from '@models/api/errors/ModelSchemaValidationError';
 
 export const validateModelWithSchema = async <ModeLType>(
   model: ModeLType,

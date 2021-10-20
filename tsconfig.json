@@ -23,17 +23,18 @@
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["src/assets/*"],
-      "@public/*": ["public/*"],
-      "@utils/*": ["src/utils/*"],
-      "@modules/*": ["src/modules/*"],
-      "@ui/*": ["src/ui/*"],
-      "@layouts/*": ["src/layouts/*"],
       "@contexts/*": ["src/contexts/*"],
+      "@layouts/*": ["src/layouts/*"],
       "@libs/*": ["src/libs/*"],
+      "@mock/*": ["__tests__/mock/*"],
+      "@models/*": ["src/models/*"],
+      "@modules/*": ["src/modules/*"],
+      "@pages/*": ["src/pages/*"],
+      "@public/*": ["public/*"],
       "@services/*": ["src/services/*"],
       "@styles/*": ["src/styles/*"],
-      "@pages/*": ["src/pages/*"],
-      "@mock/*": ["__tests__/mock/*"]
+      "@ui/*": ["src/ui/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "twind.d.ts"],

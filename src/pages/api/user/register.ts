@@ -23,13 +23,15 @@ async function post(
     emailVerified: false,
     disabled: false,
   });
-  await db.collection('profiles').doc(user.uid).create({
-    id: user.uid,
-    firstName: model.firstName,
-    lastName: model.lastName,
-    gender: model.gender,
-    dob: model.dob,
-  });
+  await db
+    .Profile()
+    .doc(user.uid)
+    .create({
+      firstName: model.firstName,
+      lastName: model.lastName,
+      gender: model.gender,
+      dob: new Date(model.dob),
+    });
   return res.json(new ResultSuccess(user));
 }
 

@@ -20,15 +20,15 @@ async function post(
 
   await auth.updateUser(model.uid, { password: model.newPassword });
 
-  const userProfileDoc = db.collection('profiles').doc(model.uid);
   const firestoreTimestamp = admin.firestore.FieldValue.serverTimestamp();
-  await userProfileDoc.set(
-    { passwordLastUpdatedTime: firestoreTimestamp },
-    { merge: true }
-  );
-  await userProfileDoc
-    .collection('password_update_history')
-    .add({ timestamp: firestoreTimestamp }); // More info may be desired here in the future
+  await db
+    .Profile()
+    .doc(model.uid)
+    .set({ passwordLastUpdatedTime: firestoreTimestamp }, { merge: true });
+  await db
+    .Profile_PasswordUpdateHistory(model.uid)
+    // More info may be desired here in the future
+    .add({ timestamp: firestoreTimestamp });
   return res.json(new ResultSuccess(null));
 }
 

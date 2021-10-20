@@ -1,6 +1,6 @@
 import { auth } from '@libs/firebase-admin/firebase-admin';
-import { UserAuthenticationError } from './errors/UserAuthenticationError';
-import { UserAuthorizationError } from './errors/UserAuthorizationError';
+import { UserAuthenticationError } from '@models/api/errors/UserAuthenticationError';
+import { UserAuthorizationError } from '@models/api/errors/UserAuthorizationError';
 
 // Remove the 'Bearer' preffix from Authorization header
 const getIdTokenFromAuthHeader = (header: string) => header.substr(6).trim();

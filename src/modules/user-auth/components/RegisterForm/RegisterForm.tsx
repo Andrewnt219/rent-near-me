@@ -67,7 +67,7 @@ const RegisterForm = ({
           controller={controllers.gender}
         >
           <option value="" disabled></option>
-          {Object.entries(RegisterModel.genders).map(([key, val], idx) => (
+          {Object.entries(RegisterModel.genders).map(([key, val]) => (
             <option key={key} value={key}>
               {val}
             </option>

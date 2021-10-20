@@ -2,11 +2,11 @@ import { Type } from '@common-types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Result, ResultError } from '@utils/api-responses';
 
-import { HttpMethodForbiddenError } from './errors/HttpMethodForbiddenError';
-import { HttpMethodUnsupportedError } from './errors/HttpMethodUnsupportedError';
-import { ModelSchemaValidationError } from './errors/ModelSchemaValidationError';
-import { UserAuthenticationError } from './errors/UserAuthenticationError';
-import { UserAuthorizationError } from './errors/UserAuthorizationError';
+import { HttpMethodForbiddenError } from '@models/api/errors/HttpMethodForbiddenError';
+import { HttpMethodUnsupportedError } from '@models/api/errors/HttpMethodUnsupportedError';
+import { ModelSchemaValidationError } from '@models/api/errors/ModelSchemaValidationError';
+import { UserAuthenticationError } from '@models/api/errors/UserAuthenticationError';
+import { UserAuthorizationError } from '@models/api/errors/UserAuthorizationError';
 
 export type ApiErrorHandler = (
   req: NextApiRequest,
