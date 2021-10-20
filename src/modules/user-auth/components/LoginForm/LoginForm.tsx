@@ -1,10 +1,10 @@
 import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
-import Checkbox from '@ui/Checkbox';
-import Form from '@ui/Form';
+import Checkbox from '@ui/Form/Checkbox';
+import Form from '@ui/Form/Form';
 import HrText from '@ui/HrText/HrText';
-import PasswordField from '@ui/PasswordField';
-import TextField from '@ui/TextField';
+import PasswordField from '@ui/Form/PasswordField';
+import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { MouseEventHandler, ButtonHTMLAttributes, ReactNode } from 'react';
 import { FaFacebook, FaKey } from 'react-icons/fa';
