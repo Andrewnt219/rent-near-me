@@ -9,7 +9,9 @@ export const validateUser = async (
   authHeader: string | undefined,
   throwError = false
 ) => {
-  if (!authHeader) throw new UserAuthenticationError();
+  if (!authHeader)
+    if (throwError) throw new UserAuthenticationError();
+    else return null;
   const idToken = getIdTokenFromAuthHeader(authHeader);
   try {
     const decodedToken = await auth.verifyIdToken(idToken, true);
@@ -32,5 +34,6 @@ export const validateUserWithId = async (
     if (throwError)
       throw new UserAuthorizationError(decodedToken.uid, decodedToken.email);
     else return null;
+
   return decodedToken;
 };

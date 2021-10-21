@@ -7,6 +7,7 @@ import { HttpMethodUnsupportedError } from '@models/api/errors/HttpMethodUnsuppo
 import { ModelSchemaValidationError } from '@models/api/errors/ModelSchemaValidationError';
 import { UserAuthenticationError } from '@models/api/errors/UserAuthenticationError';
 import { UserAuthorizationError } from '@models/api/errors/UserAuthorizationError';
+import { ResourceNotFoundError } from '@models/api/errors/ResourceNotFoundError';
 
 export type ApiErrorHandler = (
   req: NextApiRequest,
@@ -21,6 +22,11 @@ type ErrorHandlingInfo = {
 };
 
 const ERR_HANDLING_RULES: ErrorHandlingInfo[] = [
+  {
+    errorType: ResourceNotFoundError,
+    statusCode: 404,
+    translateKey: 'common:errors.api.not-found',
+  },
   {
     errorType: UserAuthenticationError,
     statusCode: 403,

@@ -19,6 +19,7 @@
       "invalid-schema": "Invalid incoming data shape.",
       "invalid-user": "User has not signed in",
       "unauthorized-user": "User is not allowed to perform this action",
+      "not-found": "Not found",
       "other": "Oops! Something went wrong."
     }
   },
