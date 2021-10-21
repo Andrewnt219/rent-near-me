@@ -3,9 +3,12 @@ import { ModelSchemaValidationError } from '@models/api/errors/ModelSchemaValida
 
 export const validateModelWithSchema = async <ModelType>(
   model: ModelType,
-  Schema: SchemaOf<ModelType>
+  Schema: SchemaOf<ModelType>,
+  throwError = false
 ) => {
   if (!(await Schema.isValid(model))) {
-    throw new ModelSchemaValidationError(model);
+    if (throwError) throw new ModelSchemaValidationError(model);
+    else return false;
   }
+  return true;
 };

@@ -12,14 +12,15 @@ import * as admin from 'firebase-admin';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type PostResponseData = Await<null>;
-export type ApiPostResult_User_ChangePassword = ResultSuccess<PostResponseData>;
+export type ApiResult_User_ChangePassword_POST =
+  ResultSuccess<PostResponseData>;
 async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
   const model = req.body as ChangePasswordFormModel;
-  await validateModelWithSchema(model, ChangePasswordFormSchema());
-  await validateUserWithId(req.headers.authorization, model.uid);
+  await validateModelWithSchema(model, ChangePasswordFormSchema(), true);
+  await validateUserWithId(req.headers.authorization, model.uid, true);
 
   await auth.updateUser(model.uid, { password: model.newPassword });
 

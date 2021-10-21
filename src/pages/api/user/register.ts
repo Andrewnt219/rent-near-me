@@ -11,13 +11,13 @@ import { capitalizeName } from '@utils/string-utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type PostResponseData = Await<ReturnType<typeof auth.createUser>>;
-export type ApiPostResult_User_Register = ResultSuccess<PostResponseData>;
+export type ApiResult_User_Register_POST = ResultSuccess<PostResponseData>;
 async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
   const model = req.body as RegisterFormModel;
-  await validateModelWithSchema(model, RegisterFormSchema());
+  await validateModelWithSchema(model, RegisterFormSchema(), true);
 
   const user = await auth.createUser({
     email: model.email,
