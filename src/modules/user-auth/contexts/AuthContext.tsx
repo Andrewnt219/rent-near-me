@@ -1,3 +1,4 @@
+import useSWR from 'swr';
 import firebase from 'firebase/app';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
 import { isNullOrUndefined } from '@utils/validate-js-utils';
@@ -5,12 +6,15 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
 import AuthService from '@services/AuthService';
+import type { ApiResult_User_Profile_GET } from '@pages/api/user/profile/[uid]';
+import type Profile from '@models/api/entities/Profile/Profile';
 
 type AuthContextValue = {
   isAuthReady: boolean;
   isAuthenticated: boolean;
   effectiveProvider: string | null;
   user: firebase.User | null;
+  profile: Profile | undefined;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -33,11 +37,16 @@ export const AuthProvider: FC = ({ children }) => {
     });
   }, []);
 
+  const { data: profile } = useSWR<ApiResult_User_Profile_GET>(
+    user ? `/api/user/profile/${user.uid}` : null
+  );
+
   return (
     <AuthContext.Provider
       value={{
         isAuthReady: isReady,
         user,
+        profile: profile?.data,
         get effectiveProvider() {
           return AuthService.getEffectiveAuthProvider(this.user);
         },

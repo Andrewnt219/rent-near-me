@@ -46,7 +46,7 @@ function getMenuItems(t: Translate): MenuItem[] {
   return [
     {
       link: {
-        href: '/account/personal-info',
+        href: '/account/profile',
       },
       data: {
         title: t('account:index.menu-items.personal-info.title'),

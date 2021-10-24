@@ -32,5 +32,8 @@
       "submit-button": "Update Password",
       "description": "Last updated {{time}}"
     }
+  },
+  "personal-info": {
+    "page-title": "Personal Info"
   }
 }

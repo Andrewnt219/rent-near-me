@@ -1,26 +1,32 @@
-import { GetLayout } from '@common-types';
+import { PageWithLayout } from '@common-types';
+import SWRDefaultConfigProvider from '@libs/swr/SWRDefaultConfigProvider';
 import { AuthProvider } from '@modules/user-auth/contexts/AuthContext';
-import '@reach/dialog/styles.css';
 import GlobalStyle from '@styles/GlobalStyles';
 import { SnackbarProvider } from '@ui/Snackbar/SnackbarContext';
 import type { AppProps } from 'next/app';
-import 'react-day-picker/lib/style.css';
 import { GlobalStyles as TwinStyles } from 'twin.macro';
+import '@reach/dialog/styles.css';
+import 'react-day-picker/lib/style.css';
 
-type Page = AppProps['Component'] & {
-  getLayout?: GetLayout;
+type MyAppProps = {
+  Component: PageWithLayout;
+  pageProps: AppProps['pageProps'];
 };
-function MyApp({ Component, pageProps }: AppProps) {
-  const getLayout = (Component as Page).getLayout ?? ((page) => page);
+
+function MyApp({ Component, pageProps }: MyAppProps) {
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <AuthProvider>
-      <SnackbarProvider>
-        <TwinStyles />
-        <GlobalStyle />
-        {getLayout(<Component {...pageProps} />)}
-      </SnackbarProvider>
-    </AuthProvider>
+    <SWRDefaultConfigProvider>
+      <AuthProvider>
+        <SnackbarProvider>
+          <TwinStyles />
+          <GlobalStyle />
+          {getLayout(<Component {...pageProps} />)}
+        </SnackbarProvider>
+      </AuthProvider>
+    </SWRDefaultConfigProvider>
   );
 }
+
 export default MyApp;

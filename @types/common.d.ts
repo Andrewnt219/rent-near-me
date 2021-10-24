@@ -1,4 +1,5 @@
 declare module '@common-types' {
+  import { NextPage } from 'next';
   import { LinkProps } from 'next/link';
   import { ReactNode } from 'react';
   import { StyledComponent } from 'styled-components';
@@ -16,7 +17,13 @@ declare module '@common-types' {
     toggle: () => void;
   };
   type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
-  type GetLayout = (page: ReactNode) => ReactNode;
+  type PageWithLayout = NextPage & {
+    getLayout?: (page: ReactNode) => ReactNode;
+  };
+  type Controllers<TFormValues> = Record<
+    keyof TFormValues,
+    UseControllerProps<TFormValues>
+  >;
 
   type StyledComponentProps<T> = T extends StyledComponent<
     any,

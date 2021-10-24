@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { isBrowser } from '@firebase/util';
 import { Translate } from 'next-translate';
-import { isNullOrUndefined } from './validate-js-utils';
 
 type ResultTypes = 'success' | 'error';
 type ErrorWithMessage = Error | { message: string };
