@@ -31,9 +31,9 @@ export const AuthProvider: FC = ({ children }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async (newUser) => {
+      await AuthService.updateRequestAuthorizationHeader(newUser);
       setUser(newUser);
       setIsReady(true);
-      await AuthService.updateRequestAuthorizationHeader(newUser);
     });
   }, []);
 
