@@ -2,7 +2,7 @@ import { Dialog } from '@reach/dialog';
 import { ButtonGhost } from '@ui/Button/Button';
 import { FC, ReactNode } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-import tw, { css, styled } from 'twin.macro';
+import tw, { css, styled, theme } from 'twin.macro';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -93,11 +93,12 @@ const modalDialogCss = (size: ModalSize) => {
   }
 
   return css`
-    ${sizeCss}
     max-width: calc(100% - 1rem);
+    top: calc(50% - ${theme('spacing.var-app-bar')} / 2);
+    ${sizeCss}
     ${tw`bg-white rounded shadow-xl`}
     ${tw`p-0 m-0`}
-    ${tw`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+    ${tw`fixed lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
   `;
 };
 
@@ -114,7 +115,7 @@ const ModalBody = styled.div`
   ${tw`p-xl`}
 `;
 const ModalBodyContent = styled.div`
-  max-height: calc(100vh - 10rem);
+  max-height: calc(100vh - ${theme`spacing.var-app-bar`} - 8rem);
   ${tw`overflow-auto p-xs`}
 `;
 
