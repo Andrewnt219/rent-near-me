@@ -1,7 +1,8 @@
 declare module '@common-types' {
   import { NextPage } from 'next';
   import { LinkProps } from 'next/link';
-  import { ReactNode } from 'react';
+  import { ReactElement } from 'react';
+  import { UseControllerProps } from 'react-hook-form';
   import { StyledComponent } from 'styled-components';
   import { InferType } from 'yup';
 
@@ -18,7 +19,7 @@ declare module '@common-types' {
   };
   type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
   type PageWithLayout = NextPage & {
-    getLayout?: (page: ReactNode) => ReactNode;
+    getLayout?: (page: ReactElement) => ReactElement;
   };
   type Controllers<TFormValues> = Record<
     keyof TFormValues,

@@ -1,14 +1,15 @@
+import { PropsWithChildren } from 'react';
 import Layout from './Layout';
 import { LayoutProvider } from './contexts/LayoutModalContext';
 import AppBar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
 import HomeNavBar from './components/HomeNavBar/HomeNavBar';
-import { PropsWithChildren } from 'react';
 
-type Props = {
+type DefaultLayoutProps = PropsWithChildren<{
   className?: string;
-};
-const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
+}>;
+
+function DefaultLayout({ className, children }: DefaultLayoutProps) {
   return (
     <LayoutProvider>
       <Layout size="sm" tw="flex flex-col min-h-full relative">
@@ -21,6 +22,6 @@ const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
       </Layout>
     </LayoutProvider>
   );
-};
+}
 
 export default DefaultLayout;

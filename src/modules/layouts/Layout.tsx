@@ -1,13 +1,11 @@
 import { HTMLAttributes, PropsWithChildren } from 'react';
 import tw, { css, styled, theme } from 'twin.macro';
 
-type LayoutProps = StyledWrapperProps & HTMLAttributes<HTMLDivElement>;
-const Layout = ({
-  children,
-  size,
-  ...htmlAttrs
-}: PropsWithChildren<LayoutProps>) => (
-  <StyledWrapper {...htmlAttrs} size={size}>
+type LayoutProps = PropsWithChildren<
+  StyledWrapperProps & HTMLAttributes<HTMLDivElement>
+>;
+const Layout = ({ children, size, ...props }: LayoutProps) => (
+  <StyledWrapper {...props} size={size}>
     {children}
   </StyledWrapper>
 );
