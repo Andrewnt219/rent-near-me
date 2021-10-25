@@ -41,7 +41,7 @@ export class ResultError implements Result<null> {
 }
 
 export function getErrorMessage(
-  error: Error | AxiosError<ResultError>,
+  error: Error | AxiosError<ResultError> | unknown,
   t: Translate
 ) {
   if (axios.isAxiosError(error)) {

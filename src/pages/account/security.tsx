@@ -25,9 +25,6 @@ function Main() {
   return (
     <ActionFieldGroup>
       <PasswordActionField />
-      <PasswordActionField />
-      <PasswordActionField />
-      <PasswordActionField />
     </ActionFieldGroup>
   );
 }

@@ -1,24 +1,21 @@
-import { Await } from '@common-types';
+import type { Await } from '@common-types';
 import { auth, db } from '@libs/firebase-admin/firebase-admin';
 import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
-import { Result, ResultError, ResultSuccess } from '@utils/api-responses';
+import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
+import { validateModelWithSchema } from '@utils/api/model-schema-validator';
 import { capitalizeName } from '@utils/string-utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type PostResponseData = Await<ReturnType<typeof auth.createUser>>;
-export type ApiPostResult_UserRegister = ResultSuccess<PostResponseData>;
+export type ApiPostResult_User_Register = ResultSuccess<PostResponseData>;
 async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
   const model = new RegisterFormModel(req.body);
-  const isValid = await RegisterFormModel.getValidationSchema().isValid(model);
-  if (!isValid) {
-    return res
-      .status(422)
-      .json(new ResultError('common:errors.api.invalid-schema'));
-  }
+  await validateModelWithSchema(model, RegisterFormModel);
+
   const user = await auth.createUser({
     email: model.email,
     password: model.password,

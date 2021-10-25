@@ -4,9 +4,12 @@ import { isNullOrUndefined } from '@utils/validate-js-utils';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
+import AuthService from './services/AuthService';
+import axios from 'axios';
 
 type AuthContextValue = {
   isAuthenticated: boolean;
+  providerId: string | null;
   user: firebase.User | null;
 };
 
@@ -22,13 +25,19 @@ export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState<firebase.User | null>(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged(setUser);
+    auth.onAuthStateChanged(async (newUser) => {
+      setUser(newUser);
+      await AuthService.updateRequestAuthorizationHeader(newUser);
+    });
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        get providerId() {
+          return AuthService.getAuthProviderId(this.user);
+        },
         get isAuthenticated() {
           return !isNullOrUndefined(this.user);
         },

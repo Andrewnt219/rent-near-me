@@ -7,7 +7,7 @@ type Props = {
 };
 function ActionFieldLayout({ className, ...props }: PropsWithChildren<Props>) {
   return (
-    <article className={className}>
+    <article tw="pt-0 pb-2xl" className={className}>
       <header tw="flex justify-between items-baseline">
         <h3 tw="font-semibold">{props.label}</h3>
 

@@ -3,13 +3,21 @@ import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
 
-type EditPasswordSchema = Record<keyof EditPasswordModel, yup.AnySchema>;
-export default class EditPasswordModel {
+type ChangePasswordSchema = Record<
+  keyof ChangePasswordFormModel,
+  yup.AnySchema
+>;
+export default class ChangePasswordFormModel {
+  uid = '';
+  email = '';
   oldPassword = '';
   newPassword = '';
   confirmNewPassword = '';
-  constructor(source?: Record<keyof EditPasswordModel, any>) {
+
+  constructor(source?: Record<keyof ChangePasswordFormModel, any>) {
     if (!isNullOrUndefined(source)) {
+      this.uid = source.uid;
+      this.email = source.email;
       this.oldPassword = source.oldPassword;
       this.newPassword = source.newPassword;
       this.confirmNewPassword = source.confirmNewPassword;
@@ -29,8 +37,10 @@ export default class EditPasswordModel {
       ? t('common:errors.form.weak-password')
       : 'weak password';
 
-    return yup.object().shape<EditPasswordSchema>({
-      oldPassword: yup.string().required(requiredMessage),
+    return yup.object().shape<ChangePasswordSchema>({
+      uid: yup.string().required(),
+      email: yup.string().nullable(),
+      oldPassword: yup.string().nullable(),
       newPassword: yup
         .string()
         .required(requiredMessage)

@@ -59,7 +59,7 @@ const StyledLine = styled.div`
 const links: Record<string, RouteProps[]> = {
   account: [
     {
-      textTranslateKey: 'account',
+      textTranslateKey: 'account.index',
       href: '/account',
     },
   ],
