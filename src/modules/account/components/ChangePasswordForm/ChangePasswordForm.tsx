@@ -1,11 +1,11 @@
 import { ButtonLink, ButtonSecondary } from '@ui/Button/Button';
-import Form from '@ui/Form';
+import Form from '@ui/Form/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
-import PasswordField from '@ui/PasswordField';
-import HiddenField from '@ui/HiddenField';
+import PasswordField from '@ui/Form/PasswordField';
+import HiddenField from '@ui/Form/HiddenField';
 import useTranslation from 'next-translate/useTranslation';
 import { useChangePasswordForm } from './useChangePasswordForm';
-import { useAuth } from '@modules/user-auth/AuthContext';
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 
 type Props = {
   className?: string;
@@ -14,7 +14,7 @@ function ChangePasswordForm({ className, ...props }: Props) {
   const { t } = useTranslation();
   const { form, controllers, onSubmit, passwordValidationResults } =
     useChangePasswordForm();
-  const { providerId } = useAuth();
+  const { effectiveProvider } = useAuth();
 
   return (
     <Form className={className} tw="" noValidate onSubmit={onSubmit}>
@@ -24,7 +24,7 @@ function ChangePasswordForm({ className, ...props }: Props) {
         hiddenVisually
       />
 
-      {providerId === 'password' && (
+      {effectiveProvider === 'password' && (
         <PasswordField
           controller={controllers.oldPassword}
           id="edit-password-old-password"

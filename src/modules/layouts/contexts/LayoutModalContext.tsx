@@ -2,11 +2,12 @@ import { ModalControl } from '@common-types';
 import LoginForm from '@modules/user-auth/components/LoginForm/LoginForm';
 import RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterForm';
 import Modal from '@ui/Modal/Modal';
-import { createContext, FC, useContext, useState } from 'react';
+import { createContext, FC, useContext } from 'react';
+import useModalGroup from 'src/hooks/useModalGroup';
 
 type LayoutModalContextValue = {
-  loginModal: ModalControl;
-  registerModal: ModalControl;
+  loginModal?: ModalControl;
+  registerModal?: ModalControl;
 };
 
 const LayoutModalContext = createContext<LayoutModalContextValue | null>(null);
@@ -17,44 +18,29 @@ export const useLayoutModal = () => {
 };
 
 export const LayoutProvider: FC = ({ children }) => {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModel, setShowRegisterModel] = useState(false);
-
-  const value: LayoutModalContextValue = {
-    loginModal: {
-      isShow: showLoginModal,
-      show: () => setShowLoginModal(true),
-      hide: () => setShowLoginModal(false),
-      toggle: () => setShowLoginModal((isShow) => !isShow),
-    },
-    registerModal: {
-      isShow: showRegisterModel,
-      show: () => setShowRegisterModel(true),
-      hide: () => setShowRegisterModel(false),
-      toggle: () => setShowRegisterModel((isShow) => !isShow),
-    },
-  };
+  const value: LayoutModalContextValue = useModalGroup('login', 'register');
+  const { loginModal, registerModal } = value;
 
   return (
     <LayoutModalContext.Provider value={value}>
       {children}
       <Modal
         size="md"
-        show={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
+        show={loginModal?.isShow}
+        onClose={loginModal?.hide}
         aria-labelledby="LoginModalTitle"
         header={<h3 id="LoginModalTitle">Log in</h3>}
       >
-        <LoginForm />
+        <LoginForm onCreateNewAccountClick={value.registerModal?.show} />
       </Modal>
       <Modal
         size="lg"
-        show={showRegisterModel}
-        onClose={() => setShowRegisterModel(false)}
+        show={registerModal?.isShow}
+        onClose={registerModal?.hide}
         aria-labelledby="RegisterModalTitle"
         header={<h3 id="RegisterModalTitle">Register an account</h3>}
       >
-        <RegisterForm />
+        <RegisterForm onAlreadyHaveAccountClick={value.loginModal?.show} />
       </Modal>
     </LayoutModalContext.Provider>
   );

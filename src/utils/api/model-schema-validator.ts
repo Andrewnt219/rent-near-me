@@ -1,13 +1,5 @@
 import { SchemaOf } from 'yup';
-
-export class ModelSchemaValidationError<ModeLType> extends Error {
-  model: ModeLType;
-
-  constructor(model: ModeLType, message?: string) {
-    super(message);
-    this.model = model;
-  }
-}
+import { ModelSchemaValidationError } from '@models/api/errors/ModelSchemaValidationError';
 
 export const validateModelWithSchema = async <ModeLType>(
   model: ModeLType,

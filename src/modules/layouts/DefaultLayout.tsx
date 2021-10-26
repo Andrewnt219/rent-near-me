@@ -1,8 +1,8 @@
-import Layout from '@layouts/Layout';
-import { LayoutProvider } from '@modules/user-auth/LayoutModalContext';
-import AppBar from '@ui/navigation/AppBar/AppBar';
-import Footer from '@ui/navigation/Footer/Footer';
-import HomeNavBar from '@ui/navigation/HomeNavBar/HomeNavBar';
+import Layout from './Layout';
+import { LayoutProvider } from './contexts/LayoutModalContext';
+import AppBar from './components/AppBar/AppBar';
+import Footer from './components/Footer/Footer';
+import HomeNavBar from './components/HomeNavBar/HomeNavBar';
 import { PropsWithChildren } from 'react';
 
 type Props = {

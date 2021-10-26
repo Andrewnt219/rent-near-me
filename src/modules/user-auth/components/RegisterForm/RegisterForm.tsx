@@ -1,18 +1,24 @@
+import { MouseEventHandler } from 'react';
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import RegisterModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
-import { useLayoutModal } from '@modules/user-auth/LayoutModalContext';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
-import Form from '@ui/Form';
+import Form from '@ui/Form/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
-import PasswordField from '@ui/PasswordField';
+import PasswordField from '@ui/Form/PasswordField';
 import Row from '@ui/Row/Row';
-import Select from '@ui/SelectField';
-import TextField from '@ui/TextField';
+import Select from '@ui/Form/SelectField';
+import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import useRegisterForm from './useRegisterForm';
 
-export default function RegisterForm() {
+type RegisterFormProps = {
+  onAlreadyHaveAccountClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+const RegisterForm = ({
+  onAlreadyHaveAccountClick = () => undefined,
+}: RegisterFormProps) => {
   const {
     controllers,
     form,
@@ -20,20 +26,13 @@ export default function RegisterForm() {
     submitError,
     passwordValidationResults,
   } = useRegisterForm();
-  const { loginModal, registerModal } = useLayoutModal();
   const { t } = useTranslation();
 
   return (
     <Form noValidate onSubmit={onSubmit}>
       <div tw="mb-md flex flex-wrap justify-between items-center">
         <h4 tw="text-xl font-semibold">Welcome to RentNearMe!</h4>
-        <ButtonLink
-          type="button"
-          onClick={() => {
-            registerModal.hide();
-            loginModal.show();
-          }}
-        >
+        <ButtonLink type="button" onClick={onAlreadyHaveAccountClick}>
           Already have an account?
         </ButtonLink>
       </div>
@@ -68,7 +67,7 @@ export default function RegisterForm() {
           controller={controllers.gender}
         >
           <option value="" disabled></option>
-          {Object.entries(RegisterModel.genders).map(([key, val], idx) => (
+          {Object.entries(RegisterModel.genders).map(([key, val]) => (
             <option key={key} value={key}>
               {val}
             </option>
@@ -120,4 +119,6 @@ export default function RegisterForm() {
       </ButtonPrimary>
     </Form>
   );
-}
+};
+
+export default RegisterForm;

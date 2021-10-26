@@ -1,6 +1,6 @@
 import { FormHTMLAttributes } from 'react';
 import tw, { css, styled } from 'twin.macro';
-import { ButtonLink } from './Button/Button';
+import { ButtonLink } from '../Button/Button';
 
 type Props = FormHTMLAttributes<HTMLFormElement>;
 

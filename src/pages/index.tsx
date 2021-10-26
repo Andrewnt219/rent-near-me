@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import DefaultLayout from 'src/layouts/DefaultLayout';
+import DefaultLayout from '@modules/layouts/DefaultLayout';
+
 export default function Home() {
   return <div></div>;
 }

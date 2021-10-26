@@ -1,6 +1,6 @@
 import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
 import SettingsPageLayout from '@modules/account/layouts/SettingsPageLayout/SettingsPageLayout';
-import { useAuth } from '@modules/user-auth/AuthContext';
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink } from '@ui/Button/Button';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
 import useTranslation from 'next-translate/useTranslation';

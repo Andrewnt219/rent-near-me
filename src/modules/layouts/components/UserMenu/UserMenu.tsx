@@ -1,7 +1,7 @@
 import { RouteProps } from '@common-types';
-import { useAuth } from '@modules/user-auth/AuthContext';
-import { useLayoutModal } from '@modules/user-auth/LayoutModalContext';
-import AuthService from '@modules/user-auth/services/AuthService';
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import AuthService from '@services/AuthService';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
@@ -96,11 +96,11 @@ function Menu(props: MenuProps) {
         <UserMenuLinksGroup routes={links['account']} />
       ) : (
         <UserMenuLinksGroup tw="font-semibold">
-          <StyledUserMenuLink as="button" onClick={registerModal.show}>
+          <StyledUserMenuLink as="button" onClick={registerModal?.show}>
             Register
           </StyledUserMenuLink>
 
-          <StyledUserMenuLink as="button" onClick={loginModal.show}>
+          <StyledUserMenuLink as="button" onClick={loginModal?.show}>
             Login
           </StyledUserMenuLink>
         </UserMenuLinksGroup>

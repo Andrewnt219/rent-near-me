@@ -38,7 +38,7 @@ export default class AuthService {
     await auth.signOut();
   }
 
-  static getAuthProviderId(user = auth.currentUser) {
+  static getEffectiveAuthProvider(user = auth.currentUser) {
     if (user?.providerId !== 'firebase') {
       return user?.providerId ?? null;
     }
@@ -61,7 +61,7 @@ export default class AuthService {
 
   private static async reauthenticate(email: string, password: string) {
     const user = auth.currentUser;
-    const providerId = AuthService.getAuthProviderId();
+    const providerId = AuthService.getEffectiveAuthProvider();
     switch (providerId) {
       case 'password':
         await user?.reauthenticateWithCredential(

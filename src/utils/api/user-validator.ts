@@ -1,26 +1,13 @@
 import { auth } from '@libs/firebase-admin/firebase-admin';
+import { UserAuthenticationError } from '@models/api/errors/UserAuthenticationError';
+import { UserAuthorizationError } from '@models/api/errors/UserAuthorizationError';
 
-export class UserAuthenticationError extends Error {
-  constructor(message?: string) {
-    super(message);
-  }
-}
-
-export class UserAuthorizationError extends Error {
-  uid?: string;
-  email?: string;
-
-  constructor(uid?: string, email?: string) {
-    super('Unauthorized user');
-    this.uid = uid;
-    this.email = email;
-  }
-}
+// Remove the 'Bearer' preffix from Authorization header
+const getIdTokenFromAuthHeader = (header: string) => header.substr(6).trim();
 
 export const validateUser = async (authHeader: string | undefined) => {
   if (!authHeader) throw new UserAuthenticationError();
-  // Remove the 'Bearer' preffix from Authorization header
-  const idToken = authHeader.substr(6).trim();
+  const idToken = getIdTokenFromAuthHeader(authHeader);
   const decodedToken = await auth.verifyIdToken(idToken, true).catch(() => {
     throw new UserAuthenticationError();
   });

@@ -8,6 +8,7 @@ declare module '@common-types' {
     exact?: boolean;
   };
   type ModalControl = {
+    name: string;
     isShow: boolean;
     show: () => void;
     hide: () => void;
@@ -29,4 +30,10 @@ declare module '@common-types' {
   >
     ? P
     : never;
+
+  type Type<T> = {
+    new (...args: any[]): T;
+  };
+
+  type FirestoreTimestamp = Date | FirebaseFirestore.FieldValue;
 }

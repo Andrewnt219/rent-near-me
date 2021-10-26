@@ -1,13 +1,12 @@
-import { useLayoutModal } from '@modules/user-auth/LayoutModalContext';
-import AuthService from '@modules/user-auth/services/AuthService';
+import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
-import Checkbox from '@ui/Checkbox';
-import Form from '@ui/Form';
+import Checkbox from '@ui/Form/Checkbox';
+import Form from '@ui/Form/Form';
 import HrText from '@ui/HrText/HrText';
-import PasswordField from '@ui/PasswordField';
-import TextField from '@ui/TextField';
+import PasswordField from '@ui/Form/PasswordField';
+import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { MouseEventHandler, ButtonHTMLAttributes, ReactNode } from 'react';
 import { FaFacebook, FaKey } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { RiErrorWarningFill } from 'react-icons/ri';
@@ -16,9 +15,14 @@ import { useLoginForm } from './useLoginForm';
 
 const signInExternalIconStyle = tw`w-6 h-6`;
 
-export default function LoginForm() {
+type LoginFormProps = {
+  onCreateNewAccountClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+const LoginForm = ({
+  onCreateNewAccountClick = () => undefined,
+}: LoginFormProps) => {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
-  const { loginModal, registerModal } = useLayoutModal();
   const { t } = useTranslation();
 
   return (
@@ -78,7 +82,7 @@ export default function LoginForm() {
           type="button"
           icon={<FcGoogle css={signInExternalIconStyle} />}
           text={t('common:login.google')}
-          onClick={() => AuthService.signInWithGoogle()}
+          onClick={AuthService.signInWithGoogle}
         />
 
         <SignInExternalButton
@@ -87,24 +91,23 @@ export default function LoginForm() {
             <FaFacebook css={signInExternalIconStyle} tw="text-[#1877f2]" />
           }
           text={t('common:login.facebook')}
-          onClick={() => AuthService.signInWithFacebook()}
+          onClick={AuthService.signInWithFacebook}
         />
 
         <SignInExternalButton
           type="button"
           icon={<FaKey css={signInExternalIconStyle} />}
           text={t('common:login.new-account')}
-          onClick={() => {
-            loginModal.hide();
-            registerModal.show();
-          }}
+          onClick={onCreateNewAccountClick}
         />
       </ul>
     </Form>
   );
-}
+};
 
-type ExternalAuthButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export default LoginForm;
+
+type SignInExternalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: ReactNode;
   text: ReactNode;
 };
@@ -112,7 +115,7 @@ function SignInExternalButton({
   text,
   icon,
   ...buttonProps
-}: ExternalAuthButtonProps) {
+}: SignInExternalButtonProps) {
   return (
     <ButtonOutline
       tw="w-full grid grid-cols-[3rem auto] place-items-center"

@@ -1,6 +1,8 @@
 import { NextApiHandler } from 'next';
-import { Result, ResultError } from '@utils/api-responses';
+import { Result } from '@utils/api-responses';
 import handleError from './error-handler';
+import { HttpMethodForbiddenError } from '@models/api/errors/HttpMethodForbiddenError';
+import { HttpMethodUnsupportedError } from '@models/api/errors/HttpMethodUnsupportedError';
 
 export type ApiHandler = NextApiHandler<Result>;
 export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
@@ -9,21 +11,15 @@ type HttpMethodHandlerSelector = (handlers: HttpMethodHandlers) => ApiHandler;
 
 export const handleHttpMethod: HttpMethodHandlerSelector =
   (handlers) => async (req, res) => {
-    const httpMethod = req.method?.toLowerCase() ?? '';
-    if (!(httpMethod in handlers)) {
-      return res
-        .status(405)
-        .json(new ResultError('common:errors.api.http-not-allowed'));
-    }
-
-    const handle = handlers[httpMethod as HttpMethod];
-    if (!handle) {
-      return res
-        .status(405)
-        .json(new ResultError('common:errors.api.http-not-supported'));
-    }
-
     try {
+      const httpMethod = req.method?.toLowerCase() ?? '';
+      if (!(httpMethod in handlers))
+        throw new HttpMethodForbiddenError(httpMethod);
+
+      const method = httpMethod as HttpMethod;
+      const handle = handlers[method];
+      if (!handle) throw new HttpMethodUnsupportedError(method);
+
       return await Promise.resolve(handle(req, res));
     } catch (err) {
       return await Promise.resolve(handleError(req, res, err));

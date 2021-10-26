@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useStaticBreadCrumb } from 'src/hooks/useStaticBreadCrumb';
-import { accountRoutes } from '../../account-routes';
+import { accountRoutes } from '../../routes';
 import BreadCrumbItem from '../BreadCrumbItem/BreadCrumbItem';
 
 type Props = {

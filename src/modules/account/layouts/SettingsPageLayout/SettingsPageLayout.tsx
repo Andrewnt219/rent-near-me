@@ -1,4 +1,4 @@
-import DefaultLayout from '@layouts/DefaultLayout';
+import DefaultLayout from '@modules/layouts/DefaultLayout';
 import { PropsWithChildren } from 'react';
 
 type Props = {

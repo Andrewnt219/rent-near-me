@@ -1,11 +1,11 @@
-import { extractEmailLocal } from './string-utils';
 import {
   containsALowerCaseLetter,
   containsANumber,
-  containsAnUpperCaseLetter,
   containsASpecialCharacter,
+  containsAnUpperCaseLetter,
   containsWords,
 } from './validate-js-utils';
+import { extractEmailLocal } from './string-utils';
 
 export function isValidPassword(password: string | undefined | null) {
   if (!password) return false;

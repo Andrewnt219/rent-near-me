@@ -1,6 +1,6 @@
 // import '@libs/react-datepicker/style.css';
 import { GetLayout } from '@common-types';
-import { AuthProvider } from '@modules/user-auth/AuthContext';
+import { AuthProvider } from '@modules/user-auth/contexts/AuthContext';
 import '@reach/dialog/styles.css';
 import GlobalStyle from '@styles/GlobalStyles';
 import type { AppProps } from 'next/app';

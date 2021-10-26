@@ -1,4 +1,4 @@
-import Form, { inputCss, labelActiveCss, labelInvalidCss } from '@ui/Form';
+import Form, { inputCss, labelActiveCss, labelInvalidCss } from '@ui/Form/Form';
 import { isEmptyString } from '@utils/validate-js-utils';
 import React, { ReactNode } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
