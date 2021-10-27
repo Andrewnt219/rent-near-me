@@ -1,10 +1,12 @@
 import { ModalControl } from '@common-types';
-import { useMemo } from 'hoist-non-react-statics/node_modules/@types/react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-export type ModalGroupControl<Keys extends string> = {
-  [K in `${Keys}Modal`]: ModalControl;
-};
+type ModalKey<Key extends string> = `${Key}Modal`;
+
+type ModalGroupControl<Key extends string> = Record<
+  ModalKey<Key>,
+  ModalControl
+>;
 
 const useModalGroup = <T extends string>(
   ...modalNames: T[]
@@ -27,7 +29,7 @@ const useModalGroup = <T extends string>(
 
     const controls = {} as ModalGroupControl<T>;
     for (const modalName of modalNames) {
-      controls[`${modalName}Modal`] = {
+      controls[`${modalName}Modal` as ModalKey<T>] = {
         name: modalName,
         isShow: modalStates[modalName] ?? false,
         show: () => showModal(modalName),
