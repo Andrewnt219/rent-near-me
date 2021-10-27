@@ -1,9 +1,13 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
+import { isBrowser } from '@firebase/util';
 import { Translate } from 'next-translate';
 import { isNullOrUndefined } from './validate-js-utils';
 
 type ResultTypes = 'success' | 'error';
 type ErrorWithMessage = Error | { message: string };
+
+const hasMessage = (error: unknown): error is ErrorWithMessage =>
+  !isNullOrUndefined((error as ErrorWithMessage)?.message);
 
 export interface Result<Data = unknown> {
   type: ResultTypes;
@@ -41,13 +45,14 @@ export class ResultError implements Result<null> {
 }
 
 export function getErrorMessage(error: unknown, t: Translate) {
-  if (axios.isAxiosError(error)) {
+  if (typeof error === 'string') return t(error);
+  if (hasMessage(error)) return t(error.message);
+  if (error instanceof ResultError) return t(error.error.message);
+
+  if (isBrowser() && !isNullOrUndefined(error) && axios.isAxiosError(error)) {
     if (error.response) return t(error.response.data.error?.message);
     if (error.request) return t('common:errors.api.network-issue');
   }
-
-  if (error instanceof ResultError) return error.error.message;
-  if (error instanceof Error) return error.message;
 
   return t('common:errors.api.other');
 }
