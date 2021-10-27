@@ -8,15 +8,15 @@ type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 type ModalProps = {
-  show?: boolean;
-  onClose?: () => void;
+  show: boolean;
+  onClose: () => void;
   size?: ModalSize;
   header?: ReactNode;
   closeButtonPosition?: CloseModalButtonPosition;
 };
 const Modal: FC<ModalProps> = ({
-  show = false,
-  onClose = () => undefined,
+  show,
+  onClose,
   size = 'md',
   closeButtonPosition = 'left',
   header,

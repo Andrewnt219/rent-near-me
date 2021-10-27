@@ -6,8 +6,8 @@ import { createContext, FC, useContext } from 'react';
 import useModalGroup from 'src/hooks/useModalGroup';
 
 type LayoutModalContextValue = {
-  loginModal?: ModalControl;
-  registerModal?: ModalControl;
+  loginModal: ModalControl;
+  registerModal: ModalControl;
 };
 
 const LayoutModalContext = createContext<LayoutModalContextValue | null>(null);
@@ -18,29 +18,29 @@ export const useLayoutModal = () => {
 };
 
 export const LayoutProvider: FC = ({ children }) => {
-  const value: LayoutModalContextValue = useModalGroup('login', 'register');
-  const { loginModal, registerModal } = value;
+  const [loginModal, registerModal] = useModalGroup('login', 'register');
+  if (!loginModal || !registerModal) return null;
 
   return (
-    <LayoutModalContext.Provider value={value}>
+    <LayoutModalContext.Provider value={{ loginModal, registerModal }}>
       {children}
       <Modal
         size="md"
-        show={loginModal?.isShow}
-        onClose={loginModal?.hide}
+        show={loginModal.isShow}
+        onClose={loginModal.hide}
         aria-labelledby="LoginModalTitle"
         header={<h3 id="LoginModalTitle">Log in</h3>}
       >
-        <LoginForm onCreateNewAccountClick={value.registerModal?.show} />
+        <LoginForm />
       </Modal>
       <Modal
         size="lg"
-        show={registerModal?.isShow}
-        onClose={registerModal?.hide}
+        show={registerModal.isShow}
+        onClose={registerModal.hide}
         aria-labelledby="RegisterModalTitle"
         header={<h3 id="RegisterModalTitle">Register an account</h3>}
       >
-        <RegisterForm onAlreadyHaveAccountClick={value.loginModal?.show} />
+        <RegisterForm />
       </Modal>
     </LayoutModalContext.Provider>
   );

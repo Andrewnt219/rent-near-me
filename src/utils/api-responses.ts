@@ -40,10 +40,7 @@ export class ResultError implements Result<null> {
   }
 }
 
-export function getErrorMessage(
-  error: Error | AxiosError<ResultError> | unknown,
-  t: Translate
-) {
+export function getErrorMessage(error: unknown, t: Translate) {
   if (axios.isAxiosError(error)) {
     if (error.response) return t(error.response.data.error?.message);
     if (error.request) return t('common:errors.api.network-issue');

@@ -1,9 +1,7 @@
 import { ModalControl } from '@common-types';
 import { useState } from 'react';
 
-const useModalGroup = (
-  ...modalNames: string[]
-): Record<string, ModalControl> => {
+const useModalGroup = (...modalNames: string[]): ModalControl[] => {
   const initModalStates: Record<string, boolean> = modalNames.reduce(
     (states, modalName) => ({ ...states, [modalName]: false }),
     {}
@@ -20,19 +18,13 @@ const useModalGroup = (
       [modalName]: !states[modalName],
     }));
 
-  return modalNames.reduce(
-    (controls, modalName) => ({
-      ...controls,
-      [`${modalName}Modal`]: {
-        name: modalName,
-        isShow: modalStates[modalName],
-        show: () => showModal(modalName),
-        hide: () => hideModal(modalName),
-        toggle: () => toggleModal(modalName),
-      },
-    }),
-    {}
-  );
+  return modalNames.map((modalName) => ({
+    name: modalName,
+    isShow: modalStates[modalName] ?? false,
+    show: () => showModal(modalName),
+    hide: () => hideModal(modalName),
+    toggle: () => toggleModal(modalName),
+  }));
 };
 
 export default useModalGroup;
