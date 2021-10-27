@@ -18,8 +18,7 @@ export const useLayoutModal = () => {
 };
 
 export const LayoutProvider: FC = ({ children }) => {
-  const [loginModal, registerModal] = useModalGroup('login', 'register');
-  if (!loginModal || !registerModal) return null;
+  const { loginModal, registerModal } = useModalGroup('login', 'register');
 
   return (
     <LayoutModalContext.Provider value={{ loginModal, registerModal }}>
