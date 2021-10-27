@@ -1,22 +1,18 @@
+import { Controllers } from '@common-types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
-import LoginFormModel from '@modules/user-auth/components/LoginForm/LoginFormModel';
+import * as LoginForm from '@modules/user-auth/components/LoginForm/LoginFormModel';
 import AuthService from '@services/AuthService';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
-import { UseControllerProps, useForm } from 'react-hook-form';
-
-type Controllers = Record<
-  keyof LoginFormModel,
-  UseControllerProps<LoginFormModel>
->;
+import { useForm } from 'react-hook-form';
 
 export const useLoginForm = () => {
   const { t } = useTranslation();
 
-  const form = useForm<LoginFormModel>({
-    defaultValues: new LoginFormModel(),
-    resolver: yupResolver(LoginFormModel.getValidationSchema(t)),
+  const formSchema = LoginForm.Schema(t);
+  const form = useForm<LoginForm.Model>({
+    defaultValues: formSchema.getDefault(),
+    resolver: yupResolver(formSchema),
   });
   const { control } = form;
 
@@ -29,7 +25,7 @@ export const useLoginForm = () => {
     ).catch((err) => setSubmitError(err.error_description || err.message));
   });
 
-  const controllers: Controllers = {
+  const controllers: Controllers<LoginForm.Model> = {
     email: {
       control,
       name: 'email',

@@ -7,16 +7,15 @@ import {
 } from 'react-hook-form';
 import Form from './Form';
 
-type Props<
-  FormValues extends FieldValues
-> = InputHTMLAttributes<HTMLInputElement> & {
-  label: ReactNode;
-  inputDescription?: ReactNode;
-  children?: never;
-  id: string;
-  autoComplete: string;
-  controller: UseControllerProps<FormValues>;
-};
+type Props<FormValues extends FieldValues> =
+  InputHTMLAttributes<HTMLInputElement> & {
+    label: ReactNode;
+    inputDescription?: ReactNode;
+    children?: never;
+    id: string;
+    autoComplete: string;
+    controller: UseControllerProps<FormValues>;
+  };
 
 function PasswordField<FormValues extends FieldValues>(
   props: Props<FormValues>

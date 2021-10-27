@@ -3,9 +3,9 @@ import { ModelSchemaValidationError } from '@models/api/errors/ModelSchemaValida
 
 export const validateModelWithSchema = async <ModeLType>(
   model: ModeLType,
-  Schema: { getValidationSchema(): SchemaOf<ModeLType> }
+  Schema: SchemaOf<ModeLType>
 ) => {
-  if (!(await Schema.getValidationSchema().isValid(model))) {
+  if (!(await Schema.isValid(model))) {
     throw new ModelSchemaValidationError(model);
   }
 };

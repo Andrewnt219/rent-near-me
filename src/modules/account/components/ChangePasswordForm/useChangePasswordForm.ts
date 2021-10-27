@@ -7,14 +7,15 @@ import AuthService from '@services/AuthService';
 import { getErrorMessage } from '@utils/api-responses';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
-import ChangePasswordFormModel from './ChangePasswordFormModel';
+import * as ChangePasswordForm from './ChangePasswordFormModel';
 
 export const useChangePasswordForm = () => {
   const { t } = useTranslation();
 
-  const form = useForm<ChangePasswordFormModel>({
-    defaultValues: new ChangePasswordFormModel(),
-    resolver: yupResolver(ChangePasswordFormModel.getValidationSchema(t)),
+  const formSchema = ChangePasswordForm.Schema(t);
+  const form = useForm<ChangePasswordForm.Model>({
+    defaultValues: formSchema.getDefault(),
+    resolver: yupResolver(formSchema),
   });
 
   const { user } = useAuth();
@@ -28,7 +29,7 @@ export const useChangePasswordForm = () => {
   const passwordValidationResults = validatePassword(password);
 
   const { control } = form;
-  const controllers: Controllers<ChangePasswordFormModel> = {
+  const controllers: Controllers<ChangePasswordForm.Model> = {
     uid: {
       name: 'uid',
       control,

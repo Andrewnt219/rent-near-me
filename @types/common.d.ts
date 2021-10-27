@@ -3,6 +3,8 @@ declare module '@common-types' {
   import { ReactNode } from 'react';
   import { UseControllerProps } from 'react-hook-form';
   import { StyledComponent } from 'styled-components';
+  import { InferType } from 'yup';
+
   type RouteProps = LinkProps & {
     textTranslateKey: string;
     exact?: boolean;
@@ -15,7 +17,6 @@ declare module '@common-types' {
     toggle: () => void;
   };
   type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
-
   type GetLayout = (page: ReactNode) => ReactNode;
   type Controllers<TFormValues> = Record<
     keyof TFormValues,
@@ -34,6 +35,15 @@ declare module '@common-types' {
   type Type<T> = {
     new (...args: any[]): T;
   };
+
+  type RemoveIndex<T> = {
+    [K in keyof T as string extends K
+      ? never
+      : number extends K
+      ? never
+      : K]: T[K];
+  };
+  type InferFromSchema<T> = RemoveIndex<InferType<T>>;
 
   type FirestoreTimestamp = Date | FirebaseFirestore.FieldValue;
 }

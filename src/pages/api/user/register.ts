@@ -1,6 +1,6 @@
 import type { Await } from '@common-types';
 import { auth, db } from '@libs/firebase-admin/firebase-admin';
-import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
+import * as RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateModelWithSchema } from '@utils/api/model-schema-validator';
@@ -13,8 +13,8 @@ async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
-  const model = new RegisterFormModel(req.body);
-  await validateModelWithSchema(model, RegisterFormModel);
+  const model = req.body as RegisterForm.Model;
+  await validateModelWithSchema(model, RegisterForm.Schema());
 
   const user = await auth.createUser({
     email: model.email,

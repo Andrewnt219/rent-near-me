@@ -1,13 +1,13 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
-import ChangePasswordFormModel from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
-import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
+import * as ChangePasswordForm from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
+import * as RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { ApiPostResult_User_ChangePassword } from '@pages/api/user/changePassword';
 import { ApiPostResult_User_Register } from '@pages/api/user/register';
 import axios from 'axios';
 import firebase from 'firebase/app';
 
 export default class AuthService {
-  static async registerWithEmail(formData: RegisterFormModel) {
+  static async registerWithEmail(formData: RegisterForm.Model) {
     const response = await axios.post<ApiPostResult_User_Register>(
       '/api/user/register',
       formData
@@ -50,7 +50,7 @@ export default class AuthService {
       : user?.providerData[0]?.providerId ?? null;
   }
 
-  static async changePassword(formData: ChangePasswordFormModel) {
+  static async changePassword(formData: ChangePasswordForm.Model) {
     const { email, oldPassword } = formData;
     await AuthService.reauthenticate(email, oldPassword);
     await axios.post<ApiPostResult_User_ChangePassword>(
@@ -59,11 +59,12 @@ export default class AuthService {
     );
   }
 
-  private static async reauthenticate(email: string, password: string) {
+  private static async reauthenticate(email?: string, password?: string) {
     const user = auth.currentUser;
     const providerId = AuthService.getEffectiveAuthProvider();
     switch (providerId) {
       case 'password':
+        if (!email || !password) throw Error('Email and Password is required');
         await user?.reauthenticateWithCredential(
           firebase.auth.EmailAuthProvider.credential(email, password)
         );

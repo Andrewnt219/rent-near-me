@@ -1,17 +1,20 @@
+import { InferFromSchema } from '@common-types';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
 
-export default class LoginFormModel {
-  email = '';
-  keepLogIn = false;
-  password = '';
+export const Schema = (t?: Translate) => {
+  const requiredMessage = t?.('common:errors.form.required');
+  const emailMessage = t?.('common:errors.form.invalid-email');
+  return yup.object().shape({
+    email: yup
+      .string()
+      .default('')
+      .required(requiredMessage)
+      .trim()
+      .email(emailMessage),
+    password: yup.string().default('').required(requiredMessage),
+    keepLogIn: yup.boolean().default(false),
+  });
+};
 
-  static getValidationSchema(t?: Translate) {
-    const requiredMessage = t ? t('common:errors.form.required') : undefined;
-    const emailMessage = t ? t('common:errors.form.invalid-email') : undefined;
-    return yup.object().shape({
-      email: yup.string().required(requiredMessage).trim().email(emailMessage),
-      password: yup.string().required(requiredMessage),
-    });
-  }
-}
+export type Model = InferFromSchema<ReturnType<typeof Schema>>;
