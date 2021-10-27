@@ -1,13 +1,13 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
-import * as ChangePasswordForm from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
-import * as RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
+import { ChangePasswordFormModel } from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
+import { RegisterFormModel } from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { ApiPostResult_User_ChangePassword } from '@pages/api/user/changePassword';
 import { ApiPostResult_User_Register } from '@pages/api/user/register';
 import axios from 'axios';
 import firebase from 'firebase/app';
 
 export default class AuthService {
-  static async registerWithEmail(formData: RegisterForm.Model) {
+  static async registerWithEmail(formData: RegisterFormModel) {
     const response = await axios.post<ApiPostResult_User_Register>(
       '/api/user/register',
       formData
@@ -50,7 +50,7 @@ export default class AuthService {
       : user?.providerData[0]?.providerId ?? null;
   }
 
-  static async changePassword(formData: ChangePasswordForm.Model) {
+  static async changePassword(formData: ChangePasswordFormModel) {
     const { email, oldPassword } = formData;
     await AuthService.reauthenticate(email, oldPassword);
     await axios.post<ApiPostResult_User_ChangePassword>(

@@ -4,7 +4,7 @@ import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
 
-export const Schema = (t?: Translate) => {
+export const RegisterFormSchema = (t?: Translate) => {
   const requiredMessage = t?.('common:errors.form.required');
   const emailMessage = t?.('common:errors.form.invalid-email');
   const selectMessage = t?.('common:errors.form.unselected-dropdown');
@@ -45,4 +45,6 @@ export const Schema = (t?: Translate) => {
   });
 };
 
-export type Model = InferFromSchema<ReturnType<typeof Schema>>;
+export type RegisterFormModel = InferFromSchema<
+  ReturnType<typeof RegisterFormSchema>
+>;

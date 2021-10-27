@@ -1,6 +1,9 @@
 import { Controllers } from '@common-types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
+import {
+  RegisterFormSchema,
+  RegisterFormModel,
+} from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import AuthService from '@services/AuthService';
 import { getErrorMessage } from '@utils/api-responses';
 import { validatePassword } from '@utils/validate-password-utils';
@@ -11,8 +14,8 @@ import { useForm } from 'react-hook-form';
 export default function useRegisterForm() {
   const { t } = useTranslation();
 
-  const formSchema = RegisterForm.Schema(t);
-  const form = useForm<RegisterForm.Model>({
+  const formSchema = RegisterFormSchema(t);
+  const form = useForm<RegisterFormModel>({
     defaultValues: formSchema.getDefault(),
     resolver: yupResolver(formSchema),
   });
@@ -20,7 +23,7 @@ export default function useRegisterForm() {
 
   const [submitError, setSubmitError] = useState('');
 
-  const controllers: Controllers<RegisterForm.Model> = {
+  const controllers: Controllers<RegisterFormModel> = {
     firstName: {
       control,
       name: 'firstName',

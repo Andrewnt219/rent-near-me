@@ -1,6 +1,9 @@
 import type { Await } from '@common-types';
 import { auth, db } from '@libs/firebase-admin/firebase-admin';
-import * as ChangePasswordForm from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
+import {
+  ChangePasswordFormSchema,
+  ChangePasswordFormModel,
+} from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateModelWithSchema } from '@utils/api/model-schema-validator';
@@ -14,8 +17,8 @@ async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
-  const model = req.body as ChangePasswordForm.Model;
-  await validateModelWithSchema(model, ChangePasswordForm.Schema());
+  const model = req.body as ChangePasswordFormModel;
+  await validateModelWithSchema(model, ChangePasswordFormSchema());
   await validateUserWithId(req.headers.authorization, model.uid);
 
   await auth.updateUser(model.uid, { password: model.newPassword });

@@ -2,7 +2,7 @@ import { InferFromSchema } from '@common-types';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
 
-export const Schema = (t?: Translate) => {
+export const LoginFormSchema = (t?: Translate) => {
   const requiredMessage = t?.('common:errors.form.required');
   const emailMessage = t?.('common:errors.form.invalid-email');
   return yup.object().shape({
@@ -17,4 +17,6 @@ export const Schema = (t?: Translate) => {
   });
 };
 
-export type Model = InferFromSchema<ReturnType<typeof Schema>>;
+export type LoginFormModel = InferFromSchema<
+  ReturnType<typeof LoginFormSchema>
+>;
