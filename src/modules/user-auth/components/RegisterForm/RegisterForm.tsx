@@ -1,4 +1,3 @@
-import { MouseEventHandler } from 'react';
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import Form from '@ui/Form/Form';
@@ -11,14 +10,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import useRegisterForm from './useRegisterForm';
 import { Genders } from '@models/constnats';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
-type RegisterFormProps = {
-  onAlreadyHaveAccountClick?: MouseEventHandler<HTMLButtonElement>;
-};
-
-const RegisterForm = ({
-  onAlreadyHaveAccountClick = () => undefined,
-}: RegisterFormProps) => {
+const RegisterForm = () => {
   const {
     controllers,
     form,
@@ -27,12 +21,13 @@ const RegisterForm = ({
     passwordValidationResults,
   } = useRegisterForm();
   const { t } = useTranslation();
+  const { loginModal } = useLayoutModal();
 
   return (
     <Form noValidate onSubmit={onSubmit}>
       <div tw="mb-md flex flex-wrap justify-between items-center">
         <h4 tw="text-xl font-semibold">Welcome to RentNearMe!</h4>
-        <ButtonLink type="button" onClick={onAlreadyHaveAccountClick}>
+        <ButtonLink type="button" onClick={loginModal.show}>
           Already have an account?
         </ButtonLink>
       </div>

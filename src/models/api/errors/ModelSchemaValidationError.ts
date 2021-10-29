@@ -1,7 +1,7 @@
-export class ModelSchemaValidationError<ModeLType> extends Error {
-  model: ModeLType;
+export class ModelSchemaValidationError<ModelType> extends Error {
+  model: ModelType;
 
-  constructor(model: ModeLType, message?: string) {
+  constructor(model: ModelType, message?: string) {
     super(message);
     this.model = model;
   }

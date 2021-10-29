@@ -6,24 +6,20 @@ import HrText from '@ui/HrText/HrText';
 import PasswordField from '@ui/Form/PasswordField';
 import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
-import { MouseEventHandler, ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { FaFacebook, FaKey } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import tw from 'twin.macro';
 import { useLoginForm } from './useLoginForm';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
 const signInExternalIconStyle = tw`w-6 h-6`;
 
-type LoginFormProps = {
-  onCreateNewAccountClick?: MouseEventHandler<HTMLButtonElement>;
-};
-
-const LoginForm = ({
-  onCreateNewAccountClick = () => undefined,
-}: LoginFormProps) => {
+const LoginForm = () => {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
   const { t } = useTranslation();
+  const { registerModal } = useLayoutModal();
 
   return (
     <Form noValidate onSubmit={onSubmit}>
@@ -98,7 +94,7 @@ const LoginForm = ({
           type="button"
           icon={<FaKey css={signInExternalIconStyle} />}
           text={t('common:login.new-account')}
-          onClick={onCreateNewAccountClick}
+          onClick={registerModal.show}
         />
       </ul>
     </Form>
