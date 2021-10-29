@@ -1,6 +1,5 @@
 import { MouseEventHandler } from 'react';
 import DatePicker from '@libs/react-day-picker/DatePicker';
-import RegisterModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import Form from '@ui/Form/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
@@ -11,6 +10,7 @@ import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import useRegisterForm from './useRegisterForm';
+import { Genders } from '@models/constnats';
 
 type RegisterFormProps = {
   onAlreadyHaveAccountClick?: MouseEventHandler<HTMLButtonElement>;
@@ -67,7 +67,7 @@ const RegisterForm = ({
           controller={controllers.gender}
         >
           <option value="" disabled></option>
-          {Object.entries(RegisterModel.genders).map(([key, val]) => (
+          {Object.entries(Genders).map(([key, val]) => (
             <option key={key} value={key}>
               {val}
             </option>

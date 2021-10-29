@@ -10,7 +10,7 @@ import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 type Props = {
   className?: string;
 };
-function ChangePasswordForm({ className, ...props }: Props) {
+function ChangePasswordForm({ className }: Props) {
   const { t } = useTranslation();
   const { form, controllers, onSubmit, passwordValidationResults } =
     useChangePasswordForm();

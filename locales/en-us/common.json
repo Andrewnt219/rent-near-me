@@ -5,7 +5,7 @@
       "invalid-email": "Please enter a valid email address",
       "weak-password": "Weak password",
       "unselected-dropdown": "Please select an option",
-      "invalid-date": "Suggested format is dd-MMM-yyyy",
+      "invalid-date": "A valid date is required (e.g.: 31-Dec-2021)",
       "invalid-max-length": "Cannot be longer than {{length}} characters",
       "invalid-min-length": "Must be at least {{length}} characters",
       "confirm-password-not-match": "Confirm password does not match"

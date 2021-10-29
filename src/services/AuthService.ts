@@ -1,6 +1,6 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
-import ChangePasswordFormModel from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
-import RegisterFormModel from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
+import { ChangePasswordFormModel } from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
+import { RegisterFormModel } from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { ApiPostResult_User_ChangePassword } from '@pages/api/user/changePassword';
 import { ApiPostResult_User_Register } from '@pages/api/user/register';
 import axios from 'axios';
@@ -59,11 +59,12 @@ export default class AuthService {
     );
   }
 
-  private static async reauthenticate(email: string, password: string) {
+  private static async reauthenticate(email?: string, password?: string) {
     const user = auth.currentUser;
     const providerId = AuthService.getEffectiveAuthProvider();
     switch (providerId) {
       case 'password':
+        if (!email || !password) throw Error('Email and Password is required');
         await user?.reauthenticateWithCredential(
           firebase.auth.EmailAuthProvider.credential(email, password)
         );

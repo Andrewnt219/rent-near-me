@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
@@ -20,7 +21,11 @@ const HomeNavBar = ({ className }: Props) => {
   return (
     <StyledHeader className={className} tw="bg-white py-xl">
       <Layout.Container tw="flex items-center justify-between">
-        <Logo />
+        <Link href="/">
+          <a>
+            <Logo />
+          </a>
+        </Link>
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
