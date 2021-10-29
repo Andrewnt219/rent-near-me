@@ -6,8 +6,9 @@ import { isNullOrUndefined } from './validate-js-utils';
 type ResultTypes = 'success' | 'error';
 type ErrorWithMessage = Error | { message: string };
 
-const hasMessage = (error: unknown): error is ErrorWithMessage =>
-  !isNullOrUndefined((error as ErrorWithMessage)?.message);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const hasMessage = (error: any): error is ErrorWithMessage =>
+  typeof error?.message === 'string';
 
 export interface Result<Data = unknown> {
   type: ResultTypes;

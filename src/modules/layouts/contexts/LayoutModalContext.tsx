@@ -2,7 +2,7 @@ import { ModalControl } from '@common-types';
 import LoginForm from '@modules/user-auth/components/LoginForm/LoginForm';
 import RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterForm';
 import Modal from '@ui/Modal/Modal';
-import { createContext, FC, useContext } from 'react';
+import { createContext, FC, useContext, useMemo } from 'react';
 import useModalGroup from 'src/hooks/useModalGroup';
 
 type LayoutModalContextValue = {
@@ -18,15 +18,15 @@ export const useLayoutModal = () => {
 };
 
 export const LayoutProvider: FC = ({ children }) => {
-  const { loginModal, registerModal } = useModalGroup('login', 'register');
+  const value = useModalGroup('login', 'register');
 
   return (
-    <LayoutModalContext.Provider value={{ loginModal, registerModal }}>
+    <LayoutModalContext.Provider value={value}>
       {children}
       <Modal
         size="md"
-        show={loginModal.isShow}
-        onClose={loginModal.hide}
+        show={value.loginModal.isShow}
+        onClose={value.loginModal.hide}
         aria-labelledby="LoginModalTitle"
         header={<h3 id="LoginModalTitle">Log in</h3>}
       >
@@ -34,8 +34,8 @@ export const LayoutProvider: FC = ({ children }) => {
       </Modal>
       <Modal
         size="lg"
-        show={registerModal.isShow}
-        onClose={registerModal.hide}
+        show={value.registerModal.isShow}
+        onClose={value.registerModal.hide}
         aria-labelledby="RegisterModalTitle"
         header={<h3 id="RegisterModalTitle">Register an account</h3>}
       >
