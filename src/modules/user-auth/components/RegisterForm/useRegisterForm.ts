@@ -1,5 +1,5 @@
 import { Controllers } from '@common-types';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import {
   RegisterFormSchema,
   RegisterFormModel,
