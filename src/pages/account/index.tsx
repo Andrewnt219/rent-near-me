@@ -11,7 +11,7 @@ export default function AccountIndexPage() {
   const { t } = useTranslation();
 
   return (
-    <section tw="max-w-5xl space-y-3xl md:space-y-4xl">
+    <section tw="max-w-5xl space-y-xl md:space-y-xl">
       <Header />
 
       <nav aria-label="Settings" tw="">

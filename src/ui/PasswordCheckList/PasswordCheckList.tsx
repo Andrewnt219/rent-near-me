@@ -1,7 +1,7 @@
 import PasswordCriterion from '@ui/PasswordCriterion/PasswordCriterion';
 import { PasswordCriteria } from '@utils/validate-password-utils';
 import { VFC } from 'react';
-import { BsQuestionCircleFill } from 'react-icons/bs';
+import { MdInfo } from 'react-icons/md';
 
 type Props = {
   className?: string;
@@ -31,7 +31,7 @@ const PasswordCheckList: VFC<Props> = ({ className, ...props }) => {
         }
       >
         Contains a number or a special character
-        <BsQuestionCircleFill tw="text-info text-xs" />
+        <MdInfo tw="text-info text-body2" />
       </PasswordCriterion>
     </div>
   );

@@ -7,7 +7,7 @@ import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactNode } from 'react';
-import { FaShieldAlt } from 'react-icons/fa';
+import { MdShield } from 'react-icons/md';
 
 export default function SecurityPage() {
   const { t } = useTranslation();
@@ -25,6 +25,8 @@ function Main() {
   return (
     <ActionFieldGroup>
       <PasswordActionField />
+      <PasswordActionField />
+      <PasswordActionField />
     </ActionFieldGroup>
   );
 }
@@ -34,14 +36,14 @@ function Aside() {
     <AccountInfoCardGroup>
       <AccountInfoCard
         title="Let's make your account more secure"
-        icon={<FaShieldAlt tw=" text-secondary" />}
+        icon={<MdShield tw=" text-secondary" />}
       >
         We’re always working on ways to increase safety in our community. That’s
         why we look at every account to make sure it’s as secure as possible.
       </AccountInfoCard>
       <AccountInfoCard
         title="Let's make your account more secure"
-        icon={<FaShieldAlt tw=" text-secondary" />}
+        icon={<MdShield tw=" text-secondary" />}
       >
         We’re always working on ways to increase safety in our community. That’s
         why we look at every account to make sure it’s as secure as possible.

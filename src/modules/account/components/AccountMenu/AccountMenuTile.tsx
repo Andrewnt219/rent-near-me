@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
+import { MdChevronRight } from 'react-icons/md';
 
 type Props = {
   className?: string;
@@ -13,18 +13,17 @@ function AccountMenuTile({ className, ...props }: Props) {
   return (
     <article
       className={className}
-      css={{ boxShadow: 'rgb(0 0 0 / 16%) 0px 2px 8px' }}
-      tw="p-xl w-full h-full rounded"
+      tw="p-xl w-full h-full rounded shadow-z8"
     >
       <span aria-hidden css={{ fontSize: '2em' }}>
         {props.data.icon}
       </span>
 
-      <div tw="mt-md text-lg font-semibold flex items-baseline gap-xs">
+      <div tw="mt-md text-h3 font-semibold flex items-baseline gap-xs">
         {props.data.title}
 
         <div aria-hidden tw="" css={{ fontSize: '.75em' }}>
-          <FaChevronRight />
+          <MdChevronRight />
         </div>
       </div>
 

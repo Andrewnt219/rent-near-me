@@ -7,7 +7,7 @@ import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import React from 'react';
-import { FaGlobe } from 'react-icons/fa';
+import { MdLanguage } from 'react-icons/md';
 import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
 
@@ -19,7 +19,7 @@ const HomeNavBar = ({ className }: Props) => {
   const { registerModal } = useLayoutModal();
 
   return (
-    <StyledHeader className={className} tw="bg-white py-xl">
+    <header className={className} tw="bg-white py-lg shadow">
       <Layout.Container tw="flex items-center justify-between">
         <Link href="/">
           <a>
@@ -42,18 +42,18 @@ const HomeNavBar = ({ className }: Props) => {
           )}
 
           <IconButtonGhost size="md">
-            <FaGlobe />
+            <MdLanguage />
             <span tw="sr-only">Change site&apos; language</span>
           </IconButtonGhost>
 
           <UserMenu tw="ml-sm" />
         </nav>
       </Layout.Container>
-    </StyledHeader>
+    </header>
   );
 };
 
 const StyledHeader = styled.header`
-  box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
+  
 `;
 export default HomeNavBar;

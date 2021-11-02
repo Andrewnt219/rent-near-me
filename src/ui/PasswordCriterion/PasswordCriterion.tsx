@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IoCheckmarkOutline, IoCloseOutline } from 'react-icons/io5';
+import { MdCheck, MdClose } from 'react-icons/md';
 import tw, { styled } from 'twin.macro';
 
 type PasswordCriteriaProps = {
@@ -14,12 +14,12 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
     <StyledPassworCriterion isQualified={isQualified}>
       {isQualified ? (
         <>
-          <IoCheckmarkOutline />
+          <MdCheck />
           <span tw="sr-only">qualified</span>
         </>
       ) : (
         <>
-          <IoCloseOutline />
+          <MdClose />
           <span tw="sr-only">not qualified</span>
         </>
       )}
@@ -29,7 +29,7 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
 };
 
 const StyledPassworCriterion = styled.p<PasswordCriteriaProps>`
-  ${tw`text-xs font-semibold`}
+  ${tw`text-body2 font-semibold`}
   ${tw`flex items-center gap-sm`};
   ${tw`text-danger`}
 

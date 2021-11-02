@@ -4,7 +4,7 @@ import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
-import { FaUserAlt } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
 import tw, { styled } from 'twin.macro';
 import { StyledUserMenuLink } from '../UserMenuLink/UserMenuLink';
 import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
@@ -34,7 +34,7 @@ const UserMenu = ({ className }: Props) => {
 
         <HamburgerIcon />
 
-        <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
+        <MdDashboard tw="h-7 w-7 p-xs bg-dark rounded-full text-white ml-md" />
       </ButtonGhost>
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
     </div>
@@ -108,7 +108,7 @@ function Menu(props: MenuProps) {
       <UserMenuLinksGroup routes={links['preference']} />
       {isAuthenticated && (
         <UserMenuLinksGroup>
-          <StyledUserMenuLink as="button" onClick={() => AuthService.signOut()}>
+          <StyledUserMenuLink tw="text-danger" as="button" onClick={() => AuthService.signOut()}>
             Logout
           </StyledUserMenuLink>
         </UserMenuLinksGroup>

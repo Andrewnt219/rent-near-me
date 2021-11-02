@@ -7,7 +7,7 @@ import Row from '@ui/Row/Row';
 import Select from '@ui/Form/SelectField';
 import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
-import { RiErrorWarningFill } from 'react-icons/ri';
+import { MdError } from 'react-icons/md';
 import useRegisterForm from './useRegisterForm';
 import { Genders } from '@models/constnats';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
@@ -26,7 +26,7 @@ const RegisterForm = () => {
   return (
     <Form noValidate onSubmit={onSubmit}>
       <div tw="mb-md flex flex-wrap justify-between items-center">
-        <h4 tw="text-xl font-semibold">Welcome to RentNearMe!</h4>
+        <h4 tw="text-h4 font-semibold">Welcome to RentNearMe!</h4>
         <ButtonLink type="button" onClick={loginModal.show}>
           Already have an account?
         </ButtonLink>
@@ -97,7 +97,7 @@ const RegisterForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          <MdError tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
       )}

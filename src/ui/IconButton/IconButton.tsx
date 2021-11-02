@@ -5,13 +5,13 @@ type Size = 'sm' | 'md' | 'lg';
 function getIconButonSize(size: Size | undefined) {
   switch (size) {
     case 'lg':
-      return tw`w-12 h-12 p-sm text-xl`;
+      return tw`w-12 h-12 p-sm text-button`;
 
     case 'md':
-      return tw`w-10 h-10 p-xs text-lg`;
+      return tw`w-10 h-10 p-xs text-button`;
 
     case 'sm':
-      return tw`w-8 h-8 p-xs text-body`;
+      return tw`w-8 h-8 p-xs text-button`;
 
     default:
       return tw``;

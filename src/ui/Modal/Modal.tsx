@@ -1,7 +1,7 @@
 import { Dialog } from '@reach/dialog';
 import { ButtonGhost } from '@ui/Button/Button';
 import { FC, ReactNode } from 'react';
-import { IoCloseOutline } from 'react-icons/io5';
+import { MdOutlineClose } from 'react-icons/md';
 import tw, { css, styled, theme } from 'twin.macro';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
@@ -37,7 +37,7 @@ const Modal: FC<ModalProps> = ({
             css={closeModalBtnCss(closeButtonPosition)}
             onClick={onClose}
           >
-            <IoCloseOutline tw="w-6 h-6" />
+            <MdOutlineClose tw="w-6 h-6" />
             <span tw="sr-only">Close dialog</span>
           </ButtonGhost>
           <ModalHeaderContent>{header}</ModalHeaderContent>
@@ -94,16 +94,15 @@ const modalDialogCss = (size: ModalSize) => {
 
   return css`
     max-width: calc(100% - 1rem);
-    top: calc(50% - ${theme('spacing.var-app-bar')} / 2);
     ${sizeCss}
-    ${tw`bg-white rounded shadow-xl`}
+    ${tw`bg-white rounded`}
     ${tw`p-0 m-0`}
     ${tw`fixed lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
   `;
 };
 
 const ModalHeader = styled.div`
-  ${tw`relative px-xl py-md`}
+  ${tw`relative px-xl py-md text-h6`}
   ${tw`border-b border-light`}
   ${tw`text-center font-semibold`}
 `;
@@ -115,7 +114,6 @@ const ModalBody = styled.div`
   ${tw`p-xl`}
 `;
 const ModalBodyContent = styled.div`
-  max-height: calc(100vh - ${theme`spacing.var-app-bar`} - 8rem);
   ${tw`overflow-auto p-xs`}
 `;
 

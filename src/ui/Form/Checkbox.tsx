@@ -4,7 +4,7 @@ import {
   useController,
   UseControllerProps,
 } from 'react-hook-form';
-import { FaCheck } from 'react-icons/fa';
+import { MdCheck } from 'react-icons/md';
 import Form from './Form';
 
 type Props<FormValues extends FieldValues> =
@@ -46,7 +46,7 @@ export default function Checkbox<FormValues extends FieldValues>({
           aria-checked={value === true}
           aria-invalid={fieldState.invalid}
         >
-          <FaCheck />
+          <MdCheck />
         </Form.CheckboxTick>
 
         {label}

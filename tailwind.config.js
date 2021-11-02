@@ -1,6 +1,21 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { fontFamily, colors } = require('tailwindcss/defaultTheme');
 
+const getBorderColor = (theme) => ({
+  DEFAULT: theme('colors.gray.300'),
+  light: theme('colors.gray.100'),
+  dark: theme('colors.gray.800'),
+});
+
+const getBackgroundColor = (theme) => ({
+  light: theme('colors.gray.100'),
+  dark: theme('colors.gray.900'),
+});
+
+const getTextColor = (theme) => ({
+  muted: theme('colors.gray.600'),
+});
+
 module.exports = {
   mode: 'jit',
   purge: [
@@ -10,7 +25,8 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    shadow: {
+    boxShadow: {
+      DEFAULT: 'rgb(145 158 171 / 24%) 0px 1px 2px 0px',
       z1: 'rgb(145 158 171 / 24%) 0px 1px 2px 0px',
       z8: 'rgb(145 158 171 / 24%) 0px 8px 16px 0px',
       z12: 'rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 12px 24px 0px',
@@ -25,12 +41,12 @@ module.exports = {
       danger: 'rgb(188 30 93 / 24%) 0px 8px 16px 0px',
     },
     fontSize: {
-      h1: ['clamp(2.5rem, 2.2rem + 1.5vw, 4rem)', '1.25'],
-      h2: ['clamp(2rem, 1.8rem + 1vw, 3rem)', '1.33333'],
-      h3: ['clamp(1.5rem, 1.4rem + 0.5vw, 2rem);', '1.5'],
-      h4: ['clamp(1.25rem, 1.2rem + 0.25vw, 1.5rem)', '1.5'],
-      h5: ['clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem)', '1.5'],
-      h6: ['clamp(1.0625rem, 1.05rem + 0.0625vw, 1.125rem)', '1.55556'],
+      h1: ['clamp(2.5rem, 2.2rem + 1.5vw, 4rem)', '1.25'], // 40px ~ 64px
+      h2: ['clamp(2rem, 1.8rem + 1vw, 3rem)', '1.33333'], // 32px ~ 48px
+      h3: ['clamp(1.5rem, 1.4rem + 0.5vw, 2rem);', '1.5'], // 24px ~ 32px
+      h4: ['clamp(1.25rem, 1.2rem + 0.25vw, 1.5rem)', '1.5'], // 20px ~ 24px
+      h5: ['clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem)', '1.5'], // 18px ~ 20px
+      h6: ['clamp(1.0625rem, 1.05rem + 0.0625vw, 1.125rem)', '1.55556'], // 17px ~ 18 px
       body1: ['1rem', '1.5'],
       body2: ['0.875rem', '1.57143'],
       caption: ['0.75rem', '1.5'],
@@ -87,6 +103,14 @@ module.exports = {
     },
 
     extend: {
+      spacing: {
+        xs: '0.25rem',
+        sm: '0.5rem',
+        md: '1rem',
+        lg: '1.5rem',
+        xl: '3rem',
+      },
+
       maxWidth: {
         '8xl': '90rem',
         'var-page': 'var(--page-max-width, 90rem)',
@@ -96,25 +120,15 @@ module.exports = {
         DEFAULT: '0.25rem',
       },
 
-      borderColor: (theme) => ({
-        DEFAULT: theme('colors.gray.300'),
-      }),
+      borderColor: getBorderColor,
+      backgroundColor: getBackgroundColor,
+      textColor: getTextColor,
+      divideColor: getBorderColor,
+      placeholderColor: getTextColor,
+      ringColor: getBorderColor,
 
       fontFamily: {
         sans: ['Public Sans', ...fontFamily.sans],
-      },
-
-      spacing: {
-        s1: '0.5rem',
-        s2: '1rem',
-        s3: '1.5rem',
-        s4: '2rem',
-        s5: '2.5rem',
-        s6: '3rem',
-        s7: '3.5rem',
-        s8: '4rem',
-        s9: '4.5rem',
-        s10: '5rem',
       },
     },
   },

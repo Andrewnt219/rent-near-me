@@ -11,7 +11,7 @@ type Props = {
 function AccountInfoCard({ className, ...props }: PropsWithChildren<Props>) {
   return (
     <StyledWrapper className={className} tw="">
-      <header tw="text-lg">
+      <header tw="text-h3">
         <span aria-hidden css={{ fontSize: '1.75em' }}>
           {props.icon}
         </span>
@@ -26,13 +26,13 @@ function AccountInfoCard({ className, ...props }: PropsWithChildren<Props>) {
 }
 
 const StyledWrapper = styled.article`
-  ${tw`border px-xl py-2xl`}
+  ${tw`border px-xl py-xl`}
 
   ${AccountInfoCardGroup} & {
     ${tw`not-first:border-t-0 not-last:border-b-0 relative`}
 
     &:not(:last-child)::after {
-      ${tw`content absolute bottom-0 left-md block w-16 h-px bg-bordercolor`}
+      ${tw`content absolute bottom-0 left-md block w-16 border-b`}
     }
   }
 `;

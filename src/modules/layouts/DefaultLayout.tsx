@@ -13,7 +13,7 @@ const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
     <LayoutProvider>
       <Layout
         size="sm"
-        tw="flex flex-col min-h-full relative pb-var-app-bar lg:pb-0"
+        tw="flex flex-col min-h-full relative pb-md lg:pb-0"
       >
         <HomeNavBar tw="hidden lg:block" />
         <AppBar tw="lg:hidden" />

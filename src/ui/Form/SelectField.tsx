@@ -4,7 +4,7 @@ import {
   useController,
   UseControllerProps,
 } from 'react-hook-form';
-import { GoChevronDown } from 'react-icons/go';
+import { MdArrowDropDown } from 'react-icons/md';
 import Form from './Form';
 
 type Props<FormValues extends FieldValues> =
@@ -35,7 +35,7 @@ function Select<FormValues extends FieldValues>(props: Props<FormValues>) {
       </Form.Select>
 
       <Form.Label htmlFor={selectProps.id}>{label}</Form.Label>
-      <GoChevronDown tw="absolute top-lg right-md" />
+      <MdArrowDropDown tw="absolute top-lg right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid && (

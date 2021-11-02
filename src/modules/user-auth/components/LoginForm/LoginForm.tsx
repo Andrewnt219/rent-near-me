@@ -7,9 +7,9 @@ import PasswordField from '@ui/Form/PasswordField';
 import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { FaFacebook, FaKey } from 'react-icons/fa';
+import { MdFacebook, MdVpnKey } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
-import { RiErrorWarningFill } from 'react-icons/ri';
+import { MdError } from 'react-icons/md';
 import tw from 'twin.macro';
 import { useLoginForm } from './useLoginForm';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   return (
     <Form noValidate onSubmit={onSubmit}>
-      <h4 tw="text-xl mb-md font-semibold">Welcome back to RentNearMe!</h4>
+      <h4 tw="text-h4 mb-md font-semibold">Welcome back to RentNearMe!</h4>
 
       <TextField
         label={t('common:login.email')}
@@ -55,7 +55,7 @@ const LoginForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          <MdError tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
       )}
@@ -84,7 +84,7 @@ const LoginForm = () => {
         <SignInExternalButton
           type="button"
           icon={
-            <FaFacebook css={signInExternalIconStyle} tw="text-[#1877f2]" />
+            <MdFacebook css={signInExternalIconStyle} tw="text-[#1877f2]" />
           }
           text={t('common:login.facebook')}
           onClick={AuthService.signInWithFacebook}
@@ -92,7 +92,7 @@ const LoginForm = () => {
 
         <SignInExternalButton
           type="button"
-          icon={<FaKey css={signInExternalIconStyle} />}
+          icon={<MdVpnKey css={signInExternalIconStyle} />}
           text={t('common:login.new-account')}
           onClick={registerModal.show}
         />
