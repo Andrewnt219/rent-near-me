@@ -1,5 +1,15 @@
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
-const ActionFieldGroup = tw.div`all-child:py-xl divide-y `;
+const ActionFieldGroup = styled.div`
+  ${tw`  divide-y `}
+
+  & > * {
+    ${tw`py-lg`}
+
+    &:first-child {
+      ${tw`pt-0`}
+    }
+  }
+`;
 
 export default ActionFieldGroup;

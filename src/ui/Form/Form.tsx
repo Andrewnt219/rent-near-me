@@ -12,7 +12,7 @@ const Form = ({ children, ...formProps }: Props) => {
 /*                                    INPUT                                   */
 /* -------------------------------------------------------------------------- */
 export const inputCss = css`
-  ${tw`border  w-full rounded px-sm pt-lg pb-sm`}
+  ${tw`border  w-full rounded px-md pt-lg pb-sm`}
   ${tw`transition-colors`}
 
   &[aria-invalid='true']:not(:focus) {
@@ -46,7 +46,7 @@ export const labelInvalidCss = css`
 Form.Label = styled.label`
   /* Translate y equals to input pt */
   /* left equals to input pl */
-  ${tw`absolute top-0 left-sm transform translate-y-md`}
+  ${tw`absolute top-0 left-md transform translate-y-md`}
   ${tw`transition-all`} 
 
   input:focus ~ &, input:not(:placeholder-shown) ~ & {
@@ -118,7 +118,6 @@ Form.ErrorMessage = styled.p`
   ${tw`text-danger`}
 `;
 
-Form.Description = styled.p`
-`;
+Form.Description = styled.p``;
 
 export default Form;

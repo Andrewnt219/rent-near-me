@@ -1,11 +1,11 @@
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink, ButtonSecondary } from '@ui/Button/Button';
 import Form from '@ui/Form/Form';
-import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
-import PasswordField from '@ui/Form/PasswordField';
 import HiddenField from '@ui/Form/HiddenField';
+import PasswordField from '@ui/Form/PasswordField';
+import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import useTranslation from 'next-translate/useTranslation';
 import { useChangePasswordForm } from './useChangePasswordForm';
-import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 
 type Props = {
   className?: string;
