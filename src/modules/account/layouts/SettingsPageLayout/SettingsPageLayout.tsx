@@ -1,21 +1,22 @@
 import DefaultLayout from '@modules/layouts/DefaultLayout';
-import { PropsWithChildren } from 'react';
+import AuthGuard from '@modules/user-auth/utils/AuthGuard/AuthGuard';
+import { FC } from 'react';
 
-type Props = {
+type SettingsPageLayoutProps = {
   className?: string;
 };
-function SettingsPageLayout({
+
+const SettingsPageLayout: FC<SettingsPageLayoutProps> = ({
   className,
   children,
-  ...props
-}: PropsWithChildren<Props>) {
-  return (
-    <DefaultLayout>
+}) => (
+  <DefaultLayout>
+    <AuthGuard>
       <div className={className} tw="max-w-5xl mt-2xl mx-auto">
         {children}
       </div>
-    </DefaultLayout>
-  );
-}
+    </AuthGuard>
+  </DefaultLayout>
+);
 
 export default SettingsPageLayout;

@@ -1,18 +1,25 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import UnauthenticatedPrompt from '../../components/UnauthenticatedPrompt';
-import EmailUnverifiedPrompt from '../../components/EmailUnverifiedPrompt';
+import DefaultUnauthenticatedPrompt from '../../components/DefaultUnauthenticatedPrompt';
+import DefaultEmailUnverifiedPrompt from '../../components/DefaultEmailUnverifiedPrompt';
 
 type AuthGuardProps = {
   emailVerified?: boolean;
+  renderUnauthenticated?: ReactNode;
+  renderEmailUnverified?: ReactNode;
 };
 
-const AuthGuard: FC<AuthGuardProps> = ({ children, emailVerified = false }) => {
+const AuthGuard: FC<AuthGuardProps> = ({
+  children,
+  emailVerified = false,
+  renderUnauthenticated = <DefaultUnauthenticatedPrompt />,
+  renderEmailUnverified = <DefaultEmailUnverifiedPrompt />,
+}) => {
   const { user } = useAuth();
 
-  if (!user) return <UnauthenticatedPrompt />;
+  if (!user) return <>{renderUnauthenticated}</>;
 
-  if (emailVerified && !user.emailVerified) return <EmailUnverifiedPrompt />;
+  if (emailVerified && !user.emailVerified) return <>{renderEmailUnverified}</>;
 
   return <>{children}</>;
 };
