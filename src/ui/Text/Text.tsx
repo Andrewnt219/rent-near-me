@@ -3,13 +3,14 @@ import tw, { styled } from 'twin.macro';
 
 type Props = {
   className?: string;
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
   variant?: StyledTextProps['variant'];
 };
 function Text({ className, ...props }: PropsWithChildren<Props>) {
+  console.log(props);
   return (
     <StyledText
-      as={props.as ?? 'p'}
+      as={props.component ?? 'span'}
       variant={props.variant ?? 'body1'}
       className={className}
       tw=""
