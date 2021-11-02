@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Controllers } from '@common-types';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthService from '@services/AuthService';
 import { getErrorMessage } from '@utils/api-responses';
