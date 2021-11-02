@@ -14,7 +14,7 @@ type AuthContextValue = {
   isAuthenticated: boolean;
   effectiveProvider: string | null;
   user: firebase.User | null;
-  profile: Profile | undefined;
+  profile: Profile | null;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -46,7 +46,7 @@ export const AuthProvider: FC = ({ children }) => {
       value={{
         isAuthReady: isReady,
         user,
-        profile: profile?.data,
+        profile: profile?.data ?? null,
         get effectiveProvider() {
           return AuthService.getEffectiveAuthProvider(this.user);
         },
