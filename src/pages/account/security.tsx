@@ -4,7 +4,7 @@ import AccountPageHeader from '@modules/account/components/AccountPageHeader/Acc
 import ActionFieldGroup from '@modules/account/components/ActionFieldGroup/ActionFieldGroup';
 import PasswordActionField from '@modules/account/components/PasswordActionField/PasswordActionField';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
-import SettingsPageLayout from '@modules/account/layouts/SettingsPageLayout/SettingsPageLayout';
+import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactNode } from 'react';
 import { FaShieldAlt } from 'react-icons/fa';
@@ -51,5 +51,5 @@ function Aside() {
 }
 
 SecurityPage.getLayout = (page: ReactNode) => {
-  return <SettingsPageLayout>{page}</SettingsPageLayout>;
+  return <AccountPageLayout>{page}</AccountPageLayout>;
 };

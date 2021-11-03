@@ -1,7 +1,7 @@
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import NextLink from 'next/link';
 import { PropsWithChildren } from 'react';
-import SettingsPageLayout from '../SettingsPageLayout/SettingsPageLayout';
+import AccountPageLayout from '../AccountPageLayout/AccountPageLayout';
 type Props = {
   className?: string;
 };
@@ -11,7 +11,7 @@ function PaymentSettingPageLayout({
   ...props
 }: PropsWithChildren<Props>) {
   return (
-    <SettingsPageLayout>
+    <AccountPageLayout>
       <div className={className} tw="">
         <AccountPageHeader title="Payments & payouts" />
 
@@ -29,7 +29,7 @@ function PaymentSettingPageLayout({
 
         {children}
       </div>
-    </SettingsPageLayout>
+    </AccountPageLayout>
   );
 }
 
