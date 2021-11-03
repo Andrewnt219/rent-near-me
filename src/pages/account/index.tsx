@@ -1,5 +1,5 @@
 import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
-import SettingsPageLayout from '@modules/account/layouts/SettingsPageLayout/SettingsPageLayout';
+import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink } from '@ui/Button/Button';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
@@ -64,5 +64,5 @@ function Separator() {
   return <div tw="hidden md:(inline font-semibold) ">·</div>;
 }
 AccountIndexPage.getLayout = (page: ReactNode) => {
-  return <SettingsPageLayout>{page}</SettingsPageLayout>;
+  return <AccountPageLayout>{page}</AccountPageLayout>;
 };
