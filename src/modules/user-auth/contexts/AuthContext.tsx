@@ -7,7 +7,7 @@ import { createContext, useContext, FC } from 'react';
 import AuthService from '@services/AuthService';
 
 type AuthContextValue = {
-  ready: boolean;
+  isAuthReady: boolean;
   isAuthenticated: boolean;
   effectiveProvider: string | null;
   user: firebase.User | null;
@@ -23,12 +23,12 @@ export const useAuth = () => {
 
 export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState<firebase.User | null>(null);
-  const [ready, setReady] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     auth.onAuthStateChanged(async (newUser) => {
       setUser(newUser);
-      setReady(true);
+      setIsReady(true);
       await AuthService.updateRequestAuthorizationHeader(newUser);
     });
   }, []);
@@ -36,7 +36,7 @@ export const AuthProvider: FC = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        ready,
+        isAuthReady: isReady,
         user,
         get effectiveProvider() {
           return AuthService.getEffectiveAuthProvider(this.user);

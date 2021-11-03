@@ -7,30 +7,31 @@ import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 type AuthGuardProps = {
   emailVerified?: boolean;
   promptLogin?: boolean;
-  renderUnauthenticated?: ReactNode;
-  renderEmailUnverified?: ReactNode;
+  renderedUnauthenticated?: ReactNode;
+  renderedEmailUnverified?: ReactNode;
 };
 
 const AuthGuard: FC<AuthGuardProps> = ({
   children,
   emailVerified = false,
   promptLogin = false,
-  renderUnauthenticated = <DefaultUnauthenticatedPrompt />,
-  renderEmailUnverified = <DefaultEmailUnverifiedPrompt />,
+  renderedUnauthenticated = <DefaultUnauthenticatedPrompt />,
+  renderedEmailUnverified = <DefaultEmailUnverifiedPrompt />,
 }) => {
-  const { ready, user } = useAuth();
+  const { isAuthReady, user } = useAuth();
   const { loginModal } = useLayoutModal();
 
   useEffect(() => {
-    if (promptLogin && ready && !user) {
+    if (promptLogin && isAuthReady && !user) {
       loginModal.show();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, user]);
+  }, [isAuthReady, user]);
 
-  if (!user) return <>{renderUnauthenticated}</>;
+  if (!user) return <>{renderedUnauthenticated}</>;
 
-  if (emailVerified && !user.emailVerified) return <>{renderEmailUnverified}</>;
+  if (emailVerified && !user.emailVerified)
+    return <>{renderedEmailUnverified}</>;
 
   return <>{children}</>;
 };
