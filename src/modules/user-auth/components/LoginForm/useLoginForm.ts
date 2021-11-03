@@ -8,9 +8,11 @@ import AuthService from '@services/AuthService';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
 export const useLoginForm = () => {
   const { t } = useTranslation();
+  const { loginModal } = useLayoutModal();
 
   const formSchema = LoginFormSchema(t);
   const form = useForm<LoginFormModel>({
@@ -26,6 +28,8 @@ export const useLoginForm = () => {
       data.password,
       data.keepLogIn
     ).catch((err) => setSubmitError(err.error_description || err.message));
+
+    loginModal.hide();
   });
 
   const controllers: Controllers<LoginFormModel> = {
