@@ -1,5 +1,5 @@
 import { InferFromSchema } from '@common-types';
-import { DEFAULT_DATE_FORMAT, GENDERS, MAXIMUM_DOB } from '@models/constnats';
+import { DATE_TIME_FORMATS, GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
@@ -14,7 +14,7 @@ export const RegisterFormSchema = (t?: Translate) => {
     length: 50,
   });
   const maxDateMessage = t?.('common:errors.form.max-date', {
-    date: dayjs(MAXIMUM_DOB).format(DEFAULT_DATE_FORMAT),
+    date: dayjs(MAXIMUM_DOB).format(DATE_TIME_FORMATS.MEDIUM_DATE),
   });
   const weakPasswordMessage =
     t?.('common:errors.form.weak-password') ?? 'weak password';
