@@ -1,15 +1,14 @@
 import { RouteProps } from '@common-types';
+import { Icon } from '@iconify/react';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthService from '@services/AuthService';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
-import { MdAccountCircle } from 'react-icons/md';
 import tw, { styled } from 'twin.macro';
 import { StyledUserMenuLink } from '../UserMenuLink/UserMenuLink';
 import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
 import { useUserMenuDropDown } from './useUserMenuDropdown';
-
 type Props = {
   className?: string;
 };
@@ -34,7 +33,7 @@ const UserMenu = ({ className }: Props) => {
 
         <HamburgerIcon />
 
-        <MdAccountCircle tw="w-8 h-8 p-xs rounded-full ml-sm" />
+        <Icon icon="mdi:account-circle" tw="w-8 h-8 p-xs rounded-full ml-sm" />
       </ButtonGhost>
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
     </div>

@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
@@ -9,12 +10,8 @@ import HrText from '@ui/HrText/HrText';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { MdError, MdFacebook, MdVpnKey } from 'react-icons/md';
 import tw from 'twin.macro';
 import { useLoginForm } from './useLoginForm';
-
-const signInExternalIconStyle = tw`w-6 h-6`;
 
 const LoginForm = () => {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
@@ -57,7 +54,7 @@ const LoginForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <MdError tw="w-5 h-5 fill-current" />
+          <Icon icon="mdi:alert-circle" tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
       )}
@@ -78,15 +75,20 @@ const LoginForm = () => {
       <ul aria-label="Sign-in options" tw="space-y-sm">
         <SignInExternalButton
           type="button"
-          icon={<FcGoogle css={signInExternalIconStyle} />}
+          icon={
+            <StyledIconWrapper>
+              <Icon icon="flat-color-icons:google" />
+            </StyledIconWrapper>
+          }
           text={t('common:login.google')}
           onClick={AuthService.signInWithGoogle}
         />
-
         <SignInExternalButton
           type="button"
           icon={
-            <MdFacebook css={signInExternalIconStyle} tw="text-[#1877f2]" />
+            <StyledIconWrapper>
+              <Icon icon="mdi:facebook" tw="text-[#1877f2]" />
+            </StyledIconWrapper>
           }
           text={t('common:login.facebook')}
           onClick={AuthService.signInWithFacebook}
@@ -94,7 +96,11 @@ const LoginForm = () => {
 
         <SignInExternalButton
           type="button"
-          icon={<MdVpnKey css={signInExternalIconStyle} />}
+          icon={
+            <StyledIconWrapper>
+              <Icon icon="mdi:key" />
+            </StyledIconWrapper>
+          }
           text={t('common:login.new-account')}
           onClick={registerModal.show}
         />
@@ -102,6 +108,8 @@ const LoginForm = () => {
     </Form>
   );
 };
+
+const StyledIconWrapper = tw.span`svg:(w-6 h-6)`;
 
 export default LoginForm;
 

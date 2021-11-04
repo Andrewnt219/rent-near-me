@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 // twin.d.ts
+import { Icon } from '@iconify/react';
+import { ComponentProps, VFC } from 'react';
 import styledImport, { css as cssImport, CSSProp } from 'styled-components';
 import 'twin.macro';
 
@@ -15,11 +17,11 @@ declare module 'react' {
     css?: CSSProp;
   }
   // The inline svg css prop
-  interface SVGProps<T> extends SVGProps<SVGSVGElement> {
+  interface SVGProps extends SVGProps<SVGSVGElement> {
     css?: CSSProp;
   }
 
-  interface SVGAttributes<T> extends SVGAttributes<SVGElement> {
+  interface SVGAttributes extends SVGAttributes<SVGElement> {
     css?: CSSProp;
   }
 }

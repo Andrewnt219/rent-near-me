@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
@@ -7,7 +8,6 @@ import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
 import Link from 'next/link';
 import React from 'react';
-import { MdLanguage } from 'react-icons/md';
 import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
 
@@ -42,7 +42,7 @@ const HomeNavBar = ({ className }: Props) => {
           )}
 
           <IconButtonGhost size="md">
-            <MdLanguage />
+            <Icon icon="mdi:web" />
             <span tw="sr-only">Change site&apos; language</span>
           </IconButtonGhost>
 

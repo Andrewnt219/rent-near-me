@@ -4,7 +4,7 @@ import {
   useController,
   UseControllerProps,
 } from 'react-hook-form';
-import { MdArrowDropDown } from 'react-icons/md';
+import { Icon } from '@iconify/react';
 import Form from './Form';
 
 type Props<FormValues extends FieldValues> =
@@ -35,7 +35,7 @@ function Select<FormValues extends FieldValues>(props: Props<FormValues>) {
       </Form.Select>
 
       <Form.Label htmlFor={selectProps.id}>{label}</Form.Label>
-      <MdArrowDropDown tw="absolute top-lg right-md" />
+      <Icon icon="mdi:arrow-down-drop-circle" tw="absolute top-lg right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid && (

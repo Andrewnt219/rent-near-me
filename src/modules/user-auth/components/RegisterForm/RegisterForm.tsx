@@ -10,7 +10,7 @@ import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import Row from '@ui/Row/Row';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
-import { MdError } from 'react-icons/md';
+import { Icon } from '@iconify/react';
 import useRegisterForm from './useRegisterForm';
 
 const RegisterForm = () => {
@@ -101,7 +101,7 @@ const RegisterForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <MdError tw="w-5 h-5 fill-current" />
+          <Icon tw="w-5 h-5 fill-current" icon="mdi:alert-circle" />
           {submitError}
         </Form.ErrorMessage>
       )}

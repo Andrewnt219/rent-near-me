@@ -1,6 +1,6 @@
 import Text from '@ui/Text/Text';
 import { FC } from 'react';
-import { MdCheck, MdClose } from 'react-icons/md';
+import { Icon } from '@iconify/react';
 import tw, { styled } from 'twin.macro';
 
 type PasswordCriteriaProps = {
@@ -19,12 +19,12 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
     >
       {isQualified ? (
         <>
-          <MdCheck />
+          <Icon icon="mdi:check" />
           <span tw="sr-only">qualified</span>
         </>
       ) : (
         <>
-          <MdClose />
+          <Icon icon="mdi:close" />
           <span tw="sr-only">not qualified</span>
         </>
       )}

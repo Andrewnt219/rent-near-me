@@ -4,7 +4,7 @@ import {
   useController,
   UseControllerProps,
 } from 'react-hook-form';
-import { MdCheck } from 'react-icons/md';
+import { Icon } from '@iconify/react';
 import Form from './Form';
 
 type Props<FormValues extends FieldValues> =
@@ -46,7 +46,7 @@ export default function Checkbox<FormValues extends FieldValues>({
           aria-checked={value === true}
           aria-invalid={fieldState.invalid}
         >
-          <MdCheck />
+          <Icon icon="mdi:check" />
         </Form.CheckboxTick>
 
         {label}

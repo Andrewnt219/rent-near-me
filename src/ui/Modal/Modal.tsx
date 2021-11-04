@@ -3,7 +3,7 @@ import { Dialog } from '@reach/dialog';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
-import { MdOutlineClose } from 'react-icons/md';
+import { Icon } from '@iconify/react';
 import tw, { css, styled } from 'twin.macro';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
@@ -41,7 +41,7 @@ const Modal: FC<ModalProps> = ({
             css={closeModalBtnCss(closeButtonPosition)}
             onClick={onClose}
           >
-            <MdOutlineClose tw="w-6 h-6" />
+            <Icon icon="mdi:close" tw="w-6 h-6" />
             <span tw="sr-only">Close dialog</span>
           </IconButtonGhost>
           <Text component="h3" variant="h5" id={`${id}-modal-title`}>

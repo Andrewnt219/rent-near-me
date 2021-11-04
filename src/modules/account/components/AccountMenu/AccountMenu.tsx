@@ -1,8 +1,8 @@
+import { Icon } from '@iconify/react';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink, { LinkProps } from 'next/link';
 import { ComponentProps, useMemo } from 'react';
-import { MdInfo, MdLock, MdPayment } from 'react-icons/md';
 import AccountMenuTile from './AccountMenuTile';
 
 type Props = {
@@ -48,14 +48,14 @@ function getMenuItems(t: Translate): MenuItem[] {
       data: {
         title: t('account:index.menu-items.personal-info.title'),
         description: t('account:index.menu-items.personal-info.description'),
-        icon: <MdInfo tw="text-secondary" />,
+        icon: <Icon icon="mdi:information" tw="text-secondary" />,
       },
     },
     {
       data: {
         title: t('account:index.menu-items.security.title'),
         description: t('account:index.menu-items.security.description'),
-        icon: <MdLock tw="text-secondary" />,
+        icon: <Icon icon="mdi:lock" tw="text-secondary" />,
       },
       link: {
         href: '/account/security',
@@ -65,7 +65,7 @@ function getMenuItems(t: Translate): MenuItem[] {
       data: {
         title: t('account:index.menu-items.payments.title'),
         description: t('account:index.menu-items.payments.description'),
-        icon: <MdPayment tw="text-secondary" />,
+        icon: <Icon icon="mdi:credit-card-outline" tw="text-secondary" />,
       },
       link: {
         href: '/account/payments/payment-methods',

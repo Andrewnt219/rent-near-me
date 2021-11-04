@@ -1,5 +1,5 @@
+import { Icon } from '@iconify/react';
 import { VFC } from 'react';
-import { MdChevronRight } from 'react-icons/md';
 import { useStaticBreadCrumb } from 'src/hooks/useStaticBreadCrumb';
 import { accountRoutes } from '../../routes';
 import BreadCrumbItem from './BreadCrumbItem';
@@ -21,7 +21,7 @@ const BreadCrumb: VFC<Props> = ({ className }) => {
             />
 
             {index < routes.length - 1 && (
-              <MdChevronRight aria-hidden tw="mx-xs" />
+              <Icon icon="mdi:chevron-right" aria-hidden tw="mx-xs" />
             )}
           </li>
         ))}

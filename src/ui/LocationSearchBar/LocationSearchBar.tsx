@@ -1,5 +1,5 @@
 import { IconButtonPrimary } from '@ui/IconButton/IconButton';
-import { MdSearch } from 'react-icons/md';
+import { Icon } from '@iconify/react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
@@ -15,7 +15,7 @@ const SearchBar = ({ className }: Props) => {
         size="md"
         tw="absolute top-1/2 right-sm transform -translate-y-1/2"
       >
-        <MdSearch />
+        <Icon icon="mdi:magnify" />
         <span tw="sr-only">Search</span>
       </IconButtonPrimary>
     </StyledWrapper>

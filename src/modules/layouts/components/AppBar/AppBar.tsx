@@ -1,5 +1,5 @@
+import { Icon } from '@iconify/react';
 import { ComponentProps } from 'react';
-import { MdDashboard, MdFavorite, MdSearch } from 'react-icons/md';
 import AppBarMenuItem from '../AppBarMenuItem/AppBarMenuItem';
 
 type Props = {
@@ -22,17 +22,17 @@ const AppBar = ({ className }: Props) => {
 const links: ComponentProps<typeof AppBarMenuItem>[] = [
   {
     href: '/',
-    icon: <MdSearch />,
+    icon: <Icon icon="mdi:magnify" />,
     textTranslateKey: 'home',
   },
   {
     href: '/wishlist',
-    icon: <MdFavorite />,
+    icon: <Icon icon="mdi:heart" />,
     textTranslateKey: 'wishlist',
   },
   {
     href: '/login',
-    icon: <MdDashboard />,
+    icon: <Icon icon="mdi:view-dashboard" />,
     textTranslateKey: 'login',
   },
 ];
