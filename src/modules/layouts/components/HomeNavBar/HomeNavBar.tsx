@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import { ButtonGhost } from '@ui/Button/Button';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Logo from '@ui/Logo/Logo';
+import Link from 'next/link';
 import React from 'react';
 import { MdLanguage } from 'react-icons/md';
 import { styled } from 'twin.macro';
@@ -53,7 +53,5 @@ const HomeNavBar = ({ className }: Props) => {
   );
 };
 
-const StyledHeader = styled.header`
-  
-`;
+const StyledHeader = styled.header``;
 export default HomeNavBar;

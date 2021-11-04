@@ -1,10 +1,10 @@
 import { RouteProps } from '@common-types';
-import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthService from '@services/AuthService';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
-import { MdDashboard } from 'react-icons/md';
+import { MdAccountCircle } from 'react-icons/md';
 import tw, { styled } from 'twin.macro';
 import { StyledUserMenuLink } from '../UserMenuLink/UserMenuLink';
 import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
@@ -34,7 +34,7 @@ const UserMenu = ({ className }: Props) => {
 
         <HamburgerIcon />
 
-        <MdDashboard tw="h-7 w-7 p-xs bg-dark rounded-full text-white ml-md" />
+        <MdAccountCircle tw="w-8 h-8 p-xs rounded-full ml-sm" />
       </ButtonGhost>
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
     </div>
@@ -108,7 +108,11 @@ function Menu(props: MenuProps) {
       <UserMenuLinksGroup routes={links['preference']} />
       {isAuthenticated && (
         <UserMenuLinksGroup>
-          <StyledUserMenuLink tw="text-danger" as="button" onClick={() => AuthService.signOut()}>
+          <StyledUserMenuLink
+            tw="text-danger"
+            as="button"
+            onClick={() => AuthService.signOut()}
+          >
             Logout
           </StyledUserMenuLink>
         </UserMenuLinksGroup>
