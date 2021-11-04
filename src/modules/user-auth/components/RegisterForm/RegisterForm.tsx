@@ -1,6 +1,6 @@
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
-import { Genders, Maximum_Dob } from '@models/constnats';
+import { GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import Form from '@ui/Form/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import PasswordField from '@ui/Form/PasswordField';
@@ -54,7 +54,7 @@ const RegisterForm = () => {
           label={t('common:register.dob.label')}
           controller={controllers.dob}
           inputDescription={t('common:register.dob.description')}
-          dayPickerProps={{ disabledDays: { after: Maximum_Dob } }}
+          dayPickerProps={{ disabledDays: { after: MAXIMUM_DOB } }}
         />
 
         <Select
@@ -63,7 +63,7 @@ const RegisterForm = () => {
           controller={controllers.gender}
         >
           <option value="" disabled></option>
-          {Object.entries(Genders).map(([key, val]) => (
+          {Object.entries(GENDERS).map(([key, val]) => (
             <option key={key} value={key}>
               {val}
             </option>
