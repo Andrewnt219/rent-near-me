@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { MdFavorite, MdSearch, MdDashboard } from 'react-icons/md';
+import { MdDashboard, MdFavorite, MdSearch } from 'react-icons/md';
 import AppBarMenuItem from '../AppBarMenuItem/AppBarMenuItem';
 
 type Props = {
@@ -9,7 +9,7 @@ const AppBar = ({ className }: Props) => {
   return (
     <header
       className={className}
-      tw="h-lg z-40 fixed bottom-0 left-0 right-0 py-md  border-t bg-white"
+      tw="z-40 fixed bottom-0 left-0 right-0 py-md  border-t bg-white"
     >
       <nav>
         <MenuList />
