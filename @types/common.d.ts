@@ -2,7 +2,6 @@ declare module '@common-types' {
   import { NextPage } from 'next';
   import { LinkProps } from 'next/link';
   import { ReactElement } from 'react';
-  import { UseControllerProps } from 'react-hook-form';
   import { StyledComponent } from 'styled-components';
   import { InferType } from 'yup';
 
@@ -21,10 +20,6 @@ declare module '@common-types' {
   type PageWithLayout = NextPage & {
     getLayout?: (page: ReactElement) => ReactElement;
   };
-  type Controllers<TFormValues> = Record<
-    keyof TFormValues,
-    UseControllerProps<TFormValues>
-  >;
 
   type StyledComponentProps<T> = T extends StyledComponent<
     any,

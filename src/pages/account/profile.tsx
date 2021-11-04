@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
-import SettingsPageLayout from '@modules/account/layouts/SettingsPageLayout/SettingsPageLayout';
+import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 
 export default function PersonalInfoPage() {
@@ -23,5 +23,5 @@ export default function PersonalInfoPage() {
 }
 
 PersonalInfoPage.getLayout = (page: ReactNode) => (
-  <SettingsPageLayout>{page}</SettingsPageLayout>
+  <AccountPageLayout>{page}</AccountPageLayout>
 );
