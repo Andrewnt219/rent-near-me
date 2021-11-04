@@ -6,6 +6,8 @@
       "weak-password": "Weak password",
       "unselected-dropdown": "Please select an option",
       "invalid-date": "A valid date is required (e.g.: 31-Dec-2021)",
+      "max-date": "Date cannot be after {{date}}",
+      "min-date": "Date cannot be before {{date}}",
       "invalid-max-length": "Cannot be longer than {{length}} characters",
       "invalid-min-length": "Must be at least {{length}} characters",
       "confirm-password-not-match": "Confirm password does not match"
@@ -37,6 +39,8 @@
     "new-account": "Create a new account"
   },
   "register": {
+    "welcome": "Welcome to RentNearMe!",
+    "alreadyHasAccount": "Already have an account?",
     "firstName": {
       "label": "First name",
       "description": "Make sure it matches the name on your ID"
@@ -45,7 +49,7 @@
     "gender": "Gender",
     "dob": {
       "label": "Date of birth",
-      "description": "To sign up, you need to be at least 18. Your birthday won’t be shared with anyone else."
+      "description": "Your birthdate won't be shared with anyone by default"
     },
     "email": {
       "label": "Email",

@@ -50,8 +50,8 @@ export default function useRegisterForm() {
     },
   };
 
-  const onSubmit = form.handleSubmit((data) => {
-    AuthService.registerWithEmail(data).catch((e) =>
+  const onSubmit = form.handleSubmit(async (data) => {
+    await AuthService.registerWithEmail(data).catch((e) =>
       setSubmitError(getErrorMessage(e, t))
     );
   });
