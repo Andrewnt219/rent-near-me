@@ -1,3 +1,4 @@
+import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
 import BreadCrumb from '../BreadCrumb/BreadCrumb';
 type Props = {
@@ -8,7 +9,9 @@ const AccountPageHeader: FC<Props> = ({ className, title }) => {
   return (
     <header className={className} tw="">
       <BreadCrumb />
-      <h1 tw="text-h2 mt-sm font-semibold">{title}</h1>
+      <Text component="h1" variant="h2">
+        {title}
+      </Text>
     </header>
   );
 };

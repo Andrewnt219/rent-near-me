@@ -32,11 +32,7 @@ const BaseButton = styled.button<BaseButtonProps>`
 /* -------------------------------------------------------------------------- */
 
 export const ButtonPrimary = styled(BaseButton)`
-  ${tw`font-semibold  bg-primary text-white`}
-
-  &:hover {
-    ${tw`filter brightness-90`}
-  }
+  ${tw`font-semibold  bg-primary text-white hover:bg-primary-dark`}
 
   &:active,
   &:focus-visible {

@@ -1,18 +1,18 @@
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
 import Checkbox from '@ui/Form/Checkbox';
 import Form from '@ui/Form/Form';
-import HrText from '@ui/HrText/HrText';
 import PasswordField from '@ui/Form/PasswordField';
 import TextField from '@ui/Form/TextField';
+import HrText from '@ui/HrText/HrText';
+import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { MdFacebook, MdVpnKey } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
-import { MdError } from 'react-icons/md';
+import { MdError, MdFacebook, MdVpnKey } from 'react-icons/md';
 import tw from 'twin.macro';
 import { useLoginForm } from './useLoginForm';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
 const signInExternalIconStyle = tw`w-6 h-6`;
 
@@ -23,7 +23,9 @@ const LoginForm = () => {
 
   return (
     <Form noValidate onSubmit={onSubmit}>
-      <h4 tw="text-h4 mb-md font-semibold">Welcome back to RentNearMe!</h4>
+      <Text tw="mb-md" component="h4" variant="h4">
+        Welcome back to RentNearMe!
+      </Text>
 
       <TextField
         label={t('common:login.email')}

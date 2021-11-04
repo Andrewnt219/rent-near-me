@@ -1,3 +1,4 @@
+import Text from '@ui/Text/Text';
 import { FC } from 'react';
 import { MdCheck, MdClose } from 'react-icons/md';
 import tw, { styled } from 'twin.macro';
@@ -11,7 +12,11 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
   children,
 }) => {
   return (
-    <StyledPassworCriterion isQualified={isQualified}>
+    <StyledPassworCriterion
+      component="p"
+      variant="sub2"
+      isQualified={isQualified}
+    >
       {isQualified ? (
         <>
           <MdCheck />
@@ -28,8 +33,7 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
   );
 };
 
-const StyledPassworCriterion = styled.p<PasswordCriteriaProps>`
-  ${tw`text-body2 font-semibold`}
+const StyledPassworCriterion = styled(Text)<PasswordCriteriaProps>`
   ${tw`flex items-center gap-sm`};
   ${tw`text-danger`}
 

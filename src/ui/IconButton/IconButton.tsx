@@ -41,11 +41,7 @@ export const IconButtonGhost = styled(IconButton)`
 /* -------------------------------------------------------------------------- */
 
 export const IconButtonPrimary = styled(IconButton)`
-  ${tw`font-semibold  bg-primary text-white`}
-
-  &:hover {
-    ${tw`filter brightness-90`}
-  }
+  ${tw`font-semibold  bg-primary text-white hover:bg-primary-dark`}
 
   &:active,
   &:focus-visible {

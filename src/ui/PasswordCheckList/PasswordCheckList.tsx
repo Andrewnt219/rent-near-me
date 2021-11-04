@@ -31,7 +31,7 @@ const PasswordCheckList: VFC<Props> = ({ className, ...props }) => {
         }
       >
         Contains a number or a special character
-        <MdInfo tw="text-info text-body2" />
+        <MdInfo tw="text-info" />
       </PasswordCriterion>
     </div>
   );

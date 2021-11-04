@@ -1,8 +1,10 @@
+import { useUuid } from '@hooks/useUuid';
 import { Dialog } from '@reach/dialog';
-import { ButtonGhost } from '@ui/Button/Button';
+import { IconButtonGhost } from '@ui/IconButton/IconButton';
+import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
-import tw, { css, styled, theme } from 'twin.macro';
+import tw, { css, styled } from 'twin.macro';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -23,8 +25,11 @@ const Modal: FC<ModalProps> = ({
   children,
   ...props
 }) => {
+  const id = useUuid();
+
   return (
     <Dialog
+      aria-labelledby={`${id}-modal-title`}
       css={modalDialogCss(size)}
       isOpen={show}
       onDismiss={onClose}
@@ -32,15 +37,16 @@ const Modal: FC<ModalProps> = ({
     >
       {header && (
         <ModalHeader>
-          <ButtonGhost
-            circle
+          <IconButtonGhost
             css={closeModalBtnCss(closeButtonPosition)}
             onClick={onClose}
           >
             <MdOutlineClose tw="w-6 h-6" />
             <span tw="sr-only">Close dialog</span>
-          </ButtonGhost>
-          <ModalHeaderContent>{header}</ModalHeaderContent>
+          </IconButtonGhost>
+          <Text component="h3" variant="h5" id={`${id}-modal-title`}>
+            {header}
+          </Text>
         </ModalHeader>
       )}
       <ModalBody>
@@ -64,7 +70,7 @@ const closeModalBtnCss = (closeBtnPos: CloseModalButtonPosition) => {
   }
   return css`
     ${closeBtnPosCss}
-    ${tw`p-xs absolute top-1/2 transform -translate-y-1/2 mt-xs`}
+    ${tw` absolute top-1/2 transform -translate-y-1/2`}
   `;
 };
 
@@ -102,16 +108,12 @@ const modalDialogCss = (size: ModalSize) => {
 };
 
 const ModalHeader = styled.div`
-  ${tw`relative px-xl py-md text-h6`}
+  ${tw`relative text-center py-md`}
   ${tw`border-b border-light`}
-  ${tw`text-center font-semibold`}
-`;
-const ModalHeaderContent = styled.div`
-  ${tw`overflow-auto max-h-16`}
 `;
 
 const ModalBody = styled.div`
-  ${tw`p-xl`}
+  ${tw`px-lg pb-xl pt-lg`}
 `;
 const ModalBodyContent = styled.div`
   ${tw`overflow-auto p-xs`}

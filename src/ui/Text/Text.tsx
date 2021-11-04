@@ -1,15 +1,15 @@
-import { PropsWithChildren } from 'react';
+import { HTMLAttributes, PropsWithChildren } from 'react';
 import tw, { styled } from 'twin.macro';
 
-type Props = {
+type Props = HTMLAttributes<HTMLHeadingElement> & {
   className?: string;
   component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
   variant?: StyledTextProps['variant'];
 };
 function Text({ className, ...props }: PropsWithChildren<Props>) {
-  console.log(props);
   return (
     <StyledText
+      {...props}
       as={props.component ?? 'span'}
       variant={props.variant ?? 'body1'}
       className={className}

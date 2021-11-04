@@ -1,16 +1,17 @@
 import DatePicker from '@libs/react-day-picker/DatePicker';
+import { Genders } from '@models/constnats';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import Form from '@ui/Form/Form';
-import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import PasswordField from '@ui/Form/PasswordField';
-import Row from '@ui/Row/Row';
 import Select from '@ui/Form/SelectField';
 import TextField from '@ui/Form/TextField';
+import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
+import Row from '@ui/Row/Row';
+import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import { MdError } from 'react-icons/md';
 import useRegisterForm from './useRegisterForm';
-import { Genders } from '@models/constnats';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
 const RegisterForm = () => {
   const {
@@ -26,7 +27,10 @@ const RegisterForm = () => {
   return (
     <Form noValidate onSubmit={onSubmit}>
       <div tw="mb-md flex flex-wrap justify-between items-center">
-        <h4 tw="text-h4 font-semibold">Welcome to RentNearMe!</h4>
+        <Text component="h4" variant="h4">
+          Welcome to RentNearMe!
+        </Text>
+
         <ButtonLink type="button" onClick={loginModal.show}>
           Already have an account?
         </ButtonLink>
