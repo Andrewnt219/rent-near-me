@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import useTranslation from 'next-translate/useTranslation';
-import ToggleActionField from '@modules/account/ui/ActionField/ToggleActionField';
+import ToggleActionField from '@modules/account/components/ActionField/ToggleActionField';
 import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm';
 dayjs.extend(relativeTime);
 
