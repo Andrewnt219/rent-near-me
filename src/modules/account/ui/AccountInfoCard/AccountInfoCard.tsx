@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
-import AccountInfoCardGroup from '../AccountInfoCardGroup/AccountInfoCardGroup';
+import AccountInfoCardGroup from './AccountInfoCardGroup';
 
 type Props = {
   className?: string;

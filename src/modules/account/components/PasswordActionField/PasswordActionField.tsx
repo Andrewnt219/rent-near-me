@@ -1,9 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import useTranslation from 'next-translate/useTranslation';
-import { useState } from 'react';
-import ActionFieldLayout from '../../layouts/ActionFieldLayout/ActionFieldLayout';
-import ActionFieldButton from '../ActionFieldButton/ActionFieldButton';
+import ActionField from '@modules/account/ui/ActionField/ActionField';
 import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm';
 dayjs.extend(relativeTime);
 
@@ -14,27 +12,15 @@ type Props = {
 };
 function PasswordActionField({ className }: Props) {
   const { t } = useTranslation();
-  const [isEditMode, setIsEditMode] = useState(false);
 
   return (
-    <ActionFieldLayout
+    <ActionField
       label={t('account:security.edit-password.field-label')}
-      actionButton={
-        <ActionFieldButton onClick={() => setIsEditMode((prev) => !prev)}>
-          {isEditMode
-            ? t('account:security.edit-password.cancel-button')
-            : t('account:security.edit-password.action-button')}
-        </ActionFieldButton>
-      }
-    >
-      {isEditMode ? (
-        <ChangePasswordForm />
-      ) : (
-        t('account:security.edit-password.description', {
-          time: dayjs(MOCK_LAST_UPDATED_DATE).fromNow(),
-        })
-      )}
-    </ActionFieldLayout>
+      mainContent={<ChangePasswordForm />}
+      alternativeContent={t('account:security.edit-password.description', {
+        time: dayjs(MOCK_LAST_UPDATED_DATE).fromNow(),
+      })}
+    />
   );
 }
 

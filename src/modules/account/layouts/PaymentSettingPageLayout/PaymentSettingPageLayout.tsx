@@ -1,4 +1,4 @@
-import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
+import AccountPageHeader from '@modules/account/ui/AccountPageHeader/AccountPageHeader';
 import NextLink from 'next/link';
 import { PropsWithChildren } from 'react';
 import AccountPageLayout from '../AccountPageLayout/AccountPageLayout';

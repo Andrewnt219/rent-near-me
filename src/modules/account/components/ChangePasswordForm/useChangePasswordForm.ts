@@ -11,17 +11,18 @@ import {
   ChangePasswordFormSchema,
   ChangePasswordFormModel,
 } from './ChangePasswordFormModel';
+import { useActionField } from '@modules/account/contexts/ActionFieldContext';
 
 export const useChangePasswordForm = () => {
   const { t } = useTranslation();
+  const actionField = useActionField();
+  const { user } = useAuth();
 
   const formSchema = ChangePasswordFormSchema(t);
   const form = useForm<ChangePasswordFormModel>({
     defaultValues: formSchema.getDefault(),
     resolver: yupResolver(formSchema),
   });
-
-  const { user } = useAuth();
 
   useEffect(() => {
     form.setValue('uid', user?.uid ?? '');
@@ -56,10 +57,11 @@ export const useChangePasswordForm = () => {
   };
 
   const [submitError, setSubmitError] = useState('');
-  const onSubmit = form.handleSubmit((data) => {
-    AuthService.changePassword(data).catch((e) =>
+  const onSubmit = form.handleSubmit(async (data) => {
+    await AuthService.changePassword(data).catch((e) =>
       setSubmitError(getErrorMessage(e, t))
     );
+    actionField.showAlternativeContent();
   });
 
   return {

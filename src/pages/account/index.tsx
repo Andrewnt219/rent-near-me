@@ -1,4 +1,4 @@
-import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
+import AccountMenu from '@modules/account/ui/AccountMenu/AccountMenu';
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink } from '@ui/Button/Button';

@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useStaticBreadCrumb } from 'src/hooks/useStaticBreadCrumb';
 import { accountRoutes } from '../../routes';
-import BreadCrumbItem from '../BreadCrumbItem/BreadCrumbItem';
+import BreadCrumbItem from './BreadCrumbItem';
 
 type Props = {
   className?: string;
