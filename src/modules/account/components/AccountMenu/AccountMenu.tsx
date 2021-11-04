@@ -2,6 +2,7 @@ import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink, { LinkProps } from 'next/link';
 import { ComponentProps, useMemo } from 'react';
+import { MdInfo, MdLock, MdPayment } from 'react-icons/md';
 import AccountMenuTile from './AccountMenuTile';
 
 type Props = {

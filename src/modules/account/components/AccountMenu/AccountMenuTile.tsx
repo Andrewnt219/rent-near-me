@@ -11,23 +11,19 @@ type Props = {
 };
 function AccountMenuTile({ className, ...props }: Props) {
   return (
-    <article
-      className={className}
-      tw="p-xl w-full h-full rounded shadow-z8"
-    >
-      <span aria-hidden css={{ fontSize: '2em' }}>
+    <article className={className} tw="p-lg w-full h-full rounded shadow-z8">
+      <span aria-hidden tw="text-[length: 2em]">
         {props.data.icon}
       </span>
 
-      <div tw="mt-md text-h3 font-semibold flex items-baseline gap-xs">
+      <div tw="mt-sm text-h4 font-semibold flex items-baseline gap-xs">
         {props.data.title}
-
-        <div aria-hidden tw="" css={{ fontSize: '.75em' }}>
+        <div aria-hidden tw="text-[length: 0.75em]">
           <MdChevronRight />
         </div>
       </div>
 
-      <div tw="mt-sm">{props.data.description}</div>
+      <div tw="mt-md">{props.data.description}</div>
     </article>
   );
 }
