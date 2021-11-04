@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import NextLink, { LinkProps } from 'next/link';
 import { ComponentProps, useMemo } from 'react';
 import { FaInfoCircle, FaLock, FaMoneyBill } from 'react-icons/fa';
-import AccountMenuTile from '../AccountMenuTile/AccountMenuTile';
+import AccountMenuTile from './AccountMenuTile';
 
 type Props = {
   className?: string;
