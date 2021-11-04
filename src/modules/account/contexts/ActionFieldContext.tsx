@@ -1,3 +1,4 @@
+import { useMemo } from 'hoist-non-react-statics/node_modules/@types/react';
 import { FC, createContext, useContext, useState } from 'react';
 
 type ActionFieldContextValue = {
@@ -20,15 +21,18 @@ export const useActionField = () => {
 export const ActionFieldProvider: FC = ({ children }) => {
   const [isShowingMainContent, setIsShowingMainContent] = useState(false);
 
+  const value = useMemo(
+    () => ({
+      isShowingMainContent,
+      showMainContent: () => setIsShowingMainContent(true),
+      showAlternativeContent: () => setIsShowingMainContent(false),
+      toggleContent: () => setIsShowingMainContent((isShowing) => !isShowing),
+    }),
+    [isShowingMainContent]
+  );
+
   return (
-    <ActionFieldContext.Provider
-      value={{
-        isShowingMainContent,
-        showMainContent: () => setIsShowingMainContent(true),
-        showAlternativeContent: () => setIsShowingMainContent(false),
-        toggleContent: () => setIsShowingMainContent((isShowing) => !isShowing),
-      }}
-    >
+    <ActionFieldContext.Provider value={value}>
       {children}
     </ActionFieldContext.Provider>
   );
