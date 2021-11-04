@@ -2,7 +2,7 @@ import { InferFromSchema } from '@common-types';
 import { Default_Date_Format, Genders, Maximum_Dob } from '@models/constnats';
 import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
-import yup from 'yup';
+import * as yup from 'yup';
 import dayjs from 'dayjs';
 
 export const RegisterFormSchema = (t?: Translate) => {
