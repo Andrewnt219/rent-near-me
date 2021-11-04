@@ -13,8 +13,10 @@ type ActionFieldProps = {
   mainActionText?: string | ReactNode;
   alternativeActionText?: string | ReactNode;
   showActionButton?: boolean;
+  className?: string;
 };
-const ActionField: VFC<ActionFieldProps> = (props) => {
+
+const ToggleActionField: VFC<ActionFieldProps> = (props) => {
   return (
     <ActionFieldProvider>
       <ActionFieldContent {...props} />
@@ -22,33 +24,31 @@ const ActionField: VFC<ActionFieldProps> = (props) => {
   );
 };
 
-export default ActionField;
+export default ToggleActionField;
 
 const ActionFieldContent: VFC<ActionFieldProps> = ({
   label,
-  mainContent = <></>,
-  alternativeContent = <></>,
+  mainContent,
+  alternativeContent,
   mainActionText = 'Update',
   alternativeActionText = 'Cancel',
   showActionButton = true,
+  className,
 }) => {
   const { isShowingMainContent, toggleContent } = useActionField();
 
   return (
     <ActionFieldLayout
       label={label}
-      actionButton={
+      renderedActionButton={
         <ActionFieldButton onClick={toggleContent}>
-          {isShowingMainContent ? (
-            <>{alternativeActionText}</>
-          ) : (
-            <>{mainActionText}</>
-          )}
+          {isShowingMainContent ? alternativeActionText : mainActionText}
         </ActionFieldButton>
       }
       showActionButton={showActionButton}
+      className={className}
     >
-      {isShowingMainContent ? <>{mainContent}</> : <>{alternativeContent}</>}
+      {isShowingMainContent ? mainContent : alternativeContent}
     </ActionFieldLayout>
   );
 };
