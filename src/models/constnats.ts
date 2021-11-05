@@ -13,7 +13,7 @@ export const DATE_TIME_FORMATS = {
   EXTRA_LONG_DATE: 'ddd, DD-MM-YYYY', // Fri, 31-12-2021
   EXTRA_LONG_DATE_TEXT: 'dddd, MMMM DD, YYYY', // Friday, December 31, 2021
 
-  DATE_TIME_12H: 'YYYY-MM-DD h:mm a', // 2021-12-31 11:59 PM
+  DATE_TIME_12H: 'DD-MM-YYYY h:mm a', // 2021-12-31 11:59 PM
   DATE_TIME_12H_TEXT: 'MMMM DD, YYYY - h:mm A', // December 31, 2021 - 11:59 PM
 
   TIME_12H: 'h:mm A', // 11:59 PM
