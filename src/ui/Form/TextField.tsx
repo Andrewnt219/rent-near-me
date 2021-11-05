@@ -28,7 +28,7 @@ const TextField: VFC<TextFieldProps> = ({
     <Form.Group>
       <Form.Input
         id={id}
-        aria-describedby={fieldState.invalid ? errMsgId : descId}
+        aria-describedby={`${errMsgId} ${descId}`}
         aria-invalid={fieldState.invalid}
         {...inputProps}
         {...field}

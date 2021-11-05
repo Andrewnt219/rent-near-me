@@ -23,13 +23,12 @@
   },
   "security": {
     "page-title": "Login & Security",
-    "edit-password": {
+    "change-password": {
+      "forget-password-link": "Need a new password?",
       "old-password": "Old password",
       "new-password": "New password",
       "confirm-new-password": "Confirm new password",
       "field-label": "Change password",
-      "action-button": "Update",
-      "cancel-button": "Cancel",
       "submit-button": "Update Password",
       "description": "Last updated {{time}}"
     }

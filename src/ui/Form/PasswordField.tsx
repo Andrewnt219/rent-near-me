@@ -34,7 +34,7 @@ const PasswordField: VFC<PasswordFieldProps> = ({
       <div tw="relative">
         <Form.Input
           id={id}
-          aria-describedby={`description-${id}`}
+          aria-describedby={`${errMsgId} ${descId}`}
           aria-invalid={fieldState.invalid}
           tw="!pr-14"
           type={showPassword ? 'text' : 'password'}

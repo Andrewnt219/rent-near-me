@@ -12,7 +12,7 @@ import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 export const useLoginForm = () => {
   const { t } = useTranslation();
   const { loginModal } = useLayoutModal();
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const formSchema = LoginFormSchema(t);
   const form = useForm<LoginFormModel>({

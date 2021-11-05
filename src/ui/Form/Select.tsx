@@ -31,7 +31,7 @@ const Select: FC<SelectProps> = ({
       <Form.Select
         id={id}
         aria-invalid={fieldState.invalid}
-        aria-describedby={fieldState.invalid ? errMsgId : descId}
+        aria-describedby={`${errMsgId} ${descId}`}
         {...selectProps}
         {...field}
         value={value.toString()}

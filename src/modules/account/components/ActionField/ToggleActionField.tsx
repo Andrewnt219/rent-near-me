@@ -5,6 +5,7 @@ import {
   ActionFieldProvider,
   useActionField,
 } from '@modules/account/contexts/ActionFieldContext';
+import useTranslation from 'next-translate/useTranslation';
 
 type ActionFieldProps = {
   label: string | ReactNode;
@@ -30,11 +31,12 @@ const ActionFieldContent: VFC<ActionFieldProps> = ({
   label,
   mainContent,
   alternativeContent,
-  mainActionText = 'Update',
-  alternativeActionText = 'Cancel',
+  mainActionText,
+  alternativeActionText,
   showActionButton = true,
   className,
 }) => {
+  const { t } = useTranslation();
   const { isShowingMainContent, toggleContent } = useActionField();
 
   return (
@@ -42,7 +44,9 @@ const ActionFieldContent: VFC<ActionFieldProps> = ({
       label={label}
       renderedActionButton={
         <ActionFieldButton onClick={toggleContent}>
-          {isShowingMainContent ? alternativeActionText : mainActionText}
+          {isShowingMainContent
+            ? alternativeActionText ?? t('common:fields.toggle-action.cancel')
+            : mainActionText ?? t('common:fields.toggle-action.update')}
         </ActionFieldButton>
       }
       showActionButton={showActionButton}

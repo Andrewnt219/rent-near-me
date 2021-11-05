@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 export default function useRegisterForm() {
   const { t } = useTranslation();
   const { registerModal } = useLayoutModal();
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const formSchema = RegisterFormSchema(t);
   const form = useForm<RegisterFormModel>({

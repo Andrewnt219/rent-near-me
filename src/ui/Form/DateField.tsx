@@ -39,7 +39,7 @@ const DateField: VFC<DateFieldProps> = ({
           id,
           ref: field.ref,
           'aria-invalid': fieldState.invalid,
-          'aria-describedby': fieldState.invalid ? errMsgId : descId,
+          'aria-describedby': `${errMsgId} ${descId}`,
           name: field.name,
           onChange: field.onChange,
           onBlur: field.onBlur,
@@ -48,11 +48,8 @@ const DateField: VFC<DateFieldProps> = ({
         // onDayChange won't work with user keyboard's input
         dayPickerProps={{ ...dayPickerProps, onDayClick: field.onChange }}
         placeholder=" "
-        formatDate={(date, format) => dayjs(date).format(format)}
-        parseDate={(dateStr, format) => {
-          const parsed = dayjs(dateStr, format);
-          return parsed.isValid() ? parsed.toDate() : undefined;
-        }}
+        formatDate={dayJsFormatter}
+        parseDate={dayJsParser}
       />
 
       <StyledLabel
@@ -73,6 +70,13 @@ const DateField: VFC<DateFieldProps> = ({
       </Form.TextWrapper>
     </StyledWrapper>
   );
+};
+
+const dayJsFormatter = (date: Date, format: string) =>
+  dayjs(date).format(format);
+const dayJsParser = (dateStr: string, format: string) => {
+  const parsed = dayjs(dateStr, format);
+  return parsed.isValid() ? parsed.toDate() : undefined;
 };
 
 type StyledLabelProps = {

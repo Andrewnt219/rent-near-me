@@ -15,7 +15,7 @@ import { useActionField } from '@modules/account/contexts/ActionFieldContext';
 export const useChangePasswordForm = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const actionField = useActionField();
 
   const formSchema = ChangePasswordFormSchema(t);
@@ -29,11 +29,10 @@ export const useChangePasswordForm = () => {
     form.setValue('email', user?.email ?? '');
   }, [form, user]);
 
-  const onSubmit = form.handleSubmit(async (data) => {
-    await AuthService.changePassword(data).catch((e) =>
-      setSubmitError(getErrorMessage(e, t))
-    );
-    actionField.showAlternativeContent();
+  const onSubmit = form.handleSubmit((data) => {
+    AuthService.changePassword(data)
+      .then(() => actionField.showAlternativeContent())
+      .catch((e) => setSubmitError(getErrorMessage(e, t)));
   });
 
   const password = form.watch('newPassword');

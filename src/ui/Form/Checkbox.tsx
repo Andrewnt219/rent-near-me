@@ -39,7 +39,7 @@ const Checkbox: VFC<CheckboxProps> = ({
         />
         <Form.CheckboxTick
           role="checkbox"
-          aria-describedby={fieldState.invalid ? errMsgId : descId}
+          aria-describedby={`${errMsgId} ${descId}`}
           aria-checked={value === true}
           aria-invalid={fieldState.invalid}
         >
