@@ -39,7 +39,7 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
 };
 
 const StyledPassworCriterion = styled(Text)<PasswordCriteriaProps>`
-  ${tw`flex items-center gap-sm`};
+  ${tw`flex items-center gap-xs`};
   ${tw`text-danger`}
 
   ${(props) => props.isQualified && tw`text-success`}
