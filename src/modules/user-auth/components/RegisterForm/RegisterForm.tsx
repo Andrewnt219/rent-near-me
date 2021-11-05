@@ -1,5 +1,6 @@
 import DatePicker from '@libs/react-day-picker/DatePicker';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
+import { GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import Form from '@ui/Form/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import PasswordField from '@ui/Form/PasswordField';
@@ -9,7 +10,6 @@ import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import useRegisterForm from './useRegisterForm';
-import { Genders } from '@models/constnats';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
 const RegisterForm = () => {
@@ -26,9 +26,9 @@ const RegisterForm = () => {
   return (
     <Form noValidate onSubmit={onSubmit}>
       <div tw="mb-md flex flex-wrap justify-between items-center">
-        <h4 tw="text-xl font-semibold">Welcome to RentNearMe!</h4>
+        <h4 tw="text-xl font-semibold">{t('common:register.welcome')}</h4>
         <ButtonLink type="button" onClick={loginModal.show}>
-          Already have an account?
+          {t('common:register.alreadyHasAccount')}
         </ButtonLink>
       </div>
 
@@ -54,6 +54,7 @@ const RegisterForm = () => {
           label={t('common:register.dob.label')}
           controller={controllers.dob}
           inputDescription={t('common:register.dob.description')}
+          dayPickerProps={{ disabledDays: { after: MAXIMUM_DOB } }}
         />
 
         <Select
@@ -62,7 +63,7 @@ const RegisterForm = () => {
           controller={controllers.gender}
         >
           <option value="" disabled></option>
-          {Object.entries(Genders).map(([key, val]) => (
+          {Object.entries(GENDERS).map(([key, val]) => (
             <option key={key} value={key}>
               {val}
             </option>

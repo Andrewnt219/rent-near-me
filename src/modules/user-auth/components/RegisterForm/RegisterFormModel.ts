@@ -1,8 +1,9 @@
 import { InferFromSchema } from '@common-types';
-import { Genders } from '@models/constnats';
+import { DATE_TIME_FORMATS, GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import { isValidPassword } from '@utils/validate-password-utils';
 import { Translate } from 'next-translate';
 import * as yup from 'yup';
+import dayjs from 'dayjs';
 
 export const RegisterFormSchema = (t?: Translate) => {
   const requiredMessage = t?.('common:errors.form.required');
@@ -11,6 +12,9 @@ export const RegisterFormSchema = (t?: Translate) => {
   const dateMessage = t?.('common:errors.form.invalid-date') ?? 'invalid date';
   const maxLengthMessaage = t?.('common:errors.form.invalid-max-length', {
     length: 50,
+  });
+  const maxDateMessage = t?.('common:errors.form.max-date', {
+    date: dayjs(MAXIMUM_DOB).format(DATE_TIME_FORMATS.MEDIUM_DATE),
   });
   const weakPasswordMessage =
     t?.('common:errors.form.weak-password') ?? 'weak password';
@@ -23,13 +27,13 @@ export const RegisterFormSchema = (t?: Translate) => {
       .default('')
       .required(requiredMessage)
       .trim()
-      .oneOf(Object.keys(Genders), selectMessage),
+      .oneOf(Object.keys(GENDERS), selectMessage),
     dob: yup
       .date()
       .typeError(dateMessage)
       .default(null)
       .required(requiredMessage)
-      .max(new Date()),
+      .max(MAXIMUM_DOB, maxDateMessage),
     email: yup
       .string()
       .default('')
