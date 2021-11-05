@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 // twin.d.ts
-import { Icon } from '@iconify/react';
-import { ComponentProps, VFC } from 'react';
 import styledImport, { css as cssImport, CSSProp } from 'styled-components';
 import 'twin.macro';
 

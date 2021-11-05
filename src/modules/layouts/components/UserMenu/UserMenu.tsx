@@ -110,7 +110,7 @@ function Menu(props: MenuProps) {
           <StyledUserMenuLink
             tw="text-danger"
             as="button"
-            onClick={() => AuthService.signOut()}
+            onClick={AuthService.signOut}
           >
             Logout
           </StyledUserMenuLink>
