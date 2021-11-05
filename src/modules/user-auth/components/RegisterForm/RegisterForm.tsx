@@ -7,12 +7,12 @@ import PasswordField from '@ui/Form/PasswordField';
 import Select from '@ui/Form/SelectField';
 import TextField from '@ui/Form/TextField';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
-import Row from '@ui/Row/Row';
+import Row, { InputRow } from '@ui/Row/Row';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import { Icon } from '@iconify/react';
 import useRegisterForm from './useRegisterForm';
-
+import tw from 'twin.macro';
 const RegisterForm = () => {
   const {
     controllers,
@@ -36,7 +36,7 @@ const RegisterForm = () => {
         </ButtonLink>
       </div>
 
-      <Row>
+      <InputRow>
         <TextField
           label={t('common:register.firstName.label')}
           type="text"
@@ -51,9 +51,9 @@ const RegisterForm = () => {
           id="register-lastName"
           controller={controllers.lastName}
         />
-      </Row>
+      </InputRow>
 
-      <Row>
+      <InputRow>
         <DatePicker
           label={t('common:register.dob.label')}
           controller={controllers.dob}
@@ -72,7 +72,7 @@ const RegisterForm = () => {
             </option>
           ))}
         </Select>
-      </Row>
+      </InputRow>
 
       <TextField
         label={t('common:register.email.label')}
