@@ -1,41 +1,40 @@
+import { InputHTMLAttributes, ReactNode, useState, VFC, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import { InputHTMLAttributes, ReactNode, useState } from 'react';
-import {
-  FieldValues,
-  useController,
-  UseControllerProps,
-} from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import Form from './Form';
 
-type Props<FormValues extends FieldValues> =
-  InputHTMLAttributes<HTMLInputElement> & {
-    label: ReactNode;
-    inputDescription?: ReactNode;
-    children?: never;
-    id: string;
-    autoComplete: string;
-    controller: UseControllerProps<FormValues>;
-  };
+type PasswordFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+  id: string;
+  name: string;
+  label: ReactNode;
+  inputDescription?: ReactNode;
+};
 
-function PasswordField<FormValues extends FieldValues>(
-  props: Props<FormValues>
-) {
-  const { label, inputDescription, controller, ...inputProps } = props;
+const PasswordField: VFC<PasswordFieldProps> = ({
+  id,
+  name,
+  label,
+  inputDescription,
+  ...inputProps
+}) => {
   const {
     field: { value, ...field },
     fieldState,
-  } = useController(controller);
+  } = useController({ name });
 
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => setShowPassword((show) => !show);
 
-  const { t } = useTranslation();
+  const errMsgId = useMemo(() => `error-${id}`, [id]);
+  const descId = useMemo(() => `description-${id}`, [id]);
 
   return (
     <Form.Group>
       <div tw="relative">
         <Form.Input
-          aria-describedby={`error-${props.id}`}
+          id={id}
+          aria-describedby={`description-${id}`}
           aria-invalid={fieldState.invalid}
           tw="!pr-14"
           type={showPassword ? 'text' : 'password'}
@@ -45,7 +44,7 @@ function PasswordField<FormValues extends FieldValues>(
           placeholder=" "
         />
 
-        <Form.Label htmlFor={inputProps.id}>{label}</Form.Label>
+        <Form.Label htmlFor={id}>{label}</Form.Label>
 
         <Form.ShowPasswordButton type="button" onClick={toggleShowPassword}>
           {showPassword
@@ -55,16 +54,16 @@ function PasswordField<FormValues extends FieldValues>(
       </div>
 
       <Form.TextWrapper>
-        {fieldState.invalid && (
-          <Form.ErrorMessage id={`error-${props.id}`}>
+        {fieldState.invalid ? (
+          <Form.ErrorMessage id={errMsgId}>
             {fieldState.error?.message}
           </Form.ErrorMessage>
+        ) : (
+          <Form.Description id={descId}>{inputDescription}</Form.Description>
         )}
-
-        <Form.Description>{inputDescription}</Form.Description>
       </Form.TextWrapper>
     </Form.Group>
   );
-}
+};
 
 export default PasswordField;

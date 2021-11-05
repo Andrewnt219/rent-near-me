@@ -5,7 +5,7 @@ import Form from '@ui/Form/Form';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import PasswordField from '@ui/Form/PasswordField';
 import Row from '@ui/Row/Row';
-import Select from '@ui/Form/SelectField';
+import Select from '@ui/Form/Select';
 import TextField from '@ui/Form/TextField';
 import useTranslation from 'next-translate/useTranslation';
 import { RiErrorWarningFill } from 'react-icons/ri';
@@ -13,18 +13,13 @@ import useRegisterForm from './useRegisterForm';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
 const RegisterForm = () => {
-  const {
-    controllers,
-    form,
-    onSubmit,
-    submitError,
-    passwordValidationResults,
-  } = useRegisterForm();
+  const { form, onSubmit, submitError, passwordValidationResults } =
+    useRegisterForm();
   const { t } = useTranslation();
   const { loginModal } = useLayoutModal();
 
   return (
-    <Form noValidate onSubmit={onSubmit}>
+    <Form form={form} noValidate onSubmit={onSubmit}>
       <div tw="mb-md flex flex-wrap justify-between items-center">
         <h4 tw="text-xl font-semibold">{t('common:register.welcome')}</h4>
         <ButtonLink type="button" onClick={loginModal.show}>
@@ -34,33 +29,34 @@ const RegisterForm = () => {
 
       <Row>
         <TextField
-          label={t('common:register.firstName.label')}
-          type="text"
           id="register-firstName"
-          controller={controllers.firstName}
+          name="firstName"
+          type="text"
+          label={t('common:register.firstName.label')}
           inputDescription={t('common:register.firstName.description')}
         />
 
         <TextField
-          label={t('common:register.lastName')}
-          type="text"
           id="register-lastName"
-          controller={controllers.lastName}
+          name="lastName"
+          type="text"
+          label={t('common:register.lastName')}
         />
       </Row>
 
       <Row>
         <DatePicker
+          id="register-dob"
+          name="dob"
           label={t('common:register.dob.label')}
-          controller={controllers.dob}
           inputDescription={t('common:register.dob.description')}
           dayPickerProps={{ disabledDays: { after: MAXIMUM_DOB } }}
         />
 
         <Select
-          label={t('common:register.gender')}
           id="register-gender"
-          controller={controllers.gender}
+          name="gender"
+          label={t('common:register.gender')}
         >
           <option value="" disabled></option>
           {Object.entries(GENDERS).map(([key, val]) => (
@@ -72,19 +68,19 @@ const RegisterForm = () => {
       </Row>
 
       <TextField
-        label={t('common:register.email.label')}
-        type="email"
         id="register-email"
+        name="email"
+        type="email"
+        label={t('common:register.email.label')}
         autoComplete="username"
-        controller={controllers.email}
         inputDescription={t('common:register.email.description')}
       />
 
       <PasswordField
-        label={t('common:register.password')}
         id="register-password"
+        label={t('common:register.password')}
+        name="password"
         autoComplete="new-password"
-        controller={controllers.password}
       />
 
       <PasswordCheckList

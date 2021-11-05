@@ -1,20 +1,22 @@
-import { InputHTMLAttributes, ReactNode, VFC, useMemo } from 'react';
+import { SelectHTMLAttributes, ReactNode, FC, useMemo } from 'react';
 import { useController } from 'react-hook-form';
+import { GoChevronDown } from 'react-icons/go';
 import Form from './Form';
 
-type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   id: string;
   name: string;
   label: ReactNode;
   inputDescription?: ReactNode;
 };
 
-const TextField: VFC<TextFieldProps> = ({
+const Select: FC<SelectProps> = ({
   id,
   name,
   label,
   inputDescription,
-  ...inputProps
+  children,
+  ...selectProps
 }) => {
   const {
     field: { value, ...field },
@@ -26,17 +28,20 @@ const TextField: VFC<TextFieldProps> = ({
 
   return (
     <Form.Group>
-      <Form.Input
+      <Form.Select
         id={id}
-        aria-describedby={fieldState.invalid ? errMsgId : descId}
         aria-invalid={fieldState.invalid}
-        {...inputProps}
+        aria-describedby={fieldState.invalid ? errMsgId : descId}
+        {...selectProps}
         {...field}
         value={value.toString()}
-        placeholder=" "
-      />
+        data-selected={value.toString() !== ''}
+      >
+        {children}
+      </Form.Select>
 
       <Form.Label htmlFor={id}>{label}</Form.Label>
+      <GoChevronDown tw="absolute top-lg right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid ? (
@@ -51,4 +56,4 @@ const TextField: VFC<TextFieldProps> = ({
   );
 };
 
-export default TextField;
+export default Select;

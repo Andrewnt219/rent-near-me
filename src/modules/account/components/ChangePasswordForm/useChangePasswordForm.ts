@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Controllers } from '@common-types';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthService from '@services/AuthService';
@@ -15,8 +14,9 @@ import { useActionField } from '@modules/account/contexts/ActionFieldContext';
 
 export const useChangePasswordForm = () => {
   const { t } = useTranslation();
-  const actionField = useActionField();
   const { user } = useAuth();
+  const [submitError, setSubmitError] = useState('');
+  const actionField = useActionField();
 
   const formSchema = ChangePasswordFormSchema(t);
   const form = useForm<ChangePasswordFormModel>({
@@ -29,34 +29,6 @@ export const useChangePasswordForm = () => {
     form.setValue('email', user?.email ?? '');
   }, [form, user]);
 
-  const password = form.watch('newPassword');
-  const passwordValidationResults = validatePassword(password);
-
-  const { control } = form;
-  const controllers: Controllers<ChangePasswordFormModel> = {
-    uid: {
-      name: 'uid',
-      control,
-    },
-    email: {
-      name: 'email',
-      control,
-    },
-    oldPassword: {
-      name: 'oldPassword',
-      control,
-    },
-    newPassword: {
-      name: 'newPassword',
-      control,
-    },
-    confirmNewPassword: {
-      name: 'confirmNewPassword',
-      control,
-    },
-  };
-
-  const [submitError, setSubmitError] = useState('');
   const onSubmit = form.handleSubmit(async (data) => {
     await AuthService.changePassword(data).catch((e) =>
       setSubmitError(getErrorMessage(e, t))
@@ -64,10 +36,13 @@ export const useChangePasswordForm = () => {
     actionField.showAlternativeContent();
   });
 
+  const password = form.watch('newPassword');
+
+  const passwordValidationResults = validatePassword(password);
+
   return {
     onSubmit,
     form,
-    controllers,
     submitError,
     passwordValidationResults,
   };

@@ -1,12 +1,20 @@
-import { FormHTMLAttributes } from 'react';
+import { FormHTMLAttributes, PropsWithChildren } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { ButtonLink } from '../Button/Button';
+import { FormProvider, UseFormReturn } from 'react-hook-form';
 
-type Props = FormHTMLAttributes<HTMLFormElement>;
-
-const Form = ({ children, ...formProps }: Props) => {
-  return <form {...formProps}>{children}</form>;
+type FormProps = FormHTMLAttributes<HTMLFormElement> & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form: UseFormReturn<any>;
 };
+
+function Form({ form, ...formProps }: PropsWithChildren<FormProps>) {
+  return (
+    <FormProvider {...form}>
+      <form {...formProps} />
+    </FormProvider>
+  );
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                    INPUT                                   */

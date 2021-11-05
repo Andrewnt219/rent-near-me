@@ -1,23 +1,17 @@
-import { InputHTMLAttributes } from 'react';
-import {
-  FieldValues,
-  useController,
-  UseControllerProps,
-} from 'react-hook-form';
+import { InputHTMLAttributes, VFC } from 'react';
+import { useController } from 'react-hook-form';
 
-type Props<FormValues extends FieldValues> =
-  InputHTMLAttributes<HTMLInputElement> & {
-    children?: never;
-    hiddenVisually?: boolean;
-    controller: UseControllerProps<FormValues>;
-  };
+type HiddenFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+  name: string;
+  hiddenVisually?: boolean;
+};
 
-function TextField<FormValues extends FieldValues>({
-  controller,
+const HiddenField: VFC<HiddenFieldProps> = ({
+  name,
   hiddenVisually = false,
   ...inputProps
-}: Props<FormValues>) {
-  const { value, ...field } = useController(controller).field;
+}) => {
+  const { value, ...field } = useController({ name }).field;
   return (
     <input
       type={hiddenVisually ? 'text' : 'hidden'}
@@ -27,6 +21,6 @@ function TextField<FormValues extends FieldValues>({
       css={{ display: hiddenVisually ? 'none' : undefined }}
     />
   );
-}
+};
 
-export default TextField;
+export default HiddenField;

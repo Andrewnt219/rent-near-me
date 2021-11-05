@@ -1,5 +1,5 @@
-import { Controllers } from '@common-types';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import {
   RegisterFormSchema,
   RegisterFormModel,
@@ -13,47 +13,19 @@ import { useForm } from 'react-hook-form';
 
 export default function useRegisterForm() {
   const { t } = useTranslation();
+  const { registerModal } = useLayoutModal();
+  const [submitError, setSubmitError] = useState('');
 
   const formSchema = RegisterFormSchema(t);
   const form = useForm<RegisterFormModel>({
     defaultValues: formSchema.getDefault(),
     resolver: yupResolver(formSchema),
   });
-  const { control } = form;
-
-  const [submitError, setSubmitError] = useState('');
-
-  const controllers: Controllers<RegisterFormModel> = {
-    firstName: {
-      control,
-      name: 'firstName',
-    },
-    lastName: {
-      control,
-      name: 'lastName',
-    },
-    gender: {
-      control,
-      name: 'gender',
-    },
-    dob: {
-      control,
-      name: 'dob',
-    },
-    email: {
-      control,
-      name: 'email',
-    },
-    password: {
-      control,
-      name: 'password',
-    },
-  };
 
   const onSubmit = form.handleSubmit(async (data) => {
-    await AuthService.registerWithEmail(data).catch((e) =>
-      setSubmitError(getErrorMessage(e, t))
-    );
+    AuthService.registerWithEmail(data)
+      .then(() => registerModal.hide())
+      .catch((e) => setSubmitError(getErrorMessage(e, t)));
   });
 
   const password = form.watch('password');
@@ -63,7 +35,6 @@ export default function useRegisterForm() {
   return {
     onSubmit,
     form,
-    controllers,
     submitError,
     passwordValidationResults,
   };

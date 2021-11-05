@@ -1,13 +1,15 @@
-import { isValidDate } from '@utils/validate-js-utils';
-import dateFnsFormat from 'date-fns/format';
-import dateFnsParse from 'date-fns/parse';
+import dayjs from 'dayjs';
+import CustomParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(CustomParseFormat);
 
-export function parseDate(str: string, format: string): Date | undefined {
-  const parsed = dateFnsParse(str, format, new Date());
+export function parseDate(str: string, format: string): Date | void {
+  const parsed = dayjs(str, format);
 
-  return isValidDate(parsed) ? parsed : undefined;
+  if (parsed.isValid()) {
+    return parsed.toDate();
+  }
 }
 
-export function formatDate(date: number | Date, format: string) {
-  return dateFnsFormat(date, format);
+export function formatDate(date: Date, format: string): string {
+  return dayjs(date).format(format);
 }

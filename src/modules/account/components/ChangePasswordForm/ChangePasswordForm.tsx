@@ -7,27 +7,19 @@ import useTranslation from 'next-translate/useTranslation';
 import { useChangePasswordForm } from './useChangePasswordForm';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 
-type Props = {
-  className?: string;
-};
-function ChangePasswordForm({ className }: Props) {
+function ChangePasswordForm() {
   const { t } = useTranslation();
-  const { form, controllers, onSubmit, passwordValidationResults } =
-    useChangePasswordForm();
+  const { form, onSubmit, passwordValidationResults } = useChangePasswordForm();
   const { effectiveProvider } = useAuth();
 
   return (
-    <Form className={className} tw="" noValidate onSubmit={onSubmit}>
-      <HiddenField
-        controller={controllers.email}
-        autoComplete="username"
-        hiddenVisually
-      />
+    <Form form={form} noValidate onSubmit={onSubmit}>
+      <HiddenField name="email" autoComplete="username" hiddenVisually />
 
       {effectiveProvider === 'password' && (
         <PasswordField
-          controller={controllers.oldPassword}
           id="edit-password-old-password"
+          name="oldPassword"
           label={t('account:security.edit-password.old-password')}
           autoComplete="current-password"
           inputDescription={
@@ -37,8 +29,8 @@ function ChangePasswordForm({ className }: Props) {
       )}
 
       <PasswordField
-        controller={controllers.newPassword}
         id="edit-password-new-password"
+        name="newPassword"
         label={t('account:security.edit-password.new-password')}
         autoComplete="new-password"
       />
@@ -50,8 +42,8 @@ function ChangePasswordForm({ className }: Props) {
       </Form.Group>
 
       <PasswordField
-        controller={controllers.confirmNewPassword}
         id="edit-password-confirm-new-password"
+        name="confirmNewPassword"
         label={t('account:security.edit-password.confirm-new-password')}
         autoComplete="new-password"
       />

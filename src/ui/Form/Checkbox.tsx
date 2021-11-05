@@ -1,32 +1,29 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
-import {
-  FieldValues,
-  useController,
-  UseControllerProps,
-} from 'react-hook-form';
+import { InputHTMLAttributes, ReactNode, useMemo, VFC } from 'react';
+import { useController } from 'react-hook-form';
 import { FaCheck } from 'react-icons/fa';
 import Form from './Form';
 
-type Props<FormValues extends FieldValues> =
-  InputHTMLAttributes<HTMLInputElement> & {
-    label: ReactNode;
-    inputDescription?: ReactNode;
-    children?: never;
-    controller: UseControllerProps<FormValues>;
-    id: string;
-  };
+type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
+  id: string;
+  name: string;
+  label: ReactNode;
+  inputDescription?: ReactNode;
+};
 
-export default function Checkbox<FormValues extends FieldValues>({
+const Checkbox: VFC<CheckboxProps> = ({
   id,
+  name,
   label,
   inputDescription,
-  controller,
   ...inputProps
-}: Props<FormValues>) {
+}) => {
   const {
     field: { value, ...field },
     fieldState,
-  } = useController(controller);
+  } = useController({ name });
+
+  const errMsgId = useMemo(() => `error-${id}`, [id]);
+  const descId = useMemo(() => `description-${id}`, [id]);
 
   return (
     <Form.Group>
@@ -42,7 +39,7 @@ export default function Checkbox<FormValues extends FieldValues>({
         />
         <Form.CheckboxTick
           role="checkbox"
-          aria-describedby={id + 'error'}
+          aria-describedby={fieldState.invalid ? errMsgId : descId}
           aria-checked={value === true}
           aria-invalid={fieldState.invalid}
         >
@@ -53,11 +50,16 @@ export default function Checkbox<FormValues extends FieldValues>({
       </Form.CheckboxLabel>
 
       <Form.TextWrapper>
-        <Form.ErrorMessage id={id + 'error'}>
-          {fieldState.error?.message}
-        </Form.ErrorMessage>
-        <Form.Description>{inputDescription}</Form.Description>
+        {fieldState.invalid ? (
+          <Form.ErrorMessage id={errMsgId}>
+            {fieldState.error?.message}
+          </Form.ErrorMessage>
+        ) : (
+          <Form.Description id={descId}>{inputDescription}</Form.Description>
+        )}
       </Form.TextWrapper>
     </Form.Group>
   );
-}
+};
+
+export default Checkbox;
