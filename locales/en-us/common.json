@@ -26,6 +26,10 @@
     "password": {
       "show": "Show",
       "hide": "Hide"
+    },
+    "toggle-action": {
+      "update": "Update",
+      "cancel": "Cancel"
     }
   },
   "login": {

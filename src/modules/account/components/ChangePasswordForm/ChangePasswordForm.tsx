@@ -6,40 +6,36 @@ import HiddenField from '@ui/Form/HiddenField';
 import useTranslation from 'next-translate/useTranslation';
 import { useChangePasswordForm } from './useChangePasswordForm';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
+import { RiErrorWarningFill } from 'react-icons/ri';
 
-type Props = {
-  className?: string;
-};
-function ChangePasswordForm({ className }: Props) {
+function ChangePasswordForm() {
   const { t } = useTranslation();
-  const { form, controllers, onSubmit, passwordValidationResults } =
+  const { form, submitError, onSubmit, passwordValidationResults } =
     useChangePasswordForm();
   const { effectiveProvider } = useAuth();
 
   return (
-    <Form className={className} tw="" noValidate onSubmit={onSubmit}>
-      <HiddenField
-        controller={controllers.email}
-        autoComplete="username"
-        hiddenVisually
-      />
+    <Form form={form} noValidate onSubmit={onSubmit}>
+      <HiddenField name="email" autoComplete="username" hiddenVisually />
 
       {effectiveProvider === 'password' && (
         <PasswordField
-          controller={controllers.oldPassword}
-          id="edit-password-old-password"
-          label={t('account:security.edit-password.old-password')}
+          id="change-password-old-password"
+          name="oldPassword"
+          label={t('account:security.change-password.old-password')}
           autoComplete="current-password"
           inputDescription={
-            <ButtonLink type="button">Need a new password?</ButtonLink>
+            <ButtonLink type="button">
+              {t('account:security.change-password.forget-password-link')}
+            </ButtonLink>
           }
         />
       )}
 
       <PasswordField
-        controller={controllers.newPassword}
-        id="edit-password-new-password"
-        label={t('account:security.edit-password.new-password')}
+        id="change-password-new-password"
+        name="newPassword"
+        label={t('account:security.change-password.new-password')}
         autoComplete="new-password"
       />
 
@@ -50,18 +46,29 @@ function ChangePasswordForm({ className }: Props) {
       </Form.Group>
 
       <PasswordField
-        controller={controllers.confirmNewPassword}
-        id="edit-password-confirm-new-password"
-        label={t('account:security.edit-password.confirm-new-password')}
+        id="change-password-confirm-new-password"
+        name="confirmNewPassword"
+        label={t('account:security.change-password.confirm-new-password')}
         autoComplete="new-password"
       />
+
+      {submitError && (
+        <Form.ErrorMessage
+          role="alert"
+          aria-relevant="text"
+          tw="flex items-center gap-sm mb-sm"
+        >
+          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          {submitError}
+        </Form.ErrorMessage>
+      )}
 
       <ButtonSecondary
         type="submit"
         size="lg"
         disabled={form.formState.isSubmitting}
       >
-        Update Password
+        {t('account:security.change-password.submit-button')}
       </ButtonSecondary>
     </Form>
   );

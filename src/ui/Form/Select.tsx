@@ -1,21 +1,22 @@
-import { InputHTMLAttributes, ReactNode, useMemo, VFC } from 'react';
+import { SelectHTMLAttributes, ReactNode, FC, useMemo } from 'react';
 import { useController } from 'react-hook-form';
-import { FaCheck } from 'react-icons/fa';
+import { GoChevronDown } from 'react-icons/go';
 import Form from './Form';
 
-type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   id: string;
   name: string;
   label: ReactNode;
   inputDescription?: ReactNode;
 };
 
-const Checkbox: VFC<CheckboxProps> = ({
+const Select: FC<SelectProps> = ({
   id,
   name,
   label,
   inputDescription,
-  ...inputProps
+  children,
+  ...selectProps
 }) => {
   const {
     field: { value, ...field },
@@ -27,27 +28,20 @@ const Checkbox: VFC<CheckboxProps> = ({
 
   return (
     <Form.Group>
-      <Form.CheckboxLabel>
-        <input
-          id={id}
-          type="checkbox"
-          tw="sr-only"
-          aria-hidden
-          checked={value === true}
-          {...inputProps}
-          {...field}
-        />
-        <Form.CheckboxTick
-          role="checkbox"
-          aria-describedby={`${errMsgId} ${descId}`}
-          aria-checked={value === true}
-          aria-invalid={fieldState.invalid}
-        >
-          <FaCheck />
-        </Form.CheckboxTick>
+      <Form.Select
+        id={id}
+        aria-invalid={fieldState.invalid}
+        aria-describedby={`${errMsgId} ${descId}`}
+        {...selectProps}
+        {...field}
+        value={value.toString()}
+        data-selected={value.toString() !== ''}
+      >
+        {children}
+      </Form.Select>
 
-        {label}
-      </Form.CheckboxLabel>
+      <Form.Label htmlFor={id}>{label}</Form.Label>
+      <GoChevronDown tw="absolute top-lg right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid ? (
@@ -62,4 +56,4 @@ const Checkbox: VFC<CheckboxProps> = ({
   );
 };
 
-export default Checkbox;
+export default Select;

@@ -14,7 +14,7 @@ export const RegisterFormSchema = (t?: Translate) => {
     length: 50,
   });
   const maxDateMessage = t?.('common:errors.form.max-date', {
-    date: dayjs(MAXIMUM_DOB).format(DATE_TIME_FORMATS.MEDIUM_DATE),
+    date: dayjs(MAXIMUM_DOB).format(DATE_TIME_FORMATS.LONG_DATE),
   });
   const weakPasswordMessage =
     t?.('common:errors.form.weak-password') ?? 'weak password';

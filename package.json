@@ -19,7 +19,6 @@
     "@reach/dialog": "^0.15.3",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "axios": "^0.21.1",
-    "date-fns": "^2.22.1",
     "dayjs": "^1.10.6",
     "firebase": "^8.7.1",
     "firebase-admin": "^9.11.0",

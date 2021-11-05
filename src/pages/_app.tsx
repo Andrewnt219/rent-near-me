@@ -1,4 +1,3 @@
-// import '@libs/react-datepicker/style.css';
 import { GetLayout } from '@common-types';
 import { AuthProvider } from '@modules/user-auth/contexts/AuthContext';
 import '@reach/dialog/styles.css';

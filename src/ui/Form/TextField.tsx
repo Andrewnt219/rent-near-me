@@ -1,31 +1,34 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
-import {
-  FieldValues,
-  useController,
-  UseControllerProps,
-} from 'react-hook-form';
+import { InputHTMLAttributes, ReactNode, VFC, useMemo } from 'react';
+import { useController } from 'react-hook-form';
 import Form from './Form';
 
-type Props<FormValues extends FieldValues> =
-  InputHTMLAttributes<HTMLInputElement> & {
-    label: ReactNode;
-    inputDescription?: ReactNode;
-    children?: never;
-    id: string;
-    controller: UseControllerProps<FormValues>;
-  };
+type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+  id: string;
+  name: string;
+  label: ReactNode;
+  inputDescription?: ReactNode;
+};
 
-function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
-  const { label, inputDescription, controller, ...inputProps } = props;
+const TextField: VFC<TextFieldProps> = ({
+  id,
+  name,
+  label,
+  inputDescription,
+  ...inputProps
+}) => {
   const {
     field: { value, ...field },
     fieldState,
-  } = useController(controller);
+  } = useController({ name });
+
+  const errMsgId = useMemo(() => `error-${id}`, [id]);
+  const descId = useMemo(() => `description-${id}`, [id]);
 
   return (
     <Form.Group>
       <Form.Input
-        aria-describedby={`error-${inputProps.id}`}
+        id={id}
+        aria-describedby={`${errMsgId} ${descId}`}
         aria-invalid={fieldState.invalid}
         {...inputProps}
         {...field}
@@ -33,20 +36,19 @@ function TextField<FormValues extends FieldValues>(props: Props<FormValues>) {
         placeholder=" "
       />
 
-      <Form.Label htmlFor={inputProps.id}>{label}</Form.Label>
+      <Form.Label htmlFor={id}>{label}</Form.Label>
 
       <Form.TextWrapper>
-        {fieldState.invalid && (
-          <Form.ErrorMessage id={`error-${inputProps.id}`}>
+        {fieldState.invalid ? (
+          <Form.ErrorMessage id={errMsgId}>
             {fieldState.error?.message}
           </Form.ErrorMessage>
-        )}
-        {!fieldState.invalid && (
-          <Form.Description>{inputDescription}</Form.Description>
+        ) : (
+          <Form.Description id={descId}>{inputDescription}</Form.Description>
         )}
       </Form.TextWrapper>
     </Form.Group>
   );
-}
+};
 
 export default TextField;

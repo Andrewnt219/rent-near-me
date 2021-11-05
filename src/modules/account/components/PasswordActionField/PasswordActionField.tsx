@@ -13,9 +13,9 @@ function PasswordActionField() {
 
   return (
     <ToggleActionField
-      label={t('account:security.edit-password.field-label')}
+      label={t('account:security.change-password.field-label')}
       mainContent={<ChangePasswordForm />}
-      alternativeContent={t('account:security.edit-password.description', {
+      alternativeContent={t('account:security.change-password.description', {
         time: dayjs(MOCK_LAST_UPDATED_DATE).fromNow(),
       })}
     />

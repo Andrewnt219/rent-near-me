@@ -17,27 +17,27 @@ import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 const signInExternalIconStyle = tw`w-6 h-6`;
 
 const LoginForm = () => {
-  const { controllers, form, onSubmit, submitError } = useLoginForm();
+  const { form, onSubmit, submitError } = useLoginForm();
   const { t } = useTranslation();
   const { registerModal } = useLayoutModal();
 
   return (
-    <Form noValidate onSubmit={onSubmit}>
+    <Form form={form} noValidate onSubmit={onSubmit}>
       <h4 tw="text-xl mb-md font-semibold">Welcome back to RentNearMe!</h4>
 
       <TextField
         label={t('common:login.email')}
         type="email"
         id="login-email"
+        name="email"
         autoComplete="username"
-        controller={controllers.email}
       />
 
       <PasswordField
         label={t('common:login.password')}
         id="login-password"
+        name="password"
         autoComplete="current-password"
-        controller={controllers.password}
         inputDescription={
           <ButtonLink type="button">Forget password?</ButtonLink>
         }
@@ -45,7 +45,7 @@ const LoginForm = () => {
 
       <Checkbox
         id="login-keepLogIn"
-        controller={controllers.keepLogIn}
+        name="keepLogIn"
         label={t('common:login.keepSignedIn')}
       />
 
