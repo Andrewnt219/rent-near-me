@@ -50,7 +50,7 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
 `;
 
 Layout.Container = styled.div`
-  ${tw`mx-auto w-full max-w-var-page px-sm`}
+  ${tw`mx-auto w-full max-w-var-page-max-width px-sm`}
 `;
 
 export default Layout;

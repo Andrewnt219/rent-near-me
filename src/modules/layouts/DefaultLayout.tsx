@@ -11,16 +11,13 @@ type Props = {
 const DefaultLayout = ({ className, children }: PropsWithChildren<Props>) => {
   return (
     <LayoutProvider>
-      <Layout
-        size="sm"
-        tw="flex flex-col min-h-full relative pb-md lg:pb-0"
-      >
+      <Layout size="sm" tw="flex flex-col min-h-full relative">
         <HomeNavBar tw="hidden lg:block" />
         <AppBar tw="lg:hidden" />
         <Layout.Container as="main" tw="flex-1" className={className}>
           {children}
         </Layout.Container>
-        <Footer />
+        <Footer tw="mb-var-app-bar-height lg:mb-0" />
       </Layout>
     </LayoutProvider>
   );

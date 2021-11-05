@@ -115,11 +115,13 @@ module.exports = {
         md: '1rem',
         lg: '1.5rem',
         xl: '3rem',
+        'var-app-bar-height': 'var(--app-bar-height)',
+        'var-page-px': 'var(--page-px)',
       },
 
       maxWidth: {
         '8xl': '90rem',
-        'var-page': 'var(--page-max-width, 90rem)',
+        'var-page-max-width': 'var(--page-max-width, 90rem)',
       },
 
       borderRadius: {
