@@ -13,7 +13,7 @@ function AccountInfoCard({ className, ...props }: PropsWithChildren<Props>) {
   return (
     <StyledWrapper className={className} tw="">
       <header>
-        <Text aria-hidden tw="text-[length:2.5em]">
+        <Text component="span" aria-hidden tw="text-[length:2.5em]">
           {props.icon}
         </Text>
 

@@ -10,7 +10,7 @@ function Text({ className, ...props }: PropsWithChildren<Props>) {
   return (
     <StyledText
       {...props}
-      as={props.component ?? 'span'}
+      as={props.component ?? 'p'}
       variant={props.variant ?? 'body1'}
       className={className}
       tw=""
