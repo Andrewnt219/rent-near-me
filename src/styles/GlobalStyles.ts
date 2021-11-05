@@ -13,7 +13,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #__next {
-    ${tw`mx-auto relative`}
+    /* isolate to prevent affecting modals or portals */
+    ${tw`mx-auto relative isolate`}
   }
 
   input, textarea, select {

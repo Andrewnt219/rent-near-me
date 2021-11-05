@@ -20,7 +20,7 @@ const HomeNavBar = ({ className }: Props) => {
   const { registerModal } = useLayoutModal();
 
   return (
-    <header className={className} tw="bg-white py-lg shadow">
+    <header className={className} tw="z-10 bg-white py-lg shadow">
       <Layout.Container tw="flex items-center justify-between">
         <Link href="/">
           <a>
