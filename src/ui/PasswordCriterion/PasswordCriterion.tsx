@@ -17,17 +17,20 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
       variant="sub2"
       isQualified={isQualified}
     >
-      {isQualified ? (
-        <>
-          <Icon icon="mdi:check" />
-          <span tw="sr-only">qualified</span>
-        </>
-      ) : (
-        <>
-          <Icon icon="mdi:close" />
-          <span tw="sr-only">not qualified</span>
-        </>
-      )}
+      <span>
+        {isQualified ? (
+          <>
+            <Icon icon="mdi:check" />
+            <span tw="sr-only">qualified</span>
+          </>
+        ) : (
+          <>
+            <Icon icon="mdi:close" />
+            <span tw="sr-only">not qualified</span>
+          </>
+        )}
+      </span>
+
       {children}
     </StyledPassworCriterion>
   );
