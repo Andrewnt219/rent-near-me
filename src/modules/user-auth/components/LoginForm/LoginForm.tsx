@@ -133,7 +133,7 @@ function SignInExternalButton({
       {...buttonProps}
     >
       <span aria-hidden>{icon}</span>
-      <span>{text}</span>
+      <span tw="text-left">{text}</span>
     </ButtonOutline>
   );
 }

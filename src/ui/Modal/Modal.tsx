@@ -103,7 +103,7 @@ const modalDialogCss = (size: ModalSize) => {
     max-width: calc(100% - 1rem);
     max-height: calc(100% - 1rem);
     ${sizeCss}
-    ${tw`bg-white rounded overflow-auto isolate`}
+    ${tw` bg-white rounded overflow-auto isolate`}
     ${tw`p-0 m-0`}
     ${tw`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
   `;
