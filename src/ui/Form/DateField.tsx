@@ -5,17 +5,19 @@ import { ReactNode, VFC, useMemo } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DayPickerInputProps } from 'react-day-picker/types/Props';
 import { useController } from 'react-hook-form';
-import { styled } from 'twin.macro';
-import { formatDate, parseDate } from './react-day-picker-utils';
+import tw, { css, styled } from 'twin.macro';
+import dayjs from 'dayjs';
+import CustomParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(CustomParseFormat);
 
-type DatePickerProps = Omit<DayPickerInputProps, 'placeholder'> & {
+type DateFieldProps = Omit<DayPickerInputProps, 'placeholder'> & {
   id: string;
   name: string;
   label: ReactNode;
   inputDescription?: ReactNode;
 };
 
-const DatePicker: VFC<DatePickerProps> = ({
+const DateField: VFC<DateFieldProps> = ({
   id,
   name,
   label,
@@ -46,8 +48,11 @@ const DatePicker: VFC<DatePickerProps> = ({
         // onDayChange won't work with user keyboard's input
         dayPickerProps={{ ...dayPickerProps, onDayClick: field.onChange }}
         placeholder=" "
-        formatDate={formatDate}
-        parseDate={parseDate}
+        formatDate={(date, format) => dayjs(date).format(format)}
+        parseDate={(dateStr, format) => {
+          const parsed = dayjs(dateStr, format);
+          return parsed.isValid() ? parsed.toDate() : undefined;
+        }}
       />
 
       <StyledLabel
@@ -91,4 +96,10 @@ const StyledWrapper = styled(Form.Group)`
   }
 `;
 
-export default DatePicker;
+export default DateField;
+
+export const reactDatePickerCss = css`
+  .DayPickerInput {
+    ${tw`w-full`}
+  }
+`;

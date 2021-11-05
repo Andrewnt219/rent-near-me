@@ -1,4 +1,4 @@
-import DatePicker from '@libs/react-day-picker/DatePicker';
+import DateField from '@ui/Form/DateField';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import { GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import Form from '@ui/Form/Form';
@@ -45,7 +45,7 @@ const RegisterForm = () => {
       </Row>
 
       <Row>
-        <DatePicker
+        <DateField
           id="register-dob"
           name="dob"
           label={t('common:register.dob.label')}
