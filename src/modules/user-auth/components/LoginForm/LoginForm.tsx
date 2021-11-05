@@ -1,8 +1,8 @@
 import { Icon } from '@iconify/react';
-import atFill from '@iconify/icons-eva/at-fill';
+import googleGmail from '@iconify/icons-logos/google-gmail';
+import facebookIcon from '@iconify/icons-logos/facebook';
+import googleIcon from '@iconify/icons-logos/google-icon';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
-import facebookFill from '@iconify/icons-eva/facebook-fill';
-import googleFill from '@iconify/icons-eva/google-fill';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
@@ -81,7 +81,17 @@ const LoginForm = () => {
           type="button"
           icon={
             <StyledIconWrapper>
-              <Icon icon={googleFill} tw="text-muted" />
+              <Icon icon={googleGmail} tw="text-muted" />
+            </StyledIconWrapper>
+          }
+          text={t('common:login.new-account')}
+          onClick={registerModal.show}
+        />
+        <SignInExternalButton
+          type="button"
+          icon={
+            <StyledIconWrapper>
+              <Icon icon={googleIcon} tw="text-muted" />
             </StyledIconWrapper>
           }
           text={t('common:login.google')}
@@ -91,22 +101,11 @@ const LoginForm = () => {
           type="button"
           icon={
             <StyledIconWrapper>
-              <Icon icon={facebookFill} tw="text-muted" />
+              <Icon icon={facebookIcon} tw="text-muted" />
             </StyledIconWrapper>
           }
           text={t('common:login.facebook')}
           onClick={AuthService.signInWithFacebook}
-        />
-
-        <SignInExternalButton
-          type="button"
-          icon={
-            <StyledIconWrapper>
-              <Icon icon={atFill} tw="text-muted" />
-            </StyledIconWrapper>
-          }
-          text={t('common:login.new-account')}
-          onClick={registerModal.show}
         />
       </ul>
     </Form>

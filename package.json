@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@iconify/icons-eva": "^1.1.0",
+    "@iconify/icons-logos": "^1.1.10",
     "@iconify/react": "^3.0.1",
     "@testing-library/cypress": "^7.0.6",
     "@testing-library/jest-dom": "^5.14.1",

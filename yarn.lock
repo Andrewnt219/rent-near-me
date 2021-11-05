@@ -866,6 +866,11 @@
   resolved "https://registry.yarnpkg.com/@iconify/icons-eva/-/icons-eva-1.1.0.tgz#6d6dae59d766587e9034bbb782acca6c40ab4b0c"
   integrity sha512-a2wCJw+6UebrsoJ2WhpHUcdr4PJljwk0tdu1GfpjzwVyiJBC7y6sc2h7as1npJPLwgMIc/q8YFJf5iFl7Ik3NA==
 
+"@iconify/icons-logos@^1.1.10":
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-logos/-/icons-logos-1.1.10.tgz#4a6c5f6036ca6f515a78b5eaef6d57fc7ad4e9ad"
+  integrity sha512-bGs/c0kGUCWr29wuppFYSaHqDH3o6qV85/h5jJhmenDPgVF8xWkFbXcFW7lAa+nJy1rMk4K7kFeXDOdMG1b5Rw==
+
 "@iconify/react@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@iconify/react/-/react-3.0.1.tgz#ce2cb3f4a2b6aab5f7af082c833d869b6fb43182"
