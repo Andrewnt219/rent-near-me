@@ -1,4 +1,7 @@
 import { Icon } from '@iconify/react';
+import searchFill from '@iconify/icons-eva/search-fill';
+import heartFill from '@iconify/icons-eva/heart-fill';
+import personFill from '@iconify/icons-eva/person-fill';
 import { ComponentProps } from 'react';
 import AppBarMenuItem from '../AppBarMenuItem/AppBarMenuItem';
 
@@ -22,17 +25,17 @@ const AppBar = ({ className }: Props) => {
 const links: ComponentProps<typeof AppBarMenuItem>[] = [
   {
     href: '/',
-    icon: <Icon icon="mdi:magnify" />,
+    icon: <Icon icon={searchFill} />,
     textTranslateKey: 'home',
   },
   {
     href: '/wishlist',
-    icon: <Icon icon="mdi:heart" />,
+    icon: <Icon icon={heartFill} />,
     textTranslateKey: 'wishlist',
   },
   {
     href: '/login',
-    icon: <Icon icon="mdi:view-dashboard" />,
+    icon: <Icon icon={personFill} />,
     textTranslateKey: 'login',
   },
 ];

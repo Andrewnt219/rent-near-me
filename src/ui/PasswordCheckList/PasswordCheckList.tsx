@@ -2,6 +2,7 @@ import PasswordCriterion from '@ui/PasswordCriterion/PasswordCriterion';
 import { PasswordCriteria } from '@utils/validate-password-utils';
 import { VFC } from 'react';
 import { Icon } from '@iconify/react';
+import infoFill from '@iconify/icons-eva/info-fill';
 type Props = {
   className?: string;
   passwordValidationResults: Record<PasswordCriteria, boolean>;
@@ -30,7 +31,7 @@ const PasswordCheckList: VFC<Props> = ({ className, ...props }) => {
         }
       >
         Contains a number or a special character
-        <Icon icon="mdi:information" tw="text-info" />
+        <Icon icon={infoFill} tw="text-info" />
       </PasswordCriterion>
     </div>
   );

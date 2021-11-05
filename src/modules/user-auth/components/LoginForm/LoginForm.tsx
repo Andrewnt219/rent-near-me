@@ -1,4 +1,8 @@
 import { Icon } from '@iconify/react';
+import atFill from '@iconify/icons-eva/at-fill';
+import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
+import facebookFill from '@iconify/icons-eva/facebook-fill';
+import googleFill from '@iconify/icons-eva/google-fill';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
@@ -54,7 +58,7 @@ const LoginForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <Icon icon="mdi:alert-circle" tw="w-5 h-5 fill-current" />
+          <Icon icon={alertTriangleFill} tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
       )}
@@ -77,7 +81,7 @@ const LoginForm = () => {
           type="button"
           icon={
             <StyledIconWrapper>
-              <Icon icon="flat-color-icons:google" />
+              <Icon icon={googleFill} tw="text-muted" />
             </StyledIconWrapper>
           }
           text={t('common:login.google')}
@@ -87,7 +91,7 @@ const LoginForm = () => {
           type="button"
           icon={
             <StyledIconWrapper>
-              <Icon icon="mdi:facebook" tw="text-[#1877f2]" />
+              <Icon icon={facebookFill} tw="text-muted" />
             </StyledIconWrapper>
           }
           text={t('common:login.facebook')}
@@ -98,7 +102,7 @@ const LoginForm = () => {
           type="button"
           icon={
             <StyledIconWrapper>
-              <Icon icon="mdi:key" />
+              <Icon icon={atFill} tw="text-muted" />
             </StyledIconWrapper>
           }
           text={t('common:login.new-account')}

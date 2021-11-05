@@ -1,5 +1,6 @@
 import { IconButtonPrimary } from '@ui/IconButton/IconButton';
 import { Icon } from '@iconify/react';
+import searchFill from '@iconify/icons-eva/search-fill';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
@@ -15,7 +16,7 @@ const SearchBar = ({ className }: Props) => {
         size="md"
         tw="absolute top-1/2 right-sm transform -translate-y-1/2"
       >
-        <Icon icon="mdi:magnify" />
+        <Icon icon={searchFill} />
         <span tw="sr-only">Search</span>
       </IconButtonPrimary>
     </StyledWrapper>

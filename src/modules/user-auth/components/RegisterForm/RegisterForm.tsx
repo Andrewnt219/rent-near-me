@@ -7,12 +7,12 @@ import PasswordField from '@ui/Form/PasswordField';
 import Select from '@ui/Form/SelectField';
 import TextField from '@ui/Form/TextField';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
-import Row, { InputRow } from '@ui/Row/Row';
+import { InputRow } from '@ui/Row/Row';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
-import { Icon } from '@iconify/react';
 import useRegisterForm from './useRegisterForm';
-import tw from 'twin.macro';
+import { Icon } from '@iconify/react';
+import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 const RegisterForm = () => {
   const {
     controllers,
@@ -101,7 +101,7 @@ const RegisterForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <Icon tw="w-5 h-5 fill-current" icon="mdi:alert-circle" />
+          <Icon tw="w-5 h-5 fill-current" icon={alertTriangleFill} />
           {submitError}
         </Form.ErrorMessage>
       )}

@@ -5,6 +5,7 @@ import {
   UseControllerProps,
 } from 'react-hook-form';
 import { Icon } from '@iconify/react';
+import arrowDownFill from '@iconify/icons-eva/arrow-down-fill';
 import Form from './Form';
 
 type Props<FormValues extends FieldValues> =
@@ -35,7 +36,7 @@ function Select<FormValues extends FieldValues>(props: Props<FormValues>) {
       </Form.Select>
 
       <Form.Label htmlFor={selectProps.id}>{label}</Form.Label>
-      <Icon icon="mdi:menu-down" tw="absolute w-6 h-6 top-md right-md" />
+      <Icon icon={arrowDownFill} tw="absolute w-6 h-6 top-md right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid && (

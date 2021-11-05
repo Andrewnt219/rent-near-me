@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import chevronRightFill from '@iconify/icons-eva/chevron-right-fill';
 import { VFC } from 'react';
 import { useStaticBreadCrumb } from 'src/hooks/useStaticBreadCrumb';
 import { accountRoutes } from '../../routes';
@@ -21,7 +22,7 @@ const BreadCrumb: VFC<Props> = ({ className }) => {
             />
 
             {index < routes.length - 1 && (
-              <Icon icon="mdi:chevron-right" aria-hidden tw="mx-xs" />
+              <Icon icon={chevronRightFill} aria-hidden tw="mx-xs" />
             )}
           </li>
         ))}

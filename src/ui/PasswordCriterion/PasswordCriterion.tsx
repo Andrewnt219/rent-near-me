@@ -1,6 +1,8 @@
 import Text from '@ui/Text/Text';
 import { FC } from 'react';
 import { Icon } from '@iconify/react';
+import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
+import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
 import tw, { styled } from 'twin.macro';
 
 type PasswordCriteriaProps = {
@@ -20,12 +22,12 @@ const PasswordCriterion: FC<PasswordCriteriaProps> = ({
       <span>
         {isQualified ? (
           <>
-            <Icon icon="mdi:check" />
+            <Icon icon={checkmarkCircle2Fill} />
             <span tw="sr-only">qualified</span>
           </>
         ) : (
           <>
-            <Icon icon="mdi:close" />
+            <Icon icon={closeCircleFill} />
             <span tw="sr-only">not qualified</span>
           </>
         )}

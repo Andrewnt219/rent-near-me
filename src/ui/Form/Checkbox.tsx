@@ -6,6 +6,7 @@ import {
 } from 'react-hook-form';
 import { Icon } from '@iconify/react';
 import Form from './Form';
+import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
 
 type Props<FormValues extends FieldValues> =
   InputHTMLAttributes<HTMLInputElement> & {
@@ -46,7 +47,7 @@ export default function Checkbox<FormValues extends FieldValues>({
           aria-checked={value === true}
           aria-invalid={fieldState.invalid}
         >
-          <Icon icon="mdi:check" />
+          <Icon icon={checkmarkCircle2Fill} />
         </Form.CheckboxTick>
 
         {label}

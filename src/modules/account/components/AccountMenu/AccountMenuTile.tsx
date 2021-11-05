@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import chevronRightFill from '@iconify/icons-eva/chevron-right-fill';
 import { ReactNode } from 'react';
 
 type Props = {
@@ -19,7 +20,7 @@ function AccountMenuTile({ className, ...props }: Props) {
       <div tw="mt-sm text-h4 font-semibold flex items-baseline gap-xs">
         {props.data.title}
         <div aria-hidden tw="text-[length: 0.75em]">
-          <Icon icon="mdi:chevron-right" />
+          <Icon icon={chevronRightFill} />
         </div>
       </div>
 
