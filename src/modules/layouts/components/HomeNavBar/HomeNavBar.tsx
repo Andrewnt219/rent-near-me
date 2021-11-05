@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import globe3Fill from '@iconify/icons-eva/globe-3-fill';
+import globeFill from '@iconify/icons-eva/globe-fill';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
@@ -43,7 +43,7 @@ const HomeNavBar = ({ className }: Props) => {
           )}
 
           <IconButtonGhost size="md">
-            <Icon icon={globe3Fill} />
+            <Icon icon={globeFill} />
             <span tw="sr-only">Change site&apos; language</span>
           </IconButtonGhost>
 

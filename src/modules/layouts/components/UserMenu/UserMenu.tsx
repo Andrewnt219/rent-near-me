@@ -1,6 +1,6 @@
 import { RouteProps } from '@common-types';
 import { Icon } from '@iconify/react';
-import layersFill from '@iconify/icons-eva/layers-fill';
+import personFill from '@iconify/icons-eva/person-fill';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthService from '@services/AuthService';
@@ -34,7 +34,7 @@ const UserMenu = ({ className }: Props) => {
 
         <HamburgerIcon />
 
-        <Icon icon={layersFill} tw="w-8 h-8 p-xs rounded-full ml-sm" />
+        <Icon icon={personFill} tw="w-8 h-8 p-xs rounded-full ml-sm" />
       </ButtonGhost>
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
     </div>
