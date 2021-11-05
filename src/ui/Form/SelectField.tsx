@@ -35,7 +35,7 @@ function Select<FormValues extends FieldValues>(props: Props<FormValues>) {
       </Form.Select>
 
       <Form.Label htmlFor={selectProps.id}>{label}</Form.Label>
-      <Icon icon="mdi:arrow-down-drop-circle" tw="absolute top-lg right-md" />
+      <Icon icon="mdi:menu-down" tw="absolute w-6 h-6 top-md right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid && (
