@@ -6,10 +6,9 @@ import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonGhost } from '@ui/Button/Button';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
-import Logo from '@ui/Logo/Logo';
+import LogoWithName from '@ui/Logo/LogoWithNa,e';
 import Link from 'next/link';
 import React from 'react';
-import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
 
 type Props = {
@@ -24,7 +23,7 @@ const HomeNavBar = ({ className }: Props) => {
       <Layout.Container tw="flex items-center justify-between">
         <Link href="/">
           <a>
-            <Logo />
+            <LogoWithName />
           </a>
         </Link>
 
@@ -54,5 +53,4 @@ const HomeNavBar = ({ className }: Props) => {
   );
 };
 
-const StyledHeader = styled.header``;
 export default HomeNavBar;

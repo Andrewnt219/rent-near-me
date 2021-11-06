@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react';
-import googleGmail from '@iconify/icons-logos/google-gmail';
 import facebookIcon from '@iconify/icons-logos/facebook';
 import googleIcon from '@iconify/icons-logos/google-icon';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
@@ -16,6 +15,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import tw from 'twin.macro';
 import { useLoginForm } from './useLoginForm';
+import Logo from '@ui/Logo/Logo';
 
 const LoginForm = () => {
   const { controllers, form, onSubmit, submitError } = useLoginForm();
@@ -81,7 +81,7 @@ const LoginForm = () => {
           type="button"
           icon={
             <StyledIconWrapper>
-              <Icon icon={googleGmail} tw="text-muted" />
+              <Logo />
             </StyledIconWrapper>
           }
           text={t('common:login.new-account')}
