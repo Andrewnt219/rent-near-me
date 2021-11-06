@@ -1,5 +1,6 @@
 import { IconButtonPrimary } from '@ui/IconButton/IconButton';
-import { FaSearch } from 'react-icons/fa';
+import { Icon } from '@iconify/react';
+import searchFill from '@iconify/icons-eva/search-fill';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
@@ -15,7 +16,7 @@ const SearchBar = ({ className }: Props) => {
         size="md"
         tw="absolute top-1/2 right-sm transform -translate-y-1/2"
       >
-        <FaSearch />
+        <Icon icon={searchFill} />
         <span tw="sr-only">Search</span>
       </IconButtonPrimary>
     </StyledWrapper>
@@ -27,10 +28,8 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
-  ${tw`w-full rounded-full h-full border pl-lg pr-3xl py-md`}
-  ${tw`focus:(ring-2 ring-dark)  placeholder:( text-gray)`}
-
-  box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%);
+  ${tw`w-full rounded-full h-full border pl-lg pr-xl py-md shadow`}
+  ${tw`focus:(ring-2 ring-dark)  placeholder:(text-muted)`}
 `;
 
 export default SearchBar;

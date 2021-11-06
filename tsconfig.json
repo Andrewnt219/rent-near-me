@@ -34,9 +34,10 @@
       "@services/*": ["src/services/*"],
       "@styles/*": ["src/styles/*"],
       "@ui/*": ["src/ui/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "twind.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "cypress"]
 }

@@ -3,12 +3,12 @@ import AccountInfoCardGroup from '@modules/account/components/AccountInfoCard/Ac
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import ActionFieldGroup from '@modules/account/components/ActionField/ActionFieldGroup';
 import PasswordActionField from '@modules/account/components/PasswordActionField/PasswordActionField';
-import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
+import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactNode } from 'react';
-import { FaShieldAlt } from 'react-icons/fa';
-
+import { Icon } from '@iconify/react';
+import shieldFill from '@iconify/icons-eva/shield-fill';
 export default function SecurityPage() {
   const { t } = useTranslation();
 
@@ -34,14 +34,14 @@ function Aside() {
     <AccountInfoCardGroup>
       <AccountInfoCard
         title="Let's make your account more secure"
-        icon={<FaShieldAlt tw=" text-secondary" />}
+        icon={<Icon icon={shieldFill} tw=" text-secondary" />}
       >
         We’re always working on ways to increase safety in our community. That’s
         why we look at every account to make sure it’s as secure as possible.
       </AccountInfoCard>
       <AccountInfoCard
         title="Let's make your account more secure"
-        icon={<FaShieldAlt tw=" text-secondary" />}
+        icon={<Icon icon={shieldFill} tw=" text-secondary" />}
       >
         We’re always working on ways to increase safety in our community. That’s
         why we look at every account to make sure it’s as secure as possible.

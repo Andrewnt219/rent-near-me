@@ -1,12 +1,13 @@
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink, ButtonSecondary } from '@ui/Button/Button';
 import Form from '@ui/Form/Form';
-import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
-import PasswordField from '@ui/Form/PasswordField';
 import HiddenField from '@ui/Form/HiddenField';
+import PasswordField from '@ui/Form/PasswordField';
+import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import useTranslation from 'next-translate/useTranslation';
 import { useChangePasswordForm } from './useChangePasswordForm';
-import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { RiErrorWarningFill } from 'react-icons/ri';
+import { Icon } from '@iconify/react';
+import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 
 function ChangePasswordForm() {
   const { t } = useTranslation();
@@ -58,7 +59,8 @@ function ChangePasswordForm() {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          <Icon icon={closeCircleFill} tw="w-5 h-5 fill-current" />
+
           {submitError}
         </Form.ErrorMessage>
       )}

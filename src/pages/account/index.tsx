@@ -3,6 +3,7 @@ import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/Accoun
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink } from '@ui/Button/Button';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
+import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import React, { ReactNode } from 'react';
@@ -11,7 +12,7 @@ export default function AccountIndexPage() {
   const { t } = useTranslation();
 
   return (
-    <section tw="max-w-5xl space-y-3xl md:space-y-4xl">
+    <section tw="max-w-5xl space-y-xl md:space-y-xl">
       <Header />
 
       <nav aria-label="Settings" tw="">
@@ -36,7 +37,9 @@ function Header() {
 
   return (
     <header>
-      <h1 tw="text-h2 font-semibold">{t('account:index.page-title')}</h1>
+      <Text component="h1" variant="h2">
+        {t('account:index.page-title')}
+      </Text>
 
       <SeparatorList
         separator={<Separator />}

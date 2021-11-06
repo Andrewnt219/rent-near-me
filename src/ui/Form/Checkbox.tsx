@@ -1,7 +1,8 @@
 import { InputHTMLAttributes, ReactNode, useMemo, VFC } from 'react';
 import { useController } from 'react-hook-form';
-import { FaCheck } from 'react-icons/fa';
 import Form from './Form';
+import { Icon } from '@iconify/react';
+import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
 
 type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   id: string;
@@ -43,7 +44,7 @@ const Checkbox: VFC<CheckboxProps> = ({
           aria-checked={value === true}
           aria-invalid={fieldState.invalid}
         >
-          <FaCheck />
+          <Icon icon={checkmarkCircle2Fill} />
         </Form.CheckboxTick>
 
         {label}

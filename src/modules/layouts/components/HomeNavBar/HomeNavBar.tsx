@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import { Icon } from '@iconify/react';
+import globeFill from '@iconify/icons-eva/globe-fill';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import { ButtonGhost } from '@ui/Button/Button';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
-import Logo from '@ui/Logo/Logo';
+import LogoWithName from '@ui/Logo/LogoWithNa,e';
+import Link from 'next/link';
 import React from 'react';
-import { FaGlobe } from 'react-icons/fa';
-import { styled } from 'twin.macro';
 import UserMenu from '../UserMenu/UserMenu';
 
 type Props = {
@@ -19,11 +19,11 @@ const HomeNavBar = ({ className }: Props) => {
   const { registerModal } = useLayoutModal();
 
   return (
-    <StyledHeader className={className} tw="bg-white py-xl">
+    <header className={className} tw="z-10 bg-white py-lg shadow">
       <Layout.Container tw="flex items-center justify-between">
         <Link href="/">
           <a>
-            <Logo />
+            <LogoWithName />
           </a>
         </Link>
 
@@ -42,18 +42,15 @@ const HomeNavBar = ({ className }: Props) => {
           )}
 
           <IconButtonGhost size="md">
-            <FaGlobe />
+            <Icon icon={globeFill} />
             <span tw="sr-only">Change site&apos; language</span>
           </IconButtonGhost>
 
           <UserMenu tw="ml-sm" />
         </nav>
       </Layout.Container>
-    </StyledHeader>
+    </header>
   );
 };
 
-const StyledHeader = styled.header`
-  box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
-`;
 export default HomeNavBar;

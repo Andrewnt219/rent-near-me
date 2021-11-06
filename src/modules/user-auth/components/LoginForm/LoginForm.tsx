@@ -1,20 +1,21 @@
+import { Icon } from '@iconify/react';
+import facebookIcon from '@iconify/icons-logos/facebook';
+import googleIcon from '@iconify/icons-logos/google-icon';
+import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
+import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
 import Checkbox from '@ui/Form/Checkbox';
 import Form from '@ui/Form/Form';
-import HrText from '@ui/HrText/HrText';
 import PasswordField from '@ui/Form/PasswordField';
 import TextField from '@ui/Form/TextField';
+import HrText from '@ui/HrText/HrText';
+import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { FaFacebook, FaKey } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
-import { RiErrorWarningFill } from 'react-icons/ri';
 import tw from 'twin.macro';
 import { useLoginForm } from './useLoginForm';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
-
-const signInExternalIconStyle = tw`w-6 h-6`;
+import Logo from '@ui/Logo/Logo';
 
 const LoginForm = () => {
   const { form, onSubmit, submitError } = useLoginForm();
@@ -23,7 +24,9 @@ const LoginForm = () => {
 
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>
-      <h4 tw="text-xl mb-md font-semibold">Welcome back to RentNearMe!</h4>
+      <Text tw="mb-md" component="h4" variant="h4">
+        Welcome back to RentNearMe!
+      </Text>
 
       <TextField
         label={t('common:login.email')}
@@ -55,7 +58,7 @@ const LoginForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          <Icon icon={alertTriangleFill} tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
       )}
@@ -76,30 +79,40 @@ const LoginForm = () => {
       <ul aria-label="Sign-in options" tw="space-y-sm">
         <SignInExternalButton
           type="button"
-          icon={<FcGoogle css={signInExternalIconStyle} />}
-          text={t('common:login.google')}
-          onClick={AuthService.signInWithGoogle}
+          icon={
+            <StyledIconWrapper>
+              <Logo />
+            </StyledIconWrapper>
+          }
+          text={t('common:login.new-account')}
+          onClick={registerModal.show}
         />
-
         <SignInExternalButton
           type="button"
           icon={
-            <FaFacebook css={signInExternalIconStyle} tw="text-[#1877f2]" />
+            <StyledIconWrapper>
+              <Icon icon={googleIcon} tw="text-muted" />
+            </StyledIconWrapper>
+          }
+          text={t('common:login.google')}
+          onClick={AuthService.signInWithGoogle}
+        />
+        <SignInExternalButton
+          type="button"
+          icon={
+            <StyledIconWrapper>
+              <Icon icon={facebookIcon} tw="text-muted" />
+            </StyledIconWrapper>
           }
           text={t('common:login.facebook')}
           onClick={AuthService.signInWithFacebook}
-        />
-
-        <SignInExternalButton
-          type="button"
-          icon={<FaKey css={signInExternalIconStyle} />}
-          text={t('common:login.new-account')}
-          onClick={registerModal.show}
         />
       </ul>
     </Form>
   );
 };
+
+const StyledIconWrapper = tw.span`svg:(w-6 h-6)`;
 
 export default LoginForm;
 
@@ -119,7 +132,7 @@ function SignInExternalButton({
       {...buttonProps}
     >
       <span aria-hidden>{icon}</span>
-      <span>{text}</span>
+      <span tw="text-left">{text}</span>
     </ButtonOutline>
   );
 }

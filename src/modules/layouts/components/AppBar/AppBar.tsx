@@ -1,5 +1,8 @@
+import { Icon } from '@iconify/react';
+import searchFill from '@iconify/icons-eva/search-fill';
+import heartFill from '@iconify/icons-eva/heart-fill';
+import personFill from '@iconify/icons-eva/person-fill';
 import { ComponentProps } from 'react';
-import { FaHeart, FaSearch, FaUserAlt } from 'react-icons/fa';
 import AppBarMenuItem from '../AppBarMenuItem/AppBarMenuItem';
 
 type Props = {
@@ -9,7 +12,7 @@ const AppBar = ({ className }: Props) => {
   return (
     <header
       className={className}
-      tw="h-var-app-bar z-40 fixed bottom-0 left-0 right-0 py-md border-light border-t bg-white"
+      tw="z-10 fixed shadow h-var-app-bar-height bottom-0 left-0 right-0 py-md  border-t bg-white"
     >
       <nav>
         <MenuList />
@@ -22,17 +25,17 @@ const AppBar = ({ className }: Props) => {
 const links: ComponentProps<typeof AppBarMenuItem>[] = [
   {
     href: '/',
-    icon: <FaSearch />,
+    icon: <Icon icon={searchFill} />,
     textTranslateKey: 'home',
   },
   {
     href: '/wishlist',
-    icon: <FaHeart />,
+    icon: <Icon icon={heartFill} />,
     textTranslateKey: 'wishlist',
   },
   {
     href: '/login',
-    icon: <FaUserAlt />,
+    icon: <Icon icon={personFill} />,
     textTranslateKey: 'login',
   },
 ];

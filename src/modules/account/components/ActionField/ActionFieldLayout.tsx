@@ -1,3 +1,4 @@
+import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
 
 type ActionFieldLayoutProps = {
@@ -14,9 +15,11 @@ const ActionFieldLayout: FC<ActionFieldLayoutProps> = ({
   renderedActionButton,
   showActionButton,
 }) => (
-  <article tw="pt-0 pb-2xl" className={className}>
+  <article className={className}>
     <header tw="flex justify-between items-baseline">
-      <h3 tw="font-semibold">{label}</h3>
+      <Text component="h3" variant="sub1">
+        {label}
+      </Text>
 
       {showActionButton && <>{renderedActionButton}</>}
     </header>

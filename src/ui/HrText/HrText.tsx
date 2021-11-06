@@ -10,7 +10,7 @@ function HrText({ children, className }: PropsWithChildren<Props>) {
   return (
     <div className={className} tw="flex justify-around items-center gap-xl">
       <hr css={hrStyle} />
-      <div tw="-mt-xs text-dark text-sm">{children}</div>
+      <div tw="-mt-xs text-body2">{children}</div>
       <hr css={hrStyle} />
     </div>
   );
