@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 import crypto from 'crypto';
 import encrypted from './firebase-admin-secret.enc';
+import converters from './data-converters';
 
 import Profile from '@models/api/entities/Profile/Profile';
 import PasswordUpdateHistory from '@models/api/entities/Profile/PasswordUpdateHistory/PasswordUpdateHistory';
@@ -18,12 +19,15 @@ if (admin.apps.length === 0) {
   });
 }
 
-export const firestore = admin.firestore();
-
 const typeConverter = <T>() => ({
   toFirestore: (data: Partial<T>) => data,
-  fromFirestore: (snap: FirebaseFirestore.QueryDocumentSnapshot) =>
-    snap.data() as T,
+  fromFirestore: (snap: FirebaseFirestore.QueryDocumentSnapshot) => {
+    let data = snap.data();
+    for (const converter of converters) {
+      data = converter.apply(data);
+    }
+    return data as T;
+  },
 });
 
 const typedCollection = <T>(collectionPath: string) =>
@@ -36,6 +40,8 @@ export const db = {
       `profiles/${profileId}/password_update_history`
     ),
 };
+
+export const firestore = admin.firestore();
 
 export const auth = admin.auth();
 

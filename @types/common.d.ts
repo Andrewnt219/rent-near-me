@@ -43,8 +43,6 @@ declare module '@common-types' {
   };
   type InferFromSchema<T> = RemoveIndex<InferType<T>>;
 
-  type FirestoreTimestamp = Date | FirebaseFirestore.FieldValue;
-
   type ItemType<T extends Array> = T[number];
 
   type Id = string | number | symbol;

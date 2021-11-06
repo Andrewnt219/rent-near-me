@@ -8,7 +8,6 @@ import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateModelWithSchema } from '@utils/api/model-schema-validator';
 import { validateUserWithId } from '@utils/api/user-validator';
-import * as admin from 'firebase-admin';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type PostResponseData = Await<null>;
@@ -24,15 +23,15 @@ async function post(
 
   await auth.updateUser(model.uid, { password: model.newPassword });
 
-  const firestoreTimestamp = admin.firestore.FieldValue.serverTimestamp();
+  const now = new Date();
   await db
     .Profile()
     .doc(model.uid)
-    .set({ passwordLastUpdatedTime: firestoreTimestamp }, { merge: true });
+    .set({ passwordLastUpdatedTime: now }, { merge: true });
   await db
     .Profile_PasswordUpdateHistory(model.uid)
     // More info may be desired here in the future
-    .add({ timestamp: firestoreTimestamp });
+    .add({ timestamp: now });
   return res.json(new ResultSuccess(null));
 }
 

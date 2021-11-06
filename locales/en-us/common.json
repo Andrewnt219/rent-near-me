@@ -67,6 +67,7 @@
   "routes": {
     "account": {
       "index": "Account",
+      "profile": "Personal Info",
       "security": "Login & Security",
       "payments": "Payments & payouts"
     },

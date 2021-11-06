@@ -1,4 +1,3 @@
-import { FirestoreTimestamp } from '@common-types';
 import FirestoreEntity from '@models/api/entities/FirestoreEntity';
 
 export default class Profile implements FirestoreEntity {
@@ -6,7 +5,7 @@ export default class Profile implements FirestoreEntity {
   lastName?: string;
   gender?: string;
   dob?: Date;
-  passwordLastUpdatedTime?: FirestoreTimestamp;
+  passwordLastUpdatedTime?: Date;
   publicFields?: string[];
 
   static DEFAULT_PUBLIC_FIELDS = ['firstName', 'lastName'];
