@@ -1,15 +1,15 @@
 import { RouteProps } from '@common-types';
-import { useAuth } from '@modules/user-auth/contexts/AuthContext';
+import { Icon } from '@iconify/react';
+import personFill from '@iconify/icons-eva/person-fill';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthService from '@services/AuthService';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
-import { FaUserAlt } from 'react-icons/fa';
 import tw, { styled } from 'twin.macro';
 import { StyledUserMenuLink } from '../UserMenuLink/UserMenuLink';
 import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
 import { useUserMenuDropDown } from './useUserMenuDropdown';
-
 type Props = {
   className?: string;
 };
@@ -34,7 +34,7 @@ const UserMenu = ({ className }: Props) => {
 
         <HamburgerIcon />
 
-        <FaUserAlt tw="h-7 w-7 p-xs bg-gray rounded-full text-white ml-md" />
+        <Icon icon={personFill} tw="w-8 h-8 p-xs rounded-full ml-sm" />
       </ButtonGhost>
       {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
     </div>
@@ -108,7 +108,11 @@ function Menu(props: MenuProps) {
       <UserMenuLinksGroup routes={links['preference']} />
       {isAuthenticated && (
         <UserMenuLinksGroup>
-          <StyledUserMenuLink as="button" onClick={() => AuthService.signOut()}>
+          <StyledUserMenuLink
+            tw="text-danger"
+            as="button"
+            onClick={AuthService.signOut}
+          >
             Logout
           </StyledUserMenuLink>
         </UserMenuLinksGroup>

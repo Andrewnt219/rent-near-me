@@ -1,4 +1,5 @@
 import PaymentSettingPageLayout from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
+import Text from '@ui/Text/Text';
 import React, { ReactNode } from 'react';
 
 type Props = {
@@ -7,7 +8,9 @@ type Props = {
 export default function TaxInfoPage({ className }: Props) {
   return (
     <div className={className} tw="">
-      <h1 tw="text-hero">Taxes</h1>
+      <Text component="h2" variant="h3">
+        Taxes
+      </Text>
     </div>
   );
 }

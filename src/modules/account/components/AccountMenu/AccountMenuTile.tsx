@@ -1,5 +1,6 @@
+import { Icon } from '@iconify/react';
+import chevronRightFill from '@iconify/icons-eva/chevron-right-fill';
 import { ReactNode } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
 
 type Props = {
   className?: string;
@@ -11,24 +12,19 @@ type Props = {
 };
 function AccountMenuTile({ className, ...props }: Props) {
   return (
-    <article
-      className={className}
-      css={{ boxShadow: 'rgb(0 0 0 / 16%) 0px 2px 8px' }}
-      tw="p-xl w-full h-full rounded"
-    >
-      <span aria-hidden css={{ fontSize: '2em' }}>
+    <article className={className} tw="p-lg w-full h-full rounded shadow-z8">
+      <span aria-hidden tw="text-[length: 2em]">
         {props.data.icon}
       </span>
 
-      <div tw="mt-md text-lg font-semibold flex items-baseline gap-xs">
+      <div tw="mt-sm text-h4 font-semibold flex items-baseline gap-xs">
         {props.data.title}
-
-        <div aria-hidden tw="" css={{ fontSize: '.75em' }}>
-          <FaChevronRight />
+        <div aria-hidden tw="text-[length: 0.75em]">
+          <Icon icon={chevronRightFill} />
         </div>
       </div>
 
-      <div tw="mt-sm">{props.data.description}</div>
+      <div tw="mt-md">{props.data.description}</div>
     </article>
   );
 }

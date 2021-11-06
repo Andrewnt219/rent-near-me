@@ -36,7 +36,7 @@ const linkActiveStyle = css`
 type StyledAnchorProps = { isActive: boolean };
 const StyledAnchor = styled.a<StyledAnchorProps>`
   ${tw`inline-flex flex-col items-center`}
-  ${tw`text-xs`}  
+  ${tw`text-body2`}  
 
   svg {
     ${tw`mb-xs transition-colors`}

@@ -1,5 +1,6 @@
+import { Icon } from '@iconify/react';
+import chevronRightFill from '@iconify/icons-eva/chevron-right-fill';
 import { VFC } from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
 import { useStaticBreadCrumb } from 'src/hooks/useStaticBreadCrumb';
 import { accountRoutes } from '../../routes';
 import BreadCrumbItem from './BreadCrumbItem';
@@ -21,7 +22,7 @@ const BreadCrumb: VFC<Props> = ({ className }) => {
             />
 
             {index < routes.length - 1 && (
-              <IoIosArrowForward aria-hidden tw="mx-xs" />
+              <Icon icon={chevronRightFill} aria-hidden tw="mx-xs" />
             )}
           </li>
         ))}

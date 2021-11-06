@@ -1,8 +1,11 @@
+import { useUuid } from '@hooks/useUuid';
 import { Dialog } from '@reach/dialog';
-import { ButtonGhost } from '@ui/Button/Button';
+import { IconButtonGhost } from '@ui/IconButton/IconButton';
+import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
-import { IoCloseOutline } from 'react-icons/io5';
-import tw, { css, styled, theme } from 'twin.macro';
+import { Icon } from '@iconify/react';
+import closeFill from '@iconify/icons-eva/close-fill';
+import tw, { css, styled } from 'twin.macro';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -23,8 +26,11 @@ const Modal: FC<ModalProps> = ({
   children,
   ...props
 }) => {
+  const id = useUuid();
+
   return (
     <Dialog
+      aria-labelledby={`${id}-modal-title`}
       css={modalDialogCss(size)}
       isOpen={show}
       onDismiss={onClose}
@@ -32,15 +38,16 @@ const Modal: FC<ModalProps> = ({
     >
       {header && (
         <ModalHeader>
-          <ButtonGhost
-            circle
+          <IconButtonGhost
             css={closeModalBtnCss(closeButtonPosition)}
             onClick={onClose}
           >
-            <IoCloseOutline tw="w-6 h-6" />
+            <Icon icon={closeFill} tw="w-6 h-6" />
             <span tw="sr-only">Close dialog</span>
-          </ButtonGhost>
-          <ModalHeaderContent>{header}</ModalHeaderContent>
+          </IconButtonGhost>
+          <Text component="h3" variant="h5" id={`${id}-modal-title`}>
+            {header}
+          </Text>
         </ModalHeader>
       )}
       <ModalBody>
@@ -64,7 +71,7 @@ const closeModalBtnCss = (closeBtnPos: CloseModalButtonPosition) => {
   }
   return css`
     ${closeBtnPosCss}
-    ${tw`p-xs absolute top-1/2 transform -translate-y-1/2 mt-xs`}
+    ${tw` absolute top-1/2 transform -translate-y-1/2`}
   `;
 };
 
@@ -94,28 +101,23 @@ const modalDialogCss = (size: ModalSize) => {
 
   return css`
     max-width: calc(100% - 1rem);
-    top: calc(50% - ${theme('spacing.var-app-bar')} / 2);
+    max-height: calc(100% - 1rem);
     ${sizeCss}
-    ${tw`bg-white rounded shadow-xl`}
+    ${tw` bg-white rounded overflow-auto isolate`}
     ${tw`p-0 m-0`}
-    ${tw`fixed lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+    ${tw`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
   `;
 };
 
 const ModalHeader = styled.div`
-  ${tw`relative px-xl py-md`}
+  ${tw`sticky top-0 z-10 bg-white text-center py-md`}
   ${tw`border-b border-light`}
-  ${tw`text-center font-semibold`}
-`;
-const ModalHeaderContent = styled.div`
-  ${tw`overflow-auto max-h-16`}
 `;
 
 const ModalBody = styled.div`
-  ${tw`p-xl`}
+  ${tw`px-lg pb-xl pt-lg`}
 `;
 const ModalBodyContent = styled.div`
-  max-height: calc(100vh - ${theme`spacing.var-app-bar`} - 8rem);
   ${tw`overflow-auto p-xs`}
 `;
 

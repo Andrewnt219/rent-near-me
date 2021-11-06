@@ -1,7 +1,8 @@
 import { SelectHTMLAttributes, ReactNode, FC, useMemo } from 'react';
 import { useController } from 'react-hook-form';
-import { GoChevronDown } from 'react-icons/go';
 import Form from './Form';
+import { Icon } from '@iconify/react';
+import arrowDownFill from '@iconify/icons-eva/arrow-down-fill';
 
 type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   id: string;
@@ -41,7 +42,7 @@ const Select: FC<SelectProps> = ({
       </Form.Select>
 
       <Form.Label htmlFor={id}>{label}</Form.Label>
-      <GoChevronDown tw="absolute top-lg right-md" />
+      <Icon icon={arrowDownFill} tw="absolute h-6 w-4 top-md right-md" />
 
       <Form.TextWrapper>
         {fieldState.invalid ? (

@@ -15,11 +15,11 @@ declare module 'react' {
     css?: CSSProp;
   }
   // The inline svg css prop
-  interface SVGProps<T> extends SVGProps<SVGSVGElement> {
+  interface SVGProps extends SVGProps<SVGSVGElement> {
     css?: CSSProp;
   }
 
-  interface SVGAttributes<T> extends SVGAttributes<SVGElement> {
+  interface SVGAttributes extends SVGAttributes<SVGElement> {
     css?: CSSProp;
   }
 }

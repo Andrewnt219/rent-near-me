@@ -6,13 +6,13 @@ type Size = 'lg' | 'md' | 'sm';
 function getSizeStyle(size: Size | undefined) {
   switch (size) {
     case 'lg':
-      return tw`px-xl py-md`;
+      return tw`px-md py-md text-h6`;
 
     case 'md':
-      return tw`px-lg py-sm`;
+      return tw`px-md py-sm text-body1`;
 
     case 'sm':
-      return tw`px-sm py-xs`;
+      return tw`px-sm py-xs text-button`;
 
     default:
       return tw``;
@@ -32,11 +32,7 @@ const BaseButton = styled.button<BaseButtonProps>`
 /* -------------------------------------------------------------------------- */
 
 export const ButtonPrimary = styled(BaseButton)`
-  ${tw`font-semibold  bg-primary text-white`}
-
-  &:hover {
-    ${tw`filter brightness-90`}
-  }
+  ${tw`font-semibold  bg-primary text-white hover:bg-primary-dark`}
 
   &:active,
   &:focus-visible {

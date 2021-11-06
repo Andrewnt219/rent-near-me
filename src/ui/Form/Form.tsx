@@ -20,7 +20,7 @@ function Form({ form, ...formProps }: PropsWithChildren<FormProps>) {
 /*                                    INPUT                                   */
 /* -------------------------------------------------------------------------- */
 export const inputCss = css`
-  ${tw`border border-bordercolor w-full rounded px-sm pt-lg pb-sm`}
+  ${tw`border  w-full rounded px-md pt-lg pb-sm`}
   ${tw`transition-colors`}
 
   &[aria-invalid='true']:not(:focus) {
@@ -44,7 +44,7 @@ Form.Input = styled.input`
 /*                                    LABEL                                   */
 /* -------------------------------------------------------------------------- */
 export const labelActiveCss = css`
-  ${tw`translate-y-1 text-xs`}
+  ${tw`translate-y-1 text-body2`}
 `;
 
 export const labelInvalidCss = css`
@@ -54,8 +54,7 @@ export const labelInvalidCss = css`
 Form.Label = styled.label`
   /* Translate y equals to input pt */
   /* left equals to input pl */
-  ${tw`absolute top-0 left-sm transform translate-y-md`}
-  ${tw`text-dark`}
+  ${tw`absolute top-0 left-md transform translate-y-md`}
   ${tw`transition-all`} 
 
   input:focus ~ &, input:not(:placeholder-shown) ~ & {
@@ -82,7 +81,7 @@ Form.Select = styled.select`
 
 Form.ShowPasswordButton = styled(ButtonLink)`
   ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
-  ${tw`underline text-xs`}
+  ${tw`underline text-body2`}
 `;
 
 /* -------------------------------------------------------------------------- */
@@ -100,7 +99,7 @@ Form.CheckboxTick = styled.span`
   ${tw`text-transparent`}  
 
   label:hover > & {
-    ${tw`text-gray`}
+    ${tw`text-muted`}
   }
 
   input:checked ~ & {
@@ -120,15 +119,13 @@ Form.Group = styled.div`
 `;
 
 Form.TextWrapper = styled.div`
-  ${tw`mt-1 text-xs`}
+  ${tw`mt-1 text-body2`}
 `;
 
 Form.ErrorMessage = styled.p`
   ${tw`text-danger`}
 `;
 
-Form.Description = styled.p`
-  ${tw`text-dark`}
-`;
+Form.Description = styled.p``;
 
 export default Form;

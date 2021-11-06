@@ -9,7 +9,7 @@ function AccountSettingLayout({ className, ...props }: Props) {
   return (
     <div
       className={className}
-      tw="flex flex-col gap-2xl mt-2xl md:(flex-row gap-4xl)"
+      tw="flex flex-col gap-xl mt-xl md:(flex-row gap-xl)"
     >
       <section tw="flex-1">{props.main}</section>
 

@@ -2,15 +2,17 @@ import DateField from '@ui/Form/DateField';
 import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
 import { GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import Form from '@ui/Form/Form';
-import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import PasswordField from '@ui/Form/PasswordField';
-import Row from '@ui/Row/Row';
 import Select from '@ui/Form/Select';
 import TextField from '@ui/Form/TextField';
+import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
+import { InputRow } from '@ui/Row/Row';
+import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
-import { RiErrorWarningFill } from 'react-icons/ri';
 import useRegisterForm from './useRegisterForm';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { Icon } from '@iconify/react';
+import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 
 const RegisterForm = () => {
   const { form, onSubmit, submitError, passwordValidationResults } =
@@ -21,13 +23,16 @@ const RegisterForm = () => {
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>
       <div tw="mb-md flex flex-wrap justify-between items-center">
-        <h4 tw="text-xl font-semibold">{t('common:register.welcome')}</h4>
+        <Text component="h4" variant="h4">
+          {t('common:register.welcome')}
+        </Text>
+
         <ButtonLink type="button" onClick={loginModal.show}>
           {t('common:register.alreadyHasAccount')}
         </ButtonLink>
       </div>
 
-      <Row>
+      <InputRow>
         <TextField
           id="register-firstName"
           name="firstName"
@@ -42,9 +47,9 @@ const RegisterForm = () => {
           type="text"
           label={t('common:register.lastName')}
         />
-      </Row>
+      </InputRow>
 
-      <Row>
+      <InputRow>
         <DateField
           id="register-dob"
           name="dob"
@@ -65,7 +70,7 @@ const RegisterForm = () => {
             </option>
           ))}
         </Select>
-      </Row>
+      </InputRow>
 
       <TextField
         id="register-email"
@@ -94,7 +99,7 @@ const RegisterForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <RiErrorWarningFill tw="w-5 h-5 fill-current" />
+          <Icon tw="w-5 h-5 fill-current" icon={closeCircleFill} />
           {submitError}
         </Form.ErrorMessage>
       )}

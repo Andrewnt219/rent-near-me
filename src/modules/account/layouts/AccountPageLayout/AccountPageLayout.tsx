@@ -12,7 +12,7 @@ const AccountPageLayout: FC<AccountPageLayoutProps> = ({
 }) => (
   <DefaultLayout>
     <AuthGuard promptLogin>
-      <div className={className} tw="max-w-5xl mt-2xl mx-auto">
+      <div className={className} tw="max-w-5xl mt-xl mx-auto">
         {children}
       </div>
     </AuthGuard>
