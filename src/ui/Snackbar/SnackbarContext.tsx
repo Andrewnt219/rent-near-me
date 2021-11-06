@@ -45,7 +45,7 @@ const SnackbarProvider = ({ children, timeoutInMs = 7000 }: ProviderProps) => {
     <SnackbarContext.Provider value={value}>
       {children}
       <SnackbarList
-        tw="z-20 fixed top-sm right-md"
+        tw="z-10 fixed top-sm right-md"
         snacks={snackbarQueue.items}
       />
     </SnackbarContext.Provider>
@@ -56,7 +56,7 @@ const useSnackbarContext = (): TSnackbarContext => {
   const context = useContext(SnackbarContext);
 
   if (context === undefined) {
-    throw new Error('Must be use within AlertContext');
+    throw new Error('Must be use within SnackbarContext');
   }
 
   return context;
