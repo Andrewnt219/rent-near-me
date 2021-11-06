@@ -42,6 +42,7 @@ const itemVariants: Variants = {
   },
   exit: {
     opacity: 0,
+    x: '100%',
   },
 };
 
