@@ -1,12 +1,12 @@
 import DefaultLayout from '@modules/layouts/DefaultLayout';
 // import Alert from '@ui/Alert/Alert';
-import { useSnackbarContext } from '@ui/Snackbar/SnackbarContext';
+import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { ButtonPrimary } from '@ui/Button/Button';
 import Snackbar from '@ui/Snackbar/Snackbar';
 import React, { ReactNode } from 'react';
 
 export default function Home() {
-  const { showSuccess, showError } = useSnackbarContext();
+  const { showSuccess, showError } = useSnackbar();
   const onDismiss = () => {
     return;
   };
@@ -41,49 +41,57 @@ export default function Home() {
         />
       </div>
       {/* <div tw="flex flex-col gap-sm mt-lg">
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="error"
-        />
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="success"
-        />
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="info"
-        />
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="warning"
-        />
+        <Alert iconDisabled={true} onDismiss={onDismiss} severity="error">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert iconDisabled={true} onDismiss={onDismiss} severity="success">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert iconDisabled={true} onDismiss={onDismiss} severity="info">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert iconDisabled={true} onDismiss={onDismiss} severity="warning">
+          Lorem ipsum dolor sit amet. sit amet.
+        </Alert>
       </div>
 
-      <div tw="flex gap-sm mt-lg">
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="error"
-        />
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="success"
-        />
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="info"
-        />
-        <Alert
-          onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
-          severity="warning"
-        />
+      <div tw="flex flex-col gap-sm mt-lg">
+        <Alert iconDisabled={true} severity="error">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert iconDisabled={true} severity="success">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert iconDisabled={true} severity="info">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert iconDisabled={true} severity="warning">
+          Lorem ipsum dolor sit amet. sit amet.
+        </Alert>
+      </div>
+
+      <div tw="flex flex-col gap-sm mt-lg">
+        <Alert severity="error">Lorem ipsum dolor sit amet.</Alert>
+        <Alert severity="success">Lorem ipsum dolor sit amet.</Alert>
+        <Alert severity="info">Lorem ipsum dolor sit amet.</Alert>
+        <Alert severity="warning">
+          Lorem ipsum dolor sit amet. sit amet. sit amet.
+        </Alert>
+      </div>
+
+      <div tw="flex flex-col gap-sm mt-lg">
+        <Alert onDismiss={onDismiss} severity="error">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert onDismiss={onDismiss} severity="success">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert onDismiss={onDismiss} severity="info">
+          Lorem ipsum dolor sit amet.
+        </Alert>
+        <Alert onDismiss={onDismiss} severity="warning">
+          Lorem ipsum dolor sit amet. sit amet.
+        </Alert>
       </div> */}
 
       <ButtonPrimary

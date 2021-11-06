@@ -52,7 +52,7 @@ const SnackbarProvider = ({ children, timeoutInMs = 7000 }: ProviderProps) => {
   );
 };
 
-const useSnackbarContext = (): TSnackbarContext => {
+const useSnackbar = (): TSnackbarContext => {
   const context = useContext(SnackbarContext);
 
   if (context === undefined) {
@@ -62,4 +62,4 @@ const useSnackbarContext = (): TSnackbarContext => {
   return context;
 };
 
-export { SnackbarProvider, useSnackbarContext };
+export { SnackbarProvider, useSnackbar };
