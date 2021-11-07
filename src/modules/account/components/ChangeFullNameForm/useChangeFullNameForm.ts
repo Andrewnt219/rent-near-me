@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import AuthService from '@services/AuthService';
-import { getErrorMessage, updateResponseData } from '@utils/api-responses';
+import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import UserProfileService from '@services/UserProfileService';
+import { getErrorMessage } from '@utils/api-responses';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,7 +13,7 @@ import {
 
 const useChangeFullNameForm = () => {
   const { t } = useTranslation();
-  const { profile, mutateProfile } = useAuth();
+  const { profile, mutateProfile } = useUserProfile();
   const [submitError, setSubmitError] = useState<string | null>(null);
   const actionField = useActionField();
 
@@ -29,10 +29,13 @@ const useChangeFullNameForm = () => {
   }, [form, profile]);
 
   const onSubmit = form.handleSubmit((data) => {
-    mutateProfile((res) => updateResponseData(res, data), false);
-    AuthService.changeName(data)
-      .then(() => actionField.showAlternativeContent())
-      .catch((e) => setSubmitError(getErrorMessage(e, t)))
+    mutateProfile(data, false);
+    actionField.showAlternativeContent();
+    UserProfileService.changeName(data)
+      .catch((e) => {
+        actionField.showMainContent();
+        setSubmitError(getErrorMessage(e, t));
+      })
       .finally(() => mutateProfile());
   });
 

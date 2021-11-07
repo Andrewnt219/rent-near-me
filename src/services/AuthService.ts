@@ -1,11 +1,8 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
-import { ChangeFullNameFormModel } from '@modules/account/components/ChangeFullNameForm/ChangeFullNameFormModel';
 import { ChangePasswordFormModel } from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
 import { RegisterFormModel } from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { ApiResult_User_ChangePassword_POST } from '@pages/api/user/changePassword';
-import { ApiResult_User_Profile_PATCH } from '@pages/api/user/profile/[uid]';
 import { ApiResult_User_Register_POST } from '@pages/api/user/register';
-import { generateDisplayName } from '@utils/string-utils';
 import axios from 'axios';
 import firebase from 'firebase/app';
 
@@ -60,16 +57,6 @@ export default class AuthService {
       '/api/user/changePassword',
       formData
     );
-  }
-
-  static async changeName(formData: ChangeFullNameFormModel) {
-    await axios.patch<ApiResult_User_Profile_PATCH>(
-      `/api/user/profile/${auth.currentUser?.uid}`,
-      formData
-    );
-    await auth.currentUser?.updateProfile({
-      displayName: generateDisplayName(formData.firstName, formData.lastName),
-    });
   }
 
   private static async reauthenticate(email?: string, password?: string) {

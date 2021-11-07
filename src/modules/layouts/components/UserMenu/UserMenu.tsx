@@ -10,6 +10,7 @@ import tw, { styled } from 'twin.macro';
 import { StyledUserMenuLink } from '../UserMenuLink/UserMenuLink';
 import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
 import { useUserMenuDropDown } from './useUserMenuDropdown';
+import { useRouter } from 'next/router';
 type Props = {
   className?: string;
 };
@@ -82,6 +83,7 @@ const links: Record<string, RouteProps[]> = {
 type MenuProps = HTMLAttributes<HTMLUListElement>;
 function Menu(props: MenuProps) {
   const { isAuthenticated } = useAuth();
+  const router = useRouter();
   const { registerModal, loginModal } = useLayoutModal();
 
   return (
@@ -111,7 +113,10 @@ function Menu(props: MenuProps) {
           <StyledUserMenuLink
             tw="text-danger"
             as="button"
-            onClick={AuthService.signOut}
+            onClick={async () => {
+              router.push('/');
+              await AuthService.signOut();
+            }}
           >
             Logout
           </StyledUserMenuLink>

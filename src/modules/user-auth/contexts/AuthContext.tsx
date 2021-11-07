@@ -1,4 +1,4 @@
-import useSWR, { KeyedMutator } from 'swr';
+import useSWR from 'swr';
 import firebase from 'firebase/app';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
 import { isNullOrUndefined } from '@utils/validate-js-utils';
@@ -8,14 +8,13 @@ import { createContext, useContext, FC } from 'react';
 import AuthService from '@services/AuthService';
 import type { ApiResult_User_Profile_GET } from '@pages/api/user/profile/[uid]';
 import type Profile from '@models/api/entities/Profile/Profile';
+import { updateResponseData } from '@utils/api-responses';
 
 type AuthContextValue = {
   isAuthReady: boolean;
   isAuthenticated: boolean;
   effectiveProvider: string | null;
   user: firebase.User | null;
-  profile: Profile | null;
-  mutateProfile: KeyedMutator<ApiResult_User_Profile_GET>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -38,29 +37,14 @@ export const AuthProvider: FC = ({ children }) => {
     });
   }, []);
 
-  const {
-    data: profileResponse,
-    mutate: mutateProfileResponse,
-    isValidating: isValidating,
-  } = useSWR<ApiResult_User_Profile_GET>(
-    user ? `/api/user/profile/${user.uid}` : null
-  );
-
   const value = useMemo<AuthContextValue>(
     () => ({
-      isAuthReady:
-        isReady && (!isNullOrUndefined(profileResponse) || !isValidating),
+      isAuthReady: isReady,
       user,
-      profile: profileResponse?.data ?? null,
-      mutateProfile: mutateProfileResponse,
-      get effectiveProvider() {
-        return AuthService.getEffectiveAuthProvider(this.user);
-      },
-      get isAuthenticated() {
-        return !isNullOrUndefined(this.user);
-      },
+      effectiveProvider: AuthService.getEffectiveAuthProvider(user),
+      isAuthenticated: !isNullOrUndefined(user),
     }),
-    [isReady, profileResponse, isValidating, user, mutateProfileResponse]
+    [isReady, user]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

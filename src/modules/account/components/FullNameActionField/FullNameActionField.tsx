@@ -1,8 +1,8 @@
 import React, { VFC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import ToggleActionField from '../ActionField/ToggleActionField';
-import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import ChangeFullNameForm from '../ChangeFullNameForm/ChangeFullNameForm';
+import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 
 const FullNameActionField: VFC = () => {
   const { t } = useTranslation();
@@ -18,10 +18,10 @@ const FullNameActionField: VFC = () => {
 
 const FullNameActionFieldAltContent: VFC = () => {
   const { t } = useTranslation();
-  const { isAuthReady, profile } = useAuth();
+  const { isProfileReady, profile } = useUserProfile();
   return (
     <>
-      {isAuthReady &&
+      {isProfileReady &&
         (!profile?.firstName || !profile?.lastName
           ? t('account:personal-info.change-name.description.no-name')
           : `${profile.firstName} ${profile.lastName}`)}
