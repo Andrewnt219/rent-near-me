@@ -10,9 +10,9 @@ import {
   ChangePasswordFormSchema,
   ChangePasswordFormModel,
 } from './ChangePasswordFormModel';
-import { useActionField } from '@modules/account/contexts/ActionFieldContext';
+import { useActionField } from '@modules/account/components/ActionField/ActionFieldContext';
 
-export const useChangePasswordForm = () => {
+const useChangePasswordForm = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -36,7 +36,6 @@ export const useChangePasswordForm = () => {
   });
 
   const password = form.watch('newPassword');
-
   const passwordValidationResults = validatePassword(password);
 
   return {
@@ -46,3 +45,5 @@ export const useChangePasswordForm = () => {
     passwordValidationResults,
   };
 };
+
+export default useChangePasswordForm;

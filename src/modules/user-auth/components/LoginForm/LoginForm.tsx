@@ -14,7 +14,7 @@ import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import tw from 'twin.macro';
-import { useLoginForm } from './useLoginForm';
+import useLoginForm from './useLoginForm';
 import Logo from '@ui/Logo/Logo';
 
 const LoginForm = () => {

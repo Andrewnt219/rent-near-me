@@ -21,3 +21,7 @@ export function capitalizeName(fullname: string) {
     .map((name) => capitalize(name))
     .join(' ');
 }
+
+export function generateDisplayName(fName: string, lName: string) {
+  return capitalizeName(`${fName} ${lName}`);
+}

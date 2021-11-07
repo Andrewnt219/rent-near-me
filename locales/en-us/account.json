@@ -37,6 +37,16 @@
     }
   },
   "personal-info": {
-    "page-title": "Personal Info"
+    "page-title": "Personal Info",
+    "change-name": {
+      "field-label": "Full name",
+      "first-name": "First name",
+      "last-name": "Last name",
+      "description": {
+        "main": "Please use the name that matches your government ID",
+        "no-name": "Please provide us with your full name"
+      },
+      "submit-button": "Save"
+    }
   }
 }

@@ -57,3 +57,17 @@ export function getErrorMessage(error: unknown, t: Translate) {
 
   return t('common:errors.api.other');
 }
+
+export function updateResponseData<T>(
+  res: ResultSuccess<T> | undefined,
+  newData: T,
+  merge = true
+) {
+  const data = merge
+    ? {
+        ...res?.data,
+        ...newData,
+      }
+    : newData;
+  return { ...res, data } as ResultSuccess<T>;
+}

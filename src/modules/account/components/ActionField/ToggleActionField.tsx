@@ -4,7 +4,7 @@ import ActionFieldButton from './ActionFieldButton';
 import {
   ActionFieldProvider,
   useActionField,
-} from '@modules/account/contexts/ActionFieldContext';
+} from '@modules/account/components/ActionField/ActionFieldContext';
 import useTranslation from 'next-translate/useTranslation';
 
 type ActionFieldProps = {
@@ -46,7 +46,7 @@ const ActionFieldContent: VFC<ActionFieldProps> = ({
         <ActionFieldButton onClick={toggleContent}>
           {isShowingMainContent
             ? alternativeActionText ?? t('common:fields.toggle-action.cancel')
-            : mainActionText ?? t('common:fields.toggle-action.update')}
+            : mainActionText ?? t('common:fields.toggle-action.edit')}
         </ActionFieldButton>
       }
       showActionButton={showActionButton}

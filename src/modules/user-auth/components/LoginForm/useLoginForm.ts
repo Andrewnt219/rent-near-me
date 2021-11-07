@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
-export const useLoginForm = () => {
+const useLoginForm = () => {
   const { t } = useTranslation();
   const { loginModal } = useLayoutModal();
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -28,3 +28,5 @@ export const useLoginForm = () => {
 
   return { onSubmit, form, submitError };
 };
+
+export default useLoginForm;

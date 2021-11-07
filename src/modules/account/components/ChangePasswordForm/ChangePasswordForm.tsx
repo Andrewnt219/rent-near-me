@@ -5,7 +5,7 @@ import HiddenField from '@ui/Form/HiddenField';
 import PasswordField from '@ui/Form/PasswordField';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import useTranslation from 'next-translate/useTranslation';
-import { useChangePasswordForm } from './useChangePasswordForm';
+import useChangePasswordForm from './useChangePasswordForm';
 import { Icon } from '@iconify/react';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 

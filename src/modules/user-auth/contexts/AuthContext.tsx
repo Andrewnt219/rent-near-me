@@ -1,8 +1,8 @@
-import useSWR from 'swr';
+import useSWR, { KeyedMutator } from 'swr';
 import firebase from 'firebase/app';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
 import { isNullOrUndefined } from '@utils/validate-js-utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
 import AuthService from '@services/AuthService';
@@ -15,6 +15,7 @@ type AuthContextValue = {
   effectiveProvider: string | null;
   user: firebase.User | null;
   profile: Profile | null;
+  mutateProfile: KeyedMutator<ApiResult_User_Profile_GET>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -37,25 +38,30 @@ export const AuthProvider: FC = ({ children }) => {
     });
   }, []);
 
-  const { data: profile } = useSWR<ApiResult_User_Profile_GET>(
+  const {
+    data: profileResponse,
+    mutate: mutateProfileResponse,
+    isValidating: isValidating,
+  } = useSWR<ApiResult_User_Profile_GET>(
     user ? `/api/user/profile/${user.uid}` : null
   );
 
-  return (
-    <AuthContext.Provider
-      value={{
-        isAuthReady: isReady,
-        user,
-        profile: profile?.data ?? null,
-        get effectiveProvider() {
-          return AuthService.getEffectiveAuthProvider(this.user);
-        },
-        get isAuthenticated() {
-          return !isNullOrUndefined(this.user);
-        },
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo<AuthContextValue>(
+    () => ({
+      isAuthReady:
+        isReady && (!isNullOrUndefined(profileResponse) || !isValidating),
+      user,
+      profile: profileResponse?.data ?? null,
+      mutateProfile: mutateProfileResponse,
+      get effectiveProvider() {
+        return AuthService.getEffectiveAuthProvider(this.user);
+      },
+      get isAuthenticated() {
+        return !isNullOrUndefined(this.user);
+      },
+    }),
+    [isReady, profileResponse, isValidating, user, mutateProfileResponse]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

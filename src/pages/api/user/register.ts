@@ -1,4 +1,5 @@
 import type { Await } from '@common-types';
+import { capitalize } from 'lodash';
 import { auth, db } from '@libs/firebase-admin/firebase-admin';
 import {
   RegisterFormSchema,
@@ -30,8 +31,8 @@ async function post(
     .Profile()
     .doc(user.uid)
     .create({
-      firstName: model.firstName,
-      lastName: model.lastName,
+      firstName: capitalize(model.firstName),
+      lastName: capitalize(model.lastName),
       gender: model.gender,
       dob: new Date(model.dob),
     });
