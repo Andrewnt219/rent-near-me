@@ -23,7 +23,7 @@ const FullNameActionFieldAltContent: VFC = () => {
     <>
       {isProfileReady &&
         (!profile?.firstName || !profile?.lastName
-          ? t('account:personal-info.change-name.description.no-name')
+          ? t('account:personal-info.change-name.description.no-data')
           : `${profile.firstName} ${profile.lastName}`)}
     </>
   );

@@ -20,7 +20,7 @@ export const DATE_TIME_FORMATS = {
   TIME_24H: 'HH:mm', // 23:59
 };
 
-export const GENDERS = {
+export const GENDERS: Record<string, string> = {
   male: 'Male',
   female: 'Female',
   other: 'Other',

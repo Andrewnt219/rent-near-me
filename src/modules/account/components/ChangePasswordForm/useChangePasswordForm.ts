@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthService from '@services/AuthService';
-import { getErrorMessage } from '@utils/api-responses';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
 import {
@@ -11,11 +10,12 @@ import {
   ChangePasswordFormModel,
 } from './ChangePasswordFormModel';
 import { useActionField } from '@modules/account/components/ActionField/ActionFieldContext';
+import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 
 const useChangePasswordForm = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const { mutateProfile } = useUserProfile();
   const actionField = useActionField();
 
   const formSchema = ChangePasswordFormSchema(t);
@@ -30,9 +30,11 @@ const useChangePasswordForm = () => {
   }, [form, user]);
 
   const onSubmit = form.handleSubmit((data) => {
+    mutateProfile({ passwordLastUpdatedTime: new Date() }, false);
+    actionField.showAlternativeContent();
     AuthService.changePassword(data)
-      .then(() => actionField.showAlternativeContent())
-      .catch((e) => setSubmitError(getErrorMessage(e, t)));
+      .catch((e) => actionField.showMainContent())
+      .finally(() => mutateProfile());
   });
 
   const password = form.watch('newPassword');
@@ -41,7 +43,6 @@ const useChangePasswordForm = () => {
   return {
     onSubmit,
     form,
-    submitError,
     passwordValidationResults,
   };
 };

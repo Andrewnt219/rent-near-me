@@ -6,30 +6,29 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useActionField } from '../ActionField/ActionFieldContext';
 import {
-  ChangeFullNameFormModel,
-  ChangeFullNameFormSchema,
-} from './ChangeFullNameFormModel';
+  ChangeGenderFormModel,
+  ChangeGenderFormSchema,
+} from './ChangeGenderFormModel';
 
-const useChangeFullNameForm = () => {
+const useChangeGenderForm = () => {
   const { t } = useTranslation();
   const { profile, mutateProfile } = useUserProfile();
   const actionField = useActionField();
 
-  const formSchema = ChangeFullNameFormSchema(t);
-  const form = useForm<ChangeFullNameFormModel>({
+  const formSchema = ChangeGenderFormSchema(t);
+  const form = useForm<ChangeGenderFormModel>({
     defaultValues: formSchema.getDefault(),
     resolver: yupResolver(formSchema),
   });
 
   useEffect(() => {
-    form.setValue('firstName', profile?.firstName ?? '');
-    form.setValue('lastName', profile?.lastName ?? '');
+    form.setValue('gender', profile?.gender ?? '');
   }, [form, profile]);
 
   const onSubmit = form.handleSubmit((data) => {
     mutateProfile(data, false);
     actionField.showAlternativeContent();
-    UserProfileService.changeName(data)
+    UserProfileService.changeGender(data)
       .catch((e) => actionField.showMainContent())
       .finally(() => mutateProfile());
   });
@@ -40,4 +39,4 @@ const useChangeFullNameForm = () => {
   };
 };
 
-export default useChangeFullNameForm;
+export default useChangeGenderForm;

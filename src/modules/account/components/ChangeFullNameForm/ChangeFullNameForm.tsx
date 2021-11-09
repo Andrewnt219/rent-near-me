@@ -6,12 +6,10 @@ import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import { VFC } from 'react';
 import useChangeFullNameForm from './useChangeFullNameForm';
-import { Icon } from '@iconify/react';
-import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 
 const ChangeFullNameForm: VFC = () => {
   const { t } = useTranslation();
-  const { form, submitError, onSubmit } = useChangeFullNameForm();
+  const { form, onSubmit } = useChangeFullNameForm();
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>
       <Text tw="mb-sm">
@@ -31,16 +29,7 @@ const ChangeFullNameForm: VFC = () => {
           label={t('account:personal-info.change-name.last-name')}
         />
       </InputRow>
-      {submitError && (
-        <Form.ErrorMessage
-          role="alert"
-          aria-relevant="text"
-          tw="flex items-center gap-sm mb-sm"
-        >
-          <Icon icon={closeCircleFill} tw="w-5 h-5 fill-current" />
-          {submitError}
-        </Form.ErrorMessage>
-      )}
+
       <ButtonSecondary
         type="submit"
         tw="px-xl"

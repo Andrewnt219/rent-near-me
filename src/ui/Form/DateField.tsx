@@ -48,6 +48,7 @@ const DateField: VFC<DateFieldProps> = ({
         placeholder=" "
         formatDate={dayJsFormatter}
         parseDate={dayJsParser}
+        value={field.value}
       />
 
       <StyledLabel

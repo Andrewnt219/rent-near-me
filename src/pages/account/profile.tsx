@@ -9,6 +9,8 @@ import AccountInfoCard from '@modules/account/components/AccountInfoCard/Account
 import AccountInfoCardGroup from '@modules/account/components/AccountInfoCard/AccountInfoCardGroup';
 import ActionFieldGroup from '@modules/account/components/ActionField/ActionFieldGroup';
 import FullNameActionField from '@modules/account/components/FullNameActionField/FullNameActionField';
+import GenderActionField from '@modules/account/components/GenderActionField/GenderActionField';
+import DobActionField from '@modules/account/components/DobActionField/DobActionField';
 
 export default function PersonalInfoPage() {
   const { t } = useTranslation();
@@ -25,6 +27,8 @@ export default function PersonalInfoPage() {
 const Main: VFC = () => (
   <ActionFieldGroup>
     <FullNameActionField />
+    <GenderActionField />
+    <DobActionField />
   </ActionFieldGroup>
 );
 

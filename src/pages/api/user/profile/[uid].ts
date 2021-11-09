@@ -3,9 +3,17 @@ import { db } from '@libs/firebase-admin/firebase-admin';
 import Profile from '@models/api/entities/Profile/Profile';
 import { ResourceNotFoundError } from '@models/api/errors/ResourceNotFoundError';
 import {
+  ChangeDobFormModel,
+  ChangeDobFormSchema,
+} from '@modules/account/components/ChangeDobForm/ChangeDobFormModel';
+import {
   ChangeFullNameFormModel,
   ChangeFullNameFormSchema,
 } from '@modules/account/components/ChangeFullNameForm/ChangeFullNameFormModel';
+import {
+  ChangeGenderFormModel,
+  ChangeGenderFormSchema,
+} from '@modules/account/components/ChangeGenderForm/ChangeGenderFormModel';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateModelWithSchema } from '@utils/api/model-schema-validator';
@@ -50,7 +58,7 @@ async function patch(
   await validateUserWithId(req.headers.authorization, uid, true);
 
   const model = req.body as Profile;
-  const mergeFields: string[] = [];
+  const mergeFields: (keyof Profile)[] = [];
 
   if (model.firstName || model.lastName) {
     await validateModelWithSchema(
@@ -59,6 +67,24 @@ async function patch(
       true
     );
     mergeFields.push('firstName', 'lastName');
+  }
+
+  if (model.gender) {
+    await validateModelWithSchema(
+      model as ChangeGenderFormModel,
+      ChangeGenderFormSchema(),
+      true
+    );
+    mergeFields.push('gender');
+  }
+
+  if (model.dob) {
+    await validateModelWithSchema(
+      model as ChangeDobFormModel,
+      ChangeDobFormSchema(),
+      true
+    );
+    mergeFields.push('dob');
   }
 
   await db.Profile().doc(uid).set(model, { mergeFields });

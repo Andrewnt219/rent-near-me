@@ -34,7 +34,7 @@ async function post(
       firstName: capitalize(model.firstName),
       lastName: capitalize(model.lastName),
       gender: model.gender,
-      dob: new Date(model.dob),
+      dob: model.dob,
     });
   return res.json(new ResultSuccess(user));
 }

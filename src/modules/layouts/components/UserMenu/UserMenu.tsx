@@ -114,7 +114,7 @@ function Menu(props: MenuProps) {
             tw="text-danger"
             as="button"
             onClick={async () => {
-              router.push('/');
+              await router.push('/');
               await AuthService.signOut();
             }}
           >
