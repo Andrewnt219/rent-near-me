@@ -38,7 +38,7 @@ const SnackbarProvider = ({
       const id = nanoid(8);
       const onDismiss = () => snackbarQueue.remove(id);
       snackbarQueue.enqueue({ ...snackbar, id, onDismiss });
-      setTimeout(snackbarQueue.dequeue, timeoutInMs);
+      setTimeout(onDismiss, timeoutInMs);
     };
 
     const factory =
