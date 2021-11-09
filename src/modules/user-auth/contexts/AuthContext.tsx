@@ -13,12 +13,12 @@ type AuthContextValue = {
   user: firebase.User | null;
 };
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const useAuth = () => {
   const authContextValue = useContext(AuthContext);
-  if (!authContextValue) throw Error('No matching AuthProvider');
-  return authContextValue as AuthContextValue;
+  if (authContextValue === undefined) throw Error('No matching AuthProvider');
+  return authContextValue;
 };
 
 export const AuthProvider: FC = ({ children }) => {

@@ -7,13 +7,14 @@ type ActionFieldContextValue = {
   toggleContent: () => void;
 };
 
-const ActionFieldContext = createContext<ActionFieldContextValue | null>(null);
+const ActionFieldContext = createContext<ActionFieldContextValue | undefined>(
+  undefined
+);
 
 export const useActionField = () => {
-  const actionFieldContextValue = useContext<ActionFieldContextValue | null>(
-    ActionFieldContext
-  );
-  if (!actionFieldContextValue) throw Error('No matching AuthProvider');
+  const actionFieldContextValue = useContext(ActionFieldContext);
+  if (actionFieldContextValue === undefined)
+    throw Error('No matching AuthProvider');
   return actionFieldContextValue;
 };
 

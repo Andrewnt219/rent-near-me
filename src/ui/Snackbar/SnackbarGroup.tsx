@@ -9,7 +9,7 @@ type Props = {
   className?: string;
   snacks: TSnackbar[];
 };
-function SnackbarList({ className, ...props }: Props) {
+function SnackbarGroup({ className, ...props }: Props) {
   return (
     <ol className={className} tw="flex flex-col gap-sm">
       <AnimatePresence>
@@ -46,4 +46,4 @@ const itemVariants: Variants = {
   },
 };
 
-export default SnackbarList;
+export default SnackbarGroup;

@@ -1,12 +1,11 @@
 import DefaultLayout from '@modules/layouts/DefaultLayout';
-// import Alert from '@ui/Alert/Alert';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { ButtonPrimary } from '@ui/Button/Button';
 import Snackbar from '@ui/Snackbar/Snackbar';
 import React, { ReactNode } from 'react';
 
 export default function Home() {
-  const { showSuccess, showError } = useSnackbar();
+  const { showSuccessSnack, showErrorSnack } = useSnackbar();
   const onDismiss = () => {
     return;
   };
@@ -15,13 +14,15 @@ export default function Home() {
     <div>
       <div tw="flex flex-col gap-sm mt-lg">
         <Snackbar
+          title="Error"
           onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
+          message="Lorem, ipsum dolor sit amet."
           severity="error"
         />
         <Snackbar
+          title="Info"
           onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
+          message="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, eaque!"
           severity="info"
         />
         <Snackbar
@@ -31,80 +32,27 @@ export default function Home() {
         />
         <Snackbar
           onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
+          message="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, eaque!"
           severity="warning"
         />
         <Snackbar
           onDismiss={onDismiss}
-          message="Lorem ipsum dolor sit amet."
+          message="Lorem, ipsum dolor sit amet."
           severity="default"
         />
       </div>
-      {/* <div tw="flex flex-col gap-sm mt-lg">
-        <Alert iconDisabled={true} onDismiss={onDismiss} severity="error">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert iconDisabled={true} onDismiss={onDismiss} severity="success">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert iconDisabled={true} onDismiss={onDismiss} severity="info">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert iconDisabled={true} onDismiss={onDismiss} severity="warning">
-          Lorem ipsum dolor sit amet. sit amet.
-        </Alert>
-      </div>
-
-      <div tw="flex flex-col gap-sm mt-lg">
-        <Alert iconDisabled={true} severity="error">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert iconDisabled={true} severity="success">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert iconDisabled={true} severity="info">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert iconDisabled={true} severity="warning">
-          Lorem ipsum dolor sit amet. sit amet.
-        </Alert>
-      </div>
-
-      <div tw="flex flex-col gap-sm mt-lg">
-        <Alert severity="error">Lorem ipsum dolor sit amet.</Alert>
-        <Alert severity="success">Lorem ipsum dolor sit amet.</Alert>
-        <Alert severity="info">Lorem ipsum dolor sit amet.</Alert>
-        <Alert severity="warning">
-          Lorem ipsum dolor sit amet. sit amet. sit amet.
-        </Alert>
-      </div>
-
-      <div tw="flex flex-col gap-sm mt-lg">
-        <Alert onDismiss={onDismiss} severity="error">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert onDismiss={onDismiss} severity="success">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert onDismiss={onDismiss} severity="info">
-          Lorem ipsum dolor sit amet.
-        </Alert>
-        <Alert onDismiss={onDismiss} severity="warning">
-          Lorem ipsum dolor sit amet. sit amet.
-        </Alert>
-      </div> */}
 
       <ButtonPrimary
         size="lg"
         tw="mt-lg"
-        onClick={() => showSuccess(new Date().toISOString())}
+        onClick={() => showSuccessSnack(new Date().toISOString())}
       >
         Enqueue Success
       </ButtonPrimary>
       <ButtonPrimary
         size="lg"
         tw="ml-sm"
-        onClick={() => showError(new Date().toISOString())}
+        onClick={() => showErrorSnack(new Date().toISOString())}
       >
         Enqueue Error
       </ButtonPrimary>

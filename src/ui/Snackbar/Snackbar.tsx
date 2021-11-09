@@ -2,6 +2,7 @@ import tw, { styled } from 'twin.macro';
 import ReachAlert from '@reach/alert';
 import { ReactNode } from 'react';
 import { Icon, IconifyIcon } from '@iconify/react';
+import closeFill from '@iconify/icons-eva/close-fill';
 import bellFill from '@iconify/icons-eva/bell-fill';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
@@ -9,9 +10,11 @@ import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 import infoFill from '@iconify/icons-eva/info-fill';
 import Text from '@ui/Text/Text';
 import { ButtonGhost } from '@ui/Button/Button';
+import { IconButtonGhost } from '@ui/IconButton/IconButton';
 
 type Props = {
   className?: string;
+  title?: ReactNode;
   severity: StyledIconContainerProps['severity'];
   message: ReactNode;
   onDismiss(): void;
@@ -19,34 +22,33 @@ type Props = {
 function Snackbar({ className, severity = 'default', ...props }: Props) {
   return (
     <StyledContainer type="assertive" className={className}>
-      <div tw="flex items-center gap-md">
-        <SnackbarIcon severity={severity} />
+      <SnackbarIcon severity={severity} />
 
-        <div tw="flex-1">
-          {/* <Text component="h3" variant="sub1">
+      <div tw="flex-1">
+        {props.title && (
+          <Text component="h3" variant="sub2">
             {props.title}
-          </Text> */}
+          </Text>
+        )}
 
-          <Text tw="text-muted">{props.message}</Text>
-        </div>
+        <Text tw="text-muted">{props.message}</Text>
       </div>
-
-      <ButtonGhost
+      <IconButtonGhost
         size="sm"
         onClick={props.onDismiss}
-        tw="font-bold  text-muted mt-sm ml-auto block"
+        tw="  text-muted ml-auto flex-center"
       >
-        Dismiss
-      </ButtonGhost>
+        <Icon icon={closeFill} tw="w-5 h-5" />
+      </IconButtonGhost>
     </StyledContainer>
   );
 }
 
 const StyledContainer = styled(ReachAlert)`
   width: min(100%, 20rem);
-
+  ${tw`flex items-center gap-md text-body2`}
   ${tw`rounded-lg bg-white`}
-  ${tw`shadow-z8 p-md pb-sm`}
+  ${tw`shadow-z8 p-md`}
 `;
 
 /* -------------------------------------------------------------------------- */
@@ -93,7 +95,7 @@ type StyledIconContainerProps = {
 };
 const StyledIconContainer = styled.span<StyledIconContainerProps>`
   ${(p) => styleSeverity(p.severity)}
-  ${tw`w-10 h-10 flex items-center justify-center   rounded-xl`}
+  ${tw`w-10 h-10 flex items-center justify-center  self-start rounded-xl`}
 `;
 
 const styleSeverity = (severity: StyledIconContainerProps['severity']) => {
