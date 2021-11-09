@@ -11,7 +11,7 @@ function Text({ className, ...props }: PropsWithChildren<Props>) {
     <StyledText
       {...props}
       as={props.component ?? 'p'}
-      variant={props.variant ?? 'body1'}
+      variant={props.variant}
       className={className}
       tw=""
     >
@@ -21,7 +21,7 @@ function Text({ className, ...props }: PropsWithChildren<Props>) {
 }
 
 type StyledTextProps = {
-  variant:
+  variant?:
     | 'h1'
     | 'h2'
     | 'h3'

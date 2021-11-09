@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "build:analyze": "cross-env ANALYZE=\"true\"  next build",
-    "rebuild": "rimraf ./node_modules ./.next | npm i",
+    "rebuild": "rimraf ./node_modules ./.next | yarn",
     "rebuild:next": "rimraf ./.next | npm run dev",
     "test": "jest",
     "cypress:open": "cypress open"
@@ -16,12 +16,14 @@
   "dependencies": {
     "@hookform/resolvers": "^2.6.0",
     "@next/bundle-analyzer": "^11.0.0",
+    "@reach/alert": "^0.16.0",
     "@reach/dialog": "^0.15.3",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
     "firebase": "^8.7.1",
     "firebase-admin": "^9.11.0",
+    "framer-motion": "^5.0.0",
     "lodash": "^4.17.21",
     "nanoid": "^3.1.30",
     "next": "^12.0.1",

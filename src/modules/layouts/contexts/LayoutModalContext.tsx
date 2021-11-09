@@ -9,11 +9,14 @@ type LayoutModalContextValue = {
   registerModal: ModalControl;
 };
 
-const LayoutModalContext = createContext<LayoutModalContextValue | null>(null);
+const LayoutModalContext = createContext<LayoutModalContextValue | undefined>(
+  undefined
+);
 export const useLayoutModal = () => {
   const modalContextValue = useContext(LayoutModalContext);
-  if (!modalContextValue) throw Error('No matching LayoutProvider');
-  return modalContextValue as LayoutModalContextValue;
+  if (modalContextValue === undefined)
+    throw Error('No matching LayoutProvider');
+  return modalContextValue;
 };
 
 export const LayoutProvider: FC = ({ children }) => {
