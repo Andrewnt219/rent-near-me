@@ -26,3 +26,9 @@ export const GENDERS = {
   other: 'Other',
   'not-given': 'Prefer not to say',
 };
+
+export enum Duration {
+  SHORT = 2000,
+  NORMAL = 4000,
+  LONG = 7000,
+}

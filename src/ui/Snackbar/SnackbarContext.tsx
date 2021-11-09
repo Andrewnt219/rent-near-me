@@ -1,4 +1,5 @@
 import { ItemType } from '@common-types';
+import { Duration } from '@models/constnats';
 import { nanoid } from 'nanoid';
 import React, {
   ComponentProps,
@@ -22,9 +23,12 @@ const SnackbarContext = createContext<TSnackbarContext | undefined>(undefined);
 
 type ProviderProps = {
   children: ReactNode | ReactNode[];
-  timeoutInMs?: number;
+  timeoutInMs?: Duration;
 };
-const SnackbarProvider = ({ children, timeoutInMs = 7000 }: ProviderProps) => {
+const SnackbarProvider = ({
+  children,
+  timeoutInMs = Duration.NORMAL,
+}: ProviderProps) => {
   const snackbarQueue = useQueue<TSnackbar>();
 
   const value: TSnackbarContext = useMemo(() => {
