@@ -1,4 +1,9 @@
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import {
+  AnimatePresence,
+  AnimateSharedLayout,
+  motion,
+  Variants,
+} from 'framer-motion';
 import { ComponentProps } from 'react';
 import Snackbar from './Snackbar';
 
@@ -12,19 +17,22 @@ type Props = {
 function SnackbarGroup({ className, ...props }: Props) {
   return (
     <ol className={className} tw="flex flex-col gap-sm">
-      <AnimatePresence>
-        {props.snacks.map((snackbarProps) => (
-          <motion.li
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            key={snackbarProps.id}
-          >
-            <Snackbar {...snackbarProps} />
-          </motion.li>
-        ))}
-      </AnimatePresence>
+      <AnimateSharedLayout>
+        <AnimatePresence>
+          {props.snacks.map((snackbarProps) => (
+            <motion.li
+              layout
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              key={snackbarProps.id}
+            >
+              <Snackbar {...snackbarProps} />
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </AnimateSharedLayout>
     </ol>
   );
 }
