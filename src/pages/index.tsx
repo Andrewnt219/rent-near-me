@@ -5,7 +5,7 @@ import Snackbar from '@ui/Snackbar/Snackbar';
 import React, { ReactNode } from 'react';
 
 export default function Home() {
-  const { showSuccessSnack, showErrorSnack } = useSnackbar();
+  const { showSnackSuccess, showSnackError } = useSnackbar();
   const onDismiss = () => {
     return;
   };
@@ -45,14 +45,14 @@ export default function Home() {
       <ButtonPrimary
         size="lg"
         tw="mt-lg"
-        onClick={() => showSuccessSnack(new Date().toISOString())}
+        onClick={() => showSnackSuccess(new Date().toISOString())}
       >
         Enqueue Success
       </ButtonPrimary>
       <ButtonPrimary
         size="lg"
         tw="ml-sm"
-        onClick={() => showErrorSnack(new Date().toISOString())}
+        onClick={() => showSnackError(new Date().toISOString())}
       >
         Enqueue Error
       </ButtonPrimary>

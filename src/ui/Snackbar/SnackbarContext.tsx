@@ -13,11 +13,11 @@ import SnackbarGroup from './SnackbarGroup';
 
 type TSnackbar = ItemType<ComponentProps<typeof SnackbarGroup>['snacks']>;
 type TSnackbarContext = {
-  showErrorSnack(message: ReactNode): void;
-  showSuccessSnack(message: ReactNode): void;
-  showInfoSnack(message: ReactNode): void;
-  showWarningSnack(message: ReactNode): void;
-  showDefaultSnack(message: ReactNode): void;
+  showSnackError(message: ReactNode): void;
+  showSnackSuccess(message: ReactNode): void;
+  showSnackInfo(message: ReactNode): void;
+  showSnackWarning(message: ReactNode): void;
+  showSnackDefault(message: ReactNode): void;
 };
 const SnackbarContext = createContext<TSnackbarContext | undefined>(undefined);
 
@@ -45,18 +45,18 @@ const SnackbarProvider = ({
       (severity: TSnackbar['severity']) =>
       (message: ReactNode, title?: ReactNode) =>
         enqueue({ message, severity, title });
-    const showErrorSnack = factory('error');
-    const showSuccessSnack = factory('success');
-    const showInfoSnack = factory('warning');
-    const showWarningSnack = factory('info');
-    const showDefaultSnack = factory('default');
+    const showSnackError = factory('error');
+    const showSnackSuccess = factory('success');
+    const showSnackInfo = factory('info');
+    const showSnackWarning = factory('warning');
+    const showSnackDefault = factory('default');
 
     return {
-      showErrorSnack,
-      showSuccessSnack,
-      showInfoSnack,
-      showWarningSnack,
-      showDefaultSnack,
+      showSnackError,
+      showSnackSuccess,
+      showSnackInfo,
+      showSnackWarning,
+      showSnackDefault,
     };
   }, [snackbarQueue, timeoutInMs]);
 
