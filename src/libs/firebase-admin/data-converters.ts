@@ -1,20 +1,23 @@
 import * as admin from 'firebase-admin';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function converter(this: any): any {
-  if (this instanceof admin.firestore.Timestamp) {
-    return this.toDate();
+function convertObject(src: any): any {
+  if (src instanceof admin.firestore.Timestamp) {
+    return src.toDate();
   }
-  if (typeof this === 'object' && this !== null) {
-    if (Array.isArray(this)) {
-      return this.map((elem) => converter.apply(elem));
+  if (typeof src === 'object' && src !== null) {
+    if (Array.isArray(src)) {
+      return src.map((elem) => convertObject(elem));
     } else {
       return Object.fromEntries(
-        Object.entries(this).map(([key, val]) => [key, converter.apply(val)])
+        Object.entries(src).map(([key, val]) => [key, convertObject(val)])
       );
     }
   }
-  return this;
+  return src;
 }
 
-export default converter;
+const convert = <T>(src: FirebaseFirestore.DocumentData): T =>
+  convertObject(src) as T;
+
+export default convert;

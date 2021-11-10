@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 import crypto from 'crypto';
 import encrypted from './firebase-admin-secret.enc';
-import converter from './data-converters';
+import convert from './data-converters';
 
 import Profile from '@models/api/entities/Profile/Profile';
 import PasswordUpdateHistory from '@models/api/entities/Profile/PasswordUpdateHistory/PasswordUpdateHistory';
@@ -22,7 +22,7 @@ if (admin.apps.length === 0) {
 const typeConverter = <T>() => ({
   toFirestore: (data: Partial<T>) => data,
   fromFirestore: (snap: FirebaseFirestore.QueryDocumentSnapshot) =>
-    converter.apply(snap.data()) as T,
+    convert(snap.data()),
 });
 
 const typedCollection = <T>(collectionPath: string) =>
