@@ -30,6 +30,9 @@
       "confirm-new-password": "Confirm new password",
       "field-label": "Change password",
       "submit-button": "Update Password",
+      "message": {
+        "success": "Password updated"
+      },
       "description": {
         "password-changed": "Last updated {{time}}",
         "password-unchanged": "Created {{time}}"
@@ -42,6 +45,9 @@
       "field-label": "Full name",
       "first-name": "First name",
       "last-name": "Last name",
+      "message": {
+        "success": "Full name updated"
+      },
       "description": {
         "main": "Please use the name that matches your government ID",
         "no-data": "Please provide us with your full name"
@@ -51,6 +57,9 @@
     "change-gender": {
       "field-label": "Gender",
       "gender": "Gender",
+      "message": {
+        "success": "Gender updated"
+      },
       "description": {
         "no-data": "Not given"
       },
@@ -59,6 +68,9 @@
     "change-dob": {
       "field-label": "Date of birth",
       "dob": "Date of birth",
+      "message": {
+        "success": "Date of birth updated"
+      },
       "description": {
         "no-data": "Not given"
       },

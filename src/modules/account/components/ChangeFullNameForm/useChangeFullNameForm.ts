@@ -1,6 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 import UserProfileService from '@services/UserProfileService';
+import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
+import { getErrorMessage } from '@utils/api-responses';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -14,6 +16,7 @@ const useChangeFullNameForm = () => {
   const { t } = useTranslation();
   const { profile, mutateProfile } = useUserProfile();
   const actionField = useActionField();
+  const snackbar = useSnackbar();
 
   const formSchema = ChangeFullNameFormSchema(t);
   const form = useForm<ChangeFullNameFormModel>({
@@ -30,7 +33,15 @@ const useChangeFullNameForm = () => {
     mutateProfile(data, false);
     actionField.showAlternativeContent();
     UserProfileService.changeName(data)
-      .catch((e) => actionField.showMainContent())
+      .then(() =>
+        snackbar.showSnackSuccess(
+          t('account:personal-info.change-name.message.success')
+        )
+      )
+      .catch((e) => {
+        snackbar.showSnackError(getErrorMessage(e, t));
+        actionField.showMainContent();
+      })
       .finally(() => mutateProfile());
   });
 

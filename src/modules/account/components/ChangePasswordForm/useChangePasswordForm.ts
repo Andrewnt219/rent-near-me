@@ -11,12 +11,15 @@ import {
 } from './ChangePasswordFormModel';
 import { useActionField } from '@modules/account/components/ActionField/ActionFieldContext';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
+import { getErrorMessage } from '@utils/api-responses';
 
 const useChangePasswordForm = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { mutateProfile } = useUserProfile();
   const actionField = useActionField();
+  const snackbar = useSnackbar();
 
   const formSchema = ChangePasswordFormSchema(t);
   const form = useForm<ChangePasswordFormModel>({
@@ -33,7 +36,15 @@ const useChangePasswordForm = () => {
     mutateProfile({ passwordLastUpdatedTime: new Date() }, false);
     actionField.showAlternativeContent();
     AuthService.changePassword(data)
-      .catch((e) => actionField.showMainContent())
+      .then(() =>
+        snackbar.showSnackSuccess(
+          t('account:security.change-password.message.success')
+        )
+      )
+      .catch((e) => {
+        snackbar.showSnackError(getErrorMessage(e, t));
+        actionField.showMainContent();
+      })
       .finally(() => mutateProfile());
   });
 
