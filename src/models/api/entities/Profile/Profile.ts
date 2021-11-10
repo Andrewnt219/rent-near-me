@@ -4,9 +4,10 @@ export default class Profile implements FirestoreEntity {
   firstName?: string;
   lastName?: string;
   gender?: string;
-  dob?: Date | string;
-  passwordLastUpdatedTime?: Date | string;
+  dob?: Date;
+  passwordLastUpdatedTime?: Date;
   publicFields?: string[];
+  a?: Date[];
 
   static DEFAULT_PUBLIC_FIELDS = ['firstName', 'lastName'];
 }

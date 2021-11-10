@@ -18,6 +18,7 @@ import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateModelWithSchema } from '@utils/api/model-schema-validator';
 import { validateUserWithId } from '@utils/api/user-validator';
+import { parseModelSync } from '@utils/model-parser';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type GetResponseData = Await<Profile>;
@@ -57,7 +58,7 @@ async function patch(
   const uid = req.query['uid'] as string;
   await validateUserWithId(req.headers.authorization, uid, true);
 
-  const model = req.body as Profile;
+  const model = parseModelSync<Profile>(req.body);
   const mergeFields: (keyof Profile)[] = [];
 
   if (model.firstName || model.lastName) {

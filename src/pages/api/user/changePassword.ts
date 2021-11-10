@@ -8,6 +8,7 @@ import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateModelWithSchema } from '@utils/api/model-schema-validator';
 import { validateUserWithId } from '@utils/api/user-validator';
+import { parseModelSync } from '@utils/model-parser';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type PostResponseData = Await<null>;
@@ -17,7 +18,7 @@ async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
-  const model = req.body as ChangePasswordFormModel;
+  const model = parseModelSync<ChangePasswordFormModel>(req.body);
   await validateModelWithSchema(model, ChangePasswordFormSchema(), true);
   await validateUserWithId(req.headers.authorization, model.uid, true);
 

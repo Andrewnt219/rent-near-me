@@ -10,6 +10,7 @@ import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateModelWithSchema } from '@utils/api/model-schema-validator';
 import { capitalizeName } from '@utils/string-utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { parseModelSync } from '@utils/model-parser';
 
 type PostResponseData = Await<ReturnType<typeof auth.createUser>>;
 export type ApiResult_User_Register_POST = ResultSuccess<PostResponseData>;
@@ -17,7 +18,7 @@ async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
-  const model = req.body as RegisterFormModel;
+  const model = parseModelSync<RegisterFormModel>(req.body);
   await validateModelWithSchema(model, RegisterFormSchema(), true);
 
   const user = await auth.createUser({

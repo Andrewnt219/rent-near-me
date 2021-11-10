@@ -1,14 +1,20 @@
 import * as admin from 'firebase-admin';
 
-function fromFirebaseTimestampToDate(this: FirebaseFirestore.DocumentData) {
-  for (const [key, val] of Object.entries(this)) {
-    if (val instanceof admin.firestore.Timestamp) {
-      this[key] = val.toDate();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function converter(this: any): any {
+  if (this instanceof admin.firestore.Timestamp) {
+    return this.toDate();
+  }
+  if (typeof this === 'object' && this !== null) {
+    if (Array.isArray(this)) {
+      return this.map((elem) => converter.apply(elem));
+    } else {
+      return Object.fromEntries(
+        Object.entries(this).map(([key, val]) => [key, converter.apply(val)])
+      );
     }
   }
   return this;
 }
 
-const converters = [fromFirebaseTimestampToDate];
-
-export default converters;
+export default converter;

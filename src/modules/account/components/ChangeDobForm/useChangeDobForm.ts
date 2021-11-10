@@ -21,7 +21,7 @@ const useChangeDobForm = () => {
 
   useEffect(() => {
     if (profile?.dob) {
-      form.setValue('dob', dayjs(profile.dob).toDate());
+      form.setValue('dob', profile.dob);
     }
   }, [form, profile]);
 

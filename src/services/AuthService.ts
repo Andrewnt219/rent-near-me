@@ -82,18 +82,5 @@ export default class AuthService {
         break;
       }
     }
-    await AuthService.updateRequestAuthorizationHeader();
-  }
-
-  static async updateRequestAuthorizationHeader(
-    user = auth.currentUser,
-    forceRefreshIdToken = false
-  ) {
-    if (!user) {
-      delete axios.defaults.headers.common['Authorization'];
-      return;
-    }
-    const idToken = await user?.getIdToken(forceRefreshIdToken);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${idToken}`;
   }
 }

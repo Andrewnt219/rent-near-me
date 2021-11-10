@@ -6,6 +6,7 @@ import GlobalStyle from '@styles/GlobalStyles';
 import { SnackbarProvider } from '@ui/Snackbar/SnackbarContext';
 import { GlobalStyles as TwinStyles } from 'twin.macro';
 import '@libs/dayjs/plugins';
+import '@libs/axios/interceptors';
 import '@reach/dialog/styles.css';
 import 'react-day-picker/lib/style.css';
 
