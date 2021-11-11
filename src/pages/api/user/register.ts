@@ -1,6 +1,6 @@
 import type { Await } from '@common-types';
 import { capitalize } from 'lodash';
-import { auth, db } from '@libs/firebase-admin/firebase-admin';
+import { auth } from '@libs/firebase-admin/firebase-admin';
 import {
   RegisterFormSchema,
   RegisterFormModel,
@@ -11,6 +11,7 @@ import { validateModelWithSchema } from '@utils/api/model-schema-validator';
 import { capitalizeName } from '@utils/string-utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { parseModelSync } from '@utils/model-parser';
+import db from '@libs/firebase-admin/db';
 
 type PostResponseData = Await<ReturnType<typeof auth.createUser>>;
 export type ApiResult_User_Register_POST = ResultSuccess<PostResponseData>;

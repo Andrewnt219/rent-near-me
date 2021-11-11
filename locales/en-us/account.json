@@ -23,12 +23,13 @@
   },
   "security": {
     "page-title": "Login & Security",
+    "login-title": "Login",
     "change-password": {
       "forget-password-link": "Need a new password?",
       "old-password": "Old password",
       "new-password": "New password",
       "confirm-new-password": "Confirm new password",
-      "field-label": "Change password",
+      "field-label": "Password",
       "submit-button": "Update Password",
       "message": {
         "success": "Password updated"
@@ -37,6 +38,9 @@
         "password-changed": "Last updated {{time}}",
         "password-unchanged": "Created {{time}}"
       }
+    },
+    "change-email": {
+      "field-label": "Email"
     }
   },
   "personal-info": {

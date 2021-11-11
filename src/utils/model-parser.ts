@@ -1,40 +1,16 @@
 import dayjs from 'dayjs';
+import { mapObjectValueSync } from './object-utils';
 import { isJsonDateString } from './string-utils';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseObjectSync = (data: any): any => {
-  if (typeof data === 'string' && isJsonDateString(data)) {
-    return dayjs(data).toDate();
+const parseModelMapper = (value: unknown) => {
+  if (typeof value === 'string' && isJsonDateString(value)) {
+    return dayjs(value).toDate();
   }
-  if (typeof data === 'object' && data !== null) {
-    if (Array.isArray(data)) {
-      return data.map((elem) => parseObjectSync(elem));
-    } else {
-      return Object.fromEntries(
-        Object.entries(data).map(([key, val]) => [key, parseObjectSync(val)])
-      );
-    }
-  }
-  return data;
+  return value;
 };
-export const parseModelSync = <T>(data: T) => parseObjectSync(data) as T;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseObject = (data: any): Promise<any> => {
-  if (typeof data === 'string' && isJsonDateString(data)) {
-    return Promise.resolve(dayjs(data).toDate());
-  }
-  if (typeof data === 'object' && data !== null) {
-    if (Array.isArray(data)) {
-      return Promise.all(data.map((elem) => parseObject(elem)));
-    } else {
-      return Promise.all(
-        Object.entries(data).map(([key, val]) =>
-          parseObject(val).then((fieldVal) => [key, fieldVal])
-        )
-      ).then((entries) => Object.fromEntries(entries));
-    }
-  }
-  return Promise.resolve(data);
-};
-export const parseModel = async <T>(data: T) => (await parseObject(data)) as T;
+export const parseModelSync = <T>(data: T) =>
+  mapObjectValueSync(data, parseModelMapper) as T;
+
+export const parseModel = async <T>(data: T) =>
+  (await mapObjectValueSync(data, parseModelMapper)) as T;

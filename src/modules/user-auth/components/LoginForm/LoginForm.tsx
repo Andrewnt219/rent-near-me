@@ -3,7 +3,6 @@ import facebookIcon from '@iconify/icons-logos/facebook';
 import googleIcon from '@iconify/icons-logos/google-icon';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
-import AuthService from '@services/AuthService';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
 import Checkbox from '@ui/Form/Checkbox';
 import Form from '@ui/Form/Form';
@@ -18,14 +17,20 @@ import useLoginForm from './useLoginForm';
 import Logo from '@ui/Logo/Logo';
 
 const LoginForm = () => {
-  const { form, onSubmit, submitError } = useLoginForm();
+  const {
+    form,
+    onSubmit,
+    submitError,
+    onLoginWithGoogle,
+    onLoginWithFacebook,
+  } = useLoginForm();
   const { t } = useTranslation();
   const { registerModal } = useLayoutModal();
 
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>
       <Text tw="mb-md" component="h4" variant="h4">
-        Welcome back to RentNearMe!
+        {t('common:login.welcome')}
       </Text>
 
       <TextField
@@ -42,7 +47,9 @@ const LoginForm = () => {
         name="password"
         autoComplete="current-password"
         inputDescription={
-          <ButtonLink type="button">Forget password?</ButtonLink>
+          <ButtonLink type="button">
+            {t('common:login.forgetPassword')}
+          </ButtonLink>
         }
       />
 
@@ -84,7 +91,7 @@ const LoginForm = () => {
               <Logo />
             </StyledIconWrapper>
           }
-          text={t('common:login.new-account')}
+          text={t('common:login.newAccount')}
           onClick={registerModal.show}
         />
         <SignInExternalButton
@@ -95,7 +102,7 @@ const LoginForm = () => {
             </StyledIconWrapper>
           }
           text={t('common:login.google')}
-          onClick={AuthService.signInWithGoogle}
+          onClick={onLoginWithGoogle}
         />
         <SignInExternalButton
           type="button"
@@ -105,7 +112,7 @@ const LoginForm = () => {
             </StyledIconWrapper>
           }
           text={t('common:login.facebook')}
-          onClick={AuthService.signInWithFacebook}
+          onClick={onLoginWithFacebook}
         />
       </ul>
     </Form>

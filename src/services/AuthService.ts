@@ -27,10 +27,12 @@ export default class AuthService {
   }
 
   static async signInWithGoogle() {
+    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
     await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   static async signInWithFacebook() {
+    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
     await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
 

@@ -26,7 +26,23 @@ const useLoginForm = () => {
       .catch((err) => setSubmitError(err.error_description || err.message));
   });
 
-  return { onSubmit, form, submitError };
+  const onLoginWithGoogle = async () => {
+    await AuthService.signInWithGoogle();
+    loginModal.hide();
+  };
+
+  const onLoginWithFacebook = async () => {
+    await AuthService.signInWithFacebook();
+    loginModal.hide();
+  };
+
+  return {
+    onSubmit,
+    form,
+    submitError,
+    onLoginWithGoogle,
+    onLoginWithFacebook,
+  };
 };
 
 export default useLoginForm;

@@ -1,5 +1,5 @@
 import type { Await } from '@common-types';
-import { db } from '@libs/firebase-admin/firebase-admin';
+import db from '@libs/firebase-admin/db';
 import Profile from '@models/api/entities/Profile/Profile';
 import { ResourceNotFoundError } from '@models/api/errors/ResourceNotFoundError';
 import {

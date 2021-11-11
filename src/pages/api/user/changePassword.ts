@@ -1,5 +1,6 @@
 import type { Await } from '@common-types';
-import { auth, db } from '@libs/firebase-admin/firebase-admin';
+import db from '@libs/firebase-admin/db';
+import { auth } from '@libs/firebase-admin/firebase-admin';
 import {
   ChangePasswordFormSchema,
   ChangePasswordFormModel,

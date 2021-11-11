@@ -1,4 +1,3 @@
-import useSWR from 'swr';
 import firebase from 'firebase/app';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
 import { isNullOrUndefined } from '@utils/validate-js-utils';
@@ -6,9 +5,6 @@ import { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
 import AuthService from '@services/AuthService';
-import type { ApiResult_User_Profile_GET } from '@pages/api/user/profile/[uid]';
-import type Profile from '@models/api/entities/Profile/Profile';
-import { updateResponseData } from '@utils/api-responses';
 
 type AuthContextValue = {
   isAuthReady: boolean;
@@ -26,24 +22,20 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: FC = ({ children }) => {
-  const [user, setUser] = useState<firebase.User | null>(null);
-  const [isReady, setIsReady] = useState(false);
+  const [user, setUser] = useState<firebase.User | null | undefined>(undefined);
 
   useEffect(() => {
-    auth.onAuthStateChanged(async (newUser) => {
-      setUser(newUser);
-      setIsReady(true);
-    });
+    auth.onAuthStateChanged(setUser);
   }, []);
 
   const value = useMemo<AuthContextValue>(
     () => ({
-      isAuthReady: isReady,
-      user,
+      isAuthReady: user !== undefined,
+      user: user ?? null,
       effectiveProvider: AuthService.getEffectiveAuthProvider(user),
       isAuthenticated: !isNullOrUndefined(user),
     }),
-    [isReady, user]
+    [user]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
