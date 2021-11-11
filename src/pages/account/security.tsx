@@ -11,7 +11,7 @@ import { Icon } from '@iconify/react';
 import shieldFill from '@iconify/icons-eva/shield-fill';
 import EmailActionField from '@modules/account/components/EmailActionField/EmailActionField';
 import Text from '@ui/Text/Text';
-export default function SecurityPage() {
+export default function AccountSecurityPage() {
   const { t } = useTranslation();
 
   return (
@@ -52,6 +52,6 @@ function Aside() {
   );
 }
 
-SecurityPage.getLayout = (page: ReactNode) => {
+AccountSecurityPage.getLayout = (page: ReactNode) => {
   return <AccountPageLayout>{page}</AccountPageLayout>;
 };

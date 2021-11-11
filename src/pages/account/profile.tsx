@@ -12,7 +12,7 @@ import FullNameActionField from '@modules/account/components/FullNameActionField
 import GenderActionField from '@modules/account/components/GenderActionField/GenderActionField';
 import DobActionField from '@modules/account/components/DobActionField/DobActionField';
 
-export default function PersonalInfoPage() {
+export default function AccountPersonalInfoPage() {
   const { t } = useTranslation();
 
   return (
@@ -54,6 +54,6 @@ const Aside: VFC = () => {
   );
 };
 
-PersonalInfoPage.getLayout = (page: ReactNode) => (
+AccountPersonalInfoPage.getLayout = (page: ReactNode) => (
   <AccountPageLayout>{page}</AccountPageLayout>
 );

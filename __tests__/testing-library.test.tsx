@@ -1,10 +1,10 @@
-import Home from '@pages/index';
+import HomePage from '@pages/index';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 it('should render home page', () => {
-  render(<Home />);
+  render(<HomePage />);
 
   const heading = screen.getByText('Supabase + Next.js');
   expect(heading).toBeInTheDocument();
