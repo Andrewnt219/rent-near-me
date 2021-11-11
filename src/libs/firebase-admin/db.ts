@@ -2,6 +2,7 @@ import Profile from '@models/api/entities/Profile/Profile';
 import PasswordUpdateHistory from '@models/api/entities/Profile/PasswordUpdateHistory/PasswordUpdateHistory';
 import admin, { firestore } from './firebase-admin';
 import { mapObjectValueSync } from '@utils/object-utils';
+import LoginHistory from '@models/api/entities/Profile/LoginHistory/LoginHistory';
 
 const convert = <T>(src: FirebaseFirestore.DocumentData): T =>
   mapObjectValueSync(src, (value) => {
@@ -22,6 +23,8 @@ const typedCollection = <T>(collectionPath: string) =>
 
 const db = {
   Profile: () => typedCollection<Profile>('profiles'),
+  Profile_LoginHistory: (profileId: string) =>
+    typedCollection<LoginHistory>(`profiles/${profileId}/login_history`),
   Profile_PasswordUpdateHistory: (profileId: string) =>
     typedCollection<PasswordUpdateHistory>(
       `profiles/${profileId}/password_update_history`
