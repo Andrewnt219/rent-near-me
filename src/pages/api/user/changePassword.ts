@@ -1,37 +1,39 @@
 import type { Await } from '@common-types';
-import { auth, db } from '@libs/firebase-admin/firebase-admin';
-import {
-  ChangePasswordFormSchema,
-  ChangePasswordFormModel,
-} from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
+import db from '@libs/firebase-admin/db';
+import { ChangePasswordPayload } from '@models/ChangePasswordPayload';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
-import { validateModelWithSchema } from '@utils/api/model-schema-validator';
+import { getClientIpAddress } from '@utils/api/ip-address-utils';
 import { validateUserWithId } from '@utils/api/user-validator';
-import * as admin from 'firebase-admin';
+import { parseModelSync } from '@utils/model-parser';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type PostResponseData = Await<null>;
-export type ApiPostResult_User_ChangePassword = ResultSuccess<PostResponseData>;
+export type ApiResult_User_ChangePassword_POST =
+  ResultSuccess<PostResponseData>;
 async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
-  const model = req.body as ChangePasswordFormModel;
-  await validateModelWithSchema(model, ChangePasswordFormSchema());
-  await validateUserWithId(req.headers.authorization, model.uid);
+  const model = parseModelSync<ChangePasswordPayload>(req.body);
+  await validateUserWithId(req.headers.authorization, model.uid, true);
 
-  await auth.updateUser(model.uid, { password: model.newPassword });
-
-  const firestoreTimestamp = admin.firestore.FieldValue.serverTimestamp();
+  const now = new Date();
   await db
     .Profile()
     .doc(model.uid)
-    .set({ passwordLastUpdatedTime: firestoreTimestamp }, { merge: true });
-  await db
-    .Profile_PasswordUpdateHistory(model.uid)
-    // More info may be desired here in the future
-    .add({ timestamp: firestoreTimestamp });
+    .set({ passwordLastUpdatedTime: now }, { merge: true });
+
+  const { browser, browserVersion, device, deviceManufacturer, os } = model;
+  await db.Profile_PasswordUpdateHistory(model.uid).add({
+    timestamp: now,
+    ipAddress: getClientIpAddress(req),
+    browser,
+    browserVersion,
+    device,
+    deviceManufacturer,
+    os,
+  });
   return res.json(new ResultSuccess(null));
 }
 

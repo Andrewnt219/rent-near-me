@@ -1,25 +1,43 @@
+import { VFC } from 'react';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import useTranslation from 'next-translate/useTranslation';
 import ToggleActionField from '@modules/account/components/ActionField/ToggleActionField';
 import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm';
-dayjs.extend(relativeTime);
+import { useAuth } from '@modules/user-auth/contexts/AuthContext';
+import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 
-// TODO #55 get last updated password time
-const MOCK_LAST_UPDATED_DATE = new Date('2021-08-02T09:00:00-04:00');
-
-function PasswordActionField() {
+const PasswordActionField: VFC = () => {
   const { t } = useTranslation();
 
   return (
     <ToggleActionField
       label={t('account:security.change-password.field-label')}
       mainContent={<ChangePasswordForm />}
-      alternativeContent={t('account:security.change-password.description', {
-        time: dayjs(MOCK_LAST_UPDATED_DATE).fromNow(),
-      })}
+      alternativeContent={<PasswordActionFieldAltContent />}
     />
   );
-}
+};
 
 export default PasswordActionField;
+
+const PasswordActionFieldAltContent: VFC = () => {
+  const { t } = useTranslation();
+  const { user } = useAuth();
+  const { isProfileReady, profile } = useUserProfile();
+
+  return (
+    <>
+      {isProfileReady &&
+        (profile?.passwordLastUpdatedTime
+          ? t('account:security.change-password.description.password-changed', {
+              time: dayjs(profile.passwordLastUpdatedTime).fromNow(),
+            })
+          : t(
+              'account:security.change-password.description.password-unchanged',
+              {
+                time: dayjs(user?.metadata.creationTime).fromNow(),
+              }
+            ))}
+    </>
+  );
+};

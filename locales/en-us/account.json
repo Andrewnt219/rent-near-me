@@ -4,15 +4,15 @@
     "go-to-profile": "Go to profile",
     "menu-items": {
       "personal-info": {
-        "title": "Personal info",
+        "title": "Personal Info",
         "description": "Provide personal details and how we can reach you"
       },
       "security": {
-        "title": "Login & security",
+        "title": "Login & Security",
         "description": "Update your password and secure your account"
       },
       "payments": {
-        "title": "Payments & payouts",
+        "title": "Payments & Payouts",
         "description": "Review payments, payouts, coupons, gift cards, and taxes"
       }
     },
@@ -23,14 +23,62 @@
   },
   "security": {
     "page-title": "Login & Security",
+    "login-title": "Login",
     "change-password": {
       "forget-password-link": "Need a new password?",
       "old-password": "Old password",
       "new-password": "New password",
       "confirm-new-password": "Confirm new password",
-      "field-label": "Change password",
+      "field-label": "Password",
       "submit-button": "Update Password",
-      "description": "Last updated {{time}}"
+      "message": {
+        "success": "Password updated"
+      },
+      "description": {
+        "password-changed": "Last updated {{time}}",
+        "password-unchanged": "Created {{time}}"
+      }
+    },
+    "change-email": {
+      "field-label": "Email"
+    }
+  },
+  "personal-info": {
+    "page-title": "Personal Info",
+    "change-name": {
+      "field-label": "Full name",
+      "first-name": "First name",
+      "last-name": "Last name",
+      "message": {
+        "success": "Full name updated"
+      },
+      "description": {
+        "main": "Please use the name that matches your government ID",
+        "no-data": "Please provide us with your full name"
+      },
+      "submit-button": "Save"
+    },
+    "change-gender": {
+      "field-label": "Gender",
+      "gender": "Gender",
+      "message": {
+        "success": "Gender updated"
+      },
+      "description": {
+        "no-data": "Not given"
+      },
+      "submit-button": "Save"
+    },
+    "change-dob": {
+      "field-label": "Date of birth",
+      "dob": "Date of birth",
+      "message": {
+        "success": "Date of birth updated"
+      },
+      "description": {
+        "no-data": "Not given"
+      },
+      "submit-button": "Save"
     }
   }
 }

@@ -1,22 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import AuthService from '@services/AuthService';
-import { getErrorMessage } from '@utils/api-responses';
+import AuthApi from '@services/AuthApi';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
 import {
   ChangePasswordFormSchema,
   ChangePasswordFormModel,
 } from './ChangePasswordFormModel';
-import { useActionField } from '@modules/account/contexts/ActionFieldContext';
+import { useActionField } from '@modules/account/components/ActionField/ActionFieldContext';
+import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
+import { getErrorMessage } from '@utils/api-responses';
 
-export const useChangePasswordForm = () => {
+const useChangePasswordForm = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const { mutateProfile } = useUserProfile();
   const actionField = useActionField();
+  const snackbar = useSnackbar();
 
   const formSchema = ChangePasswordFormSchema(t);
   const form = useForm<ChangePasswordFormModel>({
@@ -30,19 +33,29 @@ export const useChangePasswordForm = () => {
   }, [form, user]);
 
   const onSubmit = form.handleSubmit((data) => {
-    AuthService.changePassword(data)
-      .then(() => actionField.showAlternativeContent())
-      .catch((e) => setSubmitError(getErrorMessage(e, t)));
+    mutateProfile({ passwordLastUpdatedTime: new Date() }, false);
+    actionField.showAlternativeContent();
+    AuthApi.changePassword(data)
+      .then(() =>
+        snackbar.showSnackSuccess(
+          t('account:security.change-password.message.success')
+        )
+      )
+      .catch((e) => {
+        snackbar.showSnackError(getErrorMessage(e, t));
+        actionField.showMainContent();
+      })
+      .finally(() => mutateProfile());
   });
 
   const password = form.watch('newPassword');
-
   const passwordValidationResults = validatePassword(password);
 
   return {
     onSubmit,
     form,
-    submitError,
     passwordValidationResults,
   };
 };
+
+export default useChangePasswordForm;

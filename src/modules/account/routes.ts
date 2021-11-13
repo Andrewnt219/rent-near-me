@@ -5,6 +5,10 @@ export const accountRoutes: Record<string, RouteProps> = {
     href: '/account',
     textTranslateKey: 'account.index',
   },
+  profile: {
+    href: '/account/profile',
+    textTranslateKey: 'account.profile',
+  },
   security: {
     href: '/account/security',
     textTranslateKey: 'account.security',

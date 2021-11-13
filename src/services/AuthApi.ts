@@ -1,16 +1,26 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
+import { getPlatformInfo } from '@libs/platformjs';
+import { ChangePasswordPayload } from '@models/ChangePasswordPayload';
+import { LoginPayload } from '@models/LoginPayload';
 import { ChangePasswordFormModel } from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
 import { RegisterFormModel } from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
-import { ApiPostResult_User_ChangePassword } from '@pages/api/user/changePassword';
-import { ApiPostResult_User_Register } from '@pages/api/user/register';
+import { ApiResult_User_ChangePassword_POST } from '@pages/api/user/changePassword';
+import { ApiResult_User_Login_POST } from '@pages/api/user/login';
+import { ApiResult_User_Register_POST } from '@pages/api/user/register';
 import axios from 'axios';
 import firebase from 'firebase/app';
 
-export default class AuthService {
+export default class AuthApi {
   static async registerWithEmail(formData: RegisterFormModel) {
-    const response = await axios.post<ApiPostResult_User_Register>(
+    const response = await axios.post<ApiResult_User_Register_POST>(
       '/api/user/register',
       formData
+    );
+    await AuthApi.signInWithEmail(
+      formData.email,
+      formData.password,
+      false,
+      true
     );
     return response.data;
   }
@@ -18,20 +28,36 @@ export default class AuthService {
   static async signInWithEmail(
     email: string,
     password: string,
-    keepLogIn: boolean
+    keepLogIn: boolean,
+    isFirstLogin = false
   ) {
     const persistence =
       firebase.auth.Auth.Persistence[keepLogIn ? 'LOCAL' : 'SESSION'];
     await auth.setPersistence(persistence);
     await auth.signInWithEmailAndPassword(email, password);
+    AuthApi.login('password', isFirstLogin);
   }
 
   static async signInWithGoogle() {
-    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    const userCredential = await auth.signInWithPopup(
+      new firebase.auth.GoogleAuthProvider()
+    );
+    AuthApi.login(
+      'google.com',
+      userCredential.additionalUserInfo?.isNewUser ?? false
+    );
   }
 
   static async signInWithFacebook() {
-    await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    const userCredential = await auth.signInWithPopup(
+      new firebase.auth.FacebookAuthProvider()
+    );
+    AuthApi.login(
+      'facebook.com',
+      userCredential.additionalUserInfo?.isNewUser ?? false
+    );
   }
 
   static async signOut() {
@@ -52,16 +78,21 @@ export default class AuthService {
 
   static async changePassword(formData: ChangePasswordFormModel) {
     const { email, oldPassword } = formData;
-    await AuthService.reauthenticate(email, oldPassword);
-    await axios.post<ApiPostResult_User_ChangePassword>(
+    await AuthApi.reauthenticate(email, oldPassword);
+    await auth.currentUser?.updatePassword(formData.newPassword);
+    const payload: ChangePasswordPayload = {
+      uid: formData.uid,
+      ...getPlatformInfo(),
+    };
+    axios.post<ApiResult_User_ChangePassword_POST>(
       '/api/user/changePassword',
-      formData
+      payload
     );
   }
 
   private static async reauthenticate(email?: string, password?: string) {
     const user = auth.currentUser;
-    const providerId = AuthService.getEffectiveAuthProvider();
+    const providerId = AuthApi.getEffectiveAuthProvider();
     switch (providerId) {
       case 'password':
         if (!email || !password) throw Error('Email and Password is required');
@@ -82,18 +113,19 @@ export default class AuthService {
         break;
       }
     }
-    await AuthService.updateRequestAuthorizationHeader();
   }
 
-  static async updateRequestAuthorizationHeader(
-    user = auth.currentUser,
-    forceRefreshIdToken = false
-  ) {
-    if (!user) {
-      delete axios.defaults.headers.common['Authorization'];
-      return;
-    }
-    const idToken = await user?.getIdToken(forceRefreshIdToken);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${idToken}`;
+  private static async login(authProvider: string, isFirstLogin: boolean) {
+    const payload: LoginPayload = {
+      uid: auth.currentUser?.uid ?? '',
+      authProvider,
+      isFirstLogin,
+      ...getPlatformInfo(),
+    };
+    const response = await axios.post<ApiResult_User_Login_POST>(
+      '/api/user/login',
+      payload
+    );
+    return response.data;
   }
 }

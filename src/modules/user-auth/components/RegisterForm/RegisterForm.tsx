@@ -38,6 +38,8 @@ const RegisterForm = () => {
           name="firstName"
           type="text"
           label={t('common:register.firstName.label')}
+          autoCapitalize="words"
+          autoComplete="given-name"
           inputDescription={t('common:register.firstName.description')}
         />
 
@@ -46,6 +48,8 @@ const RegisterForm = () => {
           name="lastName"
           type="text"
           label={t('common:register.lastName')}
+          autoCapitalize="words"
+          autoComplete="family-name"
         />
       </InputRow>
 
@@ -56,12 +60,14 @@ const RegisterForm = () => {
           label={t('common:register.dob.label')}
           inputDescription={t('common:register.dob.description')}
           dayPickerProps={{ disabledDays: { after: MAXIMUM_DOB } }}
+          inputProps={{ 'auto-capitalize': 'words', autoComplete: 'bday' }}
         />
 
         <Select
           id="register-gender"
           name="gender"
           label={t('common:register.gender')}
+          autoComplete="sex"
         >
           <option value="" disabled></option>
           {Object.entries(GENDERS).map(([key, val]) => (

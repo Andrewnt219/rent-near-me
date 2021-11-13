@@ -14,17 +14,17 @@ export interface Result<Data = unknown> {
   type: ResultTypes;
   data: Data | null;
   error: ErrorWithMessage | null;
-  timestamp: string;
+  timestamp: Date;
 }
 
 export class ResultSuccess<Data = unknown> implements Result<Data> {
   readonly type: ResultTypes = 'success';
   data: Data;
   readonly error = null;
-  readonly timestamp: string;
+  readonly timestamp: Date;
 
   constructor(data: Data) {
-    this.timestamp = new Date().toLocaleString();
+    this.timestamp = new Date();
     this.data = data;
   }
 }
@@ -33,10 +33,10 @@ export class ResultError implements Result<null> {
   readonly type: ResultTypes = 'error';
   readonly data = null;
   error: ErrorWithMessage;
-  readonly timestamp: string;
+  readonly timestamp: Date;
 
   constructor(err: ErrorWithMessage | string) {
-    this.timestamp = new Date().toLocaleString();
+    this.timestamp = new Date();
     if (typeof err === 'string') {
       this.error = { message: err };
       return;
@@ -56,4 +56,18 @@ export function getErrorMessage(error: unknown, t: Translate) {
   }
 
   return t('common:errors.api.other');
+}
+
+export function updateResponseData<T>(
+  res: ResultSuccess<T> | undefined,
+  newData: T,
+  merge = true
+) {
+  const data = merge
+    ? {
+        ...res?.data,
+        ...newData,
+      }
+    : newData;
+  return { ...res, data } as ResultSuccess<T>;
 }

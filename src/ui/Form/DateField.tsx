@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { DATE_TIME_FORMATS } from '@models/constnats';
 import Form, { inputCss, labelActiveCss, labelInvalidCss } from '@ui/Form/Form';
 import { isEmptyString } from '@utils/validate-js-utils';
@@ -6,9 +7,6 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DayPickerInputProps } from 'react-day-picker/types/Props';
 import { useController } from 'react-hook-form';
 import tw, { css, styled } from 'twin.macro';
-import dayjs from 'dayjs';
-import CustomParseFormat from 'dayjs/plugin/customParseFormat';
-dayjs.extend(CustomParseFormat);
 
 type DateFieldProps = Omit<DayPickerInputProps, 'placeholder'> & {
   id: string;
@@ -33,9 +31,7 @@ const DateField: VFC<DateFieldProps> = ({
     <StyledWrapper>
       <DayPickerInput
         format={DATE_TIME_FORMATS.LONG_DATE}
-        {...pickerProps}
         inputProps={{
-          ...inputProps,
           id,
           ref: field.ref,
           'aria-invalid': fieldState.invalid,
@@ -44,12 +40,15 @@ const DateField: VFC<DateFieldProps> = ({
           onChange: field.onChange,
           onBlur: field.onBlur,
           autoComplete: 'off',
+          ...inputProps,
         }}
         // onDayChange won't work with user keyboard's input
-        dayPickerProps={{ ...dayPickerProps, onDayClick: field.onChange }}
+        dayPickerProps={{ onDayClick: field.onChange, ...dayPickerProps }}
         placeholder=" "
         formatDate={dayJsFormatter}
         parseDate={dayJsParser}
+        value={field.value}
+        {...pickerProps}
       />
 
       <StyledLabel

@@ -6,10 +6,12 @@ import PasswordActionField from '@modules/account/components/PasswordActionField
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
 import useTranslation from 'next-translate/useTranslation';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Icon } from '@iconify/react';
 import shieldFill from '@iconify/icons-eva/shield-fill';
-export default function SecurityPage() {
+import EmailActionField from '@modules/account/components/EmailActionField/EmailActionField';
+import Text from '@ui/Text/Text';
+export default function AccountSecurityPage() {
   const { t } = useTranslation();
 
   return (
@@ -22,10 +24,17 @@ export default function SecurityPage() {
 }
 
 function Main() {
+  const { t } = useTranslation();
   return (
-    <ActionFieldGroup>
-      <PasswordActionField />
-    </ActionFieldGroup>
+    <>
+      <Text component="h2" variant="h3" tw="mb-lg">
+        {t('account:security.login-title')}
+      </Text>
+      <ActionFieldGroup>
+        <EmailActionField />
+        <PasswordActionField />
+      </ActionFieldGroup>
+    </>
   );
 }
 
@@ -39,17 +48,10 @@ function Aside() {
         We’re always working on ways to increase safety in our community. That’s
         why we look at every account to make sure it’s as secure as possible.
       </AccountInfoCard>
-      <AccountInfoCard
-        title="Let's make your account more secure"
-        icon={<Icon icon={shieldFill} tw=" text-secondary" />}
-      >
-        We’re always working on ways to increase safety in our community. That’s
-        why we look at every account to make sure it’s as secure as possible.
-      </AccountInfoCard>
     </AccountInfoCardGroup>
   );
 }
 
-SecurityPage.getLayout = (page: ReactNode) => {
+AccountSecurityPage.getLayout = (page: ReactNode) => {
   return <AccountPageLayout>{page}</AccountPageLayout>;
 };

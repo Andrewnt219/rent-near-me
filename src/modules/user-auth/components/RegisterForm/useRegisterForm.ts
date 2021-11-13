@@ -4,7 +4,7 @@ import {
   RegisterFormSchema,
   RegisterFormModel,
 } from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
-import AuthService from '@services/AuthService';
+import AuthApi from '@services/AuthApi';
 import { getErrorMessage } from '@utils/api-responses';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
@@ -23,7 +23,7 @@ export default function useRegisterForm() {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    AuthService.registerWithEmail(data)
+    AuthApi.registerWithEmail(data)
       .then(() => registerModal.hide())
       .catch((e) => setSubmitError(getErrorMessage(e, t)));
   });

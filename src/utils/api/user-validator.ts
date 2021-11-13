@@ -5,21 +5,35 @@ import { UserAuthorizationError } from '@models/api/errors/UserAuthorizationErro
 // Remove the 'Bearer' preffix from Authorization header
 const getIdTokenFromAuthHeader = (header: string) => header.substr(6).trim();
 
-export const validateUser = async (authHeader: string | undefined) => {
-  if (!authHeader) throw new UserAuthenticationError();
+export const validateUser = async (
+  authHeader: string | undefined,
+  throwError = false
+) => {
+  if (!authHeader)
+    if (throwError) throw new UserAuthenticationError();
+    else return null;
   const idToken = getIdTokenFromAuthHeader(authHeader);
-  const decodedToken = await auth.verifyIdToken(idToken, true).catch(() => {
-    throw new UserAuthenticationError();
-  });
-  return decodedToken;
+  try {
+    const decodedToken = await auth.verifyIdToken(idToken, true);
+    return decodedToken;
+  } catch {
+    if (throwError) throw new UserAuthenticationError();
+    else return null;
+  }
 };
 
 export const validateUserWithId = async (
   authHeader: string | undefined,
-  matchingUid: string
+  matchingUid: string,
+  throwError = false
 ) => {
-  const decodedToken = await validateUser(authHeader);
+  const decodedToken = await validateUser(authHeader, throwError);
+  if (!decodedToken) return null;
+
   if (matchingUid && decodedToken.uid !== matchingUid)
-    throw new UserAuthorizationError(decodedToken.uid, decodedToken.email);
+    if (throwError)
+      throw new UserAuthorizationError(decodedToken.uid, decodedToken.email);
+    else return null;
+
   return decodedToken;
 };

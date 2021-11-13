@@ -2,9 +2,6 @@ import * as admin from 'firebase-admin';
 import crypto from 'crypto';
 import encrypted from './firebase-admin-secret.enc';
 
-import Profile from '@models/api/entities/Profile/Profile';
-import PasswordUpdateHistory from '@models/api/entities/Profile/PasswordUpdateHistory/PasswordUpdateHistory';
-
 if (admin.apps.length === 0) {
   const iv = process.env['FIREBASE_CERT_DECRYPT_IV'] as string;
   const secret = process.env['FIREBASE_CERT_DECRYPT_SECRET'] as string;
@@ -19,23 +16,6 @@ if (admin.apps.length === 0) {
 }
 
 export const firestore = admin.firestore();
-
-const typeConverter = <T>() => ({
-  toFirestore: (data: Partial<T>) => data,
-  fromFirestore: (snap: FirebaseFirestore.QueryDocumentSnapshot) =>
-    snap.data() as T,
-});
-
-const typedCollection = <T>(collectionPath: string) =>
-  firestore.collection(collectionPath).withConverter(typeConverter<T>());
-
-export const db = {
-  Profile: () => typedCollection<Profile>('profiles'),
-  Profile_PasswordUpdateHistory: (profileId: string) =>
-    typedCollection<PasswordUpdateHistory>(
-      `profiles/${profileId}/password_update_history`
-    ),
-};
 
 export const auth = admin.auth();
 

@@ -5,14 +5,11 @@ import HiddenField from '@ui/Form/HiddenField';
 import PasswordField from '@ui/Form/PasswordField';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import useTranslation from 'next-translate/useTranslation';
-import { useChangePasswordForm } from './useChangePasswordForm';
-import { Icon } from '@iconify/react';
-import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
+import useChangePasswordForm from './useChangePasswordForm';
 
 function ChangePasswordForm() {
   const { t } = useTranslation();
-  const { form, submitError, onSubmit, passwordValidationResults } =
-    useChangePasswordForm();
+  const { form, onSubmit, passwordValidationResults } = useChangePasswordForm();
   const { effectiveProvider } = useAuth();
 
   return (
@@ -52,18 +49,6 @@ function ChangePasswordForm() {
         label={t('account:security.change-password.confirm-new-password')}
         autoComplete="new-password"
       />
-
-      {submitError && (
-        <Form.ErrorMessage
-          role="alert"
-          aria-relevant="text"
-          tw="flex items-center gap-sm mb-sm"
-        >
-          <Icon icon={closeCircleFill} tw="w-5 h-5 fill-current" />
-
-          {submitError}
-        </Form.ErrorMessage>
-      )}
 
       <ButtonSecondary
         type="submit"

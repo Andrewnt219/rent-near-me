@@ -1,6 +1,7 @@
 declare module '@common-types' {
+  import { NextPage } from 'next';
   import { LinkProps } from 'next/link';
-  import { ReactNode } from 'react';
+  import { ReactElement } from 'react';
   import { StyledComponent } from 'styled-components';
   import { InferType } from 'yup';
 
@@ -16,7 +17,9 @@ declare module '@common-types' {
     toggle: () => void;
   };
   type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
-  type GetLayout = (page: ReactNode) => ReactNode;
+  type PageWithLayout = NextPage & {
+    getLayout?: (page: ReactElement) => ReactElement;
+  };
 
   type StyledComponentProps<T> = T extends StyledComponent<
     any,
@@ -39,8 +42,6 @@ declare module '@common-types' {
       : K]: T[K];
   };
   type InferFromSchema<T> = RemoveIndex<InferType<T>>;
-
-  type FirestoreTimestamp = Date | FirebaseFirestore.FieldValue;
 
   type ItemType<T extends Array> = T[number];
 

@@ -3,13 +3,13 @@ import {
   LoginFormSchema,
   LoginFormModel,
 } from '@modules/user-auth/components/LoginForm/LoginFormModel';
-import AuthService from '@services/AuthService';
+import AuthApi from '@services/AuthApi';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 
-export const useLoginForm = () => {
+const useLoginForm = () => {
   const { t } = useTranslation();
   const { loginModal } = useLayoutModal();
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -21,10 +21,28 @@ export const useLoginForm = () => {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    AuthService.signInWithEmail(data.email, data.password, data.keepLogIn)
+    AuthApi.signInWithEmail(data.email, data.password, data.keepLogIn)
       .then(() => loginModal.hide())
       .catch((err) => setSubmitError(err.error_description || err.message));
   });
 
-  return { onSubmit, form, submitError };
+  const onLoginWithGoogle = async () => {
+    await AuthApi.signInWithGoogle();
+    loginModal.hide();
+  };
+
+  const onLoginWithFacebook = async () => {
+    await AuthApi.signInWithFacebook();
+    loginModal.hide();
+  };
+
+  return {
+    onSubmit,
+    form,
+    submitError,
+    onLoginWithGoogle,
+    onLoginWithFacebook,
+  };
 };
+
+export default useLoginForm;
