@@ -9,6 +9,7 @@ import '@libs/dayjs/plugins';
 import '@libs/axios/interceptors';
 import '@reach/dialog/styles.css';
 import 'react-day-picker/lib/style.css';
+import { ModalProvider } from '@ui/Modal/ModalContext';
 
 type MyAppProps = {
   Component: PageWithLayout;
@@ -22,9 +23,11 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     <SWRDefaultConfigProvider>
       <AuthProvider>
         <SnackbarProvider>
-          <TwinStyles />
-          <GlobalStyle />
-          {getLayout(<Component {...pageProps} />)}
+          <ModalProvider>
+            <TwinStyles />
+            <GlobalStyle />
+            {getLayout(<Component {...pageProps} />)}
+          </ModalProvider>
         </SnackbarProvider>
       </AuthProvider>
     </SWRDefaultConfigProvider>

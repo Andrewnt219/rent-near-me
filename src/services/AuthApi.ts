@@ -1,5 +1,5 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
-import { getPlatformInfo } from '@libs/platformjs';
+import { getPlatformInfo } from '@utils/platform-utils';
 import { ChangePasswordPayload } from '@models/ChangePasswordPayload';
 import { LoginPayload } from '@models/LoginPayload';
 import { ChangePasswordFormModel } from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';

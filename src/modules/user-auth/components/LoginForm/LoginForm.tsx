@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import facebookIcon from '@iconify/icons-logos/facebook';
 import googleIcon from '@iconify/icons-logos/google-icon';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useModals } from '@ui/Modal/ModalContext';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
 import Checkbox from '@ui/Form/Checkbox';
 import Form from '@ui/Form/Form';
@@ -25,7 +25,7 @@ const LoginForm = () => {
     onLoginWithFacebook,
   } = useLoginForm();
   const { t } = useTranslation();
-  const { registerModal } = useLayoutModal();
+  const { registerModal } = useModals();
 
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>

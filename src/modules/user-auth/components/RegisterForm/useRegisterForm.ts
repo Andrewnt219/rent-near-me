@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useModals } from '@ui/Modal/ModalContext';
 import {
   RegisterFormSchema,
   RegisterFormModel,
@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 
 export default function useRegisterForm() {
   const { t } = useTranslation();
-  const { registerModal } = useLayoutModal();
+  const { registerModal } = useModals();
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const formSchema = RegisterFormSchema(t);

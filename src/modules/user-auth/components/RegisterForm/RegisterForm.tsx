@@ -10,7 +10,7 @@ import { InputRow } from '@ui/Row/Row';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import useRegisterForm from './useRegisterForm';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useModals } from '@ui/Modal/ModalContext';
 import { Icon } from '@iconify/react';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 
@@ -18,7 +18,7 @@ const RegisterForm = () => {
   const { form, onSubmit, submitError, passwordValidationResults } =
     useRegisterForm();
   const { t } = useTranslation();
-  const { loginModal } = useLayoutModal();
+  const { loginModal } = useModals();
 
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>

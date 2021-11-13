@@ -1,4 +1,4 @@
-import { PlatformInfo } from '@libs/platformjs';
+import { PlatformInfo } from '@utils/platform-utils';
 
 export type LoginPayload = PlatformInfo & {
   uid: string;

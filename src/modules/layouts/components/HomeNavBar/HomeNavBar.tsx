@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import globeFill from '@iconify/icons-eva/globe-fill';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useModals } from '@ui/Modal/ModalContext';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonGhost } from '@ui/Button/Button';
@@ -16,7 +16,7 @@ type Props = {
 };
 const HomeNavBar = ({ className }: Props) => {
   const { isAuthenticated } = useAuth();
-  const { registerModal } = useLayoutModal();
+  const { registerModal } = useModals();
 
   return (
     <header className={className} tw="z-10 bg-white py-lg shadow">
