@@ -3,11 +3,10 @@ import db from '@libs/firebase-admin/db';
 import { ChangePasswordPayload } from '@models/ChangePasswordPayload';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
-import getClientIpLocation from '@utils/api/user-locator';
+import getClientIpInfo from '@utils/api/user-ip-locator';
 import { validateUserWithId } from '@utils/api/user-validator';
 import { parseModelSync } from '@utils/model-parser';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import requestIp from 'request-ip';
 
 type PostResponseData = Await<null>;
 export type ApiResult_User_ChangePassword_POST =
@@ -28,8 +27,7 @@ async function post(
   const { browser, browserVersion, device, deviceManufacturer, os } = model;
   await db.Profile_PasswordUpdateHistory(model.uid).add({
     timestamp: now,
-    ipAddress: requestIp.getClientIp(req) ?? 'Unknown',
-    ...getClientIpLocation(req),
+    ...getClientIpInfo(req),
     browser,
     browserVersion,
     device,
