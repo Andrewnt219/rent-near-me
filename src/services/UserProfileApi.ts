@@ -6,7 +6,7 @@ import { ApiResult_User_Profile_PATCH } from '@pages/api/user/profile/[uid]';
 import { generateDisplayName } from '@utils/string-utils';
 import axios from 'axios';
 
-export default class UserProfileService {
+export default class UserProfileApi {
   static async changeName(formData: ChangeFullNameFormModel) {
     await axios.patch<ApiResult_User_Profile_PATCH>(
       `/api/user/profile/${auth.currentUser?.uid}`,

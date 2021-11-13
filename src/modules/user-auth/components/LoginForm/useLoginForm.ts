@@ -3,7 +3,7 @@ import {
   LoginFormSchema,
   LoginFormModel,
 } from '@modules/user-auth/components/LoginForm/LoginFormModel';
-import AuthService from '@services/AuthService';
+import AuthApi from '@services/AuthApi';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -21,18 +21,18 @@ const useLoginForm = () => {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    AuthService.signInWithEmail(data.email, data.password, data.keepLogIn)
+    AuthApi.signInWithEmail(data.email, data.password, data.keepLogIn)
       .then(() => loginModal.hide())
       .catch((err) => setSubmitError(err.error_description || err.message));
   });
 
   const onLoginWithGoogle = async () => {
-    await AuthService.signInWithGoogle();
+    await AuthApi.signInWithGoogle();
     loginModal.hide();
   };
 
   const onLoginWithFacebook = async () => {
-    await AuthService.signInWithFacebook();
+    await AuthApi.signInWithFacebook();
     loginModal.hide();
   };
 

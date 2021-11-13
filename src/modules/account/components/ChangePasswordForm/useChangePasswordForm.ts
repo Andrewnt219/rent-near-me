@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import AuthService from '@services/AuthService';
+import AuthApi from '@services/AuthApi';
 import { validatePassword } from '@utils/validate-password-utils';
 import useTranslation from 'next-translate/useTranslation';
 import {
@@ -35,7 +35,7 @@ const useChangePasswordForm = () => {
   const onSubmit = form.handleSubmit((data) => {
     mutateProfile({ passwordLastUpdatedTime: new Date() }, false);
     actionField.showAlternativeContent();
-    AuthService.changePassword(data)
+    AuthApi.changePassword(data)
       .then(() =>
         snackbar.showSnackSuccess(
           t('account:security.change-password.message.success')

@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
-import UserProfileService from '@services/UserProfileService';
+import UserProfileApi from '@services/UserProfileApi';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -31,7 +31,7 @@ const useChangeGenderForm = () => {
   const onSubmit = form.handleSubmit((data) => {
     mutateProfile(data, false);
     actionField.showAlternativeContent();
-    UserProfileService.changeGender(data)
+    UserProfileApi.changeGender(data)
       .then(() =>
         snackbar.showSnackSuccess(
           t('account:personal-info.change-gender.message.success')

@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import personFill from '@iconify/icons-eva/person-fill';
 import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import AuthService from '@services/AuthService';
+import AuthApi from '@services/AuthApi';
 import { ButtonGhost } from '@ui/Button/Button';
 import { HTMLAttributes } from 'react';
 import tw, { styled } from 'twin.macro';
@@ -115,7 +115,7 @@ function Menu(props: MenuProps) {
             as="button"
             onClick={async () => {
               await router.push('/');
-              await AuthService.signOut();
+              await AuthApi.signOut();
             }}
           >
             Logout

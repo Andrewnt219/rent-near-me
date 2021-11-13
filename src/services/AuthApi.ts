@@ -10,13 +10,13 @@ import { ApiResult_User_Register_POST } from '@pages/api/user/register';
 import axios from 'axios';
 import firebase from 'firebase/app';
 
-export default class AuthService {
+export default class AuthApi {
   static async registerWithEmail(formData: RegisterFormModel) {
     const response = await axios.post<ApiResult_User_Register_POST>(
       '/api/user/register',
       formData
     );
-    await AuthService.signInWithEmail(
+    await AuthApi.signInWithEmail(
       formData.email,
       formData.password,
       false,
@@ -35,7 +35,7 @@ export default class AuthService {
       firebase.auth.Auth.Persistence[keepLogIn ? 'LOCAL' : 'SESSION'];
     await auth.setPersistence(persistence);
     await auth.signInWithEmailAndPassword(email, password);
-    AuthService.login('password', isFirstLogin);
+    AuthApi.login('password', isFirstLogin);
   }
 
   static async signInWithGoogle() {
@@ -43,7 +43,7 @@ export default class AuthService {
     const userCredential = await auth.signInWithPopup(
       new firebase.auth.GoogleAuthProvider()
     );
-    AuthService.login(
+    AuthApi.login(
       'google.com',
       userCredential.additionalUserInfo?.isNewUser ?? false
     );
@@ -54,7 +54,7 @@ export default class AuthService {
     const userCredential = await auth.signInWithPopup(
       new firebase.auth.FacebookAuthProvider()
     );
-    AuthService.login(
+    AuthApi.login(
       'facebook.com',
       userCredential.additionalUserInfo?.isNewUser ?? false
     );
@@ -78,7 +78,7 @@ export default class AuthService {
 
   static async changePassword(formData: ChangePasswordFormModel) {
     const { email, oldPassword } = formData;
-    await AuthService.reauthenticate(email, oldPassword);
+    await AuthApi.reauthenticate(email, oldPassword);
     await auth.currentUser?.updatePassword(formData.newPassword);
     const payload: ChangePasswordPayload = {
       uid: formData.uid,
@@ -92,7 +92,7 @@ export default class AuthService {
 
   private static async reauthenticate(email?: string, password?: string) {
     const user = auth.currentUser;
-    const providerId = AuthService.getEffectiveAuthProvider();
+    const providerId = AuthApi.getEffectiveAuthProvider();
     switch (providerId) {
       case 'password':
         if (!email || !password) throw Error('Email and Password is required');

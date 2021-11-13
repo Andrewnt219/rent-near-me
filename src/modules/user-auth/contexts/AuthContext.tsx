@@ -4,7 +4,7 @@ import { isNullOrUndefined } from '@utils/validate-js-utils';
 import { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { createContext, useContext, FC } from 'react';
-import AuthService from '@services/AuthService';
+import AuthApi from '@services/AuthApi';
 
 type AuthContextValue = {
   isAuthReady: boolean;
@@ -32,7 +32,7 @@ export const AuthProvider: FC = ({ children }) => {
     () => ({
       isAuthReady: user !== undefined,
       user: user ?? null,
-      effectiveProvider: AuthService.getEffectiveAuthProvider(user),
+      effectiveProvider: AuthApi.getEffectiveAuthProvider(user),
       isAuthenticated: !isNullOrUndefined(user),
     }),
     [user]

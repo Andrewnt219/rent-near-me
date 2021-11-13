@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
-import UserProfileService from '@services/UserProfileService';
+import UserProfileApi from '@services/UserProfileApi';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { getErrorMessage } from '@utils/api-responses';
 import useTranslation from 'next-translate/useTranslation';
@@ -32,7 +32,7 @@ const useChangeFullNameForm = () => {
   const onSubmit = form.handleSubmit((data) => {
     mutateProfile(data, false);
     actionField.showAlternativeContent();
-    UserProfileService.changeName(data)
+    UserProfileApi.changeName(data)
       .then(() =>
         snackbar.showSnackSuccess(
           t('account:personal-info.change-name.message.success')
