@@ -23,7 +23,8 @@ export const useUserProfile = (): TUserUserProfile => {
     mutate: mutateProfileResponse,
     isValidating: isValidating,
   } = useSWR<ApiResult_User_Profile_GET>(
-    user ? `/api/user/profile/${user.uid}` : null
+    user ? `/api/user/profile/${user.uid}` : null,
+    { revalidateIfStale: false }
   );
 
   return useMemo(
