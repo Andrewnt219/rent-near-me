@@ -36,3 +36,16 @@ export const isMsAjaxDateString = (dateStr: string) => reMsAjax.test(dateStr);
 
 export const isJsonDateString = (dateStr: string) =>
   isIsoDateString(dateStr) || isMsAjaxDateString(dateStr);
+
+export const tryDecodeQueryParam = (
+  param: string | string[] | undefined
+): { decoded: string; error?: Error } => {
+  if (param === undefined) return { decoded: '' };
+  try {
+    return {
+      decoded: decodeURIComponent(param.toString().replace(/\+/g, ' ')),
+    };
+  } catch (e) {
+    return { decoded: param.toString(), error: e as Error };
+  }
+};
