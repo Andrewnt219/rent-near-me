@@ -16,11 +16,11 @@ const ChangeDobForm: VFC = () => {
         name="dob"
         label={t('account:personal-info.change-dob.dob')}
         dayPickerProps={{ disabledDays: { after: MAXIMUM_DOB } }}
+        inputProps={{ 'auto-capitalize': 'words', autoComplete: 'bday' }}
       />
 
       <ButtonSecondary
         type="submit"
-        tw="px-xl"
         size="lg"
         disabled={form.formState.isSubmitting}
       >

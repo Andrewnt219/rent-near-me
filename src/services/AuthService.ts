@@ -1,5 +1,7 @@
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
-import { LoginLogPayload } from '@models/LoginLogPayload';
+import { getPlatformInfo } from '@libs/platformjs';
+import { ChangePasswordPayload } from '@models/ChangePasswordPayload';
+import { LoginPayload } from '@models/LoginPayload';
 import { ChangePasswordFormModel } from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
 import { RegisterFormModel } from '@modules/user-auth/components/RegisterForm/RegisterFormModel';
 import { ApiResult_User_ChangePassword_POST } from '@pages/api/user/changePassword';
@@ -7,7 +9,6 @@ import { ApiResult_User_Login_POST } from '@pages/api/user/login';
 import { ApiResult_User_Register_POST } from '@pages/api/user/register';
 import axios from 'axios';
 import firebase from 'firebase/app';
-import platform from 'platform';
 
 export default class AuthService {
   static async registerWithEmail(formData: RegisterFormModel) {
@@ -15,31 +16,48 @@ export default class AuthService {
       '/api/user/register',
       formData
     );
+    await AuthService.signInWithEmail(
+      formData.email,
+      formData.password,
+      false,
+      true
+    );
     return response.data;
   }
 
   static async signInWithEmail(
     email: string,
     password: string,
-    keepLogIn: boolean
+    keepLogIn: boolean,
+    isFirstLogin = false
   ) {
     const persistence =
       firebase.auth.Auth.Persistence[keepLogIn ? 'LOCAL' : 'SESSION'];
     await auth.setPersistence(persistence);
     await auth.signInWithEmailAndPassword(email, password);
-    AuthService.login('password');
+    AuthService.login('password', isFirstLogin);
   }
 
   static async signInWithGoogle() {
     await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
-    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    AuthService.login('google.com');
+    const userCredential = await auth.signInWithPopup(
+      new firebase.auth.GoogleAuthProvider()
+    );
+    AuthService.login(
+      'google.com',
+      userCredential.additionalUserInfo?.isNewUser ?? false
+    );
   }
 
   static async signInWithFacebook() {
     await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
-    await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-    AuthService.login('facebook.com');
+    const userCredential = await auth.signInWithPopup(
+      new firebase.auth.FacebookAuthProvider()
+    );
+    AuthService.login(
+      'facebook.com',
+      userCredential.additionalUserInfo?.isNewUser ?? false
+    );
   }
 
   static async signOut() {
@@ -61,9 +79,14 @@ export default class AuthService {
   static async changePassword(formData: ChangePasswordFormModel) {
     const { email, oldPassword } = formData;
     await AuthService.reauthenticate(email, oldPassword);
-    await axios.post<ApiResult_User_ChangePassword_POST>(
+    await auth.currentUser?.updatePassword(formData.newPassword);
+    const payload: ChangePasswordPayload = {
+      uid: formData.uid,
+      ...getPlatformInfo(),
+    };
+    axios.post<ApiResult_User_ChangePassword_POST>(
       '/api/user/changePassword',
-      formData
+      payload
     );
   }
 
@@ -92,15 +115,12 @@ export default class AuthService {
     }
   }
 
-  private static async login(authProvider: string) {
-    const payload: LoginLogPayload = {
+  private static async login(authProvider: string, isFirstLogin: boolean) {
+    const payload: LoginPayload = {
       uid: auth.currentUser?.uid ?? '',
       authProvider,
-      browser: platform.name,
-      browserVersion: platform.version,
-      device: platform.product,
-      deviceManufacturer: platform.manufacturer,
-      os: platform.os?.toString(),
+      isFirstLogin,
+      ...getPlatformInfo(),
     };
     const response = await axios.post<ApiResult_User_Login_POST>(
       '/api/user/login',

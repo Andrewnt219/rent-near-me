@@ -1,6 +1,6 @@
 import { Await } from '@common-types';
 import db from '@libs/firebase-admin/db';
-import { LoginLogPayload } from '@models/LoginLogPayload';
+import { LoginPayload } from '@models/LoginPayload';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
 import { validateUserWithId } from '@utils/api/user-validator';
@@ -14,7 +14,7 @@ async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
-  const model = parseModelSync<LoginLogPayload>(req.body);
+  const model = parseModelSync<LoginPayload>(req.body);
   await validateUserWithId(req.headers.authorization, model.uid, true);
 
   const {
@@ -24,6 +24,7 @@ async function post(
     device,
     deviceManufacturer,
     os,
+    isFirstLogin,
   } = model;
   await db.Profile_LoginHistory(model.uid).add({
     timestamp: new Date(),
@@ -34,6 +35,7 @@ async function post(
     device,
     deviceManufacturer,
     os,
+    isFirstLogin,
   });
 
   return res.json(new ResultSuccess(null));

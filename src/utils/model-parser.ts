@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { mapObjectValueSync } from './object-utils';
+import { mapObjectValueRecursivelySync } from './object-utils';
 import { isJsonDateString } from './string-utils';
 
 const parseModelMapper = (value: unknown) => {
@@ -10,7 +10,7 @@ const parseModelMapper = (value: unknown) => {
 };
 
 export const parseModelSync = <T>(data: T) =>
-  mapObjectValueSync(data, parseModelMapper) as T;
+  mapObjectValueRecursivelySync(data, parseModelMapper) as T;
 
 export const parseModel = async <T>(data: T) =>
-  (await mapObjectValueSync(data, parseModelMapper)) as T;
+  (await mapObjectValueRecursivelySync(data, parseModelMapper)) as T;

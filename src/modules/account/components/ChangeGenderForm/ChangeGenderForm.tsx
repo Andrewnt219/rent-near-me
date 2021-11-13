@@ -15,6 +15,7 @@ const ChangeGenderForm: VFC = () => {
         id="change-gender-gender"
         name="gender"
         label={t('account:personal-info.change-gender.gender')}
+        autoComplete="sex"
       >
         <option value="" disabled></option>
         {Object.entries(GENDERS).map(([key, val]) => (
@@ -26,7 +27,6 @@ const ChangeGenderForm: VFC = () => {
 
       <ButtonSecondary
         type="submit"
-        tw="px-xl"
         size="lg"
         disabled={form.formState.isSubmitting}
       >

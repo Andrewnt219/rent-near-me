@@ -9,4 +9,5 @@ export default class LoginHistory implements FirestoreEntity {
   device?: string;
   deviceManufacturer?: string;
   os?: string;
+  isFirstLogin?: boolean;
 }

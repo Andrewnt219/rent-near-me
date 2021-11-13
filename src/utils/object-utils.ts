@@ -1,38 +1,46 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export const mapObjectValueSync = (
+export const mapObjectValueRecursivelySync = (
   obj: any,
   mapper: (value: any) => any
 ): any => {
-  if (typeof obj === 'object' && obj !== null) {
+  const mappedValue = mapper(obj);
+  if (mappedValue === obj && typeof obj === 'object' && obj !== null) {
     if (Array.isArray(obj)) {
-      return obj.map((elem) => mapObjectValueSync(elem, mapper));
+      return obj.map((elem) => mapObjectValueRecursivelySync(elem, mapper));
     } else {
       return Object.fromEntries(
         Object.entries(obj).map(([key, val]) => [
           key,
-          mapObjectValueSync(val, mapper),
+          mapObjectValueRecursivelySync(val, mapper),
         ])
       );
     }
   }
-  return mapper(obj);
+  return mappedValue;
 };
 
-export const mapObjectValue = (
+export const mapObjectValueRecursively = (
   obj: any,
   mapper: (value: any) => any | Promise<any>
 ): Promise<any> => {
-  if (typeof obj === 'object' && obj !== null) {
-    if (Array.isArray(obj)) {
-      return Promise.all(obj.map((elem) => mapObjectValue(elem, mapper)));
-    } else {
-      return Promise.all(
-        Object.entries(obj).map(([key, val]) =>
-          mapObjectValue(val, mapper).then((fieldVal) => [key, fieldVal])
-        )
-      ).then((entries) => Object.fromEntries(entries));
+  return Promise.resolve(mapper(obj)).then((mappedValue) => {
+    if (mappedValue === obj && typeof obj === 'object' && obj !== null) {
+      if (Array.isArray(obj)) {
+        return Promise.all(
+          obj.map((elem) => mapObjectValueRecursively(elem, mapper))
+        );
+      } else {
+        return Promise.all(
+          Object.entries(obj).map(([key, val]) =>
+            mapObjectValueRecursively(val, mapper).then((fieldVal) => [
+              key,
+              fieldVal,
+            ])
+          )
+        ).then((entries) => Object.fromEntries(entries));
+      }
     }
-  }
-  return Promise.resolve(mapper(obj));
+    return mappedValue;
+  });
 };

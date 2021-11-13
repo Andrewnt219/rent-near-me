@@ -31,9 +31,7 @@ const DateField: VFC<DateFieldProps> = ({
     <StyledWrapper>
       <DayPickerInput
         format={DATE_TIME_FORMATS.LONG_DATE}
-        {...pickerProps}
         inputProps={{
-          ...inputProps,
           id,
           ref: field.ref,
           'aria-invalid': fieldState.invalid,
@@ -42,13 +40,15 @@ const DateField: VFC<DateFieldProps> = ({
           onChange: field.onChange,
           onBlur: field.onBlur,
           autoComplete: 'off',
+          ...inputProps,
         }}
         // onDayChange won't work with user keyboard's input
-        dayPickerProps={{ ...dayPickerProps, onDayClick: field.onChange }}
+        dayPickerProps={{ onDayClick: field.onChange, ...dayPickerProps }}
         placeholder=" "
         formatDate={dayJsFormatter}
         parseDate={dayJsParser}
         value={field.value}
+        {...pickerProps}
       />
 
       <StyledLabel

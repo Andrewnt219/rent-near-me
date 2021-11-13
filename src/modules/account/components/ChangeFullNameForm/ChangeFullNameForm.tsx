@@ -15,24 +15,27 @@ const ChangeFullNameForm: VFC = () => {
       <Text tw="mb-sm">
         {t('account:personal-info.change-name.description.main')}
       </Text>
-      <InputRow tw="mb-sm">
+      <InputRow>
         <TextField
           id="change-name-first-name"
           name="firstName"
           type="text"
           label={t('account:personal-info.change-name.first-name')}
+          autoCapitalize="words"
+          autoComplete="given-name"
         />
         <TextField
           id="change-name-last-name"
           name="lastName"
           type="text"
           label={t('account:personal-info.change-name.last-name')}
+          autoCapitalize="words"
+          autoComplete="family-name"
         />
       </InputRow>
 
       <ButtonSecondary
         type="submit"
-        tw="px-xl"
         size="lg"
         disabled={form.formState.isSubmitting}
       >

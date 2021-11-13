@@ -1,11 +1,11 @@
 import Profile from '@models/api/entities/Profile/Profile';
 import PasswordUpdateHistory from '@models/api/entities/Profile/PasswordUpdateHistory/PasswordUpdateHistory';
 import admin, { firestore } from './firebase-admin';
-import { mapObjectValueSync } from '@utils/object-utils';
+import { mapObjectValueRecursivelySync } from '@utils/object-utils';
 import LoginHistory from '@models/api/entities/Profile/LoginHistory/LoginHistory';
 
 const convert = <T>(src: FirebaseFirestore.DocumentData): T =>
-  mapObjectValueSync(src, (value) => {
+  mapObjectValueRecursivelySync(src, (value) => {
     if (value instanceof admin.firestore.Timestamp) {
       return value.toDate();
     }

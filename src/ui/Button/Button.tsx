@@ -6,13 +6,13 @@ type Size = 'lg' | 'md' | 'sm';
 function getSizeStyle(size: Size | undefined) {
   switch (size) {
     case 'lg':
-      return tw`px-md py-md text-h6`;
+      return tw`px-md py-md text-h6 min-w-[6rem]`;
 
     case 'md':
-      return tw`px-md py-sm text-body1`;
+      return tw`px-md py-sm text-body1 min-w-[4rem]`;
 
     case 'sm':
-      return tw`px-sm py-xs text-button`;
+      return tw`px-sm py-xs text-button min-w-[4rem]`;
 
     default:
       return tw``;

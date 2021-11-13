@@ -1,13 +1,9 @@
 import type { Await } from '@common-types';
 import db from '@libs/firebase-admin/db';
-import { auth } from '@libs/firebase-admin/firebase-admin';
-import {
-  ChangePasswordFormSchema,
-  ChangePasswordFormModel,
-} from '@modules/account/components/ChangePasswordForm/ChangePasswordFormModel';
+import { ChangePasswordPayload } from '@models/ChangePasswordPayload';
 import { Result, ResultSuccess } from '@utils/api-responses';
 import { handleHttpMethod } from '@utils/api/http-method-handler';
-import { validateModelWithSchema } from '@utils/api/model-schema-validator';
+import { getClientIpAddress } from '@utils/api/ip-address-utils';
 import { validateUserWithId } from '@utils/api/user-validator';
 import { parseModelSync } from '@utils/model-parser';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -19,21 +15,25 @@ async function post(
   req: NextApiRequest,
   res: NextApiResponse<Result<PostResponseData>>
 ) {
-  const model = parseModelSync<ChangePasswordFormModel>(req.body);
-  await validateModelWithSchema(model, ChangePasswordFormSchema(), true);
+  const model = parseModelSync<ChangePasswordPayload>(req.body);
   await validateUserWithId(req.headers.authorization, model.uid, true);
-
-  await auth.updateUser(model.uid, { password: model.newPassword });
 
   const now = new Date();
   await db
     .Profile()
     .doc(model.uid)
     .set({ passwordLastUpdatedTime: now }, { merge: true });
-  await db
-    .Profile_PasswordUpdateHistory(model.uid)
-    // More info may be desired here in the future
-    .add({ timestamp: now });
+
+  const { browser, browserVersion, device, deviceManufacturer, os } = model;
+  await db.Profile_PasswordUpdateHistory(model.uid).add({
+    timestamp: now,
+    ipAddress: getClientIpAddress(req),
+    browser,
+    browserVersion,
+    device,
+    deviceManufacturer,
+    os,
+  });
   return res.json(new ResultSuccess(null));
 }
 
