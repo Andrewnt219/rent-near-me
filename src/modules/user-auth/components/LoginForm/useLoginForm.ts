@@ -7,11 +7,11 @@ import AuthApi from '@services/AuthApi';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useModals } from '@ui/Modal/ModalContext';
 
 const useLoginForm = () => {
   const { t } = useTranslation();
-  const { loginModal } = useLayoutModal();
+  const { loginModal } = useModals();
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const formSchema = LoginFormSchema(t);

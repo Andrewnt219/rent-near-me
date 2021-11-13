@@ -2,7 +2,7 @@ import { FC, ReactNode, useEffect } from 'react';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import DefaultUnauthenticatedPrompt from '../../components/DefaultUnauthenticatedPrompt';
 import DefaultEmailUnverifiedPrompt from '../../components/DefaultEmailUnverifiedPrompt';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useModals } from '@ui/Modal/ModalContext';
 
 type AuthGuardProps = {
   emailVerified?: boolean;
@@ -19,7 +19,7 @@ const AuthGuard: FC<AuthGuardProps> = ({
   renderedEmailUnverified = <DefaultEmailUnverifiedPrompt />,
 }) => {
   const { isAuthReady, user } = useAuth();
-  const { loginModal } = useLayoutModal();
+  const { loginModal } = useModals();
 
   useEffect(() => {
     if (promptLogin && isAuthReady && !user) {

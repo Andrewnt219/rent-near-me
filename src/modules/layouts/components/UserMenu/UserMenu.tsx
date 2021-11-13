@@ -1,7 +1,7 @@
 import { RouteProps } from '@common-types';
 import { Icon } from '@iconify/react';
 import personFill from '@iconify/icons-eva/person-fill';
-import { useLayoutModal } from '@modules/layouts/contexts/LayoutModalContext';
+import { useModals } from '@ui/Modal/ModalContext';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthApi from '@services/AuthApi';
 import { ButtonGhost } from '@ui/Button/Button';
@@ -84,7 +84,7 @@ type MenuProps = HTMLAttributes<HTMLUListElement>;
 function Menu(props: MenuProps) {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  const { registerModal, loginModal } = useLayoutModal();
+  const { registerModal, loginModal } = useModals();
 
   return (
     <ul

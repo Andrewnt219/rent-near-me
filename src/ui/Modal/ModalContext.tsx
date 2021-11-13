@@ -4,26 +4,24 @@ import RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterFor
 import Modal from '@ui/Modal/Modal';
 import { createContext, FC, useContext } from 'react';
 import useModalGroup from 'src/hooks/useModalGroup';
-type LayoutModalContextValue = {
+
+type ModalContextValue = {
   loginModal: ModalControl;
   registerModal: ModalControl;
 };
 
-const LayoutModalContext = createContext<LayoutModalContextValue | undefined>(
-  undefined
-);
-export const useLayoutModal = () => {
-  const modalContextValue = useContext(LayoutModalContext);
-  if (modalContextValue === undefined)
-    throw Error('No matching LayoutProvider');
+const ModalContext = createContext<ModalContextValue | undefined>(undefined);
+export const useModals = () => {
+  const modalContextValue = useContext(ModalContext);
+  if (modalContextValue === undefined) throw Error('No matching ModalProvider');
   return modalContextValue;
 };
 
-export const LayoutProvider: FC = ({ children }) => {
+export const ModalProvider: FC = ({ children }) => {
   const value = useModalGroup('login', 'register');
 
   return (
-    <LayoutModalContext.Provider value={value}>
+    <ModalContext.Provider value={value}>
       {children}
       <Modal
         size="md"
@@ -43,6 +41,6 @@ export const LayoutProvider: FC = ({ children }) => {
       >
         <RegisterForm />
       </Modal>
-    </LayoutModalContext.Provider>
+    </ModalContext.Provider>
   );
 };
