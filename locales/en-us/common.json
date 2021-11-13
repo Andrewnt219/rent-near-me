@@ -1,0 +1,83 @@
+{
+  "errors": {
+    "form": {
+      "required": "This field is required",
+      "invalid-email": "Please enter a valid email address",
+      "weak-password": "Weak password",
+      "unselected-dropdown": "Please select an option",
+      "invalid-date": "A valid date is required (e.g.: 31-Dec-2021)",
+      "max-date": "Date cannot be after {{date}}",
+      "min-date": "Date cannot be before {{date}}",
+      "invalid-max-length": "Cannot be longer than {{length}} characters",
+      "invalid-min-length": "Must be at least {{length}} characters",
+      "confirm-password-not-match": "Confirm password does not match"
+    },
+    "api": {
+      "http-not-allowed": "HTTP Method Not Allowed",
+      "http-not-supported": "HTTP Method Not Supported For This Route",
+      "network-issue": "Unable to make request. Check your network connection.",
+      "invalid-schema": "Invalid incoming data shape.",
+      "invalid-user": "User has not signed in",
+      "unauthorized-user": "User is not allowed to perform this action",
+      "not-found": "Not found",
+      "other": "Oops! Something went wrong."
+    }
+  },
+  "fields": {
+    "password": {
+      "show": "Show",
+      "hide": "Hide"
+    },
+    "toggle-action": {
+      "edit": "Edit",
+      "cancel": "Cancel"
+    }
+  },
+  "login": {
+    "welcome": "Welcome back to RentNearMe!",
+    "forgetPassword": "Forget password?",
+    "email": "Email",
+    "password": "Password",
+    "keepSignedIn": "Remember me",
+    "loading": "Loading",
+    "login": "Log in",
+    "google": "Continue with Google",
+    "facebook": "Continue with Facebook",
+    "newAccount": "Create a new account"
+  },
+  "register": {
+    "welcome": "Welcome to RentNearMe!",
+    "alreadyHasAccount": "Already have an account?",
+    "firstName": {
+      "label": "First name",
+      "description": "Make sure it matches the name on your ID"
+    },
+    "lastName": "Last name",
+    "gender": "Gender",
+    "dob": {
+      "label": "Date of birth",
+      "description": "Your birthdate won't be shared with anyone by default"
+    },
+    "email": {
+      "label": "Email",
+      "description": "We'll only communicate to you regarding your account via this email"
+    },
+    "password": "Password",
+    "loading": "Loading",
+    "register": "Create new account"
+  },
+  "routes": {
+    "account": {
+      "index": "Account",
+      "profile": "Personal Info",
+      "security": "Login & Security",
+      "payments": "Payments & payouts"
+    },
+    "home": "Home",
+    "about": "About",
+    "login": "Log in",
+    "register": "Register",
+    "wishlist": "Wishlist",
+    "logout": "Log out"
+  }
+}

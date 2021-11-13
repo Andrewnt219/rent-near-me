@@ -1,0 +1,8 @@
+{
+  "locales": ["en-us", "vi"],
+  "defaultLocale": "en-us",
+  "pages": {
+    "rgx:/account/*": ["account"],
+    "*": ["common"]
+  }
+}

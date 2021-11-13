@@ -22,16 +22,22 @@
     "noPropertyAccessFromIndexSignature": true,
     "baseUrl": ".",
     "paths": {
-      "@public/*": ["public/*"],
-      "@utils/*": ["src/utils/*"],
-      "@modules/*": ["src/modules/*"],
-      "@ui/*": ["src/ui/*"],
+      "@assets/*": ["src/assets/*"],
       "@contexts/*": ["src/contexts/*"],
+      "@layouts/*": ["src/layouts/*"],
       "@libs/*": ["src/libs/*"],
-      "@services/*": ["src/server/services/*"],
-      "@styles/*": ["src/styles/*"]
+      "@mock/*": ["__tests__/mock/*"],
+      "@models/*": ["src/models/*"],
+      "@modules/*": ["src/modules/*"],
+      "@pages/*": ["src/pages/*"],
+      "@public/*": ["public/*"],
+      "@services/*": ["src/services/*"],
+      "@styles/*": ["src/styles/*"],
+      "@ui/*": ["src/ui/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "twind.d.ts"],
+  "exclude": ["node_modules", "cypress"]
 }
