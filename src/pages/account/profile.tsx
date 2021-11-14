@@ -12,7 +12,7 @@ import FullNameActionField from '@modules/account/components/FullNameActionField
 import GenderActionField from '@modules/account/components/GenderActionField/GenderActionField';
 import DobActionField from '@modules/account/components/DobActionField/DobActionField';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
-import Loading from '@ui/Loading';
+import LoadingIndicator from '@ui/LoadingIndicator';
 
 export default function AccountPersonalInfoPage() {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ const Main: VFC = () => {
     </ActionFieldGroup>
   ) : (
     <div tw="grid place-items-center h-full">
-      <Loading animation="FlashingThreeDots" variant="secondary" />
+      <LoadingIndicator variant="FlashingThreeDots" theme="secondary" />
     </div>
   );
 };

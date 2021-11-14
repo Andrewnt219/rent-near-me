@@ -12,7 +12,8 @@ import shieldFill from '@iconify/icons-eva/shield-fill';
 import EmailActionField from '@modules/account/components/EmailActionField/EmailActionField';
 import Text from '@ui/Text/Text';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
-import Loading from '@ui/Loading';
+import LoadingIndicator from '@ui/LoadingIndicator';
+
 export default function AccountSecurityPage() {
   const { t } = useTranslation();
 
@@ -40,7 +41,7 @@ function Main() {
     </div>
   ) : (
     <div tw="grid place-items-center h-full">
-      <Loading animation="FlashingThreeDots" variant="secondary" />
+      <LoadingIndicator variant="FlashingThreeDots" theme="secondary" />
     </div>
   );
 }

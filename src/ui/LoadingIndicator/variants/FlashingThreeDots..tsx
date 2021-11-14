@@ -16,7 +16,7 @@ const FlashingDotsContainer = styled.div<LoadingAnimationProps>`
   ${tw`flex items-center justify-center`}
   ${(p) => getGapBySize(p.size)}
   & > span {
-    ${(p) => getBgColorByVariant(p.variant)}
+    ${(p) => getBgColorByVariant(p.theme)}
     ${(p) => getDimensionBySize(p.size)}
   }
 `;
@@ -33,14 +33,15 @@ const FlashingDot = styled.span<FlashingDotProps>`
 const getGapBySize = (size?: LoadingAnimationProps['size']) => {
   if (size === 'sm') {
     return tw`gap-1`;
-  } else if (size === 'lg') {
+  }
+  if (size === 'lg') {
     return tw`gap-3`;
   }
   return tw`gap-2`;
 };
 
-const getBgColorByVariant = (variant?: LoadingAnimationProps['variant']) => {
-  if (variant === 'secondary') {
+const getBgColorByVariant = (theme?: LoadingAnimationProps['theme']) => {
+  if (theme === 'secondary') {
     return tw`bg-secondary`;
   }
   return tw`bg-primary`;
@@ -49,7 +50,8 @@ const getBgColorByVariant = (variant?: LoadingAnimationProps['variant']) => {
 const getDimensionBySize = (size: LoadingAnimationProps['size']) => {
   if (size === 'sm') {
     return tw`w-2 h-2`;
-  } else if (size === 'lg') {
+  }
+  if (size === 'lg') {
     return tw`w-4 h-4`;
   }
   return tw`w-3 h-3`;
