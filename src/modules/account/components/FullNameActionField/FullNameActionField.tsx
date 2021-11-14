@@ -18,13 +18,12 @@ const FullNameActionField: VFC = () => {
 
 const FullNameActionFieldAltContent: VFC = () => {
   const { t } = useTranslation();
-  const { isProfileReady, profile } = useUserProfile();
+  const { profile } = useUserProfile();
   return (
     <>
-      {isProfileReady &&
-        (!profile?.firstName || !profile?.lastName
-          ? t('account:personal-info.change-name.description.no-data')
-          : `${profile.firstName} ${profile.lastName}`)}
+      {!profile?.firstName || !profile?.lastName
+        ? t('account:personal-info.change-name.description.no-data')
+        : `${profile.firstName} ${profile.lastName}`}
     </>
   );
 };

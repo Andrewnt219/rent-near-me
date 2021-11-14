@@ -21,12 +21,11 @@ export default GenderActionField;
 
 const GenderActionFieldAltContent: VFC = () => {
   const { t } = useTranslation();
-  const { isProfileReady, profile } = useUserProfile();
+  const { profile } = useUserProfile();
   return (
     <>
-      {isProfileReady &&
-        (GENDERS[profile?.gender ?? ''] ??
-          t('account:personal-info.change-gender.description.no-data'))}
+      {GENDERS[profile?.gender ?? ''] ??
+        t('account:personal-info.change-gender.description.no-data')}
     </>
   );
 };

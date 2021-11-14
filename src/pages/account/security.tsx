@@ -11,6 +11,8 @@ import { Icon } from '@iconify/react';
 import shieldFill from '@iconify/icons-eva/shield-fill';
 import EmailActionField from '@modules/account/components/EmailActionField/EmailActionField';
 import Text from '@ui/Text/Text';
+import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import Loading from '@ui/Loading';
 export default function AccountSecurityPage() {
   const { t } = useTranslation();
 
@@ -25,8 +27,9 @@ export default function AccountSecurityPage() {
 
 function Main() {
   const { t } = useTranslation();
-  return (
-    <>
+  const { isProfileReady } = useUserProfile();
+  return isProfileReady ? (
+    <div>
       <Text component="h2" variant="h3" tw="mb-lg">
         {t('account:security.login-title')}
       </Text>
@@ -34,7 +37,11 @@ function Main() {
         <EmailActionField />
         <PasswordActionField />
       </ActionFieldGroup>
-    </>
+    </div>
+  ) : (
+    <div tw="grid place-items-center h-full">
+      <Loading animation="FlashingThreeDots" variant="secondary" />
+    </div>
   );
 }
 
