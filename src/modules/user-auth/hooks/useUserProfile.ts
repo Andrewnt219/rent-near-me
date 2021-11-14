@@ -1,18 +1,17 @@
 import Profile from '@models/api/entities/Profile/Profile';
 import { ApiResult_User_Profile_GET } from '@pages/api/user/profile/[uid]';
 import { updateResponseData } from '@utils/api-responses';
-import { isNullOrUndefined } from '@utils/validate-js-utils';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import { useAuth } from '../contexts/AuthContext';
 
 type TUserUserProfile = {
   isProfileReady: boolean;
-  profile: Profile | undefined;
+  profile: Profile | null;
   mutateProfile: (
     mergeData?: Profile,
     shouldRevalidation?: boolean
-  ) => Promise<Profile | undefined>;
+  ) => Promise<Profile | null>;
 };
 
 export const useUserProfile = (): TUserUserProfile => {
@@ -21,23 +20,30 @@ export const useUserProfile = (): TUserUserProfile => {
   const {
     data: profileResponse,
     mutate: mutateProfileResponse,
-    isValidating: isValidating,
+    isValidating,
   } = useSWR<ApiResult_User_Profile_GET>(
     user ? `/api/user/profile/${user.uid}` : null
   );
 
+  const [profile, setPrfile] = useState<Profile | null>();
+  useEffect(() => {
+    if (profileResponse || !isValidating) {
+      setPrfile(profileResponse?.data ?? null);
+    }
+  }, [isValidating, profileResponse]);
+
   return useMemo(
     () => ({
-      isProfileReady: !isNullOrUndefined(profileResponse) || !isValidating,
-      profile: profileResponse?.data,
+      isProfileReady: profile !== undefined,
+      profile: profile ?? null,
       mutateProfile: async (mergeData?, shouldRevalidate?) => {
         const newRes = await mutateProfileResponse(
           mergeData && ((res) => updateResponseData(res, mergeData)),
           shouldRevalidate
         );
-        return newRes?.data;
+        return newRes?.data ?? null;
       },
     }),
-    [isValidating, mutateProfileResponse, profileResponse]
+    [mutateProfileResponse, profile]
   );
 };
