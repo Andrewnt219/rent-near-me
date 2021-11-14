@@ -1,6 +1,8 @@
+import DocsLayout from '@modules/layouts/DocsLayout';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { ButtonPrimary } from '@ui/Button/Button';
 import Snackbar from '@ui/Snackbar/Snackbar';
+import { ReactNode } from 'react';
 
 export default function SnackbarDocsPage() {
   const { showSnackSuccess, showSnackError } = useSnackbar();
@@ -40,20 +42,24 @@ export default function SnackbarDocsPage() {
         />
       </div>
 
-      <ButtonPrimary
-        size="lg"
-        tw="mt-lg"
-        onClick={() => showSnackSuccess(new Date().toISOString())}
-      >
-        Enqueue Success
-      </ButtonPrimary>
-      <ButtonPrimary
-        size="lg"
-        tw="ml-sm"
-        onClick={() => showSnackError(new Date().toISOString())}
-      >
-        Enqueue Error
-      </ButtonPrimary>
+      <div tw="mt-lg space-x-md">
+        <ButtonPrimary
+          size="md"
+          onClick={() => showSnackSuccess(new Date().toISOString())}
+        >
+          Enqueue Success
+        </ButtonPrimary>
+        <ButtonPrimary
+          size="md"
+          onClick={() => showSnackError(new Date().toISOString())}
+        >
+          Enqueue Error
+        </ButtonPrimary>
+      </div>
     </div>
   );
 }
+
+SnackbarDocsPage.getLayout = (page: ReactNode) => {
+  return <DocsLayout>{page}</DocsLayout>;
+};
