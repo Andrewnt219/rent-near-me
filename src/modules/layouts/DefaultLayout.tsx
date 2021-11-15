@@ -3,15 +3,16 @@ import Layout from './Layout';
 import AppBar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
 import HomeNavBar from './components/HomeNavBar/HomeNavBar';
+import { NextLayout } from '@/next';
 
 type DefaultLayoutProps = PropsWithChildren<{
   className?: string;
 }>;
 
-export default function DefaultLayout({
+const DefaultLayout: NextLayout<DefaultLayoutProps> = ({
   className,
   children,
-}: DefaultLayoutProps) {
+}) => {
   return (
     <Layout size="sm" tw="flex flex-col min-h-full relative">
       <HomeNavBar tw="hidden lg:block" />
@@ -22,8 +23,10 @@ export default function DefaultLayout({
       <Footer tw="mb-var-app-bar-height lg:mb-0" />
     </Layout>
   );
-}
+};
 
-export const getDefaultLayout = (page: ReactNode) => (
+DefaultLayout.getLayout = (page: ReactNode) => (
   <DefaultLayout>{page}</DefaultLayout>
 );
+
+export default DefaultLayout;

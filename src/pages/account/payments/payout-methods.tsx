@@ -1,11 +1,11 @@
-import { getPaymentSettingPageLayout } from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
 import Text from '@ui/Text/Text';
-import { NextPageWithLayout } from '@/next';
+import { CustomNextPage } from '@/next';
+import PaymentSettingPageLayout from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
 
 type Props = {
   className?: string;
 };
-export default function PayoutMethodsPage({ className }: Props) {
+const PayoutMethodsPage: CustomNextPage<Props> = ({ className }) => {
   return (
     <div className={className} tw="">
       <Text component="h2" variant="h3">
@@ -13,7 +13,8 @@ export default function PayoutMethodsPage({ className }: Props) {
       </Text>
     </div>
   );
-}
+};
 
-(PayoutMethodsPage as NextPageWithLayout).getLayout =
-  getPaymentSettingPageLayout;
+PayoutMethodsPage.getLayout = PaymentSettingPageLayout.getLayout;
+
+export default PayoutMethodsPage;

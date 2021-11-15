@@ -1,8 +1,11 @@
-import { getDefaultLayout } from '@modules/layouts/DefaultLayout';
+import { CustomNextPage } from '@/next';
+import DefaultLayout from '@modules/layouts/DefaultLayout';
 import React from 'react';
 
-export default function HomePage() {
+const HomePage: CustomNextPage = () => {
   return <></>;
-}
+};
 
-HomePage.getLayout = getDefaultLayout;
+HomePage.getLayout = DefaultLayout.getLayout;
+
+export default HomePage;

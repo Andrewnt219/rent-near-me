@@ -3,7 +3,6 @@ import AccountInfoCardGroup from '@modules/account/components/AccountInfoCard/Ac
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import ActionFieldGroup from '@modules/account/components/ActionField/ActionFieldGroup';
 import PasswordActionField from '@modules/account/components/PasswordActionField/PasswordActionField';
-import { getAccountPageLayout } from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
 import useTranslation from 'next-translate/useTranslation';
 import { Icon } from '@iconify/react';
@@ -13,8 +12,9 @@ import Text from '@ui/Text/Text';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 import LoadingIndicator from '@ui/LoadingIndicator';
 
-import { NextPageWithLayout } from '@/next';
-export default function AccountSecurityPage() {
+import { CustomNextPage } from '@/next';
+import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
+const AccountSecurityPage: CustomNextPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -24,7 +24,7 @@ export default function AccountSecurityPage() {
       <AccountSettingLayout main={<Main />} aside={<Aside />} />
     </section>
   );
-}
+};
 
 function Main() {
   const { t } = useTranslation();
@@ -60,4 +60,6 @@ function Aside() {
   );
 }
 
-(AccountSecurityPage as NextPageWithLayout).getLayout = getAccountPageLayout;
+AccountSecurityPage.getLayout = AccountPageLayout.getLayout;
+
+export default AccountSecurityPage;

@@ -2,7 +2,7 @@ declare module '@/next' {
   import { NextPage } from 'next';
   import { ReactNode } from 'react';
 
-  type NextPageWithLayout = NextPage & {
+  type NextLayout<Props = Record<string, unknown>> = NextPage<Props> & {
     /**
      * @description share **layout-level** states between pages
      *
@@ -41,6 +41,10 @@ declare module '@/next' {
      * Layouts with different props are considered as the same layouts and have their states synced with the exception of the `tw` prop.
      * Same layouts with `tw` props are considered as different layouts.
      */
-    getLayout?(page: ReactNode): ReactNode;
+    getLayout(page: ReactNode): ReactNode;
+  };
+
+  type CustomNextPage<Props = Record<string, unknown>> = NextPage<Props> & {
+    getLayout?: NextLayout['getLayout'];
   };
 }

@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import shieldFill from '@iconify/icons-eva/shield-fill';
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
-import { getAccountPageLayout } from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
+import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import AccountInfoCard from '@modules/account/components/AccountInfoCard/AccountInfoCard';
 import AccountInfoCardGroup from '@modules/account/components/AccountInfoCard/AccountInfoCardGroup';
 import ActionFieldGroup from '@modules/account/components/ActionField/ActionFieldGroup';
@@ -13,9 +13,9 @@ import GenderActionField from '@modules/account/components/GenderActionField/Gen
 import DobActionField from '@modules/account/components/DobActionField/DobActionField';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 import LoadingIndicator from '@ui/LoadingIndicator';
-import { NextPageWithLayout } from '@/next';
+import { CustomNextPage } from '@/next';
 
-export default function AccountPersonalInfoPage() {
+const AccountPersonalInfoPage: CustomNextPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -25,7 +25,7 @@ export default function AccountPersonalInfoPage() {
       <AccountSettingLayout main={<Main />} aside={<Aside />} />
     </section>
   );
-}
+};
 
 const Main: VFC = () => {
   const { isProfileReady } = useUserProfile();
@@ -64,5 +64,6 @@ const Aside: VFC = () => {
   );
 };
 
-(AccountPersonalInfoPage as NextPageWithLayout).getLayout =
-  getAccountPageLayout;
+AccountPersonalInfoPage.getLayout = AccountPageLayout.getLayout;
+
+export default AccountPersonalInfoPage;

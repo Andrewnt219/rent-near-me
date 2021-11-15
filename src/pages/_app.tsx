@@ -9,11 +9,10 @@ import '@libs/axios/interceptors';
 import '@reach/dialog/styles.css';
 import 'react-day-picker/lib/style.css';
 import { ModalProvider } from '@ui/Modal/ModalContext';
-import { NextPageWithLayout } from '@/next';
+import { CustomNextPage } from '@/next';
 
-type MyAppProps = {
-  Component: NextPageWithLayout;
-  pageProps: AppProps['pageProps'];
+type MyAppProps = AppProps & {
+  Component: CustomNextPage;
 };
 
 function MyApp({ Component, pageProps }: MyAppProps) {

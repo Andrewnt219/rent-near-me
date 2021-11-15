@@ -1,18 +1,16 @@
+import { NextLayout } from '@/next';
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
-import DefaultLayout from '@modules/layouts/DefaultLayout';
 import NextLink from 'next/link';
 import { PropsWithChildren, ReactNode } from 'react';
-import AccountPageLayout, {
-  getAccountPageLayout,
-} from '../AccountPageLayout/AccountPageLayout';
+import AccountPageLayout from '../AccountPageLayout/AccountPageLayout';
 type Props = {
   className?: string;
 };
-export default function PaymentSettingPageLayout({
+const PaymentSettingPageLayout: NextLayout<PropsWithChildren<Props>> = ({
   className,
   children,
   ...props
-}: PropsWithChildren<Props>) {
+}) => {
   return (
     <div className={className} tw="">
       <AccountPageHeader title="Payments & payouts" />
@@ -32,9 +30,11 @@ export default function PaymentSettingPageLayout({
       {children}
     </div>
   );
-}
-
-export const getPaymentSettingPageLayout = (page: ReactNode) => {
-  const inner = <PaymentSettingPageLayout>{page}</PaymentSettingPageLayout>;
-  return getAccountPageLayout(inner);
 };
+
+PaymentSettingPageLayout.getLayout = (page: ReactNode) => {
+  const inner = <PaymentSettingPageLayout>{page}</PaymentSettingPageLayout>;
+  return AccountPageLayout.getLayout(inner);
+};
+
+export default PaymentSettingPageLayout;
