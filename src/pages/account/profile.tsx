@@ -4,7 +4,9 @@ import { Icon } from '@iconify/react';
 import shieldFill from '@iconify/icons-eva/shield-fill';
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
-import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
+import AccountPageLayout, {
+  getAccountPageLayout,
+} from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import AccountInfoCard from '@modules/account/components/AccountInfoCard/AccountInfoCard';
 import AccountInfoCardGroup from '@modules/account/components/AccountInfoCard/AccountInfoCardGroup';
 import ActionFieldGroup from '@modules/account/components/ActionField/ActionFieldGroup';
@@ -63,6 +65,4 @@ const Aside: VFC = () => {
   );
 };
 
-AccountPersonalInfoPage.getLayout = (page: ReactNode) => (
-  <AccountPageLayout>{page}</AccountPageLayout>
-);
+AccountPersonalInfoPage.getLayout = getAccountPageLayout;

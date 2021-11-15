@@ -1,4 +1,6 @@
-import PaymentSettingPageLayout from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
+import PaymentSettingPageLayout, {
+  getPaymentSettingPageLayout,
+} from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
 import Text from '@ui/Text/Text';
 import React, { ReactNode } from 'react';
 
@@ -15,6 +17,4 @@ export default function TaxInfoPage({ className }: Props) {
   );
 }
 
-TaxInfoPage.getLayout = (page: ReactNode) => {
-  return <PaymentSettingPageLayout>{page}</PaymentSettingPageLayout>;
-};
+TaxInfoPage.getLayout = getPaymentSettingPageLayout;

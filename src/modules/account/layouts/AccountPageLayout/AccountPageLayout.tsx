@@ -1,22 +1,28 @@
-import DefaultLayout from '@modules/layouts/DefaultLayout';
+import DefaultLayout, {
+  getDefaultLayout,
+} from '@modules/layouts/DefaultLayout';
 import AuthGuard from '@modules/user-auth/utils/AuthGuard/AuthGuard';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 type AccountPageLayoutProps = {
   className?: string;
+  children: ReactNode;
 };
 
-const AccountPageLayout: FC<AccountPageLayoutProps> = ({
+export default function AccountPageLayout({
   className,
   children,
-}) => (
-  <DefaultLayout>
+}: AccountPageLayoutProps) {
+  return (
     <AuthGuard promptLogin>
       <div className={className} tw="max-w-5xl mt-xl mx-auto">
         {children}
       </div>
     </AuthGuard>
-  </DefaultLayout>
-);
+  );
+}
 
-export default AccountPageLayout;
+export const getAccountPageLayout = (page: ReactNode) => {
+  const inner = <AccountPageLayout>{page}</AccountPageLayout>;
+  return getDefaultLayout(inner);
+};

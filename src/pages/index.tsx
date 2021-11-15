@@ -1,10 +1,8 @@
-import DefaultLayout from '@modules/layouts/DefaultLayout';
-import React, { ReactNode } from 'react';
+import { getDefaultLayout } from '@modules/layouts/DefaultLayout';
+import React from 'react';
 
 export default function HomePage() {
   return <></>;
 }
 
-HomePage.getLayout = (page: ReactNode) => {
-  return <DefaultLayout>{page}</DefaultLayout>;
-};
+HomePage.getLayout = getDefaultLayout;

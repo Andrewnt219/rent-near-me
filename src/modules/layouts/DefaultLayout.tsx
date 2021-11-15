@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import Layout from './Layout';
 import AppBar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
@@ -8,7 +8,10 @@ type DefaultLayoutProps = PropsWithChildren<{
   className?: string;
 }>;
 
-function DefaultLayout({ className, children }: DefaultLayoutProps) {
+export default function DefaultLayout({
+  className,
+  children,
+}: DefaultLayoutProps) {
   return (
     <Layout size="sm" tw="flex flex-col min-h-full relative">
       <HomeNavBar tw="hidden lg:block" />
@@ -21,4 +24,6 @@ function DefaultLayout({ className, children }: DefaultLayoutProps) {
   );
 }
 
-export default DefaultLayout;
+export const getDefaultLayout = (page: ReactNode) => (
+  <DefaultLayout>{page}</DefaultLayout>
+);

@@ -3,7 +3,9 @@ import AccountInfoCardGroup from '@modules/account/components/AccountInfoCard/Ac
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import ActionFieldGroup from '@modules/account/components/ActionField/ActionFieldGroup';
 import PasswordActionField from '@modules/account/components/PasswordActionField/PasswordActionField';
-import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
+import AccountPageLayout, {
+  getAccountPageLayout,
+} from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
 import useTranslation from 'next-translate/useTranslation';
 import React, { ReactNode } from 'react';
@@ -60,6 +62,4 @@ function Aside() {
   );
 }
 
-AccountSecurityPage.getLayout = (page: ReactNode) => {
-  return <AccountPageLayout>{page}</AccountPageLayout>;
-};
+AccountSecurityPage.getLayout = getAccountPageLayout;
