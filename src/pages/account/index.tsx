@@ -3,10 +3,10 @@ import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink } from '@ui/Button/Button';
+import { LinkSimple } from '@ui/Button/Link';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
-import NextLink from 'next/link';
 
 const AccountIndexPage: CustomNextPage = () => {
   const { t } = useTranslation();
@@ -23,7 +23,6 @@ const AccountIndexPage: CustomNextPage = () => {
         <p>{t('account:index.deactivate.title')}</p>
 
         <ButtonLink as="a" tw="font-semibold">
-          {' '}
           {t('account:index.deactivate.button')}
         </ButtonLink>
       </div>
@@ -53,11 +52,9 @@ function Header() {
           {user?.email}
         </div>
 
-        <NextLink href="/account/profile-info" passHref>
-          <ButtonLink tw="font-semibold" as="a">
-            {t('account:index.go-to-profile')}
-          </ButtonLink>
-        </NextLink>
+        <LinkSimple href="/account/profile" tw="font-semibold">
+          {t('account:index.go-to-profile')}
+        </LinkSimple>
       </SeparatorList>
     </header>
   );

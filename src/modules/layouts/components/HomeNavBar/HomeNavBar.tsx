@@ -33,7 +33,7 @@ const HomeNavBar = ({ className }: Props) => {
           {!isAuthenticated && (
             <ButtonGhost
               onClick={registerModal?.show}
-              circle
+              rounded
               size="md"
               tw="font-semibold"
             >
