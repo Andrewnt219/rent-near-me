@@ -1,14 +1,12 @@
+import { NextPageWithLayout } from '@/next';
 import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
-import AccountPageLayout, {
-  getAccountPageLayout,
-} from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
+import { getAccountPageLayout } from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonLink } from '@ui/Button/Button';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
-import React, { ReactNode } from 'react';
 
 export default function AccountIndexPage() {
   const { t } = useTranslation();
@@ -68,4 +66,5 @@ function Header() {
 function Separator() {
   return <div tw="hidden md:(inline font-semibold) ">·</div>;
 }
-AccountIndexPage.getLayout = getAccountPageLayout;
+
+(AccountIndexPage as NextPageWithLayout).getLayout = getAccountPageLayout;

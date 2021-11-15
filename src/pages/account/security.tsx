@@ -3,12 +3,9 @@ import AccountInfoCardGroup from '@modules/account/components/AccountInfoCard/Ac
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import ActionFieldGroup from '@modules/account/components/ActionField/ActionFieldGroup';
 import PasswordActionField from '@modules/account/components/PasswordActionField/PasswordActionField';
-import AccountPageLayout, {
-  getAccountPageLayout,
-} from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
+import { getAccountPageLayout } from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/AccountSettingLayout';
 import useTranslation from 'next-translate/useTranslation';
-import React, { ReactNode } from 'react';
 import { Icon } from '@iconify/react';
 import shieldFill from '@iconify/icons-eva/shield-fill';
 import EmailActionField from '@modules/account/components/EmailActionField/EmailActionField';
@@ -16,6 +13,7 @@ import Text from '@ui/Text/Text';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 import LoadingIndicator from '@ui/LoadingIndicator';
 
+import { NextPageWithLayout } from '@/next';
 export default function AccountSecurityPage() {
   const { t } = useTranslation();
 
@@ -62,4 +60,4 @@ function Aside() {
   );
 }
 
-AccountSecurityPage.getLayout = getAccountPageLayout;
+(AccountSecurityPage as NextPageWithLayout).getLayout = getAccountPageLayout;

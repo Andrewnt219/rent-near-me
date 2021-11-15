@@ -1,8 +1,6 @@
-import PaymentSettingPageLayout, {
-  getPaymentSettingPageLayout,
-} from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
+import { NextPageWithLayout } from '@/next';
+import { getPaymentSettingPageLayout } from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
 import Text from '@ui/Text/Text';
-import React, { ReactNode } from 'react';
 
 type Props = {
   className?: string;
@@ -17,4 +15,4 @@ export default function TaxInfoPage({ className }: Props) {
   );
 }
 
-TaxInfoPage.getLayout = getPaymentSettingPageLayout;
+(TaxInfoPage as NextPageWithLayout).getLayout = getPaymentSettingPageLayout;

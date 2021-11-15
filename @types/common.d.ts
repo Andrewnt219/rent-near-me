@@ -17,9 +17,6 @@ declare module '@common-types' {
     toggle: () => void;
   };
   type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
-  type PageWithLayout = NextPage & {
-    getLayout?: (page: ReactElement) => ReactElement;
-  };
 
   type StyledComponentProps<T> = T extends StyledComponent<
     any,
