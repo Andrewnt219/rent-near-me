@@ -20,13 +20,12 @@ const DobActionField: VFC = () => {
 
 const DobActionFieldAltContent: VFC = () => {
   const { t } = useTranslation();
-  const { isProfileReady, profile } = useUserProfile();
+  const { profile } = useUserProfile();
   return (
     <>
-      {isProfileReady &&
-        (profile?.dob
-          ? dayjs(profile.dob).format(DATE_TIME_FORMATS.LONG_DATE_TEXT)
-          : t('account:personal-info.change-dob.description.no-data'))}
+      {profile?.dob
+        ? dayjs(profile.dob).format(DATE_TIME_FORMATS.LONG_DATE_TEXT)
+        : t('account:personal-info.change-dob.description.no-data')}
     </>
   );
 };

@@ -11,6 +11,8 @@ import ActionFieldGroup from '@modules/account/components/ActionField/ActionFiel
 import FullNameActionField from '@modules/account/components/FullNameActionField/FullNameActionField';
 import GenderActionField from '@modules/account/components/GenderActionField/GenderActionField';
 import DobActionField from '@modules/account/components/DobActionField/DobActionField';
+import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import LoadingIndicator from '@ui/LoadingIndicator';
 
 export default function AccountPersonalInfoPage() {
   const { t } = useTranslation();
@@ -24,13 +26,20 @@ export default function AccountPersonalInfoPage() {
   );
 }
 
-const Main: VFC = () => (
-  <ActionFieldGroup>
-    <FullNameActionField />
-    <GenderActionField />
-    <DobActionField />
-  </ActionFieldGroup>
-);
+const Main: VFC = () => {
+  const { isProfileReady } = useUserProfile();
+  return isProfileReady ? (
+    <ActionFieldGroup>
+      <FullNameActionField />
+      <GenderActionField />
+      <DobActionField />
+    </ActionFieldGroup>
+  ) : (
+    <div tw="grid place-items-center h-full">
+      <LoadingIndicator variant="FlashingThreeDots" theme="secondary" />
+    </div>
+  );
+};
 
 const Aside: VFC = () => {
   return (

@@ -18,7 +18,7 @@ const EmailActionField: VFC = () => {
 export default EmailActionField;
 
 const EmailActionFieldAltContent: VFC = () => {
-  const { isAuthReady, user } = useAuth();
+  const { user } = useAuth();
 
-  return <>{isAuthReady && user?.email}</>;
+  return <>{user?.email}</>;
 };

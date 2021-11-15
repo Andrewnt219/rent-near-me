@@ -23,21 +23,17 @@ export default PasswordActionField;
 const PasswordActionFieldAltContent: VFC = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const { isProfileReady, profile } = useUserProfile();
+  const { profile } = useUserProfile();
 
   return (
     <>
-      {isProfileReady &&
-        (profile?.passwordLastUpdatedTime
-          ? t('account:security.change-password.description.password-changed', {
-              time: dayjs(profile.passwordLastUpdatedTime).fromNow(),
-            })
-          : t(
-              'account:security.change-password.description.password-unchanged',
-              {
-                time: dayjs(user?.metadata.creationTime).fromNow(),
-              }
-            ))}
+      {profile?.passwordLastUpdatedTime
+        ? t('account:security.change-password.description.password-changed', {
+            time: dayjs(profile.passwordLastUpdatedTime).fromNow(),
+          })
+        : t('account:security.change-password.description.password-unchanged', {
+            time: dayjs(user?.metadata.creationTime).fromNow(),
+          })}
     </>
   );
 };

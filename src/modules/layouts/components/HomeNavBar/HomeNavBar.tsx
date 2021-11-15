@@ -6,7 +6,7 @@ import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import { ButtonGhost } from '@ui/Button/Button';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
-import LogoWithName from '@ui/Logo/LogoWithNa,e';
+import LogoWithName from '@ui/Logo/LogoWithName';
 import Link from 'next/link';
 import React from 'react';
 import UserMenu from '../UserMenu/UserMenu';
