@@ -38,7 +38,8 @@ declare module '@/next' {
      * ```
      *
      * ## Rule #3
-     * Layout with `tw` is counted as a different layout
+     * Layouts with different props are considered as the same layouts and have their states synced with the exception of the `tw` prop.
+     * Same layouts with `tw` props are considered as different layouts.
      */
     getLayout?(page: ReactNode): ReactNode;
   };
