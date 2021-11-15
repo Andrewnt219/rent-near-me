@@ -9,23 +9,24 @@ type Props = {
 const PaymentSettingPageLayout: NextLayout<PropsWithChildren<Props>> = ({
   className,
   children,
-  ...props
 }) => {
   return (
     <div className={className} tw="">
       <AccountPageHeader title="Payments & payouts" />
 
-      <NextLink href="/account/payments/payment-methods">
-        <a>Payments</a>
-      </NextLink>
+      <ul tw="flex gap-sm">
+        <NextLink href="/account/payments/payment-methods">
+          <a>Payments</a>
+        </NextLink>
 
-      <NextLink href="/account/payments/payout-methods">
-        <a>Payouts</a>
-      </NextLink>
+        <NextLink href="/account/payments/payout-methods">
+          <a>Payouts</a>
+        </NextLink>
 
-      <NextLink href="/account/payments/tax-info">
-        <a>Taxes</a>
-      </NextLink>
+        <NextLink href="/account/payments/tax-info">
+          <a>Taxes</a>
+        </NextLink>
+      </ul>
 
       {children}
     </div>
