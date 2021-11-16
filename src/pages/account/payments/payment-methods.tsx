@@ -1,20 +1,18 @@
+import { CustomNextPage } from '@/next';
 import PaymentSettingPageLayout from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
 import Text from '@ui/Text/Text';
-import { ReactNode } from 'react';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 
-type Props = {
-  className?: string;
-};
-export default function PaymentMethodsPage({ className }: Props) {
+const PaymentMethodsPage: CustomNextPage = () => {
   return (
-    <div className={className} tw="">
+    <div tw="">
       <Text component="h2" variant="h3">
         Payments
       </Text>
     </div>
   );
-}
-
-PaymentMethodsPage.getLayout = (page: ReactNode) => {
-  return <PaymentSettingPageLayout>{page}</PaymentSettingPageLayout>;
 };
+
+PaymentMethodsPage.getLayout = PaymentSettingPageLayout.getLayout;
+
+export default PaymentMethodsPage;

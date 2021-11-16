@@ -1,4 +1,4 @@
-import React, { ReactNode, VFC } from 'react';
+import React, { VFC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { Icon } from '@iconify/react';
 import shieldFill from '@iconify/icons-eva/shield-fill';
@@ -13,8 +13,9 @@ import GenderActionField from '@modules/account/components/GenderActionField/Gen
 import DobActionField from '@modules/account/components/DobActionField/DobActionField';
 import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
 import LoadingIndicator from '@ui/LoadingIndicator';
+import { CustomNextPage } from '@/next';
 
-export default function AccountPersonalInfoPage() {
+const AccountPersonalInfoPage: CustomNextPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -24,7 +25,7 @@ export default function AccountPersonalInfoPage() {
       <AccountSettingLayout main={<Main />} aside={<Aside />} />
     </section>
   );
-}
+};
 
 const Main: VFC = () => {
   const { isProfileReady } = useUserProfile();
@@ -63,6 +64,6 @@ const Aside: VFC = () => {
   );
 };
 
-AccountPersonalInfoPage.getLayout = (page: ReactNode) => (
-  <AccountPageLayout>{page}</AccountPageLayout>
-);
+AccountPersonalInfoPage.getLayout = AccountPageLayout.getLayout;
+
+export default AccountPersonalInfoPage;

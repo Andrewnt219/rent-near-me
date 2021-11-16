@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app';
-import { PageWithLayout } from '@common-types';
 import SWRDefaultConfigProvider from '@libs/swr/SWRDefaultConfigProvider';
 import { AuthProvider } from '@modules/user-auth/contexts/AuthContext';
 import GlobalStyle from '@styles/GlobalStyles';
@@ -10,10 +9,10 @@ import '@libs/axios/interceptors';
 import '@reach/dialog/styles.css';
 import 'react-day-picker/lib/style.css';
 import { ModalProvider } from '@ui/Modal/ModalContext';
+import { CustomNextPage } from '@/next';
 
-type MyAppProps = {
-  Component: PageWithLayout;
-  pageProps: AppProps['pageProps'];
+type MyAppProps = AppProps & {
+  Component: CustomNextPage;
 };
 
 function MyApp({ Component, pageProps }: MyAppProps) {

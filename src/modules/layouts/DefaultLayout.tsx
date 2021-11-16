@@ -1,14 +1,18 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import Layout from './Layout';
 import AppBar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
 import HomeNavBar from './components/HomeNavBar/HomeNavBar';
+import { NextLayout } from '@/next';
 
 type DefaultLayoutProps = PropsWithChildren<{
   className?: string;
 }>;
 
-function DefaultLayout({ className, children }: DefaultLayoutProps) {
+const DefaultLayout: NextLayout<DefaultLayoutProps> = ({
+  className,
+  children,
+}) => {
   return (
     <Layout size="sm" tw="flex flex-col min-h-full relative">
       <HomeNavBar tw="hidden lg:block" />
@@ -19,6 +23,10 @@ function DefaultLayout({ className, children }: DefaultLayoutProps) {
       <Footer tw="mb-var-app-bar-height lg:mb-0" />
     </Layout>
   );
-}
+};
+
+DefaultLayout.getLayout = (page: ReactNode) => (
+  <DefaultLayout>{page}</DefaultLayout>
+);
 
 export default DefaultLayout;
