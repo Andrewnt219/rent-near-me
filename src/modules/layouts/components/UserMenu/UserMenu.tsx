@@ -28,7 +28,7 @@ const UserMenu = ({ className }: Props) => {
         aria-expanded={isOpen}
         aria-pressed={isOpen}
         onClick={toggleDropDown}
-        circle
+        rounded
         tw="flex items-center border pl-md pr-sm py-sm transition-shadow hover:shadow"
       >
         <span tw="sr-only">Menu</span>
