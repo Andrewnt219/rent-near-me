@@ -39,8 +39,18 @@
         "password-unchanged": "Created {{time}}"
       }
     },
-    "change-email": {
-      "field-label": "Email"
+    "email": {
+      "field-label": "Email",
+      "description": {
+        "emailUnverifiedAlert": {
+          "line1": "This email has not yet been verified.",
+          "line2": "Unverified account may be deactivated after 60 days.",
+          "line3": "Resend verification email",
+          "message": {
+            "success": "Email verification sent"
+          }
+        }
+      }
     }
   },
   "personal-info": {
