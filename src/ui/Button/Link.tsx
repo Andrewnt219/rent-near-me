@@ -1,4 +1,4 @@
-import { FC, HTMLProps } from 'react';
+import { ComponentProps, FC } from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import {
   outlineStyle,
@@ -9,7 +9,7 @@ import {
   BaseProps,
 } from './styles';
 
-type LinkProps = Omit<HTMLProps<HTMLAnchorElement>, keyof BaseProps> &
+type LinkProps = ComponentProps<'a'> &
   BaseProps & {
     href: string;
     nextLinkProps?: Omit<NextLinkProps, 'href'>;

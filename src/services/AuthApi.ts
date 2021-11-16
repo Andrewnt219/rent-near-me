@@ -16,13 +16,13 @@ export default class AuthApi {
       '/api/user/register',
       formData
     );
-    await AuthApi.sendEmailVerification();
     await AuthApi.signInWithEmail(
       formData.email,
       formData.password,
       false,
       true
     );
+    await AuthApi.sendEmailVerification();
   }
 
   static async sendEmailVerification() {
