@@ -36,7 +36,9 @@ const EmailUnverifiedAlert: VFC = () => {
     // TODO(vito): Use a warning alert here when the component is built
     <div>
       <Text variant="body1">
-        <span tw="font-bold">{t('common:fields.alert.warning')}</span>:{' '}
+        <Text variant="sub1" component="span">
+          {t('common:fields.alert.warning')}:
+        </Text>{' '}
         {t('account:security.email.description.emailUnverifiedAlert.line1')}
       </Text>
       <Text variant="body2">
