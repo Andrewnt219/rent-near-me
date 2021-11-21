@@ -9,7 +9,6 @@ import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 import infoFill from '@iconify/icons-eva/info-fill';
 import Text from '@ui/Text/Text';
-import { ButtonGhost } from '@ui/Button/Button';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 
 type Props = {

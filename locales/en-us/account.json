@@ -52,7 +52,8 @@
     "verify-email": {
       "button": "Resend verification email",
       "message": {
-        "success": "Email verification sent"
+        "success": "Email verification sent",
+        "retry": "Retry in {{retryCountdown}} seconds"
       }
     }
   },
