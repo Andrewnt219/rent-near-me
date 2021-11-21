@@ -1,4 +1,4 @@
-import { ComponentProps, FC, forwardRef, Ref } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import {
   outlineStyle,
@@ -13,10 +13,9 @@ type LinkProps = ComponentProps<'a'> &
   BaseProps & {
     href: string;
     nextLinkProps?: Omit<NextLinkProps, 'href'>;
-    ref?: Ref<HTMLAnchorElement>;
   };
 
-export const LinkBase: FC<LinkProps> = forwardRef(
+export const LinkBase = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ href, nextLinkProps, children, ...props }, ref) =>
     href.startsWith('/') ? (
       <NextLink href={href} {...nextLinkProps}>
@@ -31,22 +30,22 @@ export const LinkBase: FC<LinkProps> = forwardRef(
     )
 );
 
-export const LinkPrimary: FC<LinkProps> = forwardRef((props, ref) => (
-  <LinkBase css={primaryStyle} {...props} ref={ref} />
-));
+export const LinkPrimary = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={primaryStyle} {...props} ref={ref} />
+);
 
-export const LinkSecondary: FC<LinkProps> = forwardRef((props, ref) => (
-  <LinkBase css={secondaryStyle} {...props} ref={ref} />
-));
+export const LinkSecondary = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={secondaryStyle} {...props} ref={ref} />
+);
 
-export const LinkGhost: FC<LinkProps> = forwardRef((props, ref) => (
-  <LinkBase css={ghostStyle} {...props} ref={ref} />
-));
+export const LinkGhost = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={ghostStyle} {...props} ref={ref} />
+);
 
-export const LinkOutline: FC<LinkProps> = forwardRef((props, ref) => (
-  <LinkBase css={outlineStyle} {...props} ref={ref} />
-));
+export const LinkOutline = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={outlineStyle} {...props} ref={ref} />
+);
 
-export const LinkSimple: FC<LinkProps> = forwardRef((props, ref) => (
-  <LinkBase css={linkStyle} {...props} ref={ref} />
-));
+export const LinkSimple = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={linkStyle} {...props} ref={ref} />
+);

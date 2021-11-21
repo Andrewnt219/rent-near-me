@@ -1,7 +1,6 @@
 import { CustomNextPage } from '@/next';
 import PaymentSettingPageLayout from '@modules/account/layouts/PaymentSettingPageLayout/PaymentSettingPageLayout';
 import Text from '@ui/Text/Text';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 
 const PaymentMethodsPage: CustomNextPage = () => {
   return (
