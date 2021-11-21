@@ -1,3 +1,5 @@
+import axios from 'axios';
+import firebase from 'firebase/app';
 import { auth } from '@libs/firebase-sdk/firebase-sdk';
 import { getPlatformInfo } from '@utils/platform-utils';
 import { ChangePasswordPayload } from '@models/ChangePasswordPayload';
@@ -7,12 +9,10 @@ import { RegisterFormModel } from '@modules/user-auth/components/RegisterForm/Re
 import { ApiResult_User_ChangePassword_POST } from '@pages/api/user/changePassword';
 import { ApiResult_User_Login_POST } from '@pages/api/user/login';
 import { ApiResult_User_Register_POST } from '@pages/api/user/register';
-import axios from 'axios';
-import firebase from 'firebase/app';
 
 export default class AuthApi {
   static async registerWithEmail(formData: RegisterFormModel) {
-    const response = await axios.post<ApiResult_User_Register_POST>(
+    await axios.post<ApiResult_User_Register_POST>(
       '/api/user/register',
       formData
     );
@@ -22,7 +22,13 @@ export default class AuthApi {
       false,
       true
     );
-    return response.data;
+    await AuthApi.sendEmailVerification();
+  }
+
+  static async sendEmailVerification() {
+    return await auth.currentUser?.sendEmailVerification({
+      url: AuthApi.verificationEmailRedirectUrl,
+    });
   }
 
   static async signInWithEmail(
@@ -88,6 +94,10 @@ export default class AuthApi {
       '/api/user/changePassword',
       payload
     );
+  }
+
+  private static get verificationEmailRedirectUrl() {
+    return `${window.location.protocol}//${window.location.host}/account`;
   }
 
   private static async reauthenticate(email?: string, password?: string) {

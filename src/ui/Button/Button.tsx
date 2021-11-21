@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import { styled } from 'twin.macro';
 import {
   primaryStyle,
@@ -7,6 +8,8 @@ import {
   linkStyle,
   BaseProps,
 } from './styles';
+
+export type ButtonProps = ComponentProps<'button'> & BaseProps;
 
 export const ButtonPrimary = styled.button<BaseProps>`
   ${primaryStyle}

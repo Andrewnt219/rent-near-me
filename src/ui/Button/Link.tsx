@@ -1,4 +1,4 @@
-import { FC, HTMLProps } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import {
   outlineStyle,
@@ -9,44 +9,43 @@ import {
   BaseProps,
 } from './styles';
 
-type LinkProps = Omit<HTMLProps<HTMLAnchorElement>, keyof BaseProps> &
+type LinkProps = ComponentProps<'a'> &
   BaseProps & {
     href: string;
     nextLinkProps?: Omit<NextLinkProps, 'href'>;
   };
 
-export const LinkBase: FC<LinkProps> = ({
-  href,
-  nextLinkProps,
-  children,
-  ...props
-}) =>
-  href.startsWith('/') ? (
-    <NextLink href={href} {...nextLinkProps}>
-      <a {...props}>{children}</a>
-    </NextLink>
-  ) : (
-    <a href={href} {...props} rel="noopener noreferrer nofollow">
-      {children}
-    </a>
-  );
-
-export const LinkPrimary: FC<LinkProps> = (props) => (
-  <LinkBase css={primaryStyle} {...props} />
+export const LinkBase = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ href, nextLinkProps, children, ...props }, ref) =>
+    href.startsWith('/') ? (
+      <NextLink href={href} {...nextLinkProps}>
+        <a {...props} ref={ref}>
+          {children}
+        </a>
+      </NextLink>
+    ) : (
+      <a href={href} {...props} ref={ref} rel="noopener noreferrer nofollow">
+        {children}
+      </a>
+    )
 );
 
-export const LinkSecondary: FC<LinkProps> = (props) => (
-  <LinkBase css={secondaryStyle} {...props} />
+export const LinkPrimary = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={primaryStyle} {...props} ref={ref} />
 );
 
-export const LinkGhost: FC<LinkProps> = (props) => (
-  <LinkBase css={ghostStyle} {...props} />
+export const LinkSecondary = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={secondaryStyle} {...props} ref={ref} />
 );
 
-export const LinkOutline: FC<LinkProps> = (props) => (
-  <LinkBase css={outlineStyle} {...props} />
+export const LinkGhost = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={ghostStyle} {...props} ref={ref} />
 );
 
-export const LinkSimple: FC<LinkProps> = (props) => (
-  <LinkBase css={linkStyle} {...props} />
+export const LinkOutline = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={outlineStyle} {...props} ref={ref} />
+);
+
+export const LinkSimple = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkBase css={linkStyle} {...props} ref={ref} />
 );

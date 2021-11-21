@@ -1,6 +1,6 @@
 import tw, { css } from 'twin.macro';
 
-const commonStyle = tw`rounded outline-none! inline-block text-center`;
+const commonStyle = tw`rounded outline-none! inline-block text-center disabled:(opacity-60 cursor-not-allowed)`;
 
 const getSizeStyle = (size?: Size) => {
   switch (size) {
@@ -34,7 +34,11 @@ const baseStyle = css<BaseProps>`
 export const primaryStyle = css`
   ${baseStyle}
 
-  ${tw`font-semibold  bg-primary text-white hover:bg-primary-dark`}
+  ${tw`font-semibold  bg-primary text-white`}
+
+  &:hover:not(:disabled) {
+    ${tw`bg-primary-dark`}
+  }
 
   &:active,
   &:focus-visible {
@@ -47,7 +51,7 @@ export const secondaryStyle = css`
 
   ${tw`font-semibold  bg-secondary text-white`}
 
-  &:hover {
+  &:hover:not(:disabled) {
     ${tw`filter brightness-90`}
   }
 
@@ -60,7 +64,7 @@ export const secondaryStyle = css`
 export const ghostStyle = css`
   ${baseStyle}
 
-  &:hover {
+  &:hover:not(:disabled) {
     ${tw`bg-light`}
   }
 
@@ -75,7 +79,7 @@ export const outlineStyle = css`
 
   ${tw`border`}
 
-  &:hover, &:active {
+  &:hover:not(:disabled), &:active {
     ${tw`bg-light`}
   }
 
@@ -89,7 +93,7 @@ export const linkStyle = css`
 
   ${tw`underline text-secondary`}
 
-  &:hover {
+  &:hover:not(:disabled) {
     ${tw`no-underline`}
   }
 
