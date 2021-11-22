@@ -117,8 +117,8 @@ const RegisterForm = () => {
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
-          ? t('common:register.loading')
-          : t('common:register.register')}
+          ? t('common:register.submitButton.loading')
+          : t('common:register.submitButton.submit')}
       </ButtonPrimary>
     </Form>
   );

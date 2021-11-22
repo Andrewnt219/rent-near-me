@@ -1,13 +1,14 @@
 import { ModalControl } from '@common-types';
-import LoginForm from '@modules/user-auth/components/LoginForm/LoginForm';
-import RegisterForm from '@modules/user-auth/components/RegisterForm/RegisterForm';
-import Modal from '@ui/Modal/Modal';
 import { createContext, FC, useContext } from 'react';
 import useModalGroup from 'src/hooks/useModalGroup';
+import LoginModal from '@modules/user-auth/components/LoginModal/LoginModal';
+import RegisterModal from '@modules/user-auth/components/RegisterModal/RegisterModal';
+import ForgetPasswordModal from '@modules/user-auth/components/ForgetPasswordModal/ForgetPasswordModal';
 
 type ModalContextValue = {
   loginModal: ModalControl;
   registerModal: ModalControl;
+  forgetPasswordModal: ModalControl;
 };
 
 const ModalContext = createContext<ModalContextValue | undefined>(undefined);
@@ -18,29 +19,14 @@ export const useModals = () => {
 };
 
 export const ModalProvider: FC = ({ children }) => {
-  const value = useModalGroup('login', 'register');
+  const value = useModalGroup('login', 'register', 'forgetPassword');
 
   return (
     <ModalContext.Provider value={value}>
       {children}
-      <Modal
-        size="md"
-        show={value.loginModal.isShow}
-        onClose={value.loginModal.hide}
-        aria-labelledby="LoginModalTitle"
-        header="Log in"
-      >
-        <LoginForm />
-      </Modal>
-      <Modal
-        size="lg"
-        show={value.registerModal.isShow}
-        onClose={value.registerModal.hide}
-        aria-labelledby="RegisterModalTitle"
-        header="Register an account"
-      >
-        <RegisterForm />
-      </Modal>
+      <LoginModal />
+      <RegisterModal />
+      <ForgetPasswordModal />
     </ModalContext.Provider>
   );
 };

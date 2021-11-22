@@ -96,7 +96,17 @@ export default class AuthApi {
     );
   }
 
+  static async sendEmailResetPassword(email: string) {
+    await auth.sendPasswordResetEmail(email, {
+      url: AuthApi.passwordResetEmailRedirectUrl,
+    });
+  }
+
   private static get verificationEmailRedirectUrl() {
+    return `${window.location.protocol}//${window.location.host}/account`;
+  }
+
+  private static get passwordResetEmailRedirectUrl() {
     return `${window.location.protocol}//${window.location.host}/account`;
   }
 

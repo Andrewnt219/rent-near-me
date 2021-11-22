@@ -44,8 +44,11 @@
     "email": "Email",
     "password": "Password",
     "keepSignedIn": "Remember me",
-    "loading": "Loading",
-    "login": "Log in",
+    "submitButton": {
+      "loading": "Loading",
+      "submit": "Log in"
+    },
+    "or": "or",
     "google": "Continue with Google",
     "facebook": "Continue with Facebook",
     "newAccount": "Create a new account"
@@ -68,8 +71,21 @@
       "description": "We'll only communicate to you regarding your account via this email"
     },
     "password": "Password",
-    "loading": "Loading",
-    "register": "Create new account"
+    "submitButton": {
+      "loading": "Loading",
+      "submit": "Create new account"
+    }
+  },
+  "forgetPassword": {
+    "description": "Enter the email address associated with your account, and we’ll email you a link to reset your password.",
+    "email": "Email",
+    "submitButton": {
+      "submit": "Send password reset link",
+      "loading": "Sending"
+    },
+    "message": {
+      "success": "Reset password link sent"
+    }
   },
   "routes": {
     "account": {

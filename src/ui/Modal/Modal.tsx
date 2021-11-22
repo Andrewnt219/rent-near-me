@@ -3,7 +3,7 @@ import { Dialog } from '@reach/dialog';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
-import { Icon } from '@iconify/react';
+import { Icon, IconifyIcon } from '@iconify/react';
 import closeFill from '@iconify/icons-eva/close-fill';
 import tw, { css, styled } from 'twin.macro';
 
@@ -16,12 +16,14 @@ type ModalProps = {
   size?: ModalSize;
   header?: ReactNode;
   closeButtonPosition?: CloseModalButtonPosition;
+  closeButtonIcon?: ReactNode;
 };
 const Modal: FC<ModalProps> = ({
   show,
   onClose,
   size = 'md',
   closeButtonPosition = 'left',
+  closeButtonIcon,
   header,
   children,
   ...props
@@ -42,7 +44,7 @@ const Modal: FC<ModalProps> = ({
             css={closeModalBtnCss(closeButtonPosition)}
             onClick={onClose}
           >
-            <Icon icon={closeFill} tw="w-6 h-6" />
+            {closeButtonIcon ?? <Icon icon={closeFill} tw="w-6 h-6" />}
             <span tw="sr-only">Close dialog</span>
           </IconButtonGhost>
           <Text component="h3" variant="h5" id={`${id}-modal-title`}>
@@ -115,7 +117,7 @@ const ModalHeader = styled.div`
 `;
 
 const ModalBody = styled.div`
-  ${tw`px-lg pb-xl pt-lg`}
+  ${tw`p-lg`}
 `;
 const ModalBodyContent = styled.div`
   ${tw`overflow-auto p-xs`}

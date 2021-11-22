@@ -25,7 +25,7 @@
     "page-title": "Login & Security",
     "login-title": "Login",
     "change-password": {
-      "forget-password-link": "Need a new password?",
+      "forget-password": "Forget password?",
       "old-password": "Old password",
       "new-password": "New password",
       "confirm-new-password": "Confirm new password",

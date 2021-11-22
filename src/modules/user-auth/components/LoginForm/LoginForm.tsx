@@ -25,7 +25,7 @@ const LoginForm = () => {
     onLoginWithFacebook,
   } = useLoginForm();
   const { t } = useTranslation();
-  const { registerModal } = useModals();
+  const { registerModal, forgetPasswordModal } = useModals();
 
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>
@@ -47,7 +47,7 @@ const LoginForm = () => {
         name="password"
         autoComplete="current-password"
         inputDescription={
-          <ButtonLink type="button">
+          <ButtonLink type="button" onClick={forgetPasswordModal.show}>
             {t('common:login.forgetPassword')}
           </ButtonLink>
         }
@@ -77,11 +77,11 @@ const LoginForm = () => {
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
-          ? t('common:login.loading')
-          : t('common:login.login')}
+          ? t('common:login.submitButton.loading')
+          : t('common:login.submitButton.submit')}
       </ButtonPrimary>
 
-      <HrText tw="my-lg">or</HrText>
+      <HrText tw="my-lg">{t('common:login.or')}</HrText>
 
       <ul aria-label="Sign-in options" tw="space-y-sm">
         <SignInExternalButton
