@@ -7,22 +7,18 @@ import arrowIosBackFill from '@iconify/icons-eva/arrow-ios-back-fill';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 
 const ForgetPasswordModal: VFC = () => {
-  const { isAuthReady, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { forgetPasswordModal, loginModal } = useModals();
   return (
     <Modal
       size="md"
       show={forgetPasswordModal.isShow}
-      onClose={
-        isAuthReady && !isAuthenticated
-          ? loginModal.show
-          : forgetPasswordModal.hide
-      }
+      onClose={isAuthenticated ? forgetPasswordModal.hide : loginModal.show}
       header="Forget password?"
       closeButtonIcon={
-        isAuthReady && !isAuthenticated ? (
+        isAuthenticated ? undefined : (
           <Icon icon={arrowIosBackFill} tw="w-6 h-6" />
-        ) : undefined
+        )
       }
     >
       <ForgetPasswordForm />
