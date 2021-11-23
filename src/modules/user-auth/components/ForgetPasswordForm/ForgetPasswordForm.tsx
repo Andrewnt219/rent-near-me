@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
+import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 import { ButtonPrimary } from '@ui/Button/Button';
 import Form from '@ui/Form/Form';
 import TextField from '@ui/Form/TextField';
@@ -32,7 +32,7 @@ const ForgetPasswordForm = () => {
             aria-relevant="text"
             tw="flex items-center gap-sm mb-sm"
           >
-            <Icon icon={alertTriangleFill} tw="w-5 h-5 fill-current" />
+            <Icon icon={closeCircleFill} tw="w-5 h-5 fill-current" />
             {submitError}
           </Form.ErrorMessage>
         )}

@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import facebookIcon from '@iconify/icons-logos/facebook';
 import googleIcon from '@iconify/icons-logos/google-icon';
-import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
+import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 import { useModals } from '@ui/Modal/ModalContext';
 import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
 import Checkbox from '@ui/Form/Checkbox';
@@ -65,7 +65,7 @@ const LoginForm = () => {
           aria-relevant="text"
           tw="flex items-center gap-sm mb-sm"
         >
-          <Icon icon={alertTriangleFill} tw="w-5 h-5 fill-current" />
+          <Icon icon={closeCircleFill} tw="w-5 h-5 fill-current" />
           {submitError}
         </Form.ErrorMessage>
       )}
