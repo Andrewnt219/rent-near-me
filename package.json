@@ -18,6 +18,8 @@
     "@next/bundle-analyzer": "^11.0.0",
     "@reach/alert": "^0.16.0",
     "@reach/dialog": "^0.15.3",
+    "@reach/rect": "^0.16.0",
+    "@reach/tabs": "^0.16.4",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",

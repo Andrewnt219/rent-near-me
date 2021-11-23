@@ -1,13 +1,13 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Layout from './Layout';
 import AppBar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
 import HomeNavBar from './components/HomeNavBar/HomeNavBar';
 import { NextLayout } from '@/next';
 
-type DefaultLayoutProps = PropsWithChildren<{
+type DefaultLayoutProps = {
   className?: string;
-}>;
+};
 
 const DefaultLayout: NextLayout<DefaultLayoutProps> = ({
   className,

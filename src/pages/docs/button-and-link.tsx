@@ -1,4 +1,3 @@
-import { ReactNode, VFC } from 'react';
 import DocsLayout from '@modules/layouts/DocsLayout';
 import Text from '@ui/Text/Text';
 import {
@@ -15,21 +14,22 @@ import {
   LinkOutline,
   LinkGhost,
 } from '@ui/Button/Link';
+import { CustomNextPage } from '@/next';
 
-export default function ButtonAndLinkDocsPage() {
+const ButtonAndLinkDocsPage: CustomNextPage = () => {
   return (
     <div tw="flex">
       <ButtonDocs />
       <LinkDocs />
     </div>
   );
-}
-
-ButtonAndLinkDocsPage.getLayout = (page: ReactNode) => {
-  return <DocsLayout>{page}</DocsLayout>;
 };
 
-const ButtonDocs: VFC = () => (
+ButtonAndLinkDocsPage.getLayout = DocsLayout.getLayout;
+
+export default ButtonAndLinkDocsPage;
+
+const ButtonDocs = () => (
   <div tw="flex-auto">
     <Text component="h1" variant="h2">
       Button (<pre tw="inline">{'<button>'} tag</pre>)
@@ -64,7 +64,7 @@ const ButtonDocs: VFC = () => (
   </div>
 );
 
-const LinkDocs: VFC = () => (
+const LinkDocs = () => (
   <div tw="flex-auto">
     <Text component="h1" variant="h2">
       Link (<pre tw="inline">{'<a>'} tag</pre>)
