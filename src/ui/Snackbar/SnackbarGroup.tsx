@@ -11,12 +11,21 @@ type TSnackbar = ComponentProps<typeof Snackbar> & {
   id: string;
 };
 type Props = {
+  /**
+   * Classname for merging styles
+   */
   className?: string;
+  /**
+   * Snackbars information to render
+   */
   snacks: TSnackbar[];
 };
+/**
+ * Uses for grouping \<Snackbar />
+ */
 function SnackbarGroup({ className, ...props }: Props) {
   return (
-    <ol className={className} tw="flex flex-col gap-sm">
+    <ol className={className} tw="flex flex-col gap-sm w-[min(100%, 20rem)]">
       <AnimateSharedLayout>
         <AnimatePresence>
           {props.snacks.map((snackbarProps) => (

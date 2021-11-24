@@ -12,12 +12,27 @@ import Text from '@ui/Text/Text';
 import { IconButtonGhost } from '@ui/IconButton/IconButton';
 
 type Props = {
+  /**
+   * Classname to merge styles
+   */
   className?: string;
+  /**
+   * Title text (not the title attribute)
+   */
   title?: ReactNode;
+  /**
+   * Color theme
+   */
   severity: StyledIconContainerProps['severity'];
+  /**
+   * Body text
+   */
   message: ReactNode;
   onDismiss(): void;
 };
+/**
+ * Uses for showing/alerting a short message
+ */
 function Snackbar({ className, severity = 'default', ...props }: Props) {
   return (
     <StyledContainer type="assertive" className={className}>
@@ -44,7 +59,6 @@ function Snackbar({ className, severity = 'default', ...props }: Props) {
 }
 
 const StyledContainer = styled(ReachAlert)`
-  width: min(100%, 20rem);
   ${tw`flex items-center gap-md text-body2`}
   ${tw`rounded-lg bg-white`}
   ${tw`shadow-z8 p-md`}
@@ -54,7 +68,13 @@ const StyledContainer = styled(ReachAlert)`
 /*                             ANCHOR: SNACKBAR ICON                          */
 /* -------------------------------------------------------------------------- */
 type SnackbarIconProps = {
+  /**
+   * Classname to merge styles
+   */
   className?: string;
+  /**
+   * Color theme
+   */
   severity: StyledIconContainerProps['severity'];
 };
 function SnackbarIcon(props: SnackbarIconProps) {
@@ -97,6 +117,9 @@ const StyledIconContainer = styled.span<StyledIconContainerProps>`
   ${tw`w-10 h-10 flex items-center justify-center  self-start rounded-xl`}
 `;
 
+/**
+ * Returns color theme base on severity
+ */
 const styleSeverity = (severity: StyledIconContainerProps['severity']) => {
   switch (severity) {
     case 'error':
