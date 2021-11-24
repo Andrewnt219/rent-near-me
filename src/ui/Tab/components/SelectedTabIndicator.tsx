@@ -6,17 +6,18 @@ import {
 } from '../contexts/TabOptionContext';
 
 const SelectedTabIndicator = () => {
-  const { selectedButtonRect, tabHeaderRect } = useTabAnimation();
+  const { selectedButtonRect, tabGroupRect } = useTabAnimation();
   const { theme } = useTabOption();
   return (
     <span
       css={`
-        ${tw`absolute -bottom-px h-0.5`}
+        ${tw`absolute h-0.5`}
         ${tw`transition-all duration-500`}
         ${getSelectedTabIndicatorThemeStyle(theme)}
       `}
       style={{
-        left: (selectedButtonRect?.left ?? 0) - (tabHeaderRect?.left ?? 0),
+        left: (selectedButtonRect?.left ?? 0) - (tabGroupRect?.left ?? 0),
+        top: (selectedButtonRect?.bottom ?? 0) - (tabGroupRect?.top ?? 0) - 1,
         width: selectedButtonRect?.width,
       }}
     />

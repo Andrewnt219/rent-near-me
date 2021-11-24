@@ -1,39 +1,30 @@
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 import tw from 'twin.macro';
 import {
   TabList as ReachTabList,
   TabListProps as ReachTabListProps,
 } from '@reach/tabs';
-import { useRect } from '@reach/rect';
-import SelectedTabIndicator from './SelectedTabIndicator';
 import {
   useTabOption,
   TabOptionContextValue,
 } from '../contexts/TabOptionContext';
-import { TabAnimationProvider } from '../contexts/TabAnimationContext';
 
 type TabHeaderProps = ReachTabListProps;
 
 const TabHeader: FC<TabHeaderProps> = ({ children, ...props }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const rect = useRect(ref);
   const { buttonJustify, buttonGap } = useTabOption();
   return (
-    <TabAnimationProvider tabHeaderRect={rect}>
-      <ReachTabList
-        css={`
-          ${tw`relative flex bg-transparent border-b-[1px] mb-lg`}
-          ${tw`overflow-y-hidden overflow-x-auto`}
+    <ReachTabList
+      css={`
+        ${tw`flex bg-transparent border-b-[1px] mb-lg`}
+        ${tw`overflow-x-auto`}
           ${getTabHeaderAlignStyle(buttonJustify)}
           ${getTabHeaderGapStyle(buttonGap)}
-        `}
-        ref={ref}
-        {...props}
-      >
-        {children}
-        <SelectedTabIndicator />
-      </ReachTabList>
-    </TabAnimationProvider>
+      `}
+      {...props}
+    >
+      {children}
+    </ReachTabList>
   );
 };
 
