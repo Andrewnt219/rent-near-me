@@ -55,7 +55,9 @@
         "success": "Email verification sent",
         "retry": "Retry in {{retryCountdown}} seconds"
       }
-    }
+    },
+    "social-account-title": "Social Accounts",
+    "history-title": "History"
   },
   "personal-info": {
     "page-title": "Personal Info",

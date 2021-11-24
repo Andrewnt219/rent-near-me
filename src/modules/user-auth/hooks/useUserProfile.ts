@@ -14,7 +14,7 @@ type TUserUserProfile = {
   ) => Promise<Profile | null>;
 };
 
-export const useUserProfile = (): TUserUserProfile => {
+const useUserProfile = (): TUserUserProfile => {
   const { user } = useAuth();
 
   const {
@@ -47,3 +47,5 @@ export const useUserProfile = (): TUserUserProfile => {
     [mutateProfileResponse, profile]
   );
 };
+
+export default useUserProfile;

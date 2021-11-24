@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import ToggleActionField from '@modules/account/components/ActionField/ToggleActionField';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 import { GENDERS } from '@models/constnats';
 import ChangeGenderForm from '../ChangeGenderForm/ChangeGenderForm';
 

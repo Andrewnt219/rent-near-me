@@ -1,30 +1,14 @@
 import { CustomNextPage } from '@/next';
 import DocsLayout from '@modules/layouts/DocsLayout';
-import {
-  TabSection,
-  TabHeader,
-  TabButton,
-  TabBody,
-  TabContent,
-} from '@ui/Tab/Tab';
+import { TabGroup, Tab } from '@ui/Tab';
 
 const TabDocsPage: CustomNextPage = () => {
   return (
-    <div>
-      <input />
-      <TabSection theme="secondary">
-        <TabHeader>
-          <TabButton>Tab one</TabButton>
-          <TabButton>Tab two</TabButton>
-          <TabButton>Tab three</TabButton>
-        </TabHeader>
-        <TabBody>
-          <TabContent>Tab 1 content</TabContent>
-          <TabContent>Tab 2 content</TabContent>
-          <TabContent>Tab 3 content</TabContent>
-        </TabBody>
-      </TabSection>
-    </div>
+    <TabGroup theme="secondary">
+      <Tab label="Tab 1">Tab 1 content</Tab>
+      <Tab label="Tab 2">Tab 2 content</Tab>
+      <Tab label="Tab 3">Tab 3 content</Tab>
+    </TabGroup>
   );
 };
 
