@@ -9,7 +9,7 @@ import {
 } from 'react';
 
 export type TabAnimationContextValue = {
-  tabGroupRect: DOMRect | null;
+  principleRect: DOMRect | null;
   selectedButtonRect: DOMRect | null;
   setSelectedButtonRect: Dispatch<SetStateAction<DOMRect | null>>;
 };
@@ -25,10 +25,10 @@ export const useTabAnimation = () => {
 };
 
 type TabAnimationProviderProps = {
-  tabGroupRect: DOMRect | null;
+  principleRect: DOMRect | null;
 };
 export const TabAnimationProvider: FC<TabAnimationProviderProps> = ({
-  tabGroupRect,
+  principleRect,
   children,
 }) => {
   const [selectedButtonRect, setSelectedButtonRect] = useState<DOMRect | null>(
@@ -37,11 +37,11 @@ export const TabAnimationProvider: FC<TabAnimationProviderProps> = ({
 
   const value = useMemo<TabAnimationContextValue>(
     () => ({
-      tabGroupRect,
+      principleRect,
       selectedButtonRect,
       setSelectedButtonRect,
     }),
-    [selectedButtonRect, tabGroupRect]
+    [selectedButtonRect, principleRect]
   );
 
   return (

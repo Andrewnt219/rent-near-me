@@ -1,4 +1,4 @@
-import { RefObject, useMemo, useState } from 'react';
+import { MutableRefObject, RefObject, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 import useResizeObserver from 'use-resize-observer';
 

@@ -4,7 +4,8 @@ type Handler = () => void;
 const useClickOutside = <T extends HTMLElement>(handler: Handler) => {
   const ref = useRef<T>(null);
 
-  const handlerRef = useRef<Handler>(handler);
+  const handlerRef = useRef<Handler>();
+  handlerRef.current = handler;
 
   useEffect(() => {
     const element = ref.current;
