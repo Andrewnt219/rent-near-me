@@ -51,7 +51,11 @@ export default function SnackbarDocsPage() {
         </ButtonPrimary>
         <ButtonPrimary
           size="md"
-          onClick={() => showSnackError(new Date().toISOString())}
+          onClick={() =>
+            showSnackError(
+              'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad nostrum sint minus consectetur nam exercitationem eius reiciendis voluptatibus aliquam repudiandae!'
+            )
+          }
         >
           Enqueue Error
         </ButtonPrimary>
