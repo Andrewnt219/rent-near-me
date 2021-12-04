@@ -7,13 +7,20 @@ import {
   TabOptionContextValue,
 } from '../contexts/TabOptionContext';
 import tw from 'twin.macro';
+import { useTabGroup } from '..';
 
-type TabButtonProps = ReachTabProps & {
-  isSelected?: boolean;
-};
-const TabButton: FC<TabButtonProps> = ({ isSelected, children, ...props }) => {
+type TabButtonProps = ReachTabProps;
+
+/**
+ * A button associated with a single Tab to activate that tab
+ */
+const TabButton: FC<TabButtonProps> = ({ children, ...props }) => {
   const { theme } = useTabOption();
   const { setSelectedButtonRect } = useTabAnimation();
+
+  const { selectedTab } = useTabGroup();
+  const isSelected = selectedTab === props.index;
+
   const ref = useRef<HTMLButtonElement>(null);
   const rect = useRect(ref, { observe: isSelected });
 
@@ -40,6 +47,9 @@ const TabButton: FC<TabButtonProps> = ({ isSelected, children, ...props }) => {
   );
 };
 
+/**
+ * Getter for color styling of {@link TabButton} by theme
+ */
 const getTabButtonThemeStyle = (theme?: TabOptionContextValue['theme']) => {
   if (theme === 'secondary') {
     return tw`text-secondary`;

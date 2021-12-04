@@ -1,7 +1,5 @@
 declare module '@common-types' {
-  import { NextPage } from 'next';
   import { LinkProps } from 'next/link';
-  import { ReactElement } from 'react';
   import { StyledComponent } from 'styled-components';
   import { InferType } from 'yup';
 

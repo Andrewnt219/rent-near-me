@@ -5,6 +5,9 @@ import {
   useTabOption,
 } from '../contexts/TabOptionContext';
 
+/**
+ * A color ribbon underneath the currently selected TabButton
+ */
 const SelectedTabIndicator = () => {
   const { selectedButtonRect, principleRect } = useTabAnimation();
   const { theme } = useTabOption();
@@ -22,6 +25,10 @@ const SelectedTabIndicator = () => {
     />
   );
 };
+
+/**
+ * Getter for color styling of {@link SelectedTabIndicator} by theme
+ */
 const getSelectedTabIndicatorThemeStyle = (
   theme?: TabOptionContextValue['theme']
 ) => {

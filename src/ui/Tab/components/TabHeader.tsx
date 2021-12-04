@@ -15,6 +15,9 @@ import SelectedTabIndicator from './SelectedTabIndicator';
 
 type TabHeaderProps = ReachTabListProps;
 
+/**
+ * A container for a group of TabButtons. Only one TabButton will be active at a given time.
+ */
 const TabHeader: FC<TabHeaderProps> = ({ children, ...props }) => {
   const { buttonJustify, buttonGap } = useTabOption();
   const ref = useRef<HTMLDivElement>(null);
@@ -43,6 +46,9 @@ const TabHeader: FC<TabHeaderProps> = ({ children, ...props }) => {
   );
 };
 
+/**
+ * Getter for alignment styling of {@link TabHeader} by justify-mode
+ */
 const getTabHeaderAlignStyle = (
   justify?: TabOptionContextValue['buttonJustify']
 ) => {
@@ -60,6 +66,9 @@ const getTabHeaderAlignStyle = (
   }
 };
 
+/**
+ * Getter for gap styling of {@link TabHeader} by gap
+ */
 const getTabHeaderGapStyle = (gap?: TabOptionContextValue['buttonGap']) => {
   switch (gap) {
     case 'xs':

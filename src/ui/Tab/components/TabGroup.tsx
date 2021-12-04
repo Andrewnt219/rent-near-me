@@ -17,11 +17,25 @@ type TabGroupProps = Omit<
   'defaultIndex' | 'index' | 'onChange'
 > &
   TabOptionContextValue & {
+    /**
+     * Starts the {@link TabGroup} at a specific index in uncontrolled mode.
+     */
     defaultSelectedTab?: ReachTabsProps['defaultIndex'];
+    /**
+     * Uses by the parent component to control the currently selected Tab.
+     *
+     * Make sure to include the {@link TabGroupProps.onSelectedTabChange} prop or the currently selected tab won't change.
+     */
     selectedTab?: ReachTabsProps['index'];
+    /**
+     * Invoked with the tab index when the user changes tabs, allowing the parent component to synchronize {@link TabGroupProps.selectedTab}
+     */
     onSelectedTabChange?: ReachTabsProps['onChange'];
   };
 
+/**
+ * A container for a group of Tabs. Only one Tab will be active at a given time.
+ */
 const TabGroup: FC<TabGroupProps> = ({
   theme,
   buttonJustify,
@@ -42,9 +56,9 @@ const TabGroup: FC<TabGroupProps> = ({
         {...props}
       >
         <TabHeader>
-          {Children.map(children, (child) =>
+          {Children.map(children, (child, index) =>
             isValidElement(child) ? (
-              <TabButton>{child.props.label}</TabButton>
+              <TabButton index={index}>{child.props.label}</TabButton>
             ) : null
           )}
         </TabHeader>

@@ -9,15 +9,30 @@ import {
 } from 'react';
 
 export type TabAnimationContextValue = {
+  /**
+   * A DOMRect used as the priciple element to position the SelectedTabIndicator around
+   */
   principleRect: DOMRect | null;
+  /**
+   * The DOMRect of the currently selected TabButton
+   */
   selectedButtonRect: DOMRect | null;
+  /**
+   * Setter for the DOMRect of the currently selected TabButton
+   */
   setSelectedButtonRect: Dispatch<SetStateAction<DOMRect | null>>;
 };
 
+/**
+ * Context for animation-related states of SelectedTabIndicator
+ */
 const TabAnimationContext = createContext<TabAnimationContextValue | undefined>(
   undefined
 );
 
+/**
+ * Hook to consume {@link TabAnimationContext}
+ */
 export const useTabAnimation = () => {
   const value = useContext(TabAnimationContext);
   if (value === undefined) throw Error('No matching TabAnimationProvider');
@@ -25,8 +40,15 @@ export const useTabAnimation = () => {
 };
 
 type TabAnimationProviderProps = {
-  principleRect: DOMRect | null;
+  /**
+   * A DOMRect used as the priciple element to position the SelectedTabIndicator around
+   */
+  principleRect: TabAnimationContextValue['principleRect'];
 };
+
+/**
+ * Provider for {@link TabAnimationContext}
+ */
 export const TabAnimationProvider: FC<TabAnimationProviderProps> = ({
   principleRect,
   children,
