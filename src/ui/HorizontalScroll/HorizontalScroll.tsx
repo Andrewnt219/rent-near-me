@@ -9,10 +9,20 @@ import tw from 'twin.macro';
 import { hideScrollbar } from '@styles/GlobalStyles';
 
 type HorizontalScrollProps = {
+  /**
+   * Theme of the {@link HorizontalScroll}
+   */
   theme: 'regular' | 'primary' | 'secondary';
+  /**
+   * Styles applied to the wrapper of the overflowable children
+   */
   childrenWrapperCss?: CSSProp;
 };
 
+/**
+ * A scroll mechanism with arrow buttons for horizontally overflowable element.
+ * The mechanism only kicks in when the `children` element overflows.
+ */
 const HorizontalScroll: FC<HorizontalScrollProps> = ({
   theme = 'regular',
   childrenWrapperCss,
@@ -91,6 +101,9 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
   );
 };
 
+/**
+ * Getter for color styling of {@link HorizontalScroll} by theme
+ */
 const getScrollButtonThemeStyle = (theme: HorizontalScrollProps['theme']) => {
   if (theme === 'primary') {
     return tw`text-primary`;
