@@ -9,7 +9,6 @@ import AccountSettingLayout from '@modules/account/layouts/AccountSettingLayout/
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import EmailActionField from '@modules/account/components/EmailActionField/EmailActionField';
 import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
-import Text from '@ui/Text/Text';
 import LoadingIndicator from '@ui/LoadingIndicator';
 import { TabGroup, Tab } from '@ui/Tab';
 import { Icon } from '@iconify/react';

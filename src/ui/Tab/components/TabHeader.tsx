@@ -1,6 +1,5 @@
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 import tw from 'twin.macro';
-import { useRect } from '@reach/rect';
 import {
   TabList as ReachTabList,
   TabListProps as ReachTabListProps,
@@ -10,8 +9,6 @@ import {
   useTabOption,
   TabOptionContextValue,
 } from '../contexts/TabOptionContext';
-import { TabAnimationProvider } from '../contexts/TabAnimationContext';
-import SelectedTabIndicator from './SelectedTabIndicator';
 
 type TabHeaderProps = ReachTabListProps;
 
@@ -20,28 +17,22 @@ type TabHeaderProps = ReachTabListProps;
  */
 const TabHeader: FC<TabHeaderProps> = ({ children, ...props }) => {
   const { buttonJustify, buttonGap } = useTabOption();
-  const ref = useRef<HTMLDivElement>(null);
-  const rect = useRect(ref);
   return (
     <HorizontalScroll
       theme="secondary"
       tw="mb-lg"
       childrenWrapperCss={tw`border-b-[1px]`}
     >
-      <TabAnimationProvider principleRect={rect}>
-        <ReachTabList
-          ref={ref}
-          css={`
-            ${tw`relative flex bg-transparent`}
-            ${getTabHeaderAlignStyle(buttonJustify)}
-            ${getTabHeaderGapStyle(buttonGap)}
-          `}
-          {...props}
-        >
-          {children}
-          <SelectedTabIndicator />
-        </ReachTabList>
-      </TabAnimationProvider>
+      <ReachTabList
+        css={`
+          ${tw`flex bg-transparent`}
+          ${getTabHeaderAlignStyle(buttonJustify)}
+          ${getTabHeaderGapStyle(buttonGap)}
+        `}
+        {...props}
+      >
+        {children}
+      </ReachTabList>
     </HorizontalScroll>
   );
 };

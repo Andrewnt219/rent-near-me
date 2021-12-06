@@ -11,6 +11,8 @@ import {
   TabOptionContextValue,
   TabOptionProvider,
 } from '../contexts/TabOptionContext';
+import { LayoutGroup } from 'framer-motion';
+import { useUuid } from '@hooks/useUuid';
 
 type TabGroupProps = Omit<
   ReachTabsProps,
@@ -46,24 +48,27 @@ const TabGroup: FC<TabGroupProps> = ({
   children,
   ...props
 }) => {
+  const tabId = useUuid();
   return (
     <TabOptionProvider options={{ theme, buttonJustify, buttonGap }}>
-      <ReachTabs
-        keyboardActivation={TabsKeyboardActivation.Manual}
-        defaultIndex={defaultSelectedTab}
-        index={selectedTab}
-        onChange={onSelectedTabChange}
-        {...props}
-      >
-        <TabHeader>
-          {Children.map(children, (child, index) =>
-            isValidElement(child) ? (
-              <TabButton index={index}>{child.props.label}</TabButton>
-            ) : null
-          )}
-        </TabHeader>
-        <ReachTabPanels>{children}</ReachTabPanels>
-      </ReachTabs>
+      <LayoutGroup id={`Tab-LayoutGroup-${tabId}`}>
+        <ReachTabs
+          keyboardActivation={TabsKeyboardActivation.Manual}
+          defaultIndex={defaultSelectedTab}
+          index={selectedTab}
+          onChange={onSelectedTabChange}
+          {...props}
+        >
+          <TabHeader>
+            {Children.map(children, (child, index) =>
+              isValidElement(child) ? (
+                <TabButton index={index}>{child.props.label}</TabButton>
+              ) : null
+            )}
+          </TabHeader>
+          <ReachTabPanels>{children}</ReachTabPanels>
+        </ReachTabs>
+      </LayoutGroup>
     </TabOptionProvider>
   );
 };
