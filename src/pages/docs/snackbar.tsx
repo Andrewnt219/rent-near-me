@@ -2,9 +2,9 @@ import DocsLayout from '@modules/layouts/DocsLayout';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { ButtonPrimary } from '@ui/Button/Button';
 import Snackbar from '@ui/Snackbar/Snackbar';
-import { ReactNode } from 'react';
+import { CustomNextPage } from '@/next';
 
-export default function SnackbarDocsPage() {
+const SnackbarDocsPage: CustomNextPage = () => {
   const { showSnackSuccess, showSnackError } = useSnackbar();
   const onDismiss = () => {
     return;
@@ -62,8 +62,8 @@ export default function SnackbarDocsPage() {
       </div>
     </div>
   );
-}
-
-SnackbarDocsPage.getLayout = (page: ReactNode) => {
-  return <DocsLayout>{page}</DocsLayout>;
 };
+
+SnackbarDocsPage.getLayout = DocsLayout.getLayout;
+
+export default SnackbarDocsPage;

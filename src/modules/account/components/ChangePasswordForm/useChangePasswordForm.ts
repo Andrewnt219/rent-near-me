@@ -10,7 +10,7 @@ import {
   ChangePasswordFormModel,
 } from './ChangePasswordFormModel';
 import { useActionField } from '@modules/account/components/ActionField/ActionFieldContext';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { getErrorMessage } from '@utils/api-responses';
 

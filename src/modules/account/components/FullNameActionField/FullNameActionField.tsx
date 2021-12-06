@@ -2,7 +2,7 @@ import React, { VFC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import ToggleActionField from '../ActionField/ToggleActionField';
 import ChangeFullNameForm from '../ChangeFullNameForm/ChangeFullNameForm';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 
 const FullNameActionField: VFC = () => {
   const { t } = useTranslation();

@@ -13,7 +13,7 @@ function AccountSettingLayout({ className, ...props }: Props) {
     >
       <section tw="flex-1">{props.main}</section>
 
-      <aside tw="max-w-sm flex-1">{props.aside}</aside>
+      <aside tw="md:max-w-sm flex-1">{props.aside}</aside>
     </div>
   );
 }

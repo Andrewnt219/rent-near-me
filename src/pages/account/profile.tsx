@@ -11,7 +11,7 @@ import ActionFieldGroup from '@modules/account/components/ActionField/ActionFiel
 import FullNameActionField from '@modules/account/components/FullNameActionField/FullNameActionField';
 import GenderActionField from '@modules/account/components/GenderActionField/GenderActionField';
 import DobActionField from '@modules/account/components/DobActionField/DobActionField';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 import LoadingIndicator from '@ui/LoadingIndicator';
 import { CustomNextPage } from '@/next';
 

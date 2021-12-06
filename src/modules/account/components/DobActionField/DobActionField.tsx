@@ -1,7 +1,7 @@
 import React, { VFC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import ToggleActionField from '../ActionField/ToggleActionField';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 import dayjs from 'dayjs';
 import { DATE_TIME_FORMATS } from '@models/constnats';
 import ChangeDobForm from '../ChangeDobForm/ChangeDobForm';

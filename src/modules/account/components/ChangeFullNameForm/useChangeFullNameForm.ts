@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 import UserProfileApi from '@services/UserProfileApi';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { getErrorMessage } from '@utils/api-responses';

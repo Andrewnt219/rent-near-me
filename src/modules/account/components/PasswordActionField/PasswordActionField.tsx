@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import ToggleActionField from '@modules/account/components/ActionField/ToggleActionField';
 import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 
 const PasswordActionField: VFC = () => {
   const { t } = useTranslation();

@@ -1,12 +1,13 @@
 import { NextLayout } from '@/next';
 import AccountPageHeader from '@modules/account/components/AccountPageHeader/AccountPageHeader';
 import NextLink from 'next/link';
-import { PropsWithChildren, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import AccountPageLayout from '../AccountPageLayout/AccountPageLayout';
-type Props = {
+
+type PaymentSettingPageLayoutProps = {
   className?: string;
 };
-const PaymentSettingPageLayout: NextLayout<PropsWithChildren<Props>> = ({
+const PaymentSettingPageLayout: NextLayout<PaymentSettingPageLayoutProps> = ({
   className,
   children,
 }) => {

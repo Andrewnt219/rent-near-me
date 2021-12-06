@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { useUserProfile } from '@modules/user-auth/hooks/useUserProfile';
+import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 import UserProfileApi from '@services/UserProfileApi';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect } from 'react';

@@ -24,11 +24,12 @@ const IconButton = styled.button<IconButtonProps>`
   ${(p) => getIconButonSize(p.size)}
 
   ${tw`inline-flex items-center justify-center rounded-full`}
+  ${tw`disabled:(opacity-60 cursor-not-allowed)`}
 `;
 
 /* -------------------------------------------------------------------------- */
 export const IconButtonGhost = styled(IconButton)`
-  &:hover {
+  &:hover:not(:disabled) {
     ${tw`bg-light`}
   }
 
@@ -41,7 +42,11 @@ export const IconButtonGhost = styled(IconButton)`
 /* -------------------------------------------------------------------------- */
 
 export const IconButtonPrimary = styled(IconButton)`
-  ${tw`font-semibold  bg-primary text-white hover:bg-primary-dark`}
+  ${tw`font-semibold  bg-primary text-white`}
+
+  &:hover:not(:disabled) {
+    ${tw`bg-primary-dark`}
+  }
 
   &:active,
   &:focus-visible {

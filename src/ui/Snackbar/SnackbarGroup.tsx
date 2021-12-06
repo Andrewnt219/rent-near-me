@@ -1,9 +1,4 @@
-import {
-  AnimatePresence,
-  AnimateSharedLayout,
-  motion,
-  Variants,
-} from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion, Variants } from 'framer-motion';
 import { ComponentProps } from 'react';
 import Snackbar from './Snackbar';
 
@@ -26,7 +21,7 @@ type Props = {
 function SnackbarGroup({ className, ...props }: Props) {
   return (
     <ol className={className} tw="flex flex-col gap-sm w-[min(100%, 20rem)]">
-      <AnimateSharedLayout>
+      <LayoutGroup>
         <AnimatePresence>
           {props.snacks.map((snackbarProps) => (
             <motion.li
@@ -41,7 +36,7 @@ function SnackbarGroup({ className, ...props }: Props) {
             </motion.li>
           ))}
         </AnimatePresence>
-      </AnimateSharedLayout>
+      </LayoutGroup>
     </ol>
   );
 }

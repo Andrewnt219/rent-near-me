@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 const ActionFieldGroup = styled.div`
-  ${tw`  divide-y `}
+  ${tw`divide-y`}
 
   & > * {
     ${tw`py-lg`}
