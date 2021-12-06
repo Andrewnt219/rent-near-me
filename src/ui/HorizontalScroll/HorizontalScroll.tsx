@@ -65,11 +65,14 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
 
   return (
     <div tw="flex items-center gap-xs" {...props}>
-      {isOverFlowingX && !isOnLeftEdge && (
+      {isOverFlowingX && (
         <IconButtonGhost
           size="md"
           tw="flex-shrink-0"
           css={getScrollButtonThemeStyle(theme)}
+          style={{
+            visibility: isOnLeftEdge ? 'hidden' : 'visible',
+          }}
           onClick={onScrollLeft}
         >
           <span tw="sr-only">Scroll left</span>
@@ -86,11 +89,14 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
       >
         {children}
       </div>
-      {isOverFlowingX && !isOnRightEdge && (
+      {isOverFlowingX && (
         <IconButtonGhost
           size="md"
           tw="flex-shrink-0"
           css={getScrollButtonThemeStyle(theme)}
+          style={{
+            visibility: isOnRightEdge ? 'hidden' : 'visible',
+          }}
           onClick={onScrollRight}
         >
           <span tw="sr-only">Scroll right</span>
