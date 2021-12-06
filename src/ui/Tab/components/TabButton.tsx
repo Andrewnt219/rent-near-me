@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC } from 'react';
 import { Tab as ReachTab, TabProps as ReachTabProps } from '@reach/tabs';
 import {
   useTabOption,
