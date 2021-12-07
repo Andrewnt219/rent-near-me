@@ -17,7 +17,7 @@ const Menu: FC<MenuProps> = ({ button, children }) => {
     <ReachMenu>
       <ReachMenuButton
         as={getMenuButtonComponentType(btn)}
-        {...(isValidElement(btn) ? btn.props : {})}
+        {...(isValidElement(btn) && btn.props)}
       />
       <ReachMenuList css={menuStyle}>{children}</ReachMenuList>
     </ReachMenu>

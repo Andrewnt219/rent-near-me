@@ -4,7 +4,7 @@ import { useModals } from '@ui/Modal/ModalContext';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthApi from '@services/AuthApi';
 import { ButtonGhost } from '@ui/Button/Button';
-import React, { VFC } from 'react';
+import React, { ComponentProps, forwardRef, VFC } from 'react';
 import { useRouter } from 'next/router';
 import Menu from '@ui/Menu/Menu';
 import { MenuItem, MenuItemGroup, MenuLink } from '@ui/Menu';
@@ -12,32 +12,13 @@ import useTranslation from 'next-translate/useTranslation';
 import HamburgerIcon from './HamburgerIcon';
 
 const UserMenu: VFC = () => {
-  return (
-    <Menu
-      button={
-        <ButtonGhost
-          rounded
-          tw="flex items-center border pl-md pr-sm py-sm transition-shadow hover:shadow"
-        >
-          <HamburgerIcon />
-          <Icon icon={personFill} tw="w-8 h-8 p-xs rounded-full ml-sm" />
-          <span tw="sr-only">Menu</span>
-        </ButtonGhost>
-      }
-    >
-      <UserMenuContent />
-    </Menu>
-  );
-};
-
-const UserMenuContent = () => {
   const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
   const { registerModal, loginModal } = useModals();
   const router = useRouter();
 
   return (
-    <>
+    <Menu button={<UserMenuButton />}>
       {isAuthenticated ? (
         <MenuItemGroup>
           <MenuLink href="/account">
@@ -46,8 +27,12 @@ const UserMenuContent = () => {
         </MenuItemGroup>
       ) : (
         <MenuItemGroup tw="font-semibold">
-          <MenuItem onSelect={registerModal?.show}>Register</MenuItem>
-          <MenuItem onSelect={loginModal?.show}>Login</MenuItem>
+          <MenuItem onSelect={registerModal?.show}>
+            {t('common:userMenu.register')}
+          </MenuItem>
+          <MenuItem onSelect={loginModal?.show}>
+            {t('common:userMenu.login')}
+          </MenuItem>
         </MenuItemGroup>
       )}
       <MenuItemGroup>
@@ -66,12 +51,29 @@ const UserMenuContent = () => {
               await AuthApi.signOut();
             }}
           >
-            Logout
+            {t('common:userMenu.logout')}
           </MenuItem>
         </MenuItemGroup>
       )}
-    </>
+    </Menu>
   );
 };
+
+const UserMenuButton = forwardRef<HTMLButtonElement, ComponentProps<'button'>>(
+  (props, ref) => {
+    return (
+      <ButtonGhost
+        {...props}
+        rounded
+        tw="flex items-center border pl-md pr-sm py-sm transition-shadow hover:shadow"
+        ref={ref}
+      >
+        <HamburgerIcon />
+        <Icon icon={personFill} tw="w-8 h-8 p-xs rounded-full ml-sm" />
+        <span tw="sr-only">Menu</span>
+      </ButtonGhost>
+    );
+  }
+);
 
 export default UserMenu;

@@ -46,7 +46,7 @@ const HomeNavBar = ({ className }: Props) => {
             <span tw="sr-only">Change site&apos; language</span>
           </IconButtonGhost>
 
-          <UserMenu tw="ml-sm" />
+          <UserMenu />
         </nav>
       </Layout.Container>
     </header>
