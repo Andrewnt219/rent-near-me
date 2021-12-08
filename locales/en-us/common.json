@@ -88,6 +88,7 @@
     }
   },
   "userMenu": {
+    "quickLinks": "Quick Links",
     "login": "Log in",
     "register": "Register",
     "logout": "Log out"

@@ -32,6 +32,7 @@ type MenuProps = ReachMenuListProps & {
  */
 const Menu: FC<MenuProps> = ({ button, children, ...props }) => {
   const btn = Children.only(button);
+
   return (
     <ReachMenu>
       <ReachMenuButton

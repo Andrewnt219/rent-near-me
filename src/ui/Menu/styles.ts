@@ -12,6 +12,13 @@ const menuItemStyle = css`
 `;
 
 /**
+ * Styles applied to MenuItem and MenuLink within a MenuItemGroup with a label
+ */
+const menuItemInLabelledGroupAdditionalStyle = css`
+  ${tw`pl-lg`}
+`;
+
+/**
  * Styles applied to MenuItemGroup
  */
 const menuGroupStyle = css`
@@ -19,6 +26,10 @@ const menuGroupStyle = css`
 
   &:not(:last-of-type) {
     ${tw`border-b `}
+  }
+
+  &[data-label] [role='menuitem'] {
+    ${menuItemInLabelledGroupAdditionalStyle}
   }
 `;
 
