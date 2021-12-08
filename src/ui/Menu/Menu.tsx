@@ -29,6 +29,11 @@ type MenuProps = ReachMenuListProps & {
  *  <MenuLink href="/url-of-link-1">Link 1</MenuLink>
  * </Menu>
  * ```
+ *
+ * **Note:** Avoid rendering items asynchronously as it throws off focusing order.
+ * Rendering 2 completely separated item list if need to.
+ *
+ * @see `@modules/layouts/components/UserMenu/UserMenu.tsx`
  */
 const Menu: FC<MenuProps> = ({ button, children, ...props }) => {
   const btn = Children.only(button);
