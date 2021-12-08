@@ -20,23 +20,49 @@ type TabGroupProps = Omit<
 > &
   TabOptionContextValue & {
     /**
-     * Starts the {@link TabGroup} at a specific index in uncontrolled mode.
+     * Starts the {@link TabGroup} at a specific index (0-based) in uncontrolled mode.
      */
     defaultSelectedTab?: ReachTabsProps['defaultIndex'];
     /**
-     * Uses by the parent component to control the currently selected Tab.
+     * The index of the currenly selected Tab (start from 0).
+     *
+     * Used by the parent component to control the currently selected Tab.
      *
      * Make sure to include the {@link TabGroupProps.onSelectedTabChange} prop or the currently selected tab won't change.
      */
     selectedTab?: ReachTabsProps['index'];
     /**
-     * Invoked with the tab index when the user changes tabs, allowing the parent component to synchronize {@link TabGroupProps.selectedTab}
+     * Invoked with the new Tab's index when the user changes tab, allowing the parent component to synchronize {@link TabGroupProps.selectedTab}
      */
     onSelectedTabChange?: ReachTabsProps['onChange'];
   };
 
 /**
  * A container for a group of Tabs. Only one Tab will be active at a given time.
+ *
+ * @example
+ * **Uncontrolled mode**
+ *
+ * ```jsx
+ * <TabGroup>
+ *  <Tab label="Tab 1">Tab 1 content</Tab>
+ *  <Tab label="Tab 2">Tab 2 content</Tab>
+ *  <Tab label="Tab 3">Tab 3 content</Tab>
+ * </TabGroup>
+ * ```
+ *
+ * @example
+ * **Controlled mode**
+ *
+ * ```jsx
+ * const [tab, setTab] = useState(0);
+ *
+ * <TabGroup selectedTab={tab} onSelectedTabChange={setTab}>
+ *  <Tab label="Tab 1">Tab 1 content</Tab>   // index 0
+ *  <Tab label="Tab 2">Tab 2 content</Tab>   // index 1
+ *  <Tab label="Tab 3">Tab 3 content</Tab>   // index 2
+ * </TabGroup>
+ * ```
  */
 const TabGroup: FC<TabGroupProps> = ({
   theme,
