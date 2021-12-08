@@ -1,15 +1,14 @@
+import { ComponentProps, forwardRef, VFC } from 'react';
+import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { Icon } from '@iconify/react';
 import personFill from '@iconify/icons-eva/person-fill';
+import menuFill from '@iconify/icons-eva/menu-fill';
+import { ButtonGhost } from '@ui/Button/Button';
 import { useModals } from '@ui/Modal/ModalContext';
+import { Menu, MenuItem, MenuItemGroup, MenuLink } from '@ui/Menu';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthApi from '@services/AuthApi';
-import { ButtonGhost } from '@ui/Button/Button';
-import React, { ComponentProps, forwardRef, VFC } from 'react';
-import { useRouter } from 'next/router';
-import Menu from '@ui/Menu/Menu';
-import { MenuItem, MenuItemGroup, MenuLink } from '@ui/Menu';
-import useTranslation from 'next-translate/useTranslation';
-import HamburgerIcon from './HamburgerIcon';
 
 const UserMenu: VFC = () => {
   const { t } = useTranslation();
@@ -68,8 +67,8 @@ const UserMenuButton = forwardRef<HTMLButtonElement, ComponentProps<'button'>>(
         tw="flex items-center border pl-md pr-sm py-sm transition-shadow hover:shadow"
         ref={ref}
       >
-        <HamburgerIcon />
-        <Icon icon={personFill} tw="w-8 h-8 p-xs rounded-full ml-sm" />
+        <Icon icon={menuFill} height={24} />
+        <Icon icon={personFill} height={32} width={32} tw="p-xs ml-xs" />
         <span tw="sr-only">Menu</span>
       </ButtonGhost>
     );
