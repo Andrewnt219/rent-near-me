@@ -9,6 +9,9 @@ type MenuLinkProps = ReachMenuLinkProps & {
   href: string;
 };
 
+/**
+ * An item to be used within a `Menu` with an `href` prop to navigate user to a URL upon sleected.
+ */
 const MenuLink: FC<MenuLinkProps> = (props) => {
   return <ReachMenuLink as={LinkBase} {...props} />;
 };

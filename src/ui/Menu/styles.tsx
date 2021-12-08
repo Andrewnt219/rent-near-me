@@ -1,5 +1,8 @@
 import tw, { css } from 'twin.macro';
 
+/**
+ * Styles applied to MenuItem and MenuLink
+ */
 const menuItemStyle = css`
   ${tw`font-inherit block px-md py-sm hover:bg-light`}
 
@@ -8,6 +11,9 @@ const menuItemStyle = css`
   }
 `;
 
+/**
+ * Styles applied to MenuItemGroup
+ */
 const menuGroupStyle = css`
   ${tw`py-sm`}
 
@@ -16,6 +22,9 @@ const menuGroupStyle = css`
   }
 `;
 
+/**
+ * Styled applied to Menu
+ */
 export const menuStyle = css`
   ${tw`font-normal bg-white min-w-[12.5rem] shadow rounded z-40`}
 
