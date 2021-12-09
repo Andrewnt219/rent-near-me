@@ -1,11 +1,11 @@
 import { useUuid } from '@hooks/useUuid';
 import { Dialog } from '@reach/dialog';
-import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
 import { Icon, IconifyIcon } from '@iconify/react';
 import closeFill from '@iconify/icons-eva/close-fill';
 import tw, { css, styled } from 'twin.macro';
+import { ButtonGhost } from '@ui/Button/Button';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -40,13 +40,14 @@ const Modal: FC<ModalProps> = ({
     >
       {header && (
         <ModalHeader>
-          <IconButtonGhost
+          <ButtonGhost
+            icon
             css={closeModalBtnCss(closeButtonPosition)}
             onClick={onClose}
           >
             {closeButtonIcon ?? <Icon icon={closeFill} tw="w-6 h-6" />}
             <span tw="sr-only">Close dialog</span>
-          </IconButtonGhost>
+          </ButtonGhost>
           <Text component="h3" variant="h5" id={`${id}-modal-title`}>
             {header}
           </Text>

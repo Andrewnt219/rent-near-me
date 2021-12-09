@@ -1,8 +1,8 @@
 import tw, { css } from 'twin.macro';
 
-const commonStyle = tw`rounded outline-none! inline-block text-center disabled:(opacity-60 cursor-not-allowed)`;
+type Size = 'lg' | 'md' | 'sm';
 
-const getSizeStyle = (size?: Size) => {
+const getRegularSizeStyle = (size?: Size) => {
   switch (size) {
     case 'lg':
       return tw`px-md py-md text-h6 min-w-[6rem]`;
@@ -18,17 +18,45 @@ const getSizeStyle = (size?: Size) => {
   }
 };
 
-const getRoundedStyle = (circle?: boolean) => circle && tw`rounded-full`;
+function getIconSizeStyle(size?: Size) {
+  switch (size) {
+    case 'lg':
+      return tw`w-12 h-12 p-sm text-h3`;
 
-type Size = 'lg' | 'md' | 'sm';
+    case 'md':
+      return tw`w-10 h-10 p-xs text-h4`;
+
+    case 'sm':
+      return tw`w-8 h-8 p-xs text-body2`;
+
+    default:
+      return tw``;
+  }
+}
+
+const getRoundedStyle = (rounded?: boolean) =>
+  rounded ? tw`rounded-full` : tw`rounded`;
+
 export type BaseProps = {
   size?: Size;
   rounded?: boolean;
+  icon?: boolean;
 };
 const baseStyle = css<BaseProps>`
-  ${commonStyle}
-  ${(p) => getSizeStyle(p.size)}
-  ${(p) => getRoundedStyle(p.rounded)}
+  ${(p) =>
+    p.icon
+      ? css`
+          ${tw`inline-flex items-center justify-center`}
+          ${getIconSizeStyle(p.size)}
+          ${getRoundedStyle(true)}
+        `
+      : css`
+          ${tw`inline-block text-center`}
+          ${tw`outline-none!`}
+          ${getRegularSizeStyle(p.size)}
+          ${getRoundedStyle(p.rounded)}
+        `}
+  ${tw`disabled:(opacity-60 cursor-not-allowed)`}
 `;
 
 export const primaryStyle = css`
