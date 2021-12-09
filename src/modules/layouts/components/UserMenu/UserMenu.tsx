@@ -1,129 +1,94 @@
-import { RouteProps } from '@common-types';
+import { ComponentProps, forwardRef, VFC } from 'react';
+import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { Icon } from '@iconify/react';
 import personFill from '@iconify/icons-eva/person-fill';
+import menuFill from '@iconify/icons-eva/menu-fill';
+import { ButtonGhost } from '@ui/Button/Button';
 import { useModals } from '@ui/Modal/ModalContext';
+import { Menu, MenuItem, MenuItemGroup, MenuLink } from '@ui/Menu';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthApi from '@services/AuthApi';
-import { ButtonGhost } from '@ui/Button/Button';
-import { HTMLAttributes } from 'react';
-import tw, { styled } from 'twin.macro';
-import { StyledUserMenuLink } from '../UserMenuLink/UserMenuLink';
-import UserMenuLinksGroup from '../UserMenuLinksGroup/UserMenuLinksGroup';
-import { useUserMenuDropDown } from './useUserMenuDropdown';
-import { useRouter } from 'next/router';
-type Props = {
-  className?: string;
-};
-const UserMenu = ({ className }: Props) => {
-  const { isOpen, wrapperRef, closeDropdown, openDropdown, toggleDropDown } =
-    useUserMenuDropDown();
+
+const UserMenu: VFC = () => {
+  const { isAuthenticated } = useAuth();
 
   return (
-    <div tw="relative" ref={wrapperRef}>
+    <Menu button={<UserMenuButton />}>
+      {isAuthenticated ? (
+        <AuthenticatedUserMenuContent />
+      ) : (
+        <UnauthenticatedUserMenuContent />
+      )}
+    </Menu>
+  );
+};
+
+const UnauthenticatedUserMenuContent: VFC = () => {
+  const { t } = useTranslation();
+  const { registerModal, loginModal } = useModals();
+  return (
+    <>
+      <MenuItemGroup tw="font-semibold">
+        <MenuItem onSelect={registerModal?.show}>
+          {t('common:userMenu.register')}
+        </MenuItem>
+        <MenuItem onSelect={loginModal?.show}>
+          {t('common:userMenu.login')}
+        </MenuItem>
+      </MenuItemGroup>
+      <MenuItemGroup label={t('common:userMenu.quickLinks')}>
+        <MenuLink href="/">{t('common:routes.home')}</MenuLink>
+      </MenuItemGroup>
+    </>
+  );
+};
+
+const AuthenticatedUserMenuContent: VFC = () => {
+  const { t } = useTranslation();
+  const router = useRouter();
+  return (
+    <>
+      <MenuItemGroup>
+        <MenuLink href="/account">{t('common:routes.account.index')}</MenuLink>
+      </MenuItemGroup>
+      <MenuItemGroup label={t('common:userMenu.quickLinks')}>
+        <MenuLink href="/">{t('common:routes.home')}</MenuLink>
+        <MenuLink href="/account/security">
+          {t('common:routes.account.security')}
+        </MenuLink>
+        <MenuLink href="/wishlist">{t('common:routes.wishlist')}</MenuLink>
+      </MenuItemGroup>
+      <MenuItemGroup>
+        <MenuItem
+          tw="text-danger"
+          onSelect={async () => {
+            await router.push('/');
+            await AuthApi.signOut();
+          }}
+        >
+          {t('common:userMenu.logout')}
+        </MenuItem>
+      </MenuItemGroup>
+    </>
+  );
+};
+
+const UserMenuButton = forwardRef<HTMLButtonElement, ComponentProps<'button'>>(
+  (props, ref) => {
+    return (
       <ButtonGhost
-        className={className}
-        id="user-menu-button"
-        aria-haspopup
-        aria-controls="user-menu-menu"
-        aria-expanded={isOpen}
-        aria-pressed={isOpen}
-        onClick={toggleDropDown}
+        {...props}
         rounded
         tw="flex items-center border pl-md pr-sm py-sm transition-shadow hover:shadow"
+        ref={ref}
       >
-        <span tw="sr-only">Menu</span>
-
-        <HamburgerIcon />
-
-        <Icon icon={personFill} tw="w-8 h-8 p-xs rounded-full ml-sm" />
+        <Icon icon={menuFill} height={24} />
+        <Icon icon={personFill} height={32} width={32} tw="p-xs ml-xs" />
+        <span tw="sr-only">User menu</span>
       </ButtonGhost>
-      {isOpen && <Menu onBlur={closeDropdown} onFocus={openDropdown} />}
-    </div>
-  );
-};
-/* -------------------------------- Hamburger ------------------------------- */
-function HamburgerIcon() {
-  return (
-    <div tw="inline-flex flex-col justify-center space-y-0.5 h-full">
-      <StyledLine />
-      <StyledLine />
-      <StyledLine />
-    </div>
-  );
-}
-
-const StyledLine = styled.div`
-  ${tw`h-0.5 w-5 bg-dark`}
-`;
-
-/* ---------------------------------- Menu ---------------------------------- */
-const links: Record<string, RouteProps[]> = {
-  account: [
-    {
-      textTranslateKey: 'account.index',
-      href: '/account',
-    },
-  ],
-  preference: [
-    {
-      textTranslateKey: 'home',
-      href: '/',
-    },
-    {
-      textTranslateKey: 'account.security',
-      href: '/account/security',
-    },
-    {
-      textTranslateKey: 'wishlist',
-      href: '/wishlist',
-    },
-  ],
-};
-
-type MenuProps = HTMLAttributes<HTMLUListElement>;
-function Menu(props: MenuProps) {
-  const { isAuthenticated } = useAuth();
-  const router = useRouter();
-  const { registerModal, loginModal } = useModals();
-
-  return (
-    <ul
-      {...props}
-      id="user-menu-menu"
-      role="menu"
-      aria-label="Menu links"
-      tw="font-normal absolute top-[125%] right-0 bg-white min-w-[12.5rem] shadow rounded z-40"
-    >
-      {isAuthenticated ? (
-        <UserMenuLinksGroup routes={links['account']} />
-      ) : (
-        <UserMenuLinksGroup tw="font-semibold">
-          <StyledUserMenuLink as="button" onClick={registerModal?.show}>
-            Register
-          </StyledUserMenuLink>
-
-          <StyledUserMenuLink as="button" onClick={loginModal?.show}>
-            Login
-          </StyledUserMenuLink>
-        </UserMenuLinksGroup>
-      )}
-      <UserMenuLinksGroup routes={links['preference']} />
-      {isAuthenticated && (
-        <UserMenuLinksGroup>
-          <StyledUserMenuLink
-            tw="text-danger"
-            as="button"
-            onClick={async () => {
-              await router.push('/');
-              await AuthApi.signOut();
-            }}
-          >
-            Logout
-          </StyledUserMenuLink>
-        </UserMenuLinksGroup>
-      )}
-    </ul>
-  );
-}
+    );
+  }
+);
 
 export default UserMenu;

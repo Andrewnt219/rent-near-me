@@ -18,6 +18,22 @@ type TabProps = ReachTabPanelProps & {
 
 /**
  * A single tab panel within a TabGroup.
+ *
+ * @example
+ * Use text for label
+ * ```jsx
+ * <Tab label="Tab label">Tab content</Tab>
+ * ```
+ *
+ * Use JSX for label
+ * ```jsx
+ * <Tab label={
+ *  <div tw="flex items-center">
+ *    <Icon icon={someIcon} />
+ *    <span>Tab label</span>
+ *  </div>
+ * }>Tab content</Tab>
+ * ```
  */
 const Tab: FC<TabProps> = (props) => (
   <ReachTabPanel tabIndex={-1} {...props}></ReachTabPanel>
