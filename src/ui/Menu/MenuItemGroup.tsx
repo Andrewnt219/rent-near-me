@@ -1,11 +1,7 @@
 import { FC, ReactNode } from 'react';
+import tw, { styled } from 'twin.macro';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import Text from '@ui/Text/Text';
-import {
-  menuGroupLabelStyle,
-  menuGroupStyle,
-  menuSeparatorStyle,
-} from './styles';
 
 type MenuItemGroupProps = RadixDropdownMenu.DropdownMenuGroupProps & {
   /**
@@ -45,21 +41,42 @@ const MenuItemGroup: FC<MenuItemGroupProps> = ({
 }) => {
   return (
     <>
-      <RadixDropdownMenu.Group css={menuGroupStyle} {...props}>
+      <MenuGroup {...props}>
         {label && (
-          <RadixDropdownMenu.Label asChild>
-            <Text variant="overline" css={menuGroupLabelStyle}>
-              {label}
-            </Text>
-          </RadixDropdownMenu.Label>
+          <MenuLabel asChild>
+            <Text variant="overline">{label}</Text>
+          </MenuLabel>
         )}
         {children}
-      </RadixDropdownMenu.Group>
-      <RadixDropdownMenu.Separator asChild css={menuSeparatorStyle}>
+      </MenuGroup>
+      <MenuSeparator asChild>
         <hr />
-      </RadixDropdownMenu.Separator>
+      </MenuSeparator>
     </>
   );
 };
 
 export default MenuItemGroup;
+
+/**
+ * A component provides styling for {@link RadixDropdownMenu.Group}
+ */
+const MenuGroup = styled(RadixDropdownMenu.Group)`
+  ${tw`py-sm`}
+`;
+
+/**
+ * A component provides styling for {@link RadixDropdownMenu.Label}
+ */
+const MenuLabel = styled(RadixDropdownMenu.Label)`
+  ${tw`px-md py-sm uppercase`}
+`;
+
+/**
+ * A component provides styling for {@link RadixDropdownMenu.Separator}
+ */
+const MenuSeparator = styled(RadixDropdownMenu.Separator)`
+  &:last-child {
+    ${tw`hidden`}
+  }
+`;

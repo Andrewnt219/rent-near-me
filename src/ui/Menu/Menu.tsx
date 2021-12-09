@@ -1,6 +1,6 @@
 import { ReactNode, FC } from 'react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
-import { menuStyle } from './styles';
+import tw, { styled } from 'twin.macro';
 
 type MenuProps = RadixDropdownMenu.DropdownMenuProps & {
   /**
@@ -37,16 +37,18 @@ const Menu: FC<MenuProps> = ({
   return (
     <RadixDropdownMenu.Root {...props}>
       <RadixDropdownMenu.Trigger asChild>{button}</RadixDropdownMenu.Trigger>
-      <RadixDropdownMenu.Content
-        css={menuStyle}
-        align="start"
-        sideOffset={8}
-        {...menuPopupProps}
-      >
+      <MenuContent align="start" sideOffset={8} {...menuPopupProps}>
         {children}
-      </RadixDropdownMenu.Content>
+      </MenuContent>
     </RadixDropdownMenu.Root>
   );
 };
 
 export default Menu;
+
+/**
+ * A component provides styling for {@link RadixDropdownMenu.Content} (the menu popup)
+ */
+const MenuContent = styled(RadixDropdownMenu.Content)`
+  ${tw`font-normal bg-white min-w-[12.5rem] shadow-z8 rounded`}
+`;

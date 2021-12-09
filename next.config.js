@@ -6,8 +6,7 @@ const bundleAnalyzer = require('@next/bundle-analyzer')({
 const nextTranslate = require('next-translate');
 
 const nextConfig = {
-  // Temporary set to `false` to disable mismatch `id` error caused by Radix UI
-  reactStrictMode: false,
+  reactStrictMode: true,
   webpack: (config) => {
     // Unset client-side javascript that only works server-side
     config.resolve.fallback = { fs: false, module: false };

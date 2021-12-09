@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { LinkBase, LinkProps } from '@ui/Button/Link';
-import { menuItemStyle } from './styles';
+import MenuItemBase from './MenuItemBase';
 
 type MenuLinkProps = Omit<LinkProps, 'ref'> & {
   /**
@@ -15,9 +15,9 @@ type MenuLinkProps = Omit<LinkProps, 'ref'> & {
  */
 const MenuLink: FC<MenuLinkProps> = ({ menuItemProps, ...props }) => {
   return (
-    <RadixDropdownMenu.Item {...menuItemProps} asChild>
-      <LinkBase css={menuItemStyle} {...props}></LinkBase>
-    </RadixDropdownMenu.Item>
+    <MenuItemBase {...menuItemProps} asChild>
+      <LinkBase {...props} />
+    </MenuItemBase>
   );
 };
 
