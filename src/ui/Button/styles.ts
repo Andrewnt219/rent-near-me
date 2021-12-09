@@ -2,6 +2,9 @@ import tw, { css } from 'twin.macro';
 
 type Size = 'lg' | 'md' | 'sm';
 
+/**
+ * Getter for styling of buttons and links when `icon` is `false` or not specified
+ */
 const getRegularSizeStyle = (size?: Size) => {
   switch (size) {
     case 'lg':
@@ -18,6 +21,9 @@ const getRegularSizeStyle = (size?: Size) => {
   }
 };
 
+/**
+ * Getter for styling of buttons and links when `icon` is `true`
+ */
 function getIconSizeStyle(size?: Size) {
   switch (size) {
     case 'lg':
@@ -34,14 +40,32 @@ function getIconSizeStyle(size?: Size) {
   }
 }
 
+/**
+ * Getter for styling of buttons and links when `rounded` is `true` and `icon` is `false` or not specified
+ */
 const getRoundedStyle = (rounded?: boolean) =>
   rounded ? tw`rounded-full` : tw`rounded`;
 
 export type BaseProps = {
+  /**
+   * Size of the button which can be different between regular and icon variant even at the same size
+   */
   size?: Size;
+  /**
+   * Button would have the corners rounded if set to `true`. This prop is ignored when `icon` prop is `true`
+   */
   rounded?: boolean;
+  /**
+   * Button would be styled in a circle shape if set to `true`.
+   *
+   * Usually used when onky a single icon should be displayed within the button.
+   */
   icon?: boolean;
 };
+
+/**
+ * Base styles for all buttons and links in `@ui/Button`
+ */
 const baseStyle = css<BaseProps>`
   ${(p) =>
     p.icon
@@ -59,6 +83,9 @@ const baseStyle = css<BaseProps>`
   ${tw`disabled:(opacity-60 cursor-not-allowed)`}
 `;
 
+/**
+ * Styling for button in `primary` theme
+ */
 export const primaryStyle = css`
   ${baseStyle}
 
@@ -74,6 +101,9 @@ export const primaryStyle = css`
   }
 `;
 
+/**
+ * Styling for button in `secondary` theme
+ */
 export const secondaryStyle = css`
   ${baseStyle}
 
@@ -89,6 +119,9 @@ export const secondaryStyle = css`
   }
 `;
 
+/**
+ * Styling for button in `ghost` theme
+ */
 export const ghostStyle = css`
   ${baseStyle}
 
@@ -102,6 +135,9 @@ export const ghostStyle = css`
   }
 `;
 
+/**
+ * Styling for button in `outline` theme
+ */
 export const outlineStyle = css`
   ${baseStyle}
 
@@ -116,6 +152,9 @@ export const outlineStyle = css`
   }
 `;
 
+/**
+ * Styling for button to look like a link
+ */
 export const linkStyle = css`
   ${baseStyle}
 

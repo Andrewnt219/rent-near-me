@@ -15,6 +15,10 @@ export type LinkProps = ComponentProps<'a'> &
     nextLinkProps?: Omit<NextLinkProps, 'href'>;
   };
 
+/**
+ * A Link component that implements the {@link React.forwardRef} API and is capable of
+ * rendering both internal links with {@link NextLink} and external links with native {@link HTMLAnchorElement}
+ */
 export const LinkBase = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ href, nextLinkProps, children, ...props }, ref) =>
     href.startsWith('/') ? (
@@ -30,22 +34,37 @@ export const LinkBase = forwardRef<HTMLAnchorElement, LinkProps>(
     )
 );
 
+/**
+ * {@link LinkBase} with {@link primaryStyle}
+ */
 export const LinkPrimary = forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => <LinkBase css={primaryStyle} {...props} ref={ref} />
 );
 
+/**
+ * {@link LinkBase} with {@link secondaryStyle}
+ */
 export const LinkSecondary = forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => <LinkBase css={secondaryStyle} {...props} ref={ref} />
 );
 
+/**
+ * {@link LinkBase} with {@link ghostStyle}
+ */
 export const LinkGhost = forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => <LinkBase css={ghostStyle} {...props} ref={ref} />
 );
 
+/**
+ * {@link LinkBase} with {@link outlineStyle}
+ */
 export const LinkOutline = forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => <LinkBase css={outlineStyle} {...props} ref={ref} />
 );
 
+/**
+ * {@link LinkBase} with {@link linkStyle} (regular link appearance)
+ */
 export const LinkSimple = forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => <LinkBase css={linkStyle} {...props} ref={ref} />
 );
