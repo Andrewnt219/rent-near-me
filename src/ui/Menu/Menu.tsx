@@ -1,20 +1,18 @@
-import { Children, isValidElement, ReactNode, FC } from 'react';
-import {
-  Menu as ReachMenu,
-  MenuButton as ReachMenuButton,
-  MenuList as ReachMenuList,
-  MenuListProps as ReachMenuListProps,
-} from '@reach/menu-button';
+import { ReactNode, FC } from 'react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { menuStyle } from './styles';
 
-type MenuProps = ReachMenuListProps & {
+type MenuProps = RadixDropdownMenu.DropdownMenuProps & {
   /**
    * *A single {@link JSX.Element}* as the button to control the popup menu to be rendered where {@link Menu} is used.
    *
-   * **Note:** A valid button here must be an HTML native element or an element that implement the {@link React.forwardRef} API
-   * or the menu won't be interactive.
+   * **Note:** A valid button here must be an HTML native element or an element that implement the {@link React.forwardRef} API.
    */
   button: ReactNode;
+  /**
+   * Props passed into the popup menu element
+   */
+  menuPopupProps?: RadixDropdownMenu.DropdownMenuContentProps;
 };
 
 /**
@@ -29,35 +27,26 @@ type MenuProps = ReachMenuListProps & {
  *  <MenuLink href="/url-of-link-1">Link 1</MenuLink>
  * </Menu>
  * ```
- *
- * **Note:** Avoid rendering items asynchronously as it throws off focusing order.
- * Rendering 2 completely separated item list if need to.
- *
- * @see `@modules/layouts/components/UserMenu/UserMenu.tsx`
  */
-const Menu: FC<MenuProps> = ({ button, children, ...props }) => {
-  const btn = Children.only(button);
-
+const Menu: FC<MenuProps> = ({
+  button,
+  children,
+  menuPopupProps,
+  ...props
+}) => {
   return (
-    <ReachMenu>
-      <ReachMenuButton
-        as={getMenuButtonComponentType(btn)}
-        {...(isValidElement(btn) && btn.props)}
-      />
-      <ReachMenuList css={menuStyle} {...props}>
+    <RadixDropdownMenu.Root {...props}>
+      <RadixDropdownMenu.Trigger asChild>{button}</RadixDropdownMenu.Trigger>
+      <RadixDropdownMenu.Content
+        css={menuStyle}
+        align="start"
+        sideOffset={8}
+        {...menuPopupProps}
+      >
         {children}
-      </ReachMenuList>
-    </ReachMenu>
+      </RadixDropdownMenu.Content>
+    </RadixDropdownMenu.Root>
   );
 };
-
-/**
- * Getter for the element type of the menu-control button
- * (i.e.: `ButtonGhost` in the case of the example above)
- */
-const getMenuButtonComponentType = (button: ReactNode) =>
-  isValidElement(button) && typeof button.type !== 'string'
-    ? button.type
-    : 'button';
 
 export default Menu;

@@ -1,24 +1,28 @@
-import { HTMLAttributes, PropsWithChildren } from 'react';
+import { HTMLAttributes, forwardRef } from 'react';
 import tw, { styled } from 'twin.macro';
 
-type Props = HTMLAttributes<HTMLHeadingElement> & {
+type TextProps = HTMLAttributes<HTMLHeadingElement> & {
   className?: string;
   component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
   variant?: StyledTextProps['variant'];
 };
-function Text({ className, ...props }: PropsWithChildren<Props>) {
+
+type TextRef = HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement;
+
+const Text = forwardRef<TextRef, TextProps>(({ className, ...props }, ref) => {
   return (
     <StyledText
       {...props}
       as={props.component ?? 'p'}
       variant={props.variant}
       className={className}
+      ref={ref}
       tw=""
     >
       {props.children}
     </StyledText>
   );
-}
+});
 
 type StyledTextProps = {
   variant?:

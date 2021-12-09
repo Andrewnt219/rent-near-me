@@ -1,8 +1,13 @@
-import { useUuid } from '@hooks/useUuid';
+import { FC, ReactNode } from 'react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import Text from '@ui/Text/Text';
-import { ComponentProps, FC, ReactNode, useMemo } from 'react';
+import {
+  menuGroupLabelStyle,
+  menuGroupStyle,
+  menuSeparatorStyle,
+} from './styles';
 
-type MenuItemGroupProps = ComponentProps<'div'> & {
+type MenuItemGroupProps = RadixDropdownMenu.DropdownMenuGroupProps & {
   /**
    * Label of the MenuItemGroup
    */
@@ -25,7 +30,7 @@ type MenuItemGroupProps = ComponentProps<'div'> & {
  *    <MenuLink href="/url-to-link-2">Item 2</MenuLink>
  *    <MenuLink href="/url-to-link-3">Item 3</MenuLink>
  *  </MenuItemGroup>
- *  <MenuItemGroup label={Group 3}> // You can mix as well
+ *  <MenuItemGroup label={`Group 3`}> // You can mix as well
  *    <MenuItem onSelect={() => { ... }}>Item 3</MenuItem>
  *    <MenuItem onSelect={() => { ... }}>Item 4</MenuItem>
  *    <MenuLink href="/url-to-link-3">Item 4</MenuLink>
@@ -38,22 +43,22 @@ const MenuItemGroup: FC<MenuItemGroupProps> = ({
   children,
   ...props
 }) => {
-  const id = useUuid();
-  const labelId = useMemo(() => `Menu-MenuItemGroup-Title-${id}`, [id]);
   return (
-    <div
-      role="group"
-      aria-labelledby={label ? labelId : undefined}
-      data-label={label}
-      {...props}
-    >
-      {label && (
-        <Text id={labelId} variant="overline" tw="px-md py-sm uppercase">
-          {label}
-        </Text>
-      )}
-      {children}
-    </div>
+    <>
+      <RadixDropdownMenu.Group css={menuGroupStyle} {...props}>
+        {label && (
+          <RadixDropdownMenu.Label asChild>
+            <Text variant="overline" css={menuGroupLabelStyle}>
+              {label}
+            </Text>
+          </RadixDropdownMenu.Label>
+        )}
+        {children}
+      </RadixDropdownMenu.Group>
+      <RadixDropdownMenu.Separator asChild css={menuSeparatorStyle}>
+        <hr />
+      </RadixDropdownMenu.Separator>
+    </>
   );
 };
 
