@@ -9,7 +9,7 @@ import {
   BaseProps,
 } from './styles';
 
-type LinkProps = ComponentProps<'a'> &
+export type LinkProps = ComponentProps<'a'> &
   BaseProps & {
     href: string;
     nextLinkProps?: Omit<NextLinkProps, 'href'>;

@@ -1,8 +1,9 @@
-import { useUuid } from '@hooks/useUuid';
+import { FC, ReactNode } from 'react';
+import tw, { styled } from 'twin.macro';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import Text from '@ui/Text/Text';
-import { ComponentProps, FC, ReactNode, useMemo } from 'react';
 
-type MenuItemGroupProps = ComponentProps<'div'> & {
+type MenuItemGroupProps = RadixDropdownMenu.DropdownMenuGroupProps & {
   /**
    * Label of the MenuItemGroup
    */
@@ -25,7 +26,7 @@ type MenuItemGroupProps = ComponentProps<'div'> & {
  *    <MenuLink href="/url-to-link-2">Item 2</MenuLink>
  *    <MenuLink href="/url-to-link-3">Item 3</MenuLink>
  *  </MenuItemGroup>
- *  <MenuItemGroup label={Group 3}> // You can mix as well
+ *  <MenuItemGroup label={`Group 3`}> // You can mix as well
  *    <MenuItem onSelect={() => { ... }}>Item 3</MenuItem>
  *    <MenuItem onSelect={() => { ... }}>Item 4</MenuItem>
  *    <MenuLink href="/url-to-link-3">Item 4</MenuLink>
@@ -38,23 +39,44 @@ const MenuItemGroup: FC<MenuItemGroupProps> = ({
   children,
   ...props
 }) => {
-  const id = useUuid();
-  const labelId = useMemo(() => `Menu-MenuItemGroup-Title-${id}`, [id]);
   return (
-    <div
-      role="group"
-      aria-labelledby={label ? labelId : undefined}
-      data-label={label}
-      {...props}
-    >
-      {label && (
-        <Text id={labelId} variant="overline" tw="px-md py-sm uppercase">
-          {label}
-        </Text>
-      )}
-      {children}
-    </div>
+    <>
+      <MenuGroup {...props}>
+        {label && (
+          <MenuLabel asChild>
+            <Text variant="overline">{label}</Text>
+          </MenuLabel>
+        )}
+        {children}
+      </MenuGroup>
+      <MenuSeparator asChild>
+        <hr />
+      </MenuSeparator>
+    </>
   );
 };
 
 export default MenuItemGroup;
+
+/**
+ * A component provides styling for {@link RadixDropdownMenu.Group}
+ */
+const MenuGroup = styled(RadixDropdownMenu.Group)`
+  ${tw`py-sm`}
+`;
+
+/**
+ * A component provides styling for {@link RadixDropdownMenu.Label}
+ */
+const MenuLabel = styled(RadixDropdownMenu.Label)`
+  ${tw`px-md py-sm uppercase`}
+`;
+
+/**
+ * A component provides styling for {@link RadixDropdownMenu.Separator}
+ */
+const MenuSeparator = styled(RadixDropdownMenu.Separator)`
+  &:last-child {
+    ${tw`hidden`}
+  }
+`;
