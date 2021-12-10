@@ -77,7 +77,7 @@ const TabGroup: FC<TabGroupProps> = ({
   const tabId = useId();
   return (
     <TabOptionProvider options={{ theme, buttonJustify, buttonGap }}>
-      <LayoutGroup id={`Tab-LayoutGroup-${tabId}`}>
+      <LayoutGroup id={`Tab_LayoutGroup_${tabId}`}>
         <ReachTabs
           keyboardActivation={TabsKeyboardActivation.Manual}
           defaultIndex={defaultSelectedTab}

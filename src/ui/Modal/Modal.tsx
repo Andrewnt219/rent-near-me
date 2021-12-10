@@ -35,7 +35,7 @@ const Modal: FC<ModalProps> = ({
   return (
     <Dialog
       id={modalId}
-      aria-labelledby={`Modal-Title-${modalId}`}
+      aria-labelledby={`Modal_Title_${modalId}`}
       css={modalDialogCss(size)}
       isOpen={show}
       onDismiss={onClose}
