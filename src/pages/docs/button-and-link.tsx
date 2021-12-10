@@ -6,7 +6,7 @@ import {
   ButtonOutline,
   ButtonPrimary,
   ButtonSecondary,
-} from '@ui/Button/Button';
+} from '@ui/Button';
 import {
   LinkSimple,
   LinkPrimary,

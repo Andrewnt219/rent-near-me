@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import searchFill from '@iconify/icons-eva/search-fill';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { ButtonPrimary } from '@ui/Button/Button';
+import { ButtonPrimary } from '@ui/Button';
 
 type Props = {
   className?: string;

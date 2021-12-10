@@ -1,5 +1,5 @@
 import DateField from '@ui/Form/DateField';
-import { ButtonLink, ButtonPrimary } from '@ui/Button/Button';
+import { ButtonLink, ButtonPrimary } from '@ui/Button';
 import { GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import Form from '@ui/Form/Form';
 import PasswordField from '@ui/Form/PasswordField';

@@ -10,7 +10,7 @@ import {
 } from './styles';
 
 /**
- * Props for all the buttons in `@ui/Button/Button`
+ * Props for all the buttons in `@ui/Button`
  */
 export type ButtonProps = ComponentProps<'button'> & BaseProps;
 

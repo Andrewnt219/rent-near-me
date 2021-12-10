@@ -5,7 +5,7 @@ import { FC, ReactNode } from 'react';
 import { Icon, IconifyIcon } from '@iconify/react';
 import closeFill from '@iconify/icons-eva/close-fill';
 import tw, { css, styled } from 'twin.macro';
-import { ButtonGhost } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';

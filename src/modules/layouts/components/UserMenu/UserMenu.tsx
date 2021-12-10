@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { Icon } from '@iconify/react';
 import personFill from '@iconify/icons-eva/person-fill';
 import menuFill from '@iconify/icons-eva/menu-fill';
-import { ButtonGhost } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button';
 import { useModals } from '@ui/Modal/ModalContext';
 import { Menu, MenuItem, MenuItemGroup, MenuLink } from '@ui/Menu';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';

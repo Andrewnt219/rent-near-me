@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 import globeFill from '@iconify/icons-eva/globe-fill';
 import { LinkBase } from '@ui/Button/Link';
-import { ButtonGhost } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button';
 import { useModals } from '@ui/Modal/ModalContext';
 import LogoWithName from '@ui/Logo/LogoWithName';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';

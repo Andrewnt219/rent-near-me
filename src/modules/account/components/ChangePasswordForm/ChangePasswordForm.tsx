@@ -1,5 +1,5 @@
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { ButtonLink, ButtonSecondary } from '@ui/Button/Button';
+import { ButtonLink, ButtonSecondary } from '@ui/Button';
 import Form from '@ui/Form/Form';
 import HiddenField from '@ui/Form/HiddenField';
 import PasswordField from '@ui/Form/PasswordField';
