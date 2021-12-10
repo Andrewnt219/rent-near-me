@@ -12,7 +12,7 @@ import {
   TabOptionProvider,
 } from '../contexts/TabOptionContext';
 import { LayoutGroup } from 'framer-motion';
-import { useUuid } from '@hooks/useUuid';
+import { useId } from '@radix-ui/react-id';
 
 type TabGroupProps = Omit<
   ReachTabsProps,
@@ -74,7 +74,7 @@ const TabGroup: FC<TabGroupProps> = ({
   children,
   ...props
 }) => {
-  const tabId = useUuid();
+  const tabId = useId();
   return (
     <TabOptionProvider options={{ theme, buttonJustify, buttonGap }}>
       <LayoutGroup id={`Tab-LayoutGroup-${tabId}`}>
