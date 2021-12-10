@@ -1,4 +1,4 @@
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import AuthApi from '@services/AuthApi';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
