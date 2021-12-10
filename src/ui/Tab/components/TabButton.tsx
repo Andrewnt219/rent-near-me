@@ -30,7 +30,7 @@ const TabButton: FC<TabButtonProps> = ({ children, ...props }) => {
       {...props}
     >
       {children}
-      {isSelected && <SelectedIndicator layoutId="Tab-SelectedIndicator" />}
+      {isSelected && <SelectedIndicator layoutId="tab-selectedIndicator" />}
     </ReachTab>
   );
 };

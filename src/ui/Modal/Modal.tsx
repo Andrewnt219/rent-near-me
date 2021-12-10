@@ -31,11 +31,11 @@ const Modal: FC<ModalProps> = ({
   ...props
 }) => {
   const modalId = useId(id);
-
+  const modalTitleId = `modal-title-${modalId}`;
   return (
     <Dialog
       id={modalId}
-      aria-labelledby={`Modal_Title_${modalId}`}
+      aria-labelledby={modalTitleId}
       css={modalDialogCss(size)}
       isOpen={show}
       onDismiss={onClose}
@@ -51,7 +51,7 @@ const Modal: FC<ModalProps> = ({
             {closeButtonIcon ?? <Icon icon={closeFill} tw="w-6 h-6" />}
             <span tw="sr-only">Close dialog</span>
           </ButtonGhost>
-          <Text component="h3" variant="h5" id={`Modal-Title-${modalId}`}>
+          <Text component="h3" variant="h5" id={modalTitleId}>
             {header}
           </Text>
         </ModalHeader>
