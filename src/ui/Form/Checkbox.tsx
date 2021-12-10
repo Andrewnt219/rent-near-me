@@ -1,9 +1,9 @@
-import { InputHTMLAttributes, ReactNode, useMemo, VFC } from 'react';
+import { InputHTMLAttributes, ReactNode, VFC } from 'react';
 import { useController } from 'react-hook-form';
 import Form from './Form';
 import { Icon } from '@iconify/react';
 import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
-import { useId } from '@react-aria/utils';
+import { useId } from '@radix-ui/react-id';
 
 type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;

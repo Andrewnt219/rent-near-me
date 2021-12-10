@@ -2,7 +2,7 @@ import { InputHTMLAttributes, ReactNode, useState, VFC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useController } from 'react-hook-form';
 import Form from './Form';
-import { useId } from '@react-aria/utils';
+import { useId } from '@radix-ui/react-id';
 
 type PasswordFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;

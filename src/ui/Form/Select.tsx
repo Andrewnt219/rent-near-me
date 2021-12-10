@@ -3,7 +3,7 @@ import { useController } from 'react-hook-form';
 import Form from './Form';
 import { Icon } from '@iconify/react';
 import arrowDownFill from '@iconify/icons-eva/arrow-down-fill';
-import { useId } from '@react-aria/utils';
+import { useId } from '@radix-ui/react-id';
 
 type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   name: string;

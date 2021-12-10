@@ -12,7 +12,7 @@ import {
   TabOptionProvider,
 } from '../contexts/TabOptionContext';
 import { LayoutGroup } from 'framer-motion';
-import { useId } from '@react-aria/utils';
+import { useId } from '@radix-ui/react-id';
 
 type TabGroupProps = Omit<
   ReachTabsProps,
