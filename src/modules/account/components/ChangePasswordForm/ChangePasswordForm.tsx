@@ -20,7 +20,6 @@ function ChangePasswordForm() {
 
       {effectiveProvider === 'password' && (
         <PasswordField
-          id="change-password-old-password"
           name="oldPassword"
           label={t('account:security.change-password.old-password')}
           autoComplete="current-password"
@@ -33,7 +32,6 @@ function ChangePasswordForm() {
       )}
 
       <PasswordField
-        id="change-password-new-password"
         name="newPassword"
         label={t('account:security.change-password.new-password')}
         autoComplete="new-password"
@@ -46,7 +44,6 @@ function ChangePasswordForm() {
       </Form.Group>
 
       <PasswordField
-        id="change-password-confirm-new-password"
         name="confirmNewPassword"
         label={t('account:security.change-password.confirm-new-password')}
         autoComplete="new-password"

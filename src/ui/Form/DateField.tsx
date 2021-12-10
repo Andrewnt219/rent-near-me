@@ -1,38 +1,42 @@
 import dayjs from 'dayjs';
+import { useId } from '@react-aria/utils';
 import { DATE_TIME_FORMATS } from '@models/constnats';
 import Form, { inputCss, labelActiveCss, labelInvalidCss } from '@ui/Form/Form';
 import { isEmptyString } from '@utils/validate-js-utils';
-import { ReactNode, VFC, useMemo } from 'react';
+import { ReactNode, VFC } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DayPickerInputProps } from 'react-day-picker/types/Props';
 import { useController } from 'react-hook-form';
 import tw, { css, styled } from 'twin.macro';
 
 type DateFieldProps = Omit<DayPickerInputProps, 'placeholder'> & {
-  id: string;
   name: string;
   label: ReactNode;
+  id?: string;
   inputDescription?: ReactNode;
 };
 
 const DateField: VFC<DateFieldProps> = ({
-  id,
   name,
   label,
+  id,
   inputDescription,
   inputProps,
   dayPickerProps,
   ...pickerProps
 }) => {
   const { field, fieldState } = useController({ name });
-  const errMsgId = useMemo(() => `error-${id}`, [id]);
-  const descId = useMemo(() => `description-${id}`, [id]);
+
+  const dateFieldId = useId(id);
+  const errMsgId = `datefield-error-${dateFieldId}`;
+  const descId = `datefield-description-${dateFieldId}`;
+
   return (
     <StyledWrapper>
       <DayPickerInput
         format={DATE_TIME_FORMATS.LONG_DATE}
         inputProps={{
-          id,
+          id: dateFieldId,
           ref: field.ref,
           'aria-invalid': fieldState.invalid,
           'aria-describedby': `${errMsgId} ${descId}`,
@@ -52,6 +56,7 @@ const DateField: VFC<DateFieldProps> = ({
       />
 
       <StyledLabel
+        htmlFor={dateFieldId}
         isInvalid={fieldState.invalid}
         isActive={!isEmptyString(field.value)}
       >

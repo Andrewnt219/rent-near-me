@@ -1,19 +1,19 @@
-import { InputHTMLAttributes, ReactNode, VFC, useMemo } from 'react';
+import { useId } from '@react-aria/utils';
+import { InputHTMLAttributes, ReactNode, VFC } from 'react';
 import { useController } from 'react-hook-form';
 import Form from './Form';
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-  id: string;
   name: string;
   label: ReactNode;
   inputDescription?: ReactNode;
 };
 
 const TextField: VFC<TextFieldProps> = ({
-  id,
   name,
   label,
   inputDescription,
+  id,
   ...inputProps
 }) => {
   const {
@@ -21,13 +21,14 @@ const TextField: VFC<TextFieldProps> = ({
     fieldState,
   } = useController({ name });
 
-  const errMsgId = useMemo(() => `error-${id}`, [id]);
-  const descId = useMemo(() => `description-${id}`, [id]);
+  const textFieldId = useId(id);
+  const errMsgId = `textField-error-${textFieldId}`;
+  const descId = `textField-description-${textFieldId}`;
 
   return (
     <Form.Group>
       <Form.Input
-        id={id}
+        id={textFieldId}
         aria-describedby={`${errMsgId} ${descId}`}
         aria-invalid={fieldState.invalid}
         {...inputProps}
@@ -36,7 +37,7 @@ const TextField: VFC<TextFieldProps> = ({
         placeholder=" "
       />
 
-      <Form.Label htmlFor={id}>{label}</Form.Label>
+      <Form.Label htmlFor={textFieldId}>{label}</Form.Label>
 
       <Form.TextWrapper>
         {fieldState.invalid ? (

@@ -12,7 +12,6 @@ const ChangeDobForm: VFC = () => {
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>
       <DateField
-        id="change-dob-dob"
         name="dob"
         label={t('account:personal-info.change-dob.dob')}
         dayPickerProps={{ disabledDays: { after: MAXIMUM_DOB } }}

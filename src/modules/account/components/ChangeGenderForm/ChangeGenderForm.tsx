@@ -12,7 +12,6 @@ const ChangeGenderForm: VFC = () => {
   return (
     <Form form={form} noValidate onSubmit={onSubmit}>
       <Select
-        id="change-gender-gender"
         name="gender"
         label={t('account:personal-info.change-gender.gender')}
         autoComplete="sex"

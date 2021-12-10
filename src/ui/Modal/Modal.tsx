@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { Icon } from '@iconify/react';
 import closeFill from '@iconify/icons-eva/close-fill';
-import { useId } from '@radix-ui/react-id';
+import { useId } from '@react-aria/utils';
 import { Dialog } from '@reach/dialog';
 import { ButtonGhost } from '@ui/Button';
 import Text from '@ui/Text/Text';

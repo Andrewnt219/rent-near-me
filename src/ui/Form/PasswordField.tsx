@@ -1,20 +1,20 @@
-import { InputHTMLAttributes, ReactNode, useState, VFC, useMemo } from 'react';
+import { InputHTMLAttributes, ReactNode, useState, VFC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useController } from 'react-hook-form';
 import Form from './Form';
+import { useId } from '@react-aria/utils';
 
 type PasswordFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-  id: string;
   name: string;
   label: ReactNode;
   inputDescription?: ReactNode;
 };
 
 const PasswordField: VFC<PasswordFieldProps> = ({
-  id,
   name,
   label,
   inputDescription,
+  id,
   ...inputProps
 }) => {
   const {
@@ -26,14 +26,15 @@ const PasswordField: VFC<PasswordFieldProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => setShowPassword((show) => !show);
 
-  const errMsgId = useMemo(() => `error-${id}`, [id]);
-  const descId = useMemo(() => `description-${id}`, [id]);
+  const passwordFieldId = useId(id);
+  const errMsgId = `passwordField-error-${passwordFieldId}`;
+  const descId = `passwordField-description-${passwordFieldId}`;
 
   return (
     <Form.Group>
       <div tw="relative">
         <Form.Input
-          id={id}
+          id={passwordFieldId}
           aria-describedby={`${errMsgId} ${descId}`}
           aria-invalid={fieldState.invalid}
           tw="!pr-14"
@@ -44,7 +45,7 @@ const PasswordField: VFC<PasswordFieldProps> = ({
           placeholder=" "
         />
 
-        <Form.Label htmlFor={id}>{label}</Form.Label>
+        <Form.Label htmlFor={passwordFieldId}>{label}</Form.Label>
 
         <Form.ShowPasswordButton type="button" onClick={toggleShowPassword}>
           {showPassword
