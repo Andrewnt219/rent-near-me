@@ -21,7 +21,7 @@ const TabButton: FC<TabButtonProps> = ({ children, ...props }) => {
   return (
     <ReachTab
       css={`
-        ${tw`relative flex-shrink-0`}
+        ${tw`relative shrink-0`}
         ${tw`min-w-[3rem] px-0 py-3 border-b-0`}
         ${tw`text-button uppercase whitespace-nowrap`}
         ${tw`focus-visible:(backdrop-filter backdrop-invert backdrop-opacity-5)`}

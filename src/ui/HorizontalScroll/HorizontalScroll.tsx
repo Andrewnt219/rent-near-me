@@ -69,7 +69,7 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         <ButtonGhost
           icon
           size="md"
-          tw="flex-shrink-0"
+          tw="shrink-0"
           css={getScrollButtonThemeStyle(theme)}
           style={{
             visibility: isOnLeftEdge ? 'hidden' : 'visible',
@@ -83,7 +83,7 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
       <div
         ref={childWrapperRef}
         css={`
-          ${tw`flex-grow overflow-x-auto`}
+          ${tw`grow overflow-x-auto`}
           ${childrenWrapperCss}
           ${hideScrollbar}
         `}
@@ -94,7 +94,7 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         <ButtonGhost
           icon
           size="md"
-          tw="flex-shrink-0"
+          tw="shrink-0"
           css={getScrollButtonThemeStyle(theme)}
           style={{
             visibility: isOnRightEdge ? 'hidden' : 'visible',

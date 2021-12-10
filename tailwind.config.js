@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { fontFamily, colors } = require('tailwindcss/defaultTheme');
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 const getBorderColor = (theme) => ({
   DEFAULT: theme('colors.gray.300'),
@@ -17,13 +17,11 @@ const getTextColor = (theme) => ({
 });
 
 module.exports = {
-  mode: 'jit',
-  purge: [
+  content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/modules/**/*.{js,ts,jsx,tsx}',
     './src/ui/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     boxShadow: {
       DEFAULT: 'rgb(145 158 171 / 24%) 0px 1px 2px 0px',
@@ -140,17 +138,7 @@ module.exports = {
       },
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [
-    centers,
-    grid,
-    sizing,
-    commons,
-    fonts,
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  plugins: [centers, grid, sizing, commons, fonts],
 };
 
 function commons({ addComponents }) {
@@ -205,7 +193,7 @@ function grid({ addComponents }) {
   });
 }
 
-function sizing({ addComponents, theme }) {
+function sizing({ addComponents }) {
   addComponents({
     '.absolute-cover': {
       position: 'absolute',

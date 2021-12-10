@@ -3,7 +3,11 @@ import DefaultLayout from '@modules/layouts/DefaultLayout';
 import React from 'react';
 
 const HomePage: CustomNextPage = () => {
-  return <></>;
+  return (
+    <>
+      <div tw="bg-primary aspect-square w-8"></div>
+    </>
+  );
 };
 
 HomePage.getLayout = DefaultLayout.getLayout;

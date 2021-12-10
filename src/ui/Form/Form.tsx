@@ -54,7 +54,7 @@ export const labelInvalidCss = css`
 Form.Label = styled.label`
   /* Translate y equals to input pt */
   /* left equals to input pl */
-  ${tw`absolute top-0 left-md transform translate-y-md`}
+  ${tw`absolute top-0 left-md translate-y-md`}
   ${tw`transition-all`} 
 
   input:focus ~ &, input:not(:placeholder-shown) ~ & {
@@ -80,7 +80,7 @@ Form.Select = styled.select`
 `;
 
 Form.ShowPasswordButton = styled(ButtonLink)`
-  ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
+  ${tw`absolute right-md top-1/2 -translate-y-1/2`}
   ${tw`underline text-body2`}
 `;
 

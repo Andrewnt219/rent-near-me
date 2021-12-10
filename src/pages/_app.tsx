@@ -1,6 +1,5 @@
 import type { CustomNextPage } from '@/next';
 import type { AppProps } from 'next/app';
-import { IdProvider as RadixIdProvider } from '@radix-ui/react-id';
 import SWRDefaultConfigProvider from '@libs/swr/SWRDefaultConfigProvider';
 import { AuthProvider } from '@modules/user-auth/contexts/AuthContext';
 import { ModalProvider } from '@ui/Modal/ModalContext';
@@ -21,19 +20,17 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <RadixIdProvider>
-      <SWRDefaultConfigProvider>
-        <AuthProvider>
-          <SnackbarProvider>
-            <ModalProvider>
-              <TwinStyles />
-              <GlobalStyle />
-              {getLayout(<Component {...pageProps} />)}
-            </ModalProvider>
-          </SnackbarProvider>
-        </AuthProvider>
-      </SWRDefaultConfigProvider>
-    </RadixIdProvider>
+    <SWRDefaultConfigProvider>
+      <AuthProvider>
+        <SnackbarProvider>
+          <ModalProvider>
+            <TwinStyles />
+            <GlobalStyle />
+            {getLayout(<Component {...pageProps} />)}
+          </ModalProvider>
+        </SnackbarProvider>
+      </AuthProvider>
+    </SWRDefaultConfigProvider>
   );
 }
 
