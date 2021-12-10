@@ -1,8 +1,11 @@
 import tw, { css } from 'twin.macro';
 
-const commonStyle = tw`rounded outline-none! inline-block text-center disabled:(opacity-60 cursor-not-allowed)`;
+type Size = 'lg' | 'md' | 'sm';
 
-const getSizeStyle = (size?: Size) => {
+/**
+ * Getter for styling of buttons and links when `icon` is `false` or not specified
+ */
+const getRegularSizeStyle = (size?: Size) => {
   switch (size) {
     case 'lg':
       return tw`px-md py-md text-h6 min-w-[6rem]`;
@@ -18,19 +21,71 @@ const getSizeStyle = (size?: Size) => {
   }
 };
 
-const getRoundedStyle = (circle?: boolean) => circle && tw`rounded-full`;
+/**
+ * Getter for styling of buttons and links when `icon` is `true`
+ */
+function getIconSizeStyle(size?: Size) {
+  switch (size) {
+    case 'lg':
+      return tw`w-12 h-12 p-sm text-h3`;
 
-type Size = 'lg' | 'md' | 'sm';
+    case 'md':
+      return tw`w-10 h-10 p-xs text-h4`;
+
+    case 'sm':
+      return tw`w-8 h-8 p-xs text-body2`;
+
+    default:
+      return tw``;
+  }
+}
+
+/**
+ * Getter for styling of buttons and links when `rounded` is `true` and `icon` is `false` or not specified
+ */
+const getRoundedStyle = (rounded?: boolean) =>
+  rounded ? tw`rounded-full` : tw`rounded`;
+
 export type BaseProps = {
+  /**
+   * Size of the button which can be different between regular and icon variant even at the same size
+   */
   size?: Size;
+  /**
+   * Button would have the corners rounded if set to `true`. This prop is ignored when `icon` prop is `true`
+   */
   rounded?: boolean;
+  /**
+   * Button would be styled in a circle shape if set to `true`.
+   *
+   * Usually used when onky a single icon should be displayed within the button.
+   */
+  icon?: boolean;
 };
+
+/**
+ * Base styles for all buttons and links in `@ui/Button`
+ */
 const baseStyle = css<BaseProps>`
-  ${commonStyle}
-  ${(p) => getSizeStyle(p.size)}
-  ${(p) => getRoundedStyle(p.rounded)}
+  ${(p) =>
+    p.icon
+      ? css`
+          ${tw`inline-flex items-center justify-center`}
+          ${getIconSizeStyle(p.size)}
+          ${getRoundedStyle(true)}
+        `
+      : css`
+          ${tw`inline-block text-center`}
+          ${tw`outline-none!`}
+          ${getRegularSizeStyle(p.size)}
+          ${getRoundedStyle(p.rounded)}
+        `}
+  ${tw`disabled:(opacity-60 cursor-not-allowed)`}
 `;
 
+/**
+ * Styling for button in `primary` theme
+ */
 export const primaryStyle = css`
   ${baseStyle}
 
@@ -46,6 +101,9 @@ export const primaryStyle = css`
   }
 `;
 
+/**
+ * Styling for button in `secondary` theme
+ */
 export const secondaryStyle = css`
   ${baseStyle}
 
@@ -61,6 +119,9 @@ export const secondaryStyle = css`
   }
 `;
 
+/**
+ * Styling for button in `ghost` theme
+ */
 export const ghostStyle = css`
   ${baseStyle}
 
@@ -74,6 +135,9 @@ export const ghostStyle = css`
   }
 `;
 
+/**
+ * Styling for button in `outline` theme
+ */
 export const outlineStyle = css`
   ${baseStyle}
 
@@ -88,6 +152,9 @@ export const outlineStyle = css`
   }
 `;
 
+/**
+ * Styling for button to look like a link
+ */
 export const linkStyle = css`
   ${baseStyle}
 

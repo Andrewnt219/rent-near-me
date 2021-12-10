@@ -6,6 +6,7 @@ import tw, { styled } from 'twin.macro';
  */
 const MenuItemBase = styled(RadixDropdownMenu.Item)`
   ${tw`font-inherit block px-md py-sm hover:bg-light`}
+  ${(p) => p.disabled && tw`cursor-not-allowed`}
 
   &:focus-visible {
     ${tw`ring-2 ring-dark`}

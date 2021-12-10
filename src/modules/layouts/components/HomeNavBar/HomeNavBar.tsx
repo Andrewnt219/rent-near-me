@@ -1,14 +1,13 @@
+import React from 'react';
 import { Icon } from '@iconify/react';
 import globeFill from '@iconify/icons-eva/globe-fill';
+import { LinkBase } from '@ui/Button/Link';
+import { ButtonGhost } from '@ui/Button/Button';
 import { useModals } from '@ui/Modal/ModalContext';
+import LogoWithName from '@ui/Logo/LogoWithName';
+import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { ButtonGhost } from '@ui/Button/Button';
-import { IconButtonGhost } from '@ui/IconButton/IconButton';
-import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
-import LogoWithName from '@ui/Logo/LogoWithName';
-import Link from 'next/link';
-import React from 'react';
 import UserMenu from '../UserMenu/UserMenu';
 
 type Props = {
@@ -21,11 +20,9 @@ const HomeNavBar = ({ className }: Props) => {
   return (
     <header className={className} tw="z-10 bg-white py-lg shadow">
       <Layout.Container tw="flex items-center justify-between">
-        <Link href="/">
-          <a>
-            <LogoWithName />
-          </a>
-        </Link>
+        <LinkBase href="/">
+          <LogoWithName />
+        </LinkBase>
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
@@ -41,10 +38,10 @@ const HomeNavBar = ({ className }: Props) => {
             </ButtonGhost>
           )}
 
-          <IconButtonGhost size="md">
+          <ButtonGhost icon size="md">
             <Icon icon={globeFill} />
             <span tw="sr-only">Change site&apos; language</span>
-          </IconButtonGhost>
+          </ButtonGhost>
 
           <UserMenu />
         </nav>

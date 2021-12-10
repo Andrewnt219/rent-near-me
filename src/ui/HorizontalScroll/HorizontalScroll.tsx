@@ -1,12 +1,12 @@
 import { FC, useRef, useCallback, useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import { IconButtonGhost } from '@ui/IconButton/IconButton';
 import arrowIosBackFill from '@iconify/icons-eva/arrow-ios-back-fill';
 import arrowIosForwardFill from '@iconify/icons-eva/arrow-ios-forward-fill';
 import useOverflow from '@hooks/useOverflow';
 import { CSSProp } from 'styled-components';
 import tw from 'twin.macro';
 import { hideScrollbar } from '@styles/GlobalStyles';
+import { ButtonGhost } from '@ui/Button/Button';
 
 type HorizontalScrollProps = {
   /**
@@ -66,7 +66,8 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
   return (
     <div tw="flex items-center gap-xs" {...props}>
       {isOverFlowingX && (
-        <IconButtonGhost
+        <ButtonGhost
+          icon
           size="md"
           tw="flex-shrink-0"
           css={getScrollButtonThemeStyle(theme)}
@@ -77,7 +78,7 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         >
           <span tw="sr-only">Scroll left</span>
           <Icon icon={arrowIosBackFill} />
-        </IconButtonGhost>
+        </ButtonGhost>
       )}
       <div
         ref={childWrapperRef}
@@ -90,7 +91,8 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         {children}
       </div>
       {isOverFlowingX && (
-        <IconButtonGhost
+        <ButtonGhost
+          icon
           size="md"
           tw="flex-shrink-0"
           css={getScrollButtonThemeStyle(theme)}
@@ -101,7 +103,7 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         >
           <span tw="sr-only">Scroll right</span>
           <Icon icon={arrowIosForwardFill} />
-        </IconButtonGhost>
+        </ButtonGhost>
       )}
     </div>
   );
