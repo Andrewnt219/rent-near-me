@@ -2,7 +2,7 @@ import { CustomNextPage } from '@/next';
 import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { ButtonLink } from '@ui/Button/Button';
+import { ButtonLink } from '@ui/Button';
 import { LinkSimple } from '@ui/Button/Link';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
 import Text from '@ui/Text/Text';

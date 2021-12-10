@@ -1,7 +1,7 @@
 import { FormHTMLAttributes, PropsWithChildren } from 'react';
-import tw, { css, styled } from 'twin.macro';
-import { ButtonLink } from '../Button/Button';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
+import tw, { css, styled } from 'twin.macro';
+import { ButtonLink } from '@ui/Button';
 
 type FormProps = FormHTMLAttributes<HTMLFormElement> & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

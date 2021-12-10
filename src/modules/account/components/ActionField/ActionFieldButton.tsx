@@ -1,5 +1,5 @@
 import { StyledComponentProps } from '@common-types';
-import { ButtonGhost } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button';
 import tw, { styled } from 'twin.macro';
 
 type ButtonProps = StyledComponentProps<typeof ButtonGhost>;

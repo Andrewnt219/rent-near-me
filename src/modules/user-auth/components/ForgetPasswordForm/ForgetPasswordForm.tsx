@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
-import { ButtonPrimary } from '@ui/Button/Button';
+import { ButtonPrimary } from '@ui/Button';
 import Form from '@ui/Form/Form';
 import TextField from '@ui/Form/TextField';
 import Text from '@ui/Text/Text';

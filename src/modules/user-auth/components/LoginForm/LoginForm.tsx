@@ -3,7 +3,7 @@ import facebookIcon from '@iconify/icons-logos/facebook';
 import googleIcon from '@iconify/icons-logos/google-icon';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 import { useModals } from '@ui/Modal/ModalContext';
-import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button/Button';
+import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button';
 import Checkbox from '@ui/Form/Checkbox';
 import Form from '@ui/Form/Form';
 import PasswordField from '@ui/Form/PasswordField';

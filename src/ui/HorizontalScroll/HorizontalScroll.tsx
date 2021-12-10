@@ -6,7 +6,7 @@ import useOverflow from '@hooks/useOverflow';
 import { CSSProp } from 'styled-components';
 import tw from 'twin.macro';
 import { hideScrollbar } from '@styles/GlobalStyles';
-import { ButtonGhost } from '@ui/Button/Button';
+import { ButtonGhost } from '@ui/Button';
 
 type HorizontalScrollProps = {
   /**

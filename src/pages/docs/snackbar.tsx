@@ -1,6 +1,6 @@
 import DocsLayout from '@modules/layouts/DocsLayout';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
-import { ButtonPrimary } from '@ui/Button/Button';
+import { ButtonPrimary } from '@ui/Button';
 import Snackbar from '@ui/Snackbar/Snackbar';
 import { CustomNextPage } from '@/next';
 

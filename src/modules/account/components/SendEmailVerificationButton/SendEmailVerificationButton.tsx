@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { getErrorMessage } from '@utils/api-responses';
 import AuthApi from '@services/AuthApi';
-import { ButtonProps, ButtonLink } from '@ui/Button/Button';
+import { ButtonProps, ButtonLink } from '@ui/Button';
 
 type SendEmailVerificationButtonProps = ButtonProps & {
   disableAfterClickMs?: number;

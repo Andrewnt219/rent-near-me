@@ -1,6 +1,6 @@
 import Form from '@ui/Form/Form';
 import DateField from '@ui/Form/DateField';
-import { ButtonSecondary } from '@ui/Button/Button';
+import { ButtonSecondary } from '@ui/Button';
 import useTranslation from 'next-translate/useTranslation';
 import { VFC } from 'react';
 import useChangeDobForm from './useChangeDobForm';

@@ -1,6 +1,6 @@
 import Form from '@ui/Form/Form';
 import TextField from '@ui/Form/TextField';
-import { ButtonSecondary } from '@ui/Button/Button';
+import { ButtonSecondary } from '@ui/Button';
 import { InputRow } from '@ui/Row/Row';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
