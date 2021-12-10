@@ -1,11 +1,11 @@
-import { useUuid } from '@hooks/useUuid';
-import { Dialog } from '@reach/dialog';
-import Text from '@ui/Text/Text';
 import { FC, ReactNode } from 'react';
-import { Icon, IconifyIcon } from '@iconify/react';
-import closeFill from '@iconify/icons-eva/close-fill';
 import tw, { css, styled } from 'twin.macro';
+import { Icon } from '@iconify/react';
+import closeFill from '@iconify/icons-eva/close-fill';
+import { useId } from '@radix-ui/react-id';
+import { Dialog } from '@reach/dialog';
 import { ButtonGhost } from '@ui/Button';
+import Text from '@ui/Text/Text';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -13,6 +13,7 @@ type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 type ModalProps = {
   show: boolean;
   onClose: () => void;
+  id?: string;
   size?: ModalSize;
   header?: ReactNode;
   closeButtonPosition?: CloseModalButtonPosition;
@@ -21,6 +22,7 @@ type ModalProps = {
 const Modal: FC<ModalProps> = ({
   show,
   onClose,
+  id,
   size = 'md',
   closeButtonPosition = 'left',
   closeButtonIcon,
@@ -28,11 +30,12 @@ const Modal: FC<ModalProps> = ({
   children,
   ...props
 }) => {
-  const id = useUuid();
-
+  const modalId = useId(id);
+  const modalTitleId = `modal-title-${modalId}`;
   return (
     <Dialog
-      aria-labelledby={`${id}-modal-title`}
+      id={modalId}
+      aria-labelledby={modalTitleId}
       css={modalDialogCss(size)}
       isOpen={show}
       onDismiss={onClose}
@@ -48,7 +51,7 @@ const Modal: FC<ModalProps> = ({
             {closeButtonIcon ?? <Icon icon={closeFill} tw="w-6 h-6" />}
             <span tw="sr-only">Close dialog</span>
           </ButtonGhost>
-          <Text component="h3" variant="h5" id={`${id}-modal-title`}>
+          <Text component="h3" variant="h5" id={modalTitleId}>
             {header}
           </Text>
         </ModalHeader>
