@@ -20,7 +20,6 @@ const ForgetPasswordForm = () => {
       <TextField
         label={t('common:forgetPassword.email')}
         type="email"
-        id="forget-password-email"
         name="email"
         autoComplete="username"
       />

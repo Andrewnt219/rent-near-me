@@ -36,14 +36,12 @@ const LoginForm = () => {
       <TextField
         label={t('common:login.email')}
         type="email"
-        id="login-email"
         name="email"
         autoComplete="username"
       />
 
       <PasswordField
         label={t('common:login.password')}
-        id="login-password"
         name="password"
         autoComplete="current-password"
         inputDescription={
@@ -53,11 +51,7 @@ const LoginForm = () => {
         }
       />
 
-      <Checkbox
-        id="login-keepLogIn"
-        name="keepLogIn"
-        label={t('common:login.keepSignedIn')}
-      />
+      <Checkbox name="keepLogIn" label={t('common:login.keepSignedIn')} />
 
       {submitError && (
         <Form.ErrorMessage

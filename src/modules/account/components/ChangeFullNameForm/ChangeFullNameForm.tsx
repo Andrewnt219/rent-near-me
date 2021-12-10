@@ -17,7 +17,6 @@ const ChangeFullNameForm: VFC = () => {
       </Text>
       <InputRow>
         <TextField
-          id="change-name-first-name"
           name="firstName"
           type="text"
           label={t('account:personal-info.change-name.first-name')}
@@ -25,7 +24,6 @@ const ChangeFullNameForm: VFC = () => {
           autoComplete="given-name"
         />
         <TextField
-          id="change-name-last-name"
           name="lastName"
           type="text"
           label={t('account:personal-info.change-name.last-name')}

@@ -1,22 +1,22 @@
-import { SelectHTMLAttributes, ReactNode, FC, useMemo } from 'react';
+import { SelectHTMLAttributes, ReactNode, FC } from 'react';
 import { useController } from 'react-hook-form';
 import Form from './Form';
 import { Icon } from '@iconify/react';
 import arrowDownFill from '@iconify/icons-eva/arrow-down-fill';
+import { useId } from '@radix-ui/react-id';
 
 type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
-  id: string;
   name: string;
   label: ReactNode;
   inputDescription?: ReactNode;
 };
 
 const Select: FC<SelectProps> = ({
-  id,
   name,
   label,
   inputDescription,
   children,
+  id,
   ...selectProps
 }) => {
   const {
@@ -24,13 +24,14 @@ const Select: FC<SelectProps> = ({
     fieldState,
   } = useController({ name });
 
-  const errMsgId = useMemo(() => `error-${id}`, [id]);
-  const descId = useMemo(() => `description-${id}`, [id]);
+  const selectId = useId(id);
+  const errMsgId = `select-error-${selectId}`;
+  const descId = `select-description-${selectId}`;
 
   return (
     <Form.Group>
       <Form.Select
-        id={id}
+        id={selectId}
         aria-invalid={fieldState.invalid}
         aria-describedby={`${errMsgId} ${descId}`}
         {...selectProps}
@@ -41,7 +42,7 @@ const Select: FC<SelectProps> = ({
         {children}
       </Form.Select>
 
-      <Form.Label htmlFor={id}>{label}</Form.Label>
+      <Form.Label htmlFor={selectId}>{label}</Form.Label>
       <Icon icon={arrowDownFill} tw="absolute h-6 w-4 top-md right-md" />
 
       <Form.TextWrapper>

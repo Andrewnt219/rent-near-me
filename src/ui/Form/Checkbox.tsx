@@ -1,21 +1,21 @@
-import { InputHTMLAttributes, ReactNode, useMemo, VFC } from 'react';
+import { InputHTMLAttributes, ReactNode, VFC } from 'react';
 import { useController } from 'react-hook-form';
 import Form from './Form';
 import { Icon } from '@iconify/react';
 import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
+import { useId } from '@radix-ui/react-id';
 
 type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
-  id: string;
   name: string;
   label: ReactNode;
   inputDescription?: ReactNode;
 };
 
 const Checkbox: VFC<CheckboxProps> = ({
-  id,
   name,
   label,
   inputDescription,
+  id,
   ...inputProps
 }) => {
   const {
@@ -23,14 +23,15 @@ const Checkbox: VFC<CheckboxProps> = ({
     fieldState,
   } = useController({ name });
 
-  const errMsgId = useMemo(() => `error-${id}`, [id]);
-  const descId = useMemo(() => `description-${id}`, [id]);
+  const checkboxId = useId(id);
+  const errMsgId = `checkbox-error-${checkboxId}`;
+  const descId = `checkbox-description-${checkboxId}`;
 
   return (
     <Form.Group>
       <Form.CheckboxLabel>
         <input
-          id={id}
+          id={checkboxId}
           type="checkbox"
           tw="sr-only"
           aria-hidden

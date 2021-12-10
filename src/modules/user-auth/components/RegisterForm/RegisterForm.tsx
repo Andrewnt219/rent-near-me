@@ -34,7 +34,6 @@ const RegisterForm = () => {
 
       <InputRow>
         <TextField
-          id="register-firstName"
           name="firstName"
           type="text"
           label={t('common:register.firstName.label')}
@@ -44,7 +43,6 @@ const RegisterForm = () => {
         />
 
         <TextField
-          id="register-lastName"
           name="lastName"
           type="text"
           label={t('common:register.lastName')}
@@ -55,7 +53,6 @@ const RegisterForm = () => {
 
       <InputRow>
         <DateField
-          id="register-dob"
           name="dob"
           label={t('common:register.dob.label')}
           inputDescription={t('common:register.dob.description')}
@@ -64,7 +61,6 @@ const RegisterForm = () => {
         />
 
         <Select
-          id="register-gender"
           name="gender"
           label={t('common:register.gender')}
           autoComplete="sex"
@@ -79,7 +75,6 @@ const RegisterForm = () => {
       </InputRow>
 
       <TextField
-        id="register-email"
         name="email"
         type="email"
         label={t('common:register.email.label')}
@@ -88,7 +83,6 @@ const RegisterForm = () => {
       />
 
       <PasswordField
-        id="register-password"
         label={t('common:register.password')}
         name="password"
         autoComplete="new-password"
