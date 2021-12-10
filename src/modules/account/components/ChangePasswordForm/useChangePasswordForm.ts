@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import AuthApi from '@services/AuthApi';
 import { validatePassword } from '@utils/validate-password-utils';

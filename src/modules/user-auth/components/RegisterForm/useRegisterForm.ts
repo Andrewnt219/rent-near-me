@@ -1,4 +1,4 @@
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useModals } from '@ui/Modal/ModalContext';
 import {
   RegisterFormSchema,
