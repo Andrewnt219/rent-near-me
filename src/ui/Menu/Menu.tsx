@@ -1,14 +1,15 @@
-import { ReactNode, FC } from 'react';
+import { ReactNode, FC, useState } from 'react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import tw, { styled } from 'twin.macro';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 
 type MenuProps = RadixDropdownMenu.DropdownMenuProps & {
   /**
    * *A single {@link JSX.Element}* as the button to control the popup menu to be rendered where {@link Menu} is used.
    *
-   * **Note:** A valid button here must be an HTML native element or an element that implement the {@link React.forwardRef} API.
+   * **Note:** A valid trigger here must be an HTML native element or an element that implement the {@link React.forwardRef} API.
    */
-  button: ReactNode;
+  trigger: ReactNode;
   /**
    * Props passed into the popup menu element
    */
@@ -16,7 +17,7 @@ type MenuProps = RadixDropdownMenu.DropdownMenuProps & {
 };
 
 /**
- * A container renders a popup menu and a button to control that popup.
+ * A component renders a popup menu and a button to control that popup.
  *
  * @example
  * A menu consisting of a mix of Menuitem and MenuLink and a ButtonGhost to control the menu
@@ -29,22 +30,58 @@ type MenuProps = RadixDropdownMenu.DropdownMenuProps & {
  * ```
  */
 const Menu: FC<MenuProps> = ({
-  button,
-  children,
+  trigger,
   menuPopupProps,
+  children,
   ...props
 }) => {
+  const [showMenu, setShowMenu] = useState(props.defaultOpen);
   return (
-    <RadixDropdownMenu.Root {...props}>
-      <RadixDropdownMenu.Trigger asChild>{button}</RadixDropdownMenu.Trigger>
-      <MenuContent align="start" sideOffset={8} {...menuPopupProps}>
-        {children}
-      </MenuContent>
+    <RadixDropdownMenu.Root
+      {...props}
+      open={showMenu}
+      onOpenChange={setShowMenu}
+    >
+      <RadixDropdownMenu.Trigger asChild>{trigger}</RadixDropdownMenu.Trigger>
+      <AnimatePresence>
+        {showMenu && (
+          <MenuContent
+            align="start"
+            sideOffset={8}
+            {...menuPopupProps}
+            asChild
+            forceMount
+          >
+            <motion.div
+              variants={animationVariants}
+              transition={{ ease: 'easeOut' }}
+              initial={props.defaultOpen ? false : `hidden`}
+              animate="visible"
+              exit="hidden"
+              style={{
+                transformOrigin:
+                  'var(--radix-dropdown-menu-content-transform-origin)',
+              }}
+            >
+              {children}
+            </motion.div>
+          </MenuContent>
+        )}
+      </AnimatePresence>
     </RadixDropdownMenu.Root>
   );
 };
 
 export default Menu;
+
+const animationVariants: Variants = {
+  visible: {
+    scale: 1,
+  },
+  hidden: {
+    scale: 0,
+  },
+};
 
 /**
  * A component provides styling for {@link RadixDropdownMenu.Content} (the menu popup)

@@ -17,7 +17,7 @@ const UserMenu: VFC = () => {
   const { registerModal, loginModal } = useModals();
 
   return (
-    <Menu button={<UserMenuButton />}>
+    <Menu trigger={<UserMenuButton />}>
       {isAuthenticated ? (
         <MenuItemGroup>
           <MenuLink href="/account">
