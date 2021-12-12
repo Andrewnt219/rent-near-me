@@ -81,6 +81,9 @@ const Tooltip: FC<TooltipProps> = ({
 
 export default Tooltip;
 
+/**
+ * Animation for the showing and hidding effect of the tooltip
+ */
 const animationVariants: Variants = {
   visible: {
     opacity: 1,
@@ -92,6 +95,9 @@ const animationVariants: Variants = {
   },
 };
 
+/**
+ * Getter for color styling of the {@link RadixTooltip.Content} by `theme`
+ */
 const getTooltipThemeStyle = (theme: TooltipProps['theme']) => {
   switch (theme) {
     case 'light':
@@ -105,6 +111,9 @@ const getTooltipThemeStyle = (theme: TooltipProps['theme']) => {
   }
 };
 
+/**
+ * Getter for color styling of the {@link RadixTooltip.Arrow} by `theme`
+ */
 const getTooltipArrowThemeStyle = (theme: TooltipProps['theme']) => {
   return css`
     ${tw`fill-current`}
