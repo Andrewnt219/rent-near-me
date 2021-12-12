@@ -61,10 +61,6 @@ const Menu: FC<MenuProps> = ({
               initial={props.defaultOpen ? false : `hidden`}
               animate="visible"
               exit="hidden"
-              style={{
-                transformOrigin:
-                  'var(--radix-dropdown-menu-content-transform-origin)',
-              }}
             >
               {children}
             </motion.div>
@@ -91,4 +87,5 @@ const animationVariants: Variants = {
  */
 const MenuContent = styled(RadixDropdownMenu.Content)`
   ${tw`font-normal bg-white min-w-[12.5rem] shadow-z8 rounded`}
+  ${tw`origin-[var(--radix-dropdown-menu-content-transform-origin)]`}
 `;
