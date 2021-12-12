@@ -3,7 +3,10 @@ import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import tw, { styled } from 'twin.macro';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 
-type MenuProps = RadixDropdownMenu.DropdownMenuProps & {
+type MenuProps = Omit<
+  RadixDropdownMenu.DropdownMenuProps,
+  'open' | 'onOpenChange'
+> & {
   /**
    * *A single {@link JSX.Element}* as the button to control the popup menu to be rendered where {@link Menu} is used.
    *
