@@ -13,7 +13,6 @@ import { AnimatePresence, motion, Variants } from 'framer-motion';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
-
 type ModalProps = {
   show: boolean;
   onClose: () => void;
@@ -23,6 +22,7 @@ type ModalProps = {
   closeButtonPosition?: CloseModalButtonPosition;
   closeButtonIcon?: ReactNode;
 };
+
 const Modal: FC<ModalProps> = ({
   show,
   onClose,
@@ -38,6 +38,7 @@ const Modal: FC<ModalProps> = ({
   const modalTitleId = `modal-title-${modalId}`;
   return (
     <AnimatePresence>
+      {/* Required to aniamte exit */}
       {show && (
         <AnimatedReachDialogOverlay
           onDismiss={onClose}

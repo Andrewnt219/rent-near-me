@@ -47,6 +47,7 @@ const Menu: FC<MenuProps> = ({
     >
       <RadixDropdownMenu.Trigger asChild>{trigger}</RadixDropdownMenu.Trigger>
       <AnimatePresence>
+        {/* Required to aniamte exit */}
         {showMenu && (
           <MenuContent
             align="start"
@@ -73,6 +74,9 @@ const Menu: FC<MenuProps> = ({
 
 export default Menu;
 
+/**
+ * Animation for expanding and collapsing effect of the menu
+ */
 const animationVariants: Variants = {
   visible: {
     scale: 1,
