@@ -3,6 +3,8 @@ import { PasswordCriteria } from '@utils/validate-password-utils';
 import { VFC } from 'react';
 import { Icon } from '@iconify/react';
 import infoFill from '@iconify/icons-eva/info-fill';
+import Tooltip from '@ui/Tooltip';
+import { SPECIAL_CHARS } from '@utils/validate-js-utils';
 type Props = {
   className?: string;
   passwordValidationResults: Record<PasswordCriteria, boolean>;
@@ -31,7 +33,9 @@ const PasswordCheckList: VFC<Props> = ({ className, ...props }) => {
         }
       >
         Contains a number or a special character
-        <Icon icon={infoFill} tw="text-info" />
+        <Tooltip trigger={<Icon icon={infoFill} tw="text-info" />}>
+          <pre tw="text-caption inline tracking-widest">{SPECIAL_CHARS}</pre>
+        </Tooltip>
       </PasswordCriterion>
     </div>
   );
