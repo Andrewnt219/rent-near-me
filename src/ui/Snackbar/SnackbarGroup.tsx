@@ -26,7 +26,7 @@ function SnackbarGroup({ className, ...props }: Props) {
           {props.snacks.map((snackbarProps) => (
             <motion.li
               layout
-              variants={itemVariants}
+              variants={ANIMATION_VARIANTS}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -43,7 +43,7 @@ function SnackbarGroup({ className, ...props }: Props) {
 
 // NOTE if using pixel, don't put as string
 // ... else exit animation won't work
-const itemVariants: Variants = {
+const ANIMATION_VARIANTS: Variants = {
   visible: {
     x: 0,
     opacity: 1,

@@ -9,7 +9,7 @@ import {
 } from '@reach/dialog';
 import { ButtonGhost } from '@ui/Button';
 import Text from '@ui/Text/Text';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion, Transition, Variants } from 'framer-motion';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -42,8 +42,8 @@ const Modal: FC<ModalProps> = ({
       {show && (
         <AnimatedReachDialogOverlay
           onDismiss={onClose}
-          transition={{ duration: animationDuration }}
-          variants={overlayAnimationVariants}
+          transition={ANIMATION_TRANSITION}
+          variants={OVERLAY_ANIMATION_VARIANTS}
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -53,8 +53,8 @@ const Modal: FC<ModalProps> = ({
             aria-labelledby={modalTitleId}
             css={modalDialogCss(size)}
             {...props}
-            transition={{ duration: animationDuration }}
-            variants={contentAnimationVariants}
+            transition={ANIMATION_TRANSITION}
+            variants={CONTENT_ANIMATION_VARIANTS}
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -84,16 +84,21 @@ const Modal: FC<ModalProps> = ({
   );
 };
 
-const animationDuration = 0.4;
-const overlayAnimationVariants: Variants = {
+const ANIMATION_TRANSITION: Transition = {
+  type: 'spring',
+  duration: 0.5,
+};
+
+const OVERLAY_ANIMATION_VARIANTS: Variants = {
   visible: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   hidden: {
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
   },
 };
-const contentAnimationVariants: Variants = {
+
+const CONTENT_ANIMATION_VARIANTS: Variants = {
   visible: {
     x: '-50%',
     y: '-50%',

@@ -1,7 +1,7 @@
 import { ReactNode, FC, useState } from 'react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import tw, { styled } from 'twin.macro';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion, Transition, Variants } from 'framer-motion';
 
 type MenuProps = Omit<
   RadixDropdownMenu.DropdownMenuProps,
@@ -55,10 +55,11 @@ const Menu: FC<MenuProps> = ({
             {...menuPopupProps}
             asChild
             forceMount
+            portalled={false}
           >
             <motion.div
-              variants={animationVariants}
-              transition={{ ease: 'easeOut' }}
+              transition={ANIMATION_TRANSITION}
+              variants={ANIMATION_VARIANTS}
               initial={props.defaultOpen ? false : `hidden`}
               animate="visible"
               exit="hidden"
@@ -77,12 +78,16 @@ export default Menu;
 /**
  * Animation for expanding and collapsing effect of the menu
  */
-const animationVariants: Variants = {
+const ANIMATION_TRANSITION: Transition = {
+  type: 'spring',
+  duration: 0.5,
+};
+const ANIMATION_VARIANTS: Variants = {
   visible: {
-    scale: 1,
+    height: 'auto',
   },
   hidden: {
-    scale: 0,
+    height: 0,
   },
 };
 
@@ -90,6 +95,6 @@ const animationVariants: Variants = {
  * A component provides styling for {@link RadixDropdownMenu.Content} (the menu popup)
  */
 const MenuContent = styled(RadixDropdownMenu.Content)`
-  ${tw`font-normal bg-white min-w-[12.5rem] shadow-z8 rounded`}
+  ${tw`font-normal bg-white min-w-[12.5rem] shadow-z8 rounded overflow-hidden`}
   ${tw`origin-[var(--radix-dropdown-menu-content-transform-origin)]`}
 `;

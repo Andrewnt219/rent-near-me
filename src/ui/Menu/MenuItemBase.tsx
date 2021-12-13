@@ -9,7 +9,7 @@ const MenuItemBase = styled(RadixDropdownMenu.Item)`
   ${(p) => p.disabled && tw`cursor-not-allowed hover:bg-transparent`}
 
   &:focus-visible:not(:hover) {
-    ${tw`ring-2 ring-dark`}
+    ${tw`ring-inset ring-2 ring-dark`}
   }
 `;
 
