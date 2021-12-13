@@ -3,13 +3,16 @@ import tw, { css, styled } from 'twin.macro';
 import { Icon } from '@iconify/react';
 import closeFill from '@iconify/icons-eva/close-fill';
 import { useId } from '@radix-ui/react-id';
-import { Dialog } from '@reach/dialog';
+import {
+  DialogOverlay as ReachDialogOverlay,
+  DialogContent as ReachDialogContent,
+} from '@reach/dialog';
 import { ButtonGhost } from '@ui/Button';
 import Text from '@ui/Text/Text';
+import { AnimatePresence, motion, Transition, Variants } from 'framer-motion';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
-
 type ModalProps = {
   show: boolean;
   onClose: () => void;
@@ -19,6 +22,7 @@ type ModalProps = {
   closeButtonPosition?: CloseModalButtonPosition;
   closeButtonIcon?: ReactNode;
 };
+
 const Modal: FC<ModalProps> = ({
   show,
   onClose,
@@ -33,34 +37,76 @@ const Modal: FC<ModalProps> = ({
   const modalId = useId(id);
   const modalTitleId = `modal-title-${modalId}`;
   return (
-    <Dialog
-      id={modalId}
-      aria-labelledby={modalTitleId}
-      css={modalDialogCss(size)}
-      isOpen={show}
-      onDismiss={onClose}
-      {...props}
-    >
-      {header && (
-        <ModalHeader>
-          <ButtonGhost
-            icon
-            css={closeModalBtnCss(closeButtonPosition)}
-            onClick={onClose}
+    <AnimatePresence>
+      {/* Required to aniamte exit */}
+      {show && (
+        <AnimatedReachDialogOverlay
+          onDismiss={onClose}
+          transition={ANIMATION_TRANSITION}
+          variants={OVERLAY_ANIMATION_VARIANTS}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+        >
+          <AnimatedReachDialogContent
+            id={modalId}
+            aria-labelledby={modalTitleId}
+            css={modalDialogCss(size)}
+            {...props}
+            transition={ANIMATION_TRANSITION}
+            variants={CONTENT_ANIMATION_VARIANTS}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
           >
-            {closeButtonIcon ?? <Icon icon={closeFill} tw="w-6 h-6" />}
-            <span tw="sr-only">Close dialog</span>
-          </ButtonGhost>
-          <Text component="h3" variant="h5" id={modalTitleId}>
-            {header}
-          </Text>
-        </ModalHeader>
+            {header && (
+              <ModalHeader>
+                <ButtonGhost
+                  icon
+                  css={closeModalBtnCss(closeButtonPosition)}
+                  onClick={onClose}
+                >
+                  {closeButtonIcon ?? <Icon icon={closeFill} tw="w-6 h-6" />}
+                  <span tw="sr-only">Close dialog</span>
+                </ButtonGhost>
+                <Text component="h3" variant="h5" id={modalTitleId}>
+                  {header}
+                </Text>
+              </ModalHeader>
+            )}
+            <ModalBody>
+              <ModalBodyContent>{children}</ModalBodyContent>
+            </ModalBody>
+          </AnimatedReachDialogContent>
+        </AnimatedReachDialogOverlay>
       )}
-      <ModalBody>
-        <ModalBodyContent>{children}</ModalBodyContent>
-      </ModalBody>
-    </Dialog>
+    </AnimatePresence>
   );
+};
+
+const ANIMATION_TRANSITION: Transition = {
+  type: 'spring',
+  duration: 0.5,
+};
+
+const OVERLAY_ANIMATION_VARIANTS: Variants = {
+  visible: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  hidden: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+  },
+};
+
+const CONTENT_ANIMATION_VARIANTS: Variants = {
+  visible: {
+    x: '-50%',
+    y: '-50%',
+  },
+  hidden: {
+    x: '-50%',
+    y: '100vh',
+  },
 };
 
 const closeModalBtnCss = (closeBtnPos: CloseModalButtonPosition) => {
@@ -77,7 +123,7 @@ const closeModalBtnCss = (closeBtnPos: CloseModalButtonPosition) => {
   }
   return css`
     ${closeBtnPosCss}
-    ${tw` absolute top-1/2 transform -translate-y-1/2`}
+    ${tw`absolute top-1/2 transform -translate-y-1/2`}
   `;
 };
 
@@ -111,9 +157,13 @@ const modalDialogCss = (size: ModalSize) => {
     ${sizeCss}
     ${tw` bg-white rounded overflow-auto isolate`}
     ${tw`p-0 m-0`}
-    ${tw`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+    ${tw`fixed top-1/2 left-1/2`}
   `;
 };
+
+const AnimatedReachDialogOverlay = motion(ReachDialogOverlay);
+
+const AnimatedReachDialogContent = motion(ReachDialogContent);
 
 const ModalHeader = styled.div`
   ${tw`sticky top-0 z-10 bg-white text-center py-md`}
@@ -123,6 +173,7 @@ const ModalHeader = styled.div`
 const ModalBody = styled.div`
   ${tw`p-lg`}
 `;
+
 const ModalBodyContent = styled.div`
   ${tw`overflow-auto p-xs`}
 `;

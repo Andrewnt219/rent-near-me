@@ -22,7 +22,7 @@ const AccountIndexPage: CustomNextPage = () => {
       <div tw="text-center">
         <p>{t('account:index.deactivate.title')}</p>
 
-        <ButtonLink as="a" tw="font-semibold">
+        <ButtonLink tw="font-semibold">
           {t('account:index.deactivate.button')}
         </ButtonLink>
       </div>
