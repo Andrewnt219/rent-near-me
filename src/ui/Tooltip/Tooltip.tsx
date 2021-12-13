@@ -1,6 +1,6 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useState, VFC } from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
-import tw, { css } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 
 type TooltipProps = Omit<RadixTooltip.TooltipProps, 'open' | 'onOpenChange'> & {
@@ -10,10 +10,6 @@ type TooltipProps = Omit<RadixTooltip.TooltipProps, 'open' | 'onOpenChange'> & {
    * **Note:** A valid trigger here must be an HTML native element or an element that implement the {@link React.forwardRef} API.
    */
   trigger: ReactNode;
-  /**
-   * Theme color to be applied on the tooltip popover
-   */
-  theme?: 'dark' | 'light' | 'primary' | 'secondary';
   /**
    * Props passed into the tooltip popover element
    */
@@ -30,7 +26,6 @@ type TooltipProps = Omit<RadixTooltip.TooltipProps, 'open' | 'onOpenChange'> & {
  */
 const Tooltip: FC<TooltipProps> = ({
   trigger,
-  theme,
   menuPopupProps,
   children,
   ...props
@@ -47,7 +42,7 @@ const Tooltip: FC<TooltipProps> = ({
       <AnimatePresence>
         {/* Required to aniamte exit */}
         {showTooltip && (
-          <RadixTooltip.Content
+          <TooltipContent
             side="top"
             sideOffset={4}
             {...menuPopupProps}
@@ -59,20 +54,11 @@ const Tooltip: FC<TooltipProps> = ({
               initial={props.defaultOpen ? false : 'hidden'}
               animate="visible"
               exit="hidden"
-              css={`
-                ${tw`px-sm py-xs rounded-md`}
-                ${tw`origin-[var(--radix-tooltip-content-transform-origin)]`}
-                ${getTooltipThemeStyle(theme)}
-              `}
             >
               {children}
-              <RadixTooltip.Arrow
-                width={12}
-                height={6}
-                css={getTooltipArrowThemeStyle(theme)}
-              />
+              <TooltipArrow />
             </motion.div>
-          </RadixTooltip.Content>
+          </TooltipContent>
         )}
       </AnimatePresence>
     </RadixTooltip.Root>
@@ -96,38 +82,17 @@ const animationVariants: Variants = {
 };
 
 /**
- * Getter for color styling of the {@link RadixTooltip.Content} by `theme`
+ * A component provides styling for {@link RadixTooltip.Content}
  */
-const getTooltipThemeStyle = (theme: TooltipProps['theme']) => {
-  switch (theme) {
-    case 'light':
-      return tw`bg-white shadow-z8`;
-    case 'primary':
-      return tw`bg-primary text-white shadow-z1`;
-    case 'secondary':
-      return tw`bg-secondary text-white shadow-z1`;
-    default:
-      return tw`bg-gray-800 text-white`;
-  }
-};
+const TooltipContent = styled(RadixTooltip.Content)`
+  ${tw`px-sm py-xs rounded-md`}
+  ${tw`origin-[var(--radix-tooltip-content-transform-origin)]`}
+  ${tw`bg-gray-800 text-white`}
+`;
 
 /**
- * Getter for color styling of the {@link RadixTooltip.Arrow} by `theme`
+ * A component provides styling for {@link RadixTooltip.Arrow}
  */
-const getTooltipArrowThemeStyle = (theme: TooltipProps['theme']) => {
-  return css`
-    ${tw`fill-current`}
-    ${() => {
-      switch (theme) {
-        case 'light':
-          return tw`text-white`;
-        case 'primary':
-          return tw`text-primary`;
-        case 'secondary':
-          return tw`text-secondary`;
-        default:
-          return tw`text-gray-800`;
-      }
-    }}
-  `;
-};
+const TooltipArrow: VFC = () => (
+  <RadixTooltip.Arrow tw="fill-current text-gray-800" width={12} height={6} />
+);
