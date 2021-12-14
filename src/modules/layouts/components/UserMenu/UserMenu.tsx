@@ -68,7 +68,8 @@ const UserMenuButton = forwardRef<HTMLButtonElement, ComponentProps<'button'>>(
       <ButtonGhost
         {...props}
         rounded
-        tw="flex items-center border pl-md pr-sm py-sm transition-shadow hover:shadow"
+        size="md"
+        tw="flex items-center border pr-sm transition-shadow hover:shadow"
         ref={ref}
       >
         <Icon icon={menuFill} height={24} />

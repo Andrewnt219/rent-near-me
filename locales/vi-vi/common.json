@@ -1,0 +1,13 @@
+{
+  "login": {
+    "facebook": "Đăng nhập bằng facebook",
+    "google": "Đăng nhập bằng Google"
+  },
+  "languageMenu": {
+    "message": "Chọn ngôn ngữ"
+  },
+  "locale": {
+    "en-us": "Tiếng Anh",
+    "vi-vi": "Tiếng Việt"
+  }
+}

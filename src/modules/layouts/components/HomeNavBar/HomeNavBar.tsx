@@ -1,14 +1,13 @@
 import React from 'react';
-import { Icon } from '@iconify/react';
-import globeFill from '@iconify/icons-eva/globe-fill';
 import { LinkBase } from '@ui/Button/Link';
-import { ButtonGhost } from '@ui/Button';
+import { ButtonPrimary } from '@ui/Button';
 import { useModals } from '@ui/Modal/ModalContext';
 import LogoWithName from '@ui/Logo/LogoWithName';
 import LocationSearchBar from '@ui/LocationSearchBar/LocationSearchBar';
 import Layout from '@modules/layouts/Layout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import UserMenu from '../UserMenu/UserMenu';
+import LanguageMenu from '../LanguageMenu/LanguageMenu';
 
 type Props = {
   className?: string;
@@ -26,23 +25,19 @@ const HomeNavBar = ({ className }: Props) => {
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
-        <nav aria-label="Main" tw="flex items-center">
+        <nav aria-label="Main" tw="flex items-center gap-4">
           {!isAuthenticated && (
-            <ButtonGhost
+            <ButtonPrimary
               onClick={registerModal?.show}
               rounded
               size="md"
-              tw="font-semibold"
+              tw="font-semibold mr-md"
             >
-              Become a Host
-            </ButtonGhost>
+              Join our community
+            </ButtonPrimary>
           )}
 
-          <ButtonGhost icon size="md">
-            <Icon icon={globeFill} />
-            <span tw="sr-only">Change site&apos; language</span>
-          </ButtonGhost>
-
+          <LanguageMenu />
           <UserMenu />
         </nav>
       </Layout.Container>

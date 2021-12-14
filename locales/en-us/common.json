@@ -93,6 +93,9 @@
     "register": "Register",
     "logout": "Log out"
   },
+  "languageMenu": {
+    "message": "Choose your language"
+  },
   "routes": {
     "account": {
       "index": "Account",
@@ -103,5 +106,9 @@
     "home": "Home",
     "about": "About",
     "wishlist": "Wishlist"
+  },
+  "locale": {
+    "en-us": "English",
+    "vi-vi": "Vietnamese"
   }
 }
