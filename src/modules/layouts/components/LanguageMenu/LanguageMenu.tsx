@@ -26,7 +26,6 @@ const LanguageMenu: VFC = () => {
               <CountryFlagIcon
                 width={32}
                 height={32}
-                tw="rounded-full"
                 country={getCountryCodeByLocale(locale as Locale)}
               />
               <Text>{t(`common:locale.${locale}`)}</Text>
@@ -54,7 +53,6 @@ const LanguageMenuButton = forwardRef<
       ref={ref}
     >
       <CountryFlagIcon
-        tw="rounded-full"
         width={128}
         height={128}
         country={getCountryCodeByLocale(lang as Locale)}

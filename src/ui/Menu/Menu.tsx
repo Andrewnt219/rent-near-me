@@ -83,10 +83,10 @@ const ANIMATION_TRANSITION: Transition = {
 };
 const ANIMATION_VARIANTS: Variants = {
   visible: {
-    height: 'auto',
+    scaleY: 1,
   },
   hidden: {
-    height: 0,
+    scaleY: 0,
   },
 };
 
@@ -94,6 +94,6 @@ const ANIMATION_VARIANTS: Variants = {
  * A component provides styling for {@link RadixDropdownMenu.Content} (the menu popup)
  */
 const MenuContent = styled(RadixDropdownMenu.Content)`
-  ${tw`font-normal bg-white min-w-[12.5rem] shadow-z8 rounded overflow-hidden`}
+  ${tw`font-normal bg-white min-w-[12.5rem] shadow-z8 rounded`}
   ${tw`origin-[var(--radix-dropdown-menu-content-transform-origin)]`}
 `;
