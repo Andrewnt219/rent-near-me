@@ -14,7 +14,7 @@ const LanguageMenu: VFC = () => {
   const { t, lang } = useTranslation();
 
   return (
-    <Menu button={<LanguageMenuButton />}>
+    <Menu trigger={<LanguageMenuButton />}>
       <MenuItemGroup label={t('common:languageMenu.message')}>
         {i18nConfig.locales.map((locale) => (
           <MenuItem

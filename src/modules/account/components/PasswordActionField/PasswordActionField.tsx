@@ -30,7 +30,7 @@ const PasswordActionFieldAltContent: VFC = () => {
 
   return (
     <div>
-      <Text tw="mb-sm">
+      <Text tw="mb-xs">
         {profile?.passwordLastUpdatedTime
           ? t('account:security.change-password.description.password-changed', {
               time: dayjs(profile.passwordLastUpdatedTime).fromNow(),

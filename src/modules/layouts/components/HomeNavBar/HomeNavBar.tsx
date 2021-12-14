@@ -25,7 +25,7 @@ const HomeNavBar = ({ className }: Props) => {
 
         <LocationSearchBar tw="min-w-[20rem]" />
 
-        <nav aria-label="Main" tw="flex items-center gap-4">
+        <nav aria-label="Main" tw="flex items-center gap-md">
           {!isAuthenticated && (
             <ButtonPrimary
               onClick={registerModal?.show}

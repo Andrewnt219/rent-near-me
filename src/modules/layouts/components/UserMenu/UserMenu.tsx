@@ -17,48 +17,54 @@ const UserMenu: VFC = () => {
   const { registerModal, loginModal } = useModals();
 
   return (
-    <Menu trigger={<UserMenuButton />}>
-      {isAuthenticated ? (
-        <MenuItemGroup>
-          <MenuLink href="/account">
-            {t('common:routes.account.index')}
-          </MenuLink>
-        </MenuItemGroup>
-      ) : (
-        <MenuItemGroup tw="font-semibold">
-          <MenuItem onSelect={registerModal?.show}>
-            {t('common:userMenu.register')}
-          </MenuItem>
-          <MenuItem onSelect={loginModal?.show}>
-            {t('common:userMenu.login')}
-          </MenuItem>
-        </MenuItemGroup>
-      )}
-      <MenuItemGroup label={t('common:userMenu.quickLinks')}>
-        <MenuLink href="/">{t('common:routes.home')}</MenuLink>
-        {isAuthenticated && (
-          <>
-            <MenuLink href="/account/security">
-              {t('common:routes.account.security')}
+    <div>
+      {/* The `div` is to avoid layout shift when the menu is toggled
+          `portalled: false` to easily place the menu behind the Modal's overlay */}
+      <Menu trigger={<UserMenuButton />} menuPopupProps={{ portalled: false }}>
+        {isAuthenticated ? (
+          <MenuItemGroup>
+            <MenuLink href="/account">
+              {t('common:routes.account.index')}
             </MenuLink>
-            <MenuLink href="/wishlist">{t('common:routes.wishlist')}</MenuLink>
-          </>
+          </MenuItemGroup>
+        ) : (
+          <MenuItemGroup tw="font-semibold">
+            <MenuItem onSelect={registerModal?.show}>
+              {t('common:userMenu.register')}
+            </MenuItem>
+            <MenuItem onSelect={loginModal?.show}>
+              {t('common:userMenu.login')}
+            </MenuItem>
+          </MenuItemGroup>
         )}
-      </MenuItemGroup>
-      {isAuthenticated && (
-        <MenuItemGroup>
-          <MenuItem
-            tw="text-danger"
-            onSelect={async () => {
-              await router.push('/');
-              await AuthApi.signOut();
-            }}
-          >
-            {t('common:userMenu.logout')}
-          </MenuItem>
+        <MenuItemGroup label={t('common:userMenu.quickLinks')}>
+          <MenuLink href="/">{t('common:routes.home')}</MenuLink>
+          {isAuthenticated && (
+            <>
+              <MenuLink href="/account/security">
+                {t('common:routes.account.security')}
+              </MenuLink>
+              <MenuLink href="/wishlist">
+                {t('common:routes.wishlist')}
+              </MenuLink>
+            </>
+          )}
         </MenuItemGroup>
-      )}
-    </Menu>
+        {isAuthenticated && (
+          <MenuItemGroup>
+            <MenuItem
+              tw="text-danger"
+              onSelect={async () => {
+                await router.push('/');
+                await AuthApi.signOut();
+              }}
+            >
+              {t('common:userMenu.logout')}
+            </MenuItem>
+          </MenuItemGroup>
+        )}
+      </Menu>
+    </div>
   );
 };
 
