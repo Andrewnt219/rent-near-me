@@ -7,7 +7,7 @@ import { ButtonOutline } from '@ui/Button';
 import { Menu, MenuItem, MenuItemGroup } from '@ui/Menu';
 import Text from '@ui/Text/Text';
 import i18nConfig from 'i18n.json';
-import CountryFlagIcon from '@ui/CountryFlagIcon/CountryFlagIcon';
+import CountryFlagIcon from '@ui/CountryFlagIcon';
 import { getCountryCodeByLocale, Locale } from '@utils/locale-utils';
 
 const LanguageMenu: VFC = () => {
