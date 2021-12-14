@@ -2,11 +2,11 @@ import { VFC } from 'react';
 import Image, { ImageProps } from 'next/image';
 import { Country } from '@utils/locale-utils';
 import UsFlag from './flags/us.svg';
-import ViFlag from './flags/vi.svg';
+import VnFlag from './flags/vn.svg';
 
 type CountryFlagIconProps = Omit<ImageProps, 'src'> & {
   /**
-   * The ISO 639-1 country code of the flag
+   * The ISO-3166 country code of the flag
    */
   country: Country | undefined;
 };
@@ -21,12 +21,12 @@ const CountryFlagIcon: VFC<CountryFlagIconProps> = ({ country, ...props }) =>
 
 /**
  * Key-value pairs of countries supported by this component
- * * Key is the ISO 639-1 country code
+ * * Key is the ISO-3166 country code
  * * Value can be a StaticImport or a path to the flag icon
  */
 const FLAGS_BY_COUNTRY_CODE = {
   us: UsFlag,
-  vi: ViFlag,
+  vn: VnFlag,
 };
 
 export default CountryFlagIcon;

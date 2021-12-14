@@ -1,6 +1,6 @@
 export type Language = 'en' | 'vi';
 
-export type Country = 'us' | 'vi';
+export type Country = 'us' | 'vn';
 
 export type Locale = `${Language}-${Country}`;
 
