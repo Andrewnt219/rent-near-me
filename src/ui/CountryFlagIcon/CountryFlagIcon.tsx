@@ -1,14 +1,13 @@
 import { forwardRef, RefAttributes } from 'react';
-import { Country } from '@utils/locale-utils';
 import UsFlag from '@iconify/icons-emojione/flag-for-united-states';
 import VnFlag from '@iconify/icons-emojione/flag-for-vietnam';
-import { Icon, IconProps } from '@iconify/react';
+import { Icon, IconifyIcon, IconProps } from '@iconify/react';
 
 type CountryFlagIconProps = Omit<IconProps, 'icon'> & {
   /**
    * The ISO-3166 country code of the flag
    */
-  country: Country | undefined;
+  country: string | undefined;
 };
 
 /**
@@ -19,7 +18,7 @@ const CountryFlagIcon = forwardRef<
   CountryFlagIconProps
 >(({ country, ...props }, ref) =>
   country ? (
-    <Icon {...props} ref={ref} icon={FLAGS_BY_COUNTRY_CODE[country]} />
+    <Icon {...props} ref={ref} icon={FLAGS_BY_COUNTRY_CODE[country] ?? ''} />
   ) : null
 );
 
@@ -28,7 +27,7 @@ const CountryFlagIcon = forwardRef<
  * * Key is the ISO-3166 country code
  * * Value can be a StaticImport or a path to the flag icon
  */
-const FLAGS_BY_COUNTRY_CODE = {
+const FLAGS_BY_COUNTRY_CODE: Record<string, IconifyIcon | string> = {
   us: UsFlag,
   vn: VnFlag,
 };
