@@ -45,6 +45,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@iconify/icons-emojione": "^1.1.0",
     "@iconify/icons-eva": "^1.1.0",
     "@iconify/icons-logos": "^1.1.10",
     "@iconify/react": "^3.0.1",

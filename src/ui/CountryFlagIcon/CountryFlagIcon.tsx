@@ -1,10 +1,10 @@
-import { VFC } from 'react';
-import Image, { ImageProps } from 'next/image';
+import { forwardRef, RefAttributes } from 'react';
 import { Country } from '@utils/locale-utils';
-import UsFlag from './flags/us.svg';
-import VnFlag from './flags/vn.svg';
+import UsFlag from '@iconify/icons-emojione/flag-for-united-states';
+import VnFlag from '@iconify/icons-emojione/flag-for-vietnam';
+import { Icon, IconProps } from '@iconify/react';
 
-type CountryFlagIconProps = Omit<ImageProps, 'src'> & {
+type CountryFlagIconProps = Omit<IconProps, 'icon'> & {
   /**
    * The ISO-3166 country code of the flag
    */
@@ -14,10 +14,14 @@ type CountryFlagIconProps = Omit<ImageProps, 'src'> & {
 /**
  * A component that displays the flag of the country specified by the `country` prop
  */
-const CountryFlagIcon: VFC<CountryFlagIconProps> = ({ country, ...props }) =>
+const CountryFlagIcon = forwardRef<
+  RefAttributes<SVGSVGElement>,
+  CountryFlagIconProps
+>(({ country, ...props }, ref) =>
   country ? (
-    <Image alt={country} {...props} src={FLAGS_BY_COUNTRY_CODE[country]} />
-  ) : null;
+    <Icon {...props} ref={ref} icon={FLAGS_BY_COUNTRY_CODE[country]} />
+  ) : null
+);
 
 /**
  * Key-value pairs of countries supported by this component
