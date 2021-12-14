@@ -1,17 +1,16 @@
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { ButtonLink, ButtonSecondary } from '@ui/Button';
+import { ButtonSecondary } from '@ui/Button';
 import Form from '@ui/Form/Form';
 import HiddenField from '@ui/Form/HiddenField';
 import PasswordField from '@ui/Form/PasswordField';
-import { useModals } from '@ui/Modal/ModalContext';
 import PasswordCheckList from '@ui/PasswordCheckList/PasswordCheckList';
 import useTranslation from 'next-translate/useTranslation';
+import ForgetPasswordButton from '../ForgetPasswordButton/ForgetPasswordButton';
 import useChangePasswordForm from './useChangePasswordForm';
 
 function ChangePasswordForm() {
   const { t } = useTranslation();
   const { form, onSubmit, passwordValidationResults } = useChangePasswordForm();
-  const { forgetPasswordModal } = useModals();
   const { effectiveProvider } = useAuth();
 
   return (
@@ -23,11 +22,7 @@ function ChangePasswordForm() {
           name="oldPassword"
           label={t('account:security.change-password.old-password')}
           autoComplete="current-password"
-          inputDescription={
-            <ButtonLink type="button" onClick={forgetPasswordModal.show}>
-              {t('account:security.change-password.forget-password')}
-            </ButtonLink>
-          }
+          inputDescription={<ForgetPasswordButton type="button" />}
         />
       )}
 

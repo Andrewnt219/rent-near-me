@@ -1,5 +1,5 @@
 {
-  "locales": ["en-us", "vi"],
+  "locales": ["en-us", "vi-vn"],
   "defaultLocale": "en-us",
   "pages": {
     "rgx:/account/*": ["account"],

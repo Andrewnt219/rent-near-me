@@ -55,7 +55,6 @@ const Menu: FC<MenuProps> = ({
             {...menuPopupProps}
             asChild
             forceMount
-            portalled={false}
           >
             <motion.div
               transition={ANIMATION_TRANSITION}

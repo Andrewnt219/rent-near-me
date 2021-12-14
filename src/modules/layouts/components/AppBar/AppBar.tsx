@@ -3,7 +3,7 @@ import searchFill from '@iconify/icons-eva/search-fill';
 import heartFill from '@iconify/icons-eva/heart-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import { ComponentProps } from 'react';
-import AppBarMenuItem from '../AppBarMenuItem/AppBarMenuItem';
+import AppBarMenuItem from './AppBarMenuItem';
 
 type Props = {
   className?: string;

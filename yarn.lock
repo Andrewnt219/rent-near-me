@@ -868,6 +868,11 @@
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.8.4.tgz#bfda18ddf2e63043550bfe1d9af3fa239a06f99f"
   integrity sha512-2Uf/aqtfzpEpCsB2ao4GOqmKhjOAxeaaq4CUMGBu+sNz1XQane1Dj2cUfhDII/rj/EWUTObIuUwqljLBbXjxeQ==
 
+"@iconify/icons-emojione@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-emojione/-/icons-emojione-1.1.0.tgz#ab0a37e7e18ec27cc8211f3d09d4dedbda469adf"
+  integrity sha512-WpAThOcdYdcXkuBoIvvdS4S0vHE9Yb5RCq5Y23UZ5RXfYUmh8pRG2GqT1tDTiSL+9khjr+tMafkBG9TaQD+gVw==
+
 "@iconify/icons-eva@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@iconify/icons-eva/-/icons-eva-1.1.0.tgz#6d6dae59d766587e9034bbb782acca6c40ab4b0c"
