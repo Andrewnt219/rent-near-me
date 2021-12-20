@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
-import { LinkBase, LinkProps } from '@ui/Button/Link';
+import { Link, LinkProps } from '@ui/Button/Link';
 import MenuItemBase from './MenuItemBase';
 import { useRouteMatch } from '@hooks/useRouteMatch';
 
@@ -18,7 +18,7 @@ const MenuLink: FC<MenuLinkProps> = ({ menuItemProps, ...props }) => {
   const matched = useRouteMatch(props.href, true);
   return (
     <MenuItemBase disabled={matched} {...menuItemProps} asChild>
-      <LinkBase {...props} />
+      <Link {...props} />
     </MenuItemBase>
   );
 };

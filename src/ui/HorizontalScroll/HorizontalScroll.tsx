@@ -6,7 +6,7 @@ import useOverflow from '@hooks/useOverflow';
 import { CSSProp } from 'styled-components';
 import tw from 'twin.macro';
 import { hideScrollbar } from '@styles/GlobalStyles';
-import { ButtonGhost } from '@ui/Button';
+import { Button } from '@ui/Button';
 
 type HorizontalScrollProps = {
   /**
@@ -66,9 +66,10 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
   return (
     <div tw="flex items-center gap-xs" {...props}>
       {isOverFlowingX && (
-        <ButtonGhost
+        <Button
           icon
           size="md"
+          variant="ghost"
           tw="flex-shrink-0"
           css={getScrollButtonThemeStyle(theme)}
           style={{
@@ -78,7 +79,7 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         >
           <span tw="sr-only">Scroll left</span>
           <Icon icon={arrowIosBackFill} />
-        </ButtonGhost>
+        </Button>
       )}
       <div
         ref={childWrapperRef}
@@ -91,9 +92,10 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         {children}
       </div>
       {isOverFlowingX && (
-        <ButtonGhost
+        <Button
           icon
           size="md"
+          variant="ghost"
           tw="flex-shrink-0"
           css={getScrollButtonThemeStyle(theme)}
           style={{
@@ -103,7 +105,7 @@ const HorizontalScroll: FC<HorizontalScrollProps> = ({
         >
           <span tw="sr-only">Scroll right</span>
           <Icon icon={arrowIosForwardFill} />
-        </ButtonGhost>
+        </Button>
       )}
     </div>
   );

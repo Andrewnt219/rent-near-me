@@ -16,15 +16,6 @@ declare module '@common-types' {
   };
   type Await<T> = T extends PromiseLike<infer U> ? Await<U> : T;
 
-  type StyledComponentProps<T> = T extends StyledComponent<
-    any,
-    any,
-    infer P,
-    any
-  >
-    ? P
-    : never;
-
   type Type<T> = {
     new (...args: any[]): T;
   };

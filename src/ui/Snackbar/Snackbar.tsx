@@ -9,7 +9,7 @@ import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 import infoFill from '@iconify/icons-eva/info-fill';
 import Text from '@ui/Text/Text';
-import { ButtonGhost } from '@ui/Button';
+import { Button } from '@ui/Button';
 
 type Props = {
   /**
@@ -48,15 +48,16 @@ function Snackbar({ className, severity = 'default', ...props }: Props) {
 
         <Text tw="text-muted">{props.message}</Text>
       </div>
-      <ButtonGhost
+      <Button
         icon
         size="sm"
+        variant="ghost"
         onClick={props.onDismiss}
         tw="  text-muted ml-auto flex-center"
       >
         <Icon icon={closeFill} tw="w-5 h-5" />
         <span tw="sr-only">Dismiss snackbar</span>
-      </ButtonGhost>
+      </Button>
     </StyledContainer>
   );
 }

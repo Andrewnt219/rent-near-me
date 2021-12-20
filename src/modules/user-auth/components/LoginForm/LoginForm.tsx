@@ -3,7 +3,6 @@ import facebookIcon from '@iconify/icons-logos/facebook';
 import googleIcon from '@iconify/icons-logos/google-icon';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
 import { useModals } from '@ui/Modal/ModalContext';
-import { ButtonLink, ButtonOutline, ButtonPrimary } from '@ui/Button';
 import Checkbox from '@ui/Form/Checkbox';
 import Form from '@ui/Form/Form';
 import PasswordField from '@ui/Form/PasswordField';
@@ -15,6 +14,7 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 import tw from 'twin.macro';
 import useLoginForm from './useLoginForm';
 import Logo from '@ui/Logo/Logo';
+import { Button } from '@ui/Button';
 
 const LoginForm = () => {
   const {
@@ -45,9 +45,13 @@ const LoginForm = () => {
         name="password"
         autoComplete="current-password"
         inputDescription={
-          <ButtonLink type="button" onClick={forgetPasswordModal.show}>
+          <Button
+            type="button"
+            variant="link"
+            onClick={forgetPasswordModal.show}
+          >
             {t('common:login.forgetPassword')}
-          </ButtonLink>
+          </Button>
         }
       />
 
@@ -64,16 +68,17 @@ const LoginForm = () => {
         </Form.ErrorMessage>
       )}
 
-      <ButtonPrimary
-        size="md"
+      <Button
         type="submit"
+        size="md"
+        variant="primary"
         tw="block w-full"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
           ? t('common:login.submitButton.loading')
           : t('common:login.submitButton.submit')}
-      </ButtonPrimary>
+      </Button>
 
       <HrText tw="my-lg">{t('common:login.or')}</HrText>
 
@@ -127,13 +132,14 @@ function SignInExternalButton({
   ...buttonProps
 }: SignInExternalButtonProps) {
   return (
-    <ButtonOutline
+    <Button
       tw="w-full grid grid-cols-[3rem auto] place-items-center"
       size="md"
+      variant="outline"
       {...buttonProps}
     >
       <span aria-hidden>{icon}</span>
       <span tw="text-left">{text}</span>
-    </ButtonOutline>
+    </Button>
   );
 }

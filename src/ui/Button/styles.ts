@@ -2,6 +2,8 @@ import tw, { css } from 'twin.macro';
 
 type Size = 'lg' | 'md' | 'sm';
 
+type Variant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'link';
+
 /**
  * Getter for styling of buttons and links when `icon` is `false` or not specified
  */
@@ -46,7 +48,11 @@ function getIconSizeStyle(size?: Size) {
 const getRoundedStyle = (rounded?: boolean) =>
   rounded ? tw`rounded-full` : tw`rounded`;
 
-export type BaseProps = {
+export type ButtonBaseProps = {
+  /**
+   * Appearance variant of the button
+   */
+  variant?: Variant;
   /**
    * Size of the button which can be different between regular and icon variant even at the same size
    */
@@ -64,9 +70,94 @@ export type BaseProps = {
 };
 
 /**
- * Base styles for all buttons and links in `@ui/Button`
+ * Styling for button by variants
  */
-const baseStyle = css<BaseProps>`
+const variantStyle: Record<Variant | '', ReturnType<typeof css>> = {
+  '': css``,
+
+  /**
+   * Styling for button in `primary` variant
+   */
+  primary: css`
+    ${tw`font-semibold  bg-primary text-white`}
+
+    &:hover:not(:disabled) {
+      ${tw`bg-primary-dark`}
+    }
+
+    &:active,
+    &:focus-visible {
+      ${tw`ring-4 ring-primary ring-opacity-50`}
+    }
+  `,
+
+  /**
+   * Styling for button in `secondary` variant
+   */
+  secondary: css`
+    ${tw`font-semibold  bg-secondary text-white`}
+
+    &:hover:not(:disabled) {
+      ${tw`filter brightness-90`}
+    }
+
+    &:active,
+    &:focus-visible {
+      ${tw`ring-4 ring-secondary ring-opacity-50`}
+    }
+  `,
+
+  /**
+   * Styling for button in `ghost` variant
+   */
+  ghost: css`
+    &:hover:not(:disabled) {
+      ${tw`bg-light`}
+    }
+
+    &:focus-visible,
+    &:active {
+      ${tw`ring-2 ring-dark`}
+    }
+  `,
+
+  /**
+   * Styling for button in `outline` variant
+   */
+  outline: css`
+    ${tw`border`}
+
+    &:hover:not(:disabled), &:active {
+      ${tw`bg-light`}
+    }
+
+    &:focus-visible {
+      ${tw`ring-2 ring-dark`}
+    }
+  `,
+
+  /**
+   * Styling for button to look like a link
+   */
+  link: css`
+    ${tw`underline text-secondary`}
+
+    &:hover:not(:disabled) {
+      ${tw`no-underline`}
+    }
+
+    &:focus-visible,
+    &:active {
+      ${tw`ring-2 ring-dark ring-offset-2`}
+    }
+  `,
+};
+
+/**
+ * Computed styles for all buttons and links in `@ui/Button`
+ */
+export const styles = css<ButtonBaseProps>`
+  ${(p) => variantStyle[p.variant ?? '']}
   ${(p) =>
     p.icon
       ? css`
@@ -81,91 +172,4 @@ const baseStyle = css<BaseProps>`
           ${getRoundedStyle(p.rounded)}
         `}
   ${tw`disabled:(opacity-60 cursor-not-allowed)`}
-`;
-
-/**
- * Styling for button in `primary` theme
- */
-export const primaryStyle = css`
-  ${baseStyle}
-
-  ${tw`font-semibold  bg-primary text-white`}
-
-  &:hover:not(:disabled) {
-    ${tw`bg-primary-dark`}
-  }
-
-  &:active,
-  &:focus-visible {
-    ${tw`ring-4 ring-primary ring-opacity-50`}
-  }
-`;
-
-/**
- * Styling for button in `secondary` theme
- */
-export const secondaryStyle = css`
-  ${baseStyle}
-
-  ${tw`font-semibold  bg-secondary text-white`}
-
-  &:hover:not(:disabled) {
-    ${tw`filter brightness-90`}
-  }
-
-  &:active,
-  &:focus-visible {
-    ${tw`ring-4 ring-secondary ring-opacity-50`}
-  }
-`;
-
-/**
- * Styling for button in `ghost` theme
- */
-export const ghostStyle = css`
-  ${baseStyle}
-
-  &:hover:not(:disabled) {
-    ${tw`bg-light`}
-  }
-
-  &:focus-visible,
-  &:active {
-    ${tw`ring-2 ring-dark`}
-  }
-`;
-
-/**
- * Styling for button in `outline` theme
- */
-export const outlineStyle = css`
-  ${baseStyle}
-
-  ${tw`border`}
-
-  &:hover:not(:disabled), &:active {
-    ${tw`bg-light`}
-  }
-
-  &:focus-visible {
-    ${tw`ring-2 ring-dark`}
-  }
-`;
-
-/**
- * Styling for button to look like a link
- */
-export const linkStyle = css`
-  ${baseStyle}
-
-  ${tw`underline text-secondary`}
-
-  &:hover:not(:disabled) {
-    ${tw`no-underline`}
-  }
-
-  &:focus-visible,
-  &:active {
-    ${tw`ring-2 ring-dark ring-offset-2`}
-  }
 `;

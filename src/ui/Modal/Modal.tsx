@@ -7,9 +7,9 @@ import {
   DialogOverlay as ReachDialogOverlay,
   DialogContent as ReachDialogContent,
 } from '@reach/dialog';
-import { ButtonGhost } from '@ui/Button';
 import Text from '@ui/Text/Text';
 import { AnimatePresence, motion, Transition, Variants } from 'framer-motion';
+import { Button } from '@ui/Button';
 
 type CloseModalButtonPosition = 'left' | 'right' | 'none';
 type ModalSize = 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -61,14 +61,15 @@ const Modal: FC<ModalProps> = ({
           >
             {header && (
               <ModalHeader>
-                <ButtonGhost
+                <Button
                   icon
+                  variant="ghost"
                   css={closeModalBtnCss(closeButtonPosition)}
                   onClick={onClose}
                 >
                   {closeButtonIcon ?? <Icon icon={closeFill} tw="w-6 h-6" />}
                   <span tw="sr-only">Close dialog</span>
-                </ButtonGhost>
+                </Button>
                 <Text component="h3" variant="h5" id={modalTitleId}>
                   {header}
                 </Text>

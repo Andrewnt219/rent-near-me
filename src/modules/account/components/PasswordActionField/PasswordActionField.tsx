@@ -6,7 +6,6 @@ import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
 import useUserProfile from '@modules/user-auth/hooks/useUserProfile';
 import Text from '@ui/Text/Text';
-import { ButtonLink } from '@ui/Button';
 import ForgetPasswordButton from '../ForgetPasswordButton/ForgetPasswordButton';
 
 const PasswordActionField: VFC = () => {
