@@ -1,5 +1,4 @@
 import DateField from '@ui/Form/DateField';
-import { ButtonLink, ButtonPrimary } from '@ui/Button';
 import { GENDERS, MAXIMUM_DOB } from '@models/constnats';
 import Form from '@ui/Form/Form';
 import PasswordField from '@ui/Form/PasswordField';
@@ -13,6 +12,7 @@ import useRegisterForm from './useRegisterForm';
 import { useModals } from '@ui/Modal/ModalContext';
 import { Icon } from '@iconify/react';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
+import { Button } from '@ui/Button';
 
 const RegisterForm = () => {
   const { form, onSubmit, submitError, passwordValidationResults } =
@@ -27,9 +27,9 @@ const RegisterForm = () => {
           {t('common:register.welcome')}
         </Text>
 
-        <ButtonLink type="button" onClick={loginModal.show}>
+        <Button type="button" variant="link" onClick={loginModal.show}>
           {t('common:register.alreadyHasAccount')}
-        </ButtonLink>
+        </Button>
       </div>
 
       <InputRow>
@@ -104,16 +104,17 @@ const RegisterForm = () => {
         </Form.ErrorMessage>
       )}
 
-      <ButtonPrimary
-        size="md"
+      <Button
         type="submit"
+        size="md"
+        variant="primary"
         tw="block w-full mt-md"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
           ? t('common:register.submitButton.loading')
           : t('common:register.submitButton.submit')}
-      </ButtonPrimary>
+      </Button>
     </Form>
   );
 };

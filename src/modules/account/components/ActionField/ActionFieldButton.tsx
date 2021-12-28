@@ -1,12 +1,12 @@
-import { StyledComponentProps } from '@common-types';
-import { ButtonGhost } from '@ui/Button';
+import { Button } from '@ui/Button';
+import { ButtonBaseProps } from '@ui/Button/styles';
 import tw, { styled } from 'twin.macro';
 
-type ButtonProps = StyledComponentProps<typeof ButtonGhost>;
-const attrs: ButtonProps = {
+const attrs: ButtonBaseProps = {
+  variant: 'ghost',
   size: 'sm',
 };
-const ActionFieldButton = styled(ButtonGhost).attrs(attrs)`
+const ActionFieldButton = styled(Button).attrs(attrs)`
   ${tw`text-secondary font-semibold`}
 `;
 

@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
 import { getErrorMessage } from '@utils/api-responses';
 import AuthApi from '@services/AuthApi';
-import { ButtonProps, ButtonLink } from '@ui/Button';
+import { ButtonProps, Button } from '@ui/Button';
 
 type SendEmailVerificationButtonProps = ButtonProps & {
   disableAfterClickMs?: number;
@@ -48,8 +48,9 @@ const SendEmailVerificationButton = forwardRef<
   };
 
   return (
-    <ButtonLink
+    <Button
       {...props}
+      variant="link"
       onClick={onClick}
       disabled={disabled || internalDisableCountdown > 0}
       ref={ref}
@@ -59,7 +60,7 @@ const SendEmailVerificationButton = forwardRef<
         ` (${t('account:security.verify-email.message.retry', {
           retryCountdown: internalDisableCountdown / 1000,
         })})`}
-    </ButtonLink>
+    </Button>
   );
 });
 

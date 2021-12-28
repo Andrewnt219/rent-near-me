@@ -1,5 +1,5 @@
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { ButtonSecondary } from '@ui/Button';
+import { Button } from '@ui/Button';
 import Form from '@ui/Form/Form';
 import HiddenField from '@ui/Form/HiddenField';
 import PasswordField from '@ui/Form/PasswordField';
@@ -44,13 +44,14 @@ function ChangePasswordForm() {
         autoComplete="new-password"
       />
 
-      <ButtonSecondary
+      <Button
         type="submit"
         size="lg"
+        variant="secondary"
         disabled={form.formState.isSubmitting}
       >
         {t('account:security.change-password.submit-button')}
-      </ButtonSecondary>
+      </Button>
     </Form>
   );
 }

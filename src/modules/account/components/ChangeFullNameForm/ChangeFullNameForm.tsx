@@ -1,6 +1,6 @@
+import { Button } from '@ui/Button';
 import Form from '@ui/Form/Form';
 import TextField from '@ui/Form/TextField';
-import { ButtonSecondary } from '@ui/Button';
 import { InputRow } from '@ui/Row/Row';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
@@ -32,13 +32,14 @@ const ChangeFullNameForm: VFC = () => {
         />
       </InputRow>
 
-      <ButtonSecondary
+      <Button
         type="submit"
         size="lg"
+        variant="secondary"
         disabled={form.formState.isSubmitting}
       >
         {t('account:personal-info.change-name.submit-button')}
-      </ButtonSecondary>
+      </Button>
     </Form>
   );
 };

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import { ButtonProps, ButtonLink } from '@ui/Button';
+import { ButtonProps, Button } from '@ui/Button';
 import { useModals } from '@ui/Modal/ModalContext';
 
 type ForgetPasswordButtonProps = ButtonProps;
@@ -13,9 +13,14 @@ const ForgetPasswordButton = forwardRef<
   const { forgetPasswordModal } = useModals();
 
   return (
-    <ButtonLink {...props} ref={ref} onClick={forgetPasswordModal.show}>
+    <Button
+      {...props}
+      variant="link"
+      ref={ref}
+      onClick={forgetPasswordModal.show}
+    >
       {t('account:security.forget-password.button')}
-    </ButtonLink>
+    </Button>
   );
 });
 

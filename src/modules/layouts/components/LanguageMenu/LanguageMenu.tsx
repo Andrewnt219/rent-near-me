@@ -3,12 +3,12 @@ import useTranslation from 'next-translate/useTranslation';
 import setLanguage from 'next-translate/setLanguage';
 import { Icon } from '@iconify/react';
 import globeFill from '@iconify/icons-eva/globe-fill';
-import { ButtonOutline } from '@ui/Button';
 import { Menu, MenuItem, MenuItemGroup } from '@ui/Menu';
 import Text from '@ui/Text/Text';
 import i18nConfig from 'i18n.json';
 import CountryFlagIcon from '@ui/CountryFlagIcon';
 import { getCountryCodeByLocale, Locale } from '@utils/locale-utils';
+import { Button } from '@ui/Button';
 
 const LanguageMenu: VFC = () => {
   const { t, lang } = useTranslation();
@@ -45,10 +45,11 @@ const LanguageMenuButton = forwardRef<
 >((props, ref) => {
   const { lang } = useTranslation();
   return (
-    <ButtonOutline
+    <Button
       {...props}
       icon
       size="lg"
+      variant="outline"
       tw="relative border p-xs transition-shadow hover:shadow"
       ref={ref}
     >
@@ -64,6 +65,6 @@ const LanguageMenuButton = forwardRef<
       >
         <Icon icon={globeFill} height={20} width={20} />
       </span>
-    </ButtonOutline>
+    </Button>
   );
 });

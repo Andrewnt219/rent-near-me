@@ -1,7 +1,8 @@
 import { FormHTMLAttributes, PropsWithChildren } from 'react';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 import tw, { css, styled } from 'twin.macro';
-import { ButtonLink } from '@ui/Button';
+import { Button } from '@ui/Button';
+import { ButtonBaseProps } from '@ui/Button/styles';
 
 type FormProps = FormHTMLAttributes<HTMLFormElement> & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -79,7 +80,8 @@ Form.Select = styled.select`
   appearance: none;
 `;
 
-Form.ShowPasswordButton = styled(ButtonLink)`
+const showPasswordButtonAttrs: ButtonBaseProps = { variant: 'link' };
+Form.ShowPasswordButton = styled(Button).attrs(showPasswordButtonAttrs)`
   ${tw`absolute right-md top-1/2 transform -translate-y-1/2`}
   ${tw`underline text-body2`}
 `;

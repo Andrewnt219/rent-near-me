@@ -1,10 +1,10 @@
-import Form from '@ui/Form/Form';
-import { ButtonSecondary } from '@ui/Button';
-import useTranslation from 'next-translate/useTranslation';
 import { VFC } from 'react';
-import useChangeGenderForm from './useChangeGenderForm';
+import useTranslation from 'next-translate/useTranslation';
+import { Button } from '@ui/Button';
+import Form from '@ui/Form/Form';
 import Select from '@ui/Form/Select';
 import { GENDERS } from '@models/constnats';
+import useChangeGenderForm from './useChangeGenderForm';
 
 const ChangeGenderForm: VFC = () => {
   const { t } = useTranslation();
@@ -24,13 +24,14 @@ const ChangeGenderForm: VFC = () => {
         ))}
       </Select>
 
-      <ButtonSecondary
+      <Button
         type="submit"
         size="lg"
+        variant="secondary"
         disabled={form.formState.isSubmitting}
       >
         {t('account:personal-info.change-gender.submit-button')}
-      </ButtonSecondary>
+      </Button>
     </Form>
   );
 };

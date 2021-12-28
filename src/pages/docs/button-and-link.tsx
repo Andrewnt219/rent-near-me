@@ -1,19 +1,7 @@
 import DocsLayout from '@modules/layouts/DocsLayout';
 import Text from '@ui/Text/Text';
-import {
-  ButtonGhost,
-  ButtonLink,
-  ButtonOutline,
-  ButtonPrimary,
-  ButtonSecondary,
-} from '@ui/Button';
-import {
-  LinkSimple,
-  LinkPrimary,
-  LinkSecondary,
-  LinkOutline,
-  LinkGhost,
-} from '@ui/Button/Link';
+import { Button } from '@ui/Button';
+import { Link } from '@ui/Button/Link';
 import { CustomNextPage } from '@/next';
 
 const ButtonAndLinkDocsPage: CustomNextPage = () => {
@@ -36,29 +24,29 @@ const ButtonDocs = () => (
     </Text>
     <div tw="space-y-2">
       <div>
-        <ButtonPrimary tw="w-32" size="md">
+        <Button variant="primary" tw="w-32" size="md">
           Primary
-        </ButtonPrimary>
+        </Button>
       </div>
       <div>
-        <ButtonSecondary tw="w-32" size="md">
+        <Button variant="secondary" tw="w-32" size="md">
           Secondary
-        </ButtonSecondary>
+        </Button>
       </div>
       <div>
-        <ButtonOutline tw="w-32" size="md">
+        <Button variant="outline" tw="w-32" size="md">
           Outline
-        </ButtonOutline>
+        </Button>
       </div>
       <div>
-        <ButtonGhost tw="w-32" size="md">
+        <Button variant="ghost" tw="w-32" size="md">
           Ghost
-        </ButtonGhost>
+        </Button>
       </div>
       <div>
-        <ButtonLink tw="w-32" size="md">
+        <Button variant="link" tw="w-32" size="md">
           Link
-        </ButtonLink>
+        </Button>
       </div>
     </div>
   </div>
@@ -71,29 +59,29 @@ const LinkDocs = () => (
     </Text>
     <div tw="space-y-2">
       <div>
-        <LinkPrimary href="/" tw="w-32" size="md">
+        <Link variant="primary" href="/" tw="w-32" size="md">
           Primary
-        </LinkPrimary>
+        </Link>
       </div>
       <div>
-        <LinkSecondary href="/" tw="w-32" size="md">
+        <Link variant="secondary" href="/" tw="w-32" size="md">
           Secondary
-        </LinkSecondary>
+        </Link>
       </div>
       <div>
-        <LinkOutline href="/" tw="w-32" size="md">
+        <Link variant="outline" href="/" tw="w-32" size="md">
           Outline
-        </LinkOutline>
+        </Link>
       </div>
       <div>
-        <LinkGhost href="/" tw="w-32" size="md">
+        <Link variant="ghost" href="/" tw="w-32" size="md">
           Ghost
-        </LinkGhost>
+        </Link>
       </div>
       <div>
-        <LinkSimple href="/" tw="w-32" size="md">
-          Simple
-        </LinkSimple>
+        <Link variant="link" href="/" tw="w-32" size="md">
+          Link
+        </Link>
       </div>
     </div>
   </div>

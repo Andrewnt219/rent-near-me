@@ -1,10 +1,10 @@
+import { VFC } from 'react';
+import useTranslation from 'next-translate/useTranslation';
 import Form from '@ui/Form/Form';
 import DateField from '@ui/Form/DateField';
-import { ButtonSecondary } from '@ui/Button';
-import useTranslation from 'next-translate/useTranslation';
-import { VFC } from 'react';
-import useChangeDobForm from './useChangeDobForm';
+import { Button } from '@ui/Button';
 import { MAXIMUM_DOB } from '@models/constnats';
+import useChangeDobForm from './useChangeDobForm';
 
 const ChangeDobForm: VFC = () => {
   const { t } = useTranslation();
@@ -18,13 +18,14 @@ const ChangeDobForm: VFC = () => {
         inputProps={{ 'auto-capitalize': 'words', autoComplete: 'bday' }}
       />
 
-      <ButtonSecondary
+      <Button
         type="submit"
+        variant="secondary"
         size="lg"
         disabled={form.formState.isSubmitting}
       >
         {t('account:personal-info.change-gender.submit-button')}
-      </ButtonSecondary>
+      </Button>
     </Form>
   );
 };

@@ -1,6 +1,6 @@
 import DocsLayout from '@modules/layouts/DocsLayout';
 import { useSnackbar } from '@ui/Snackbar/SnackbarContext';
-import { ButtonPrimary } from '@ui/Button';
+import { Button } from '@ui/Button';
 import Snackbar from '@ui/Snackbar/Snackbar';
 import { CustomNextPage } from '@/next';
 
@@ -43,14 +43,16 @@ const SnackbarDocsPage: CustomNextPage = () => {
       </div>
 
       <div tw="mt-lg space-x-md">
-        <ButtonPrimary
+        <Button
           size="md"
+          variant="primary"
           onClick={() => showSnackSuccess(new Date().toISOString())}
         >
           Enqueue Success
-        </ButtonPrimary>
-        <ButtonPrimary
+        </Button>
+        <Button
           size="md"
+          variant="primary"
           onClick={() =>
             showSnackError(
               'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad nostrum sint minus consectetur nam exercitationem eius reiciendis voluptatibus aliquam repudiandae!'
@@ -58,7 +60,7 @@ const SnackbarDocsPage: CustomNextPage = () => {
           }
         >
           Enqueue Error
-        </ButtonPrimary>
+        </Button>
       </div>
     </div>
   );

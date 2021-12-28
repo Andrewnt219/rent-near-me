@@ -1,11 +1,11 @@
 import { Icon } from '@iconify/react';
 import closeCircleFill from '@iconify/icons-eva/close-circle-fill';
-import { ButtonPrimary } from '@ui/Button';
 import Form from '@ui/Form/Form';
 import TextField from '@ui/Form/TextField';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
 import useForgetPasswordForm from './useForgetPasswordForm';
+import { Button } from '@ui/Button';
 
 const ForgetPasswordForm = () => {
   const { form, onSubmit, submitError } = useForgetPasswordForm();
@@ -37,16 +37,17 @@ const ForgetPasswordForm = () => {
         )}
       </div>
 
-      <ButtonPrimary
-        size="md"
+      <Button
         type="submit"
+        size="md"
+        variant="primary"
         tw="block w-full"
         disabled={form.formState.isSubmitting}
       >
         {form.formState.isSubmitting
           ? t('common:forgetPassword.submitButton.loading')
           : t('common:forgetPassword.submitButton.submit')}
-      </ButtonPrimary>
+      </Button>
     </Form>
   );
 };

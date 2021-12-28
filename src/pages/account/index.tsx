@@ -2,8 +2,8 @@ import { CustomNextPage } from '@/next';
 import AccountMenu from '@modules/account/components/AccountMenu/AccountMenu';
 import AccountPageLayout from '@modules/account/layouts/AccountPageLayout/AccountPageLayout';
 import { useAuth } from '@modules/user-auth/contexts/AuthContext';
-import { ButtonLink } from '@ui/Button';
-import { LinkSimple } from '@ui/Button/Link';
+import { Button } from '@ui/Button';
+import { Link } from '@ui/Button/Link';
 import SeparatorList from '@ui/SeparatorList/SeparatorList';
 import Text from '@ui/Text/Text';
 import useTranslation from 'next-translate/useTranslation';
@@ -22,9 +22,9 @@ const AccountIndexPage: CustomNextPage = () => {
       <div tw="text-center">
         <p>{t('account:index.deactivate.title')}</p>
 
-        <ButtonLink tw="font-semibold">
+        <Button variant="link" tw="font-semibold">
           {t('account:index.deactivate.button')}
-        </ButtonLink>
+        </Button>
       </div>
     </section>
   );
@@ -52,9 +52,9 @@ function Header() {
           {user?.email}
         </div>
 
-        <LinkSimple href="/account/profile" tw="font-semibold">
+        <Link variant="link" href="/account/profile" tw="font-semibold">
           {t('account:index.go-to-profile')}
-        </LinkSimple>
+        </Link>
       </SeparatorList>
     </header>
   );
